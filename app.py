@@ -115,9 +115,21 @@ def logout():
 def cdashboard():
 	return render_template('candidatedashboard.html')
 
-@app.route('/candidate_details')
-def candidate_details():
-	return render_template('candidate_details.html')
+@app.route('/candidatedetails')
+def candidatedetails():
+	return render_template('candidatedetails.html')
+
+@app.route('/candidatelist')
+def candidatelist():
+	return render_template('candidatelist.html')
+
+@app.route('/companylist')
+def companylist():
+	return render_template('companylist.html')
+
+@app.route('/joblist')
+def joblist():
+	return render_template('joblist.html')
 
 
 if __name__ == '__main__':
