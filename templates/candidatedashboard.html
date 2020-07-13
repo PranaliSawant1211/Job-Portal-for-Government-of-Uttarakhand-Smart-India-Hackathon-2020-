@@ -162,10 +162,13 @@
                                 </li>
                             </ul>
                             <div class="common-btn">
-                                <a class="login-btn" href="login.html">
-                                    <i class="icofont-plus-square"></i>
-                                    Login
-                                </a>
+                                {% if session.logged_in %}
+                                <a class="login-btn" href="/logout">Logout</a>
+                                <i class="icofont-plus-square"></i>
+                                {% else %}
+                                <a class="login-btn" href="/login">Login</a>
+                                {% endif %}
+                                <i class="icofont-plus-square"></i>
                                 <a class="sign-up-btn" href="create-account.html">
                                     <i class="icofont-user-alt-4"></i>
                                     Sign Up
@@ -208,7 +211,7 @@
                     <div class="col-lg-4">
                         <div class="dashboard-img">
                             <img src="static/img/dashboard/1.jpg" alt="Dashboard">
-                            <h3>Aikin Ward</h3>
+                            <h3>{{session.username}}</h3>
                             <p>UX/UI Designer</p>
                         </div>
                     </div>

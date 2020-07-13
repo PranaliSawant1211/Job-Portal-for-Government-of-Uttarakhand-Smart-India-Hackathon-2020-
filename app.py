@@ -5,6 +5,7 @@ from flask import flash
 from passlib.hash import sha256_crypt
 from werkzeug.security import generate_password_hash, check_password_hash
 from passlib.apps import custom_app_context as pwd_context
+from functools import wraps
 
 
 app = Flask(__name__)
@@ -15,8 +16,20 @@ app.config['MYSQL_DB'] = 'sih'
 
 mysql = MySQL(app)
 
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash("You need to login first","error")
+            return redirect(url_for('login'))
+
+    return wrap
+
 @app.route('/')
 def home():
+	session.clear()
 	return render_template('index.html')
 
 @app.route('/create_account', methods = ['GET', 'POST'])
@@ -63,6 +76,7 @@ def convertToBinaryData(filename):
     return binaryData
 
 @app.route('/login', methods = ['GET', 'POST'])
+# @login_required
 def login():
     if request.method == 'POST':
         session.pop('username', None)
@@ -73,13 +87,11 @@ def login():
         if result > 0:
             data = cursor.fetchone()
             password_db = data[11]
-            flash(password_db)
-            flash(password)
             if (pwd_context.verify(password, password_db)):
                 session['logged_in'] = True
                 session['username'] = uname
                 flash('You are now logged in', 'success')
-                return redirect(url_for('pofile'))
+                return redirect(url_for('cdashboard'))
             else:
                 flash('Invalid Login', 'error')
                 return render_template('login.html')
@@ -89,9 +101,23 @@ def login():
             return render_template('login.html')
     return render_template('login.html')
 
-@app.route('/pofile')
-def pofile():
-	return render_template('tp.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    session.clear()
+    flash('You are now logged out', 'success')
+    return redirect(url_for('login'))
+
+
+@app.route('/cdashboard')
+@login_required
+def cdashboard():
+	return render_template('candidatedashboard.html')
+
+@app.route('/candidate_details')
+def candidate_details():
+	return render_template('candidate_details.html')
 
 
 if __name__ == '__main__':
