@@ -10,7 +10,8 @@
         <!-- Meanmenu CSS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
         <!-- Icofont -->
-        <link rel="stylesheet" href="static/icofont/icofont.min.css">>
+        <link rel="stylesheet" href="static/icofont/icofont.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
 
         <!-- Nice Select JS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/nice-select.css')}}">
@@ -25,6 +26,30 @@
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css')}}">
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
+
+        <style>
+            .footer {
+    background-color:#696969;
+    color: #FFFFFF;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+   
+}
+
+.alert-error {
+  border-color: darkred;
+  background-color: red;
+  color: white;
+}
+
+.alert-info {
+  border-color: orange;
+  background-color: yellow;
+  color: black;
+}
+        </style>
 
         <title>Gable - Job Portal HTML Template</title>
 
@@ -353,11 +378,10 @@
                         <div class="portal-item">
                             <div class="row">
                                 <div class="col-lg-7">
-                                    <img src="static/images/home-1/1.jpg" alt="Portal">
+                                    <img src="static/img/home-1/1.jpg" alt="Portal">
                                 </div>
                                 <div class="col-lg-5">
-                                    <img src="static/images
-                                    /home-1/2.jpg" alt="Portal">
+                                    <img src="static/img/home-1/2.jpg" alt="Portal">
                                 </div>
                             </div>
                             <div class="portal-trusted">
@@ -1112,41 +1136,6 @@
         </section>
         <!-- End Profile -->
 
-        <!-- App -->
-        <div class="app-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="app-item app-left">
-                            <img src="static/images/home-1/6.png" alt="Mobile">
-                            <img src="static/images/home-1/7.png" alt="Mobile">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="app-item">
-                            <div class="section-title text-left">
-                                <h2>Download  The Glabe Mobile App</h2>
-                            </div>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                            <div class="app-btn">
-                                <a class="app-btn-one" href="#">
-                                    <i class="flaticon-apple"></i>
-                                    <span>Download on the</span>
-                                    <p>App Store</p>
-                                </a>
-                                <a class="app-btn-two" href="#">
-                                    <i class="flaticon-playstore"></i>
-                                    <span>ANDROID APP ON</span>
-                                    <p>Google Play</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End App -->
-
         <!-- Blog -->
         <section class="blog-area pt-100">
             <div class="container">
@@ -1237,11 +1226,17 @@
         </section>
         <!-- End Blog -->
 
-     <div class="footer" style="font-size: 20px;"><center><p> © 2000 – 2018 Code_Crunch Pty.Ltd all rights reserved<br>
+     <div class="footer" style="font-size: 20px;"><center><p> © 2000 – 2018 Code_Crunch Pvt.Ltd All Rights reserved<br>
     All trademarks and copyrights held by respective owners. <br>
-        Terms and Policy</p></center>
+        Terms and Policy</p></center></div>
 
 
+
+        <script type="text/javascript">
+              $(document).ready(function(){
+                $('.owl-carousel').owlCarousel();
+                });
+        </script>
         <!-- Essential JS -->
         <script src="static/js/jquery.min.js"></script>
         <script src="static/js/popper.min.js"></script>
@@ -1257,6 +1252,7 @@
         <script src="static/js/jquery.counterup.min.js"></script>
         <!-- Owl Carousel JS -->
         <script src="static/js/owl.carousel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
         <!-- Form Ajaxchimp JS -->
 		<script src="static/js/jquery.ajaxchimp.min.js"></script>
 		<!-- Form Validator JS -->
