@@ -4,6 +4,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -51,7 +54,88 @@
   background-color: yellow;
   color: black;
 }
+.carousel-inner{
+  
+  height: 700px;
+}
+.text0.text1{
+    
+   
+   position: absolute;
+    bottom: 200px;
+    left: 385px;
+    position: absolute;
+    white-space: nowrap;
+    color: white;
+  }
+
+.text0{
+    
+   
+   position: absolute;
+    bottom: 200px;
+    left: 340px;
+    position: absolute;
+    -webkit-animation: leftThenRight 2s ;
+    white-space: nowrap;
+    color: white;
+  }
+@-webkit-keyframes leftThenRight {
+    0%   { left:25px;}
+    
+    
+
+#body.loaded .text0 {
+    opacity: 1;
+}
+}
+    
+}
+
         </style>
+
+<style>
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  height:200px;
+
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+}
+
+.parent-container{
+
+position: relative;
+
+
+
+}
+
+.form{
+
+position: absolute;
+
+width:50%;
+
+height: 10%;
+
+
+
+left: 25%;
+
+}
+
+</style>
 
         <title>Gable - Job Portal HTML Template</title>
 
@@ -77,29 +161,29 @@
         End Preloader -->
 
         <!-- Start Navbar Area -->
-        <div class="navbar-area fixed-top">
+<div class="navbar-area fixed-top">
 
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
                 <a href="index.html" class="logo">
-                    <img src="static/images/logo.png" alt="Logo">
+                    <img src="assets/img/logo.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Menu For Desktop Device -->
-            <div class="main-nav menu-shrink">
+            <div class="main-nav">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
                         <a class="navbar-brand" href="index.html">
-                            <img src="static/images/logo.png" alt="Logo">
+                            <img src="assets/img/logo.png" alt="Logo">
                         </a>
-                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent" style="display: none;">
+                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle active">Home <i class="icofont-simple-down"></i></a>
+                                    <a href="#" class="nav-link dropdown-toggle">Home <i class="icofont-simple-down"></i></a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a href="index.html" class="nav-link active">Home Page 1</a>
+                                            <a href="index.html" class="nav-link">Home Page 1</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="index-2.html" class="nav-link">Home Page 2</a>
@@ -153,7 +237,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Pages <i class="icofont-simple-down"></i></a>
+                                    <a href="#" class="nav-link dropdown-toggle active">Pages <i class="icofont-simple-down"></i></a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a href="company-list.html" class="nav-link">Company List</a>
@@ -162,7 +246,7 @@
                                             <a href="company-details.html" class="nav-link">Company Details</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="login.html" class="nav-link">Login Page</a>
+                                            <a href="login.html" class="nav-link active">Login Page</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="create-account.html" class="nav-link">Create Account Page</a>
@@ -203,11 +287,11 @@
                                 </li>
                             </ul>
                             <div class="common-btn">
-                                <a class="login-btn" href = "{{ url_for('login') }}">
+                                <a class="login-btn" href="{{url_for('login')}}">
                                     <i class="icofont-plus-square"></i>
                                     Login
                                 </a>
-                                <a class="sign-up-btn" href="{{ url_for('create_account')}}">
+                                <a class="sign-up-btn" href="{{url_for('create_account')}}">
                                     <i class="icofont-user-alt-4"></i>
                                     Sign Up
                                 </a>
@@ -217,61 +301,107 @@
                 </div>
             </div>
         </div>
-        <!-- End Navbar Area -->
+
+<!--Navbar end -->
+
+
+
+
+<div class="parent-container"> 
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        
+        <img src="/static/hey.jpg" alt="Los Angeles" style="width: 100%">
+        
+      </div>
+
+      <div class="item">
+        
+        <img src="/static/joo.jpg" alt="Chicago" style="width: 100%;height:700px">
+        
+      </div>
     
-        <!-- Banner -->       
-        <div class="banner-area banner-img-one">
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="container">
-                        <div class="banner-text" style="padding-top:50px">
-                            <h1>Find Your <span>Desire</span> Job</h1>
-                            <p>Jobs, Employment & Future Career Opportunities</p>
-                            <div class="banner-form-area">
-                                <form>
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Job Title">
-                                                <label>
-                                                    <i class="icofont-search-1">
-                                                    	
-                                                    </i>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>
-                                                    <i class="icofont-location-pin"></i>
-                                                </label>
-                                                <input type="text" class="form-control" placeholder="City or State">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <select>
-                                                    <option>Job Category</option>
-                                                    <option>Another option</option>
-                                                    <option>A option</option>
-                                                    <option>Potato</option>
-                                                </select>	
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn banner-form-btn">Search</button>
-                                </form>
-                            </div>
-                            <div class="banner-btn">
-                                <a href="create-account.html">Create Your Profile</a>
-                                <a href="submit-resume.html">Upload Your CV</a>
-                            </div>
-                        </div>
+      <div class="item" >
+        
+        <img src="/static/heyy.jpg" alt="New York" style="width: 100%; height:700px" >
+        </div>
+      </div>
+    
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <div class="text0">
+    
+    <div class="banner-text">
+                            <h1>In search for a <span>Job</span>?</h1>
+                            <p>Grab an Opportunity</p> 
+    <div class="text1">
+  <div class="banner-form-area">
+  <form >
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Job Title">
+                        <label>
+                            <i class="icofont-search-1">
+                                
+                            </i>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>
+                            <i class="icofont-location-pin"></i>
+                        </label>
+                        <input type="text" class="form-control" placeholder="City or State">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <select>
+                            <option>Job Category</option>
+                            <option>Another option</option>
+                            <option>A option</option>
+                            <option>Potato</option>
+                        </select>   
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- End Banner -->
+
+            <button type="submit" class="btn banner-form-btn">Search</button>
+        </form>
+    </div>
+    <div class="banner-btn">
+                                <a href="create-account.html">Create Your Profile</a>
+                                <a href="submit-resume.html">Upload Your CV</a>
+                            </div>
+</div>
+</div>
+</div>
+</div>
+
+!-- End Navbar Area -->
+    
+
 
         <!-- Account -->
         <div class="account-area">
@@ -309,62 +439,82 @@
                 <div class="row">
                     <div class="col-sm-3 col-lg-3 category-border">
                         <div class="category-item">
-                            <i class="flaticon-settings"></i>
-                            <a href="#">Technical Support</a>
+                            <div class="card">
+                                <center><br><br><i class="flaticon-settings"></i>
+                                <a href="#">Technical Support</a></center>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-lg-3 category-border">
                         <div class="category-item category-two">
-                            <i class="flaticon-layers"></i>
-                            <a href="#">Business Development</a>
+                            <div class="card">
+                                <center><br><br><i class="flaticon-settings"></i>
+                                <a href="#">Business Development</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-lg-3 category-border">
                         <div class="category-item category-three">
-                            <i class="flaticon-house"></i>
-                            <a href="#">Real Estate Business</a>
+                            <div class="card">
+                                <center><br><br><i class="flaticon-settings"></i>
+                                <a href="#">Real Estate Business</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-lg-3 category-border">
                         <div class="category-item category-four">
-                            <i class="flaticon-analysis"></i>
-                            <a href="#">Share Market Analysis</a>
+                            <div class="card">
+                                <center><br><br><i class="flaticon-settings"></i>
+                                <a href="#">Share Market Analysis</a>
+                            </div>                      
                         </div>
                     </div>
                     <div class="col-sm-3 col-lg-3 category-border-three">
                         <div class="category-item category-five">
-                            <i class="flaticon-sun"></i>
-                            <a href="#">Weather & Environment</a>
+                            <div class="card">
+                                <center><br><br><i class="flaticon-settings"></i>
+                                <a href="#">Weather & Environment</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-lg-3 category-border-two">
                         <div class="category-item category-six">
-                            <i class="flaticon-hand"></i>
-                            <a href="#">Finance & Banking Service</a>
+                            <div class="card">
+                                <center><br><br><i class="flaticon-settings"></i>
+                                <a href="#">Finance & Banking Service</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-lg-3 category-border-two">
                         <div class="category-item category-seven">
-                            <i class="flaticon-neural"></i>
-                            <a href="#">IT & Networing Sevices</a>
+                            <div class="card">
+                                <center><br><br><i class="flaticon-settings"></i>
+                                <a href="#">IT & Networing Sevices</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-lg-3 category-border-two">
                         <div class="category-item category-eight">
-                            <i class="flaticon-dish"></i>
-                            <a href="#">Restaurant Services</a>
+                            <div class="card">
+                                <center><br><br><i class="flaticon-settings"></i>
+                                <a href="#">Restaurant Services</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-3 offset-sm-3 offset-lg-0 col-lg-3 category-border-two">
                         <div class="category-item category-nine">
-                            <i class="icofont-fire-burn"></i>
-                            <a href="#">Defence  & Fire Service</a>
+                            <div class="card">
+                                <center><br><br><i class="flaticon-settings"></i>
+                                <a href="#">Defence  & Fire Service</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-lg-3">
                         <div class="category-item category-ten">
-                            <i class="flaticon-truck"></i>
-                            <a href="#">Home Delivery Services</a>
+                            <div class="card">
+                                <center><br><br><i class="flaticon-settings"></i>
+                                <a href="#">Home Delivery Services</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -394,7 +544,7 @@
                     <div class="col-lg-6">
                         <div class="portal-item portal-right">
                             <h2>Trusted & Popular Job Portal</h2>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur.</p>
+                            <p></p>
                             <div class="common-btn">
                                 <a class="login-btn" href="post-a-job.html">
                                     Post a Job

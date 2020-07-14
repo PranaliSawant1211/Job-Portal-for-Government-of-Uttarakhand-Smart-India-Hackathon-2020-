@@ -141,7 +141,7 @@ button:focus {
 }
 
 .main-nav nav .navbar-nav .nav-item:hover a {
-  color: #4bcc5a;
+  color: #d966ff;
 }
 
 .main-nav nav .navbar-nav .nav-item .dropdown-menu {
@@ -149,11 +149,11 @@ button:focus {
 }
 
 .main-nav nav .navbar-nav .nav-item .dropdown-menu li:hover a {
-  color: #4bcc5a;
+  color: #d966ff;
 }
 
 .main-nav nav .navbar-nav .nav-item .dropdown-menu li a:hover, .main-nav nav .navbar-nav .nav-item .dropdown-menu li a:focus, .main-nav nav .navbar-nav .nav-item .dropdown-menu li a.active {
-  color: #4bcc5a;
+  color: #d966ff;
 }
 
 .main-nav nav .navbar-nav .nav-item a {
@@ -169,7 +169,7 @@ button:focus {
 }
 
 .main-nav nav .navbar-nav .nav-item a:hover, .main-nav nav .navbar-nav .nav-item a:focus, .main-nav nav .navbar-nav .nav-item a.active {
-  color: #4bcc5a;
+  color: #d966ff;
 }
 
 .menu-shrink {
@@ -197,7 +197,7 @@ button:focus {
 
 .common-btn .login-btn {
   border: 1px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
   color: #333333;
   margin-right: 10px;
@@ -211,8 +211,8 @@ button:focus {
   left: 0;
   top: 0;
   opacity: 0;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
   z-index: -1;
@@ -230,7 +230,7 @@ button:focus {
 .common-btn .sign-up-btn {
   color: #ffffff;
   border: 1px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
 }
 
@@ -242,8 +242,8 @@ button:focus {
   left: 0;
   top: 0;
   opacity: 1;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
   z-index: -1;
@@ -298,7 +298,7 @@ button:focus {
 
 .banner-text h1 span {
   display: inline-block;
-  color: #4bcc5a;
+  color: #d966ff;
 }
 
 .banner-text p {
@@ -325,8 +325,8 @@ button:focus {
 }
 
 .banner-form-area form .form-group i {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -393,7 +393,7 @@ button:focus {
   right: 18px;
   width: 8px;
   border-color: 1px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
 }
 
@@ -409,8 +409,8 @@ button:focus {
   color: #ffffff;
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   padding: 21px 45px;
   border-radius: 45px;
   -webkit-transition: width 20s, opacity 0.6s;
@@ -418,8 +418,8 @@ button:focus {
 }
 
 .banner-form-area .banner-form-btn:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .banner-btn {
@@ -431,7 +431,7 @@ button:focus {
   display: inline-block;
   font-weight: 500;
   font-size: 16px;
-  color: #38a745;
+  color: #ecb3ff;
   width: 210px;
   padding-top: 16px;
   padding-bottom: 16px;
@@ -448,8 +448,8 @@ button:focus {
 /*-- End Banner --*/
 /*-- Account --*/
 .account-area {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   padding-top: 50px;
   padding-bottom: 20px;
 }
@@ -477,8 +477,8 @@ button:focus {
 }
 
 .account-item:hover i {
-  -webkit-box-shadow: 0 0 0 8px #4bcc5a;
-          box-shadow: 0 0 0 8px #4bcc5a;
+  -webkit-box-shadow: 0 0 0 8px #d966ff;
+          box-shadow: 0 0 0 8px #d966ff;
 }
 
 .account-item i {
@@ -667,8 +667,8 @@ button:focus {
 
 .portal-item .portal-trusted span {
   display: block;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   color: #ffffff;
   font-weight: 600;
   font-size: 28px;
@@ -743,7 +743,7 @@ button:focus {
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
   border: 2px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
   padding: 10px 25px;
   margin-right: 5px;
@@ -781,8 +781,8 @@ button:focus {
   top: 0;
   left: 0;
   opacity: 1;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .sorting-menu ul li:last-child {
@@ -831,8 +831,8 @@ button:focus {
   display: block;
   font-weight: 500;
   font-size: 16px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -840,8 +840,8 @@ button:focus {
 }
 
 .job-item .job-inner .job-inner-left a:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -868,8 +868,8 @@ button:focus {
 
 .job-item .job-inner .job-inner-left ul li i {
   display: inline-block;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -896,7 +896,7 @@ button:focus {
   display: block;
   font-size: 14px;
   border: 1px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
   text-align: center;
   width: 95px;
@@ -911,8 +911,8 @@ button:focus {
 .job-item .job-inner .job-inner-right ul li span {
   display: block;
   color: #ffffff;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -937,8 +937,8 @@ button:focus {
   left: 0;
   opacity: 0;
   z-index: -1;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
 }
@@ -996,8 +996,8 @@ button:focus {
   border-radius: 50%;
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .job-pagination ul li a:hover {
@@ -1016,8 +1016,8 @@ button:focus {
 /*-- End Jobs --*/
 /*-- Counter --*/
 .counter-area {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .counter-item {
@@ -1135,8 +1135,8 @@ button:focus {
 }
 
 .companies-area .owl-theme .owl-dots .owl-dot.active span {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .companies-area .owl-theme .owl-dots .owl-dot span {
@@ -1193,7 +1193,7 @@ button:focus {
 }
 
 .companies-item h3 a:hover {
-  color: #4bcc5a;
+  color: #d966ff;
 }
 
 .companies-item p {
@@ -1217,7 +1217,7 @@ button:focus {
   position: relative;
   z-index: 1;
   border: 1px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
 }
 
@@ -1230,8 +1230,8 @@ button:focus {
   left: 0;
   opacity: 0;
   z-index: -1;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
 }
@@ -1258,8 +1258,8 @@ button:focus {
 }
 
 .profile-area .owl-theme .owl-dots .owl-dot.active span {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .profile-area .owl-theme .owl-dots .owl-dot span {
@@ -1316,8 +1316,8 @@ button:focus {
 .profile-item .profile-inner a {
   display: inline-block;
   font-size: 14px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1342,8 +1342,8 @@ button:focus {
   font-size: 15px;
   border: 1px solid #dedede;
   border-radius: 50%;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1885,7 +1885,7 @@ button:focus {
 
 .subscribe-item .newsletter-form .form-control {
   border: 1px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
   height: 55px;
   font-size: 16px;
@@ -1896,7 +1896,7 @@ button:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
   border: 1px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
 }
 
@@ -1919,8 +1919,8 @@ button:focus {
 .subscribe-item .newsletter-form .subscribe-btn {
   color: #ffffff;
   font-size: 16px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   padding: 15px 30px;
   position: absolute;
   right: 0;
@@ -1929,8 +1929,8 @@ button:focus {
 }
 
 .subscribe-item .newsletter-form .subscribe-btn:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .subscribe-item .newsletter-form .btn.disabled, .subscribe-item .newsletter-form .btn:disabled {
@@ -2162,8 +2162,8 @@ footer {
 
 .jobseeker-item {
   margin-bottom: 30px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   position: relative;
   padding: 45px 35px;
 }
@@ -2263,8 +2263,8 @@ footer {
 }
 
 .portal-counter-area .counter-item h3 {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -2313,7 +2313,7 @@ footer {
 }
 
 .banner-area-three .banner-text h1 span {
-  color: #38a745;
+  color: #ecb3ff;
 }
 
 .banner-area-three .banner-text p {
@@ -2346,8 +2346,8 @@ footer {
 /*-- End Banner --*/
 /*-- Create --*/
 .create-area {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   padding-top: 50px;
   padding-bottom: 20px;
 }
@@ -2387,8 +2387,8 @@ footer {
 /*-- Page Title --*/
 .page-title-area {
   height: 450px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .page-title-text {
@@ -2451,16 +2451,16 @@ footer {
 
 .create-photo .already-create a {
   color: #ffffff;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   padding: 12px 27px;
   margin-left: 10px;
   display: inline-block;
 }
 
 .create-photo .already-create a:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .create-photo .create-photo-item .create-photo-left {
@@ -2522,14 +2522,14 @@ footer {
   font-size: 18px;
   color: #ffffff;
   border-radius: 0;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   padding: 15px 40px;
 }
 
 .create-photo .create-photo-item .create-photo-right .create-photo-btn:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 /*-- End Create Photo --*/
@@ -2553,8 +2553,8 @@ footer {
 .create-information .create-information-btn a {
   display: inline-block;
   width: 200px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   color: #ffffff;
   font-size: 16px;
   padding-top: 14px;
@@ -2564,8 +2564,8 @@ footer {
 }
 
 .create-information .create-information-btn a:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .create-information .form-group {
@@ -2645,14 +2645,14 @@ footer {
   font-weight: 500;
   font-size: 16px;
   color: #ffffff;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   padding: 16px 20px;
 }
 
 .create-education .create-education-wrap .create-education-right a:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .create-education h3 {
@@ -2721,15 +2721,15 @@ footer {
   font-weight: 500;
   font-size: 16px;
   color: #ffffff;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   padding: 16px 25px;
   margin-left: 15px;
 }
 
 .create-skills .create-skills-wrap .create-skills-right a:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .create-skills h3 {
@@ -2787,8 +2787,8 @@ footer {
 .skill .skill-bar {
   width: 100%;
   height: 6px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   display: block;
   position: relative;
 }
@@ -2824,16 +2824,16 @@ footer {
 .create-ac-btn {
   font-weight: 600;
   font-size: 18px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   padding: 16px 50px;
   color: #ffffff;
   border-radius: 0;
 }
 
 .create-ac-btn:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
   color: #ffffff;
 }
 
@@ -2903,8 +2903,8 @@ footer {
 }
 
 .post-job-item .form-group .job-category-area .nice-select .option:hover, .post-job-item .form-group .job-category-area .nice-select .option.focus, .post-job-item .form-group .job-category-area .nice-select .option.selected.focus {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   color: #ffffff;
 }
 
@@ -2963,8 +2963,8 @@ footer {
 }
 
 .post-job-item .job-currency-area .nice-select .option:hover, .post-job-item .job-currency-area .nice-select .option.focus, .post-job-item .job-currency-area .nice-select .option.selected.focus {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   color: #ffffff;
 }
 
@@ -3053,8 +3053,8 @@ footer {
   display: inline-block;
   font-weight: 500;
   font-size: 16px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3090,8 +3090,8 @@ footer {
 
 .login-area .login-sign-in .login-btn {
   color: #ffffff;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   font-size: 18px;
   font-weight: 600;
   padding: 16px 140px;
@@ -3101,8 +3101,8 @@ footer {
 }
 
 .login-area .login-sign-in .login-btn:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .login-area .login-social a {
@@ -3206,8 +3206,8 @@ footer {
 
 .single-profile-item .single-profile-left .single-profile-contact ul li i {
   display: inline-block;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3223,7 +3223,7 @@ footer {
 }
 
 .single-profile-item .single-profile-left .single-profile-contact ul li a:hover {
-  color: #4bcc5a;
+  color: #d966ff;
 }
 
 .single-profile-item .single-profile-left .single-profile-social {
@@ -3254,8 +3254,8 @@ footer {
 
 .single-profile-item .single-profile-left .single-profile-social ul li i {
   display: inline-block;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3271,7 +3271,7 @@ footer {
 }
 
 .single-profile-item .single-profile-left .single-profile-social ul li a:hover {
-  color: #4bcc5a;
+  color: #d966ff;
 }
 
 .single-profile-item .single-profile-left .single-profile-skills h3 {
@@ -3330,8 +3330,8 @@ footer {
 .single-profile-item .single-profile-right .single-profile-name a {
   display: inline-block;
   color: #ffffff;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   font-weight: 600;
   font-size: 16px;
   padding: 15px 15px;
@@ -3345,8 +3345,8 @@ footer {
 }
 
 .single-profile-item .single-profile-right .single-profile-name a:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .single-profile-item .single-profile-right .single-profile-textarea {
@@ -3377,15 +3377,15 @@ footer {
   left: -56px;
   display: inline-block;
   border: 4px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
 }
 
 .single-profile-item .single-profile-right .single-profile-textarea .single-profile-heading h3 {
   font-weight: 600;
   font-size: 22px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3520,8 +3520,8 @@ footer {
   position: relative;
   top: 2px;
   margin-right: 3px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3549,8 +3549,8 @@ footer {
   height: 4px;
   bottom: -2px;
   left: 0;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .job-details-item .job-overview ul {
@@ -3572,8 +3572,8 @@ footer {
 }
 
 .job-details-item .job-overview ul li i {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3626,15 +3626,15 @@ footer {
   color: #ffffff;
   padding-top: 17px;
   padding-bottom: 17px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   font-size: 16px;
 }
 
 .job-details-btn:hover {
   color: #ffffff;
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 /*-- End Job Details --*/
@@ -3671,8 +3671,8 @@ footer {
 
 .single-resume-profile span i {
   display: inline-block;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3687,8 +3687,8 @@ footer {
 
 .single-resume-profile p i {
   display: inline-block;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3747,8 +3747,8 @@ footer {
 
 .single-resume-skills ul li i {
   display: inline-block;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3798,8 +3798,8 @@ footer {
   height: 4px;
   bottom: -2px;
   left: 0;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .single-resume-category ul {
@@ -3817,7 +3817,7 @@ footer {
 }
 
 .single-resume-category ul li:hover:before {
-  background-color: #38a745;
+  background-color: #ecb3ff;
 }
 
 .single-resume-category ul li:hover a {
@@ -3832,14 +3832,14 @@ footer {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  border: 3px solid #38a745;
+  border: 3px solid #ecb3ff;
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
 }
 
 .single-resume-category ul li span {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3929,13 +3929,13 @@ footer {
   margin-top: 38px;
   border-radius: 30px;
   font-weight: 600;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .pricing-item .pricing-btn:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 /*-- End Pricing --*/
@@ -3978,8 +3978,8 @@ footer {
 
 .dashboard-area .dashboard-nav .nav-pills .nav-link.active, .dashboard-area .dashboard-nav .nav-pills .show > .nav-link {
   color: #ffffff;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .dashboard-area .dashboard-nav ul {
@@ -3996,7 +3996,7 @@ footer {
 
 .dashboard-area .dashboard-nav ul li a {
   border: 2px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
   color: #333333;
   font-size: 14px;
@@ -4013,8 +4013,8 @@ footer {
   left: 0;
   top: 0;
   opacity: 0;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
   z-index: -1;
@@ -4074,8 +4074,8 @@ footer {
 .dashboard-area .change-password-area .change-pass-btn {
   font-weight: 600;
   font-size: 18px;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   padding: 16px 50px;
   color: #ffffff;
   border-radius: 0;
@@ -4083,8 +4083,8 @@ footer {
 }
 
 .dashboard-area .change-password-area .change-pass-btn:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
   color: #ffffff;
 }
 
@@ -4132,8 +4132,8 @@ footer {
 }
 
 .company-details-item .company-details-logo .company-logo-inner p i {
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -4173,8 +4173,8 @@ footer {
 
 .company-details-item .company-details-share ul li a {
   display: block;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -4220,8 +4220,8 @@ footer {
 
 .company-details-item .company-details-find ul li a i {
   display: inline-block;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -4280,7 +4280,7 @@ footer {
 .error-item a {
   display: inline-block;
   color: #ffffff;
-  background-color: #4bcc5a;
+  background-color: #d966ff;
   padding: 20px 45px;
   margin-top: 70px;
   font-size: 18px;
@@ -4335,7 +4335,7 @@ footer {
   font-weight: 600;
   padding: 15px 0 15px 18px;
   border: 1px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
 }
 
@@ -4369,10 +4369,10 @@ footer {
 
 .accordion li a.active {
   color: #ffffff;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border: 1px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
 }
 
@@ -4491,8 +4491,8 @@ footer {
 
 .blog-details-item .blog-details-img ul li i {
   display: inline-block;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -4534,16 +4534,16 @@ footer {
 
 .blog-details-item .blog-details-social ul li a {
   display: block;
-  background: -webkit-gradient(linear, left top, right top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .blog-details-item .blog-details-social ul li a:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#38a745), color-stop(63%, #4cce5b));
-  background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
+  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
 }
 
 .blog-details-item .blog-details-nav {
@@ -4557,7 +4557,7 @@ footer {
 
 .blog-details-item .blog-details-nav a {
   color: #333333;
-  border: 1px solid #4bcc5a;
+  border: 1px solid #d966ff;
   padding: 10px 22px;
   border-radius: 8px;
   display: inline-block;
@@ -4565,7 +4565,7 @@ footer {
 
 .blog-details-item .blog-details-nav a:hover {
   color: #ffffff;
-  background-color: #4bcc5a;
+  background-color: #d966ff;
 }
 
 .blog-details-item .blog-details-nav .previous-left {
@@ -4597,7 +4597,7 @@ footer {
 .blog-details-item .blog-details-form .form-group .form-control {
   border-radius: 0;
   height: 45px;
-  border: 1px solid #4bcc5a;
+  border: 1px solid #d966ff;
   font-size: 15px;
   padding-left: 20px;
 }
@@ -4615,11 +4615,11 @@ footer {
 
 .blog-details-item .blog-details-form .blog-details-btn {
   color: #ffffff;
-  border: 1px solid #4bcc5a;
+  border: 1px solid #d966ff;
   padding: 14px 25px;
   font-size: 15px;
   font-weight: 500;
-  background-color: #4bcc5a;
+  background-color: #d966ff;
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
   border-radius: 0;
@@ -4628,7 +4628,7 @@ footer {
 
 .blog-details-item .blog-details-form .blog-details-btn:hover {
   background-color: transparent;
-  color: #4bcc5a;
+  color: #d966ff;
 }
 
 .blog-details-item .blog-details-form .list-unstyled {
@@ -4675,7 +4675,7 @@ footer {
 .contact-form-area .form-group .form-control {
   background-color: transparent;
   border: 1px solid;
-  border-image-source: linear-gradient(90deg, #38a745 0%, #4cce5b 63%);
+  border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
   border-radius: 0;
   height: 60px;
@@ -4734,8 +4734,8 @@ footer {
 
 .contact-form-area .contact-btn {
   color: #ffffff;
-  border: 1px solid #4bcc5a;
-  background-color: #4bcc5a;
+  border: 1px solid #d966ff;
+  background-color: #d966ff;
   opacity: 1;
   border-radius: 0;
   padding: 14px 45px;

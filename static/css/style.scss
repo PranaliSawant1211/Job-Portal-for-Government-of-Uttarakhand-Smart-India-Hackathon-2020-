@@ -131,7 +131,7 @@ button {
                 }
                 &:hover {
                     a {
-                        color: #4bcc5a;
+                        color: #ff80bf;
                     }
                 }
                 .dropdown-menu {
@@ -140,12 +140,12 @@ button {
                     li {
                         &:hover {
                             a {
-                                color: #4bcc5a;
+                                color: #ff80bf;
                             }
                         }
                         a {
                             &:hover, &:focus, &.active {
-                                color: #4bcc5a;
+                                color: #ff80bf;
                             }
                         }
                     }
@@ -161,7 +161,7 @@ button {
                     transition: $transition;
 
                     &:hover, &:focus, &.active {
-                        color: #4bcc5a;
+                        color: #ff80bf;
                     }
                 }
             }
@@ -282,7 +282,7 @@ button {
 
         span {
             display: inline-block;
-            color: #4bcc5a;
+            color: #ff80bf;
         }
     }
     p {
@@ -431,7 +431,7 @@ button {
     }
     &:hover {
         i {
-            box-shadow: 0 0 0 8px #4bcc5a;
+            box-shadow: 0 0 0 8px #ff80bf;
         }
     }
     i {
@@ -1104,7 +1104,7 @@ button {
             color: $black-color;
 
             &:hover {
-                color: #4bcc5a;
+                color: #ff80bf;
             }
         }
     }
@@ -2771,7 +2771,7 @@ footer {
                         display: inline-block;
 
                         &:hover {
-                            color: #4bcc5a;
+                            color: #ff80bf;
                         }
                     }
                 }
@@ -2814,7 +2814,7 @@ footer {
                         display: inline-block;
 
                         &:hover {
-                            color: #4bcc5a;
+                            color: #ff80bf;
                         }
                     }
                 }
@@ -3733,7 +3733,7 @@ footer {
     a {
         display: inline-block;
         color: $white-color;
-        background-color: #4bcc5a;
+        background-color: #ff80bf;
         padding: 20px 45px;
         margin-top: 70px;
         font-size: 18px;
@@ -3986,14 +3986,14 @@ footer {
     
         a {
             color: $black-color;
-            border: 1px solid #4bcc5a;
+            border: 1px solid #ff80bf;
             padding: 10px 22px;
             border-radius: 8px;
             display: inline-block;
     
             &:hover {
                 color: $white-color;
-                background-color: #4bcc5a;
+                background-color: #ff80bf;
             }
         }
         .previous-left {
@@ -4019,7 +4019,7 @@ footer {
             .form-control {
                 border-radius: 0;
                 height: 45px;
-                border: 1px solid #4bcc5a;
+                border: 1px solid #ff80bf;
                 font-size: 15px;
                 padding-left: 20px;
     
@@ -4035,18 +4035,18 @@ footer {
         }
         .blog-details-btn {
             color: $white-color;
-            border: 1px solid #4bcc5a;
+            border: 1px solid #ff80bf;
             padding: 14px 25px;
             font-size: 15px;
             font-weight: 500;
-            background-color: #4bcc5a;
+            background-color: #ff80bf;
             transition: $transition;
             border-radius: 0;
             opacity: 1;
     
             &:hover {
                 background-color: transparent;
-                color: #4bcc5a;
+                color: #ff80bf;
             }
         }
         .list-unstyled {
@@ -4132,8 +4132,8 @@ footer {
     }
     .contact-btn {
         color: $white-color;
-        border: 1px solid #4bcc5a;
-        background-color: #4bcc5a;
+        border: 1px solid #ff80bf;
+        background-color: #ff80bf;
         opacity: 1;
         border-radius: 0;
         padding: 14px 45px;
