@@ -26,6 +26,8 @@
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="static/css/responsive.css">
 
+        <link rel="stylesheet" href="static/css/try.css">        
+
         <title>Gable - Job Portal HTML Template</title>
 
         <link rel="icon" type="image/png" href="static/img/favicon.png">
@@ -306,38 +308,53 @@
                                     <h3>Education</h3>
                                 </div>
                                 <div class="create-education-right">
-                                    <a href="#">Edit</a>
-                                    <a href="#">Add Education</a>
+                                    <a href="#popupE">Edit</a>
+                                    <a href="#popupE" class="popup-open">Add Education</a>
                                 </div>
                             </div>
-                            <form>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" class="form-control" placeholder="Under Graduate">
+                            <div class="popupE" id="popupE">
+                                <div class="popupE-inner">
+                                    <a class="popupE-close" href="#">&times;</a>
+                                
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Title</label>
+                                                    <input type="text" class="form-control" placeholder="Under Graduate">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Degree</label>
+                                                    <input type="text" class="form-control" placeholder="BSC in Computer Science">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Institute</label>
+                                                    <input type="text" class="form-control" placeholder="Gable University of Design & Arts">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Year</label>
+                                                    <input type="text" class="form-control" placeholder="2016-2019">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn create-ac-btn">Save</button>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Degree</label>
-                                            <input type="text" class="form-control" placeholder="BSC in Computer Science">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Institute</label>
-                                            <input type="text" class="form-control" placeholder="Gable University of Design & Arts">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Year</label>
-                                            <input type="text" class="form-control" placeholder="2016-2019">
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
+                            <div >
+                                <ol style="color: #495057" type="*">
+                                    <li>PHD degree in Criminal Law at University of Gable Internatinal (2006)</li>
+                                    <li>Master of Family Law  at University of Gable International  (2002)</li>
+                                    <li>MBBS LLB (Hon’s) in  at University of Gable International (2002)</li>
+                                    <li>Higher Secondary Certificate at Gable International collage  (1991)</li>
+                                </ol>
+                            </div>
                         </div>
                         <div class="create-skills">
                             <div class="create-skills-wrap">
@@ -345,42 +362,71 @@
                                     <h3>Skill</h3>
                                 </div>
                                 <div class="create-skills-right">
-                                    <a href="#">Edit</a>
-                                    <a href="#">Add Skill</a>
+                                    <a href="#popupS">Edit</a>
+                                    <a href="#popupS">Add Skill</a>
                                 </div>
                             </div>
-                            <form>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" class="form-control" placeholder="Frontend Design">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="skill">
-                                            <p>Percentage</p>
-                                            <div class="skill-bar skill1 skill3 wow slideInLeft animated">
-                                                <span class="skill-count1">60%</span>
+                            <div class="popupS" id="popupS">
+                                <div class="popupS-inner">
+                                    <a class="popupS-close" href="#">&times;</a>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Title</label>
+                                                    <input type="text" class="form-control" placeholder="Frontend Design">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Name</label>
-                                            <input type="text" class="form-control" placeholder="UX/UI Design">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="skill">
-                                            <p>Percentage</p>
-                                            <div class="skill-bar skill1 skill4 wow slideInLeft animated">
-                                                <span class="skill-count1">95%</span>
+                                            <div class="col-lg-6">
+                                                <div class="skill">
+                                                    <p>Percentage</p>
+                                                    <div class="skill-bar skill1 skill3 wow slideInLeft animated">
+                                                        <span class="skill-count1">60%</span>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input type="text" class="form-control" placeholder="UX/UI Design">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="skill">
+                                                    <p>Percentage</p>
+                                                    <div class="skill-bar skill1 skill4 wow slideInLeft animated">
+                                                        <span class="skill-count1">95%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn create-ac-btn">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div >
+                                <div class="single-profile-skills">
+                                    
+                                    <div class="skill">
+                                        <p>Frontend Design</p>
+                                        <div class="skill-bar skill1 wow slideInLeft  animated" style="visibility: visible; animation-name: slideInLeft;">
+                                            <span class="skill-count1">70%</span>
+                                        </div>
+                                    </div>
+                                    <div class="skill">
+                                        <p>Software Development</p>
+                                        <div class="skill-bar skill1 skill2 wow slideInLeft  animated" style="visibility: visible; animation-name: slideInLeft;">
+                                            <span class="skill-count1">90%</span>
+                                        </div>
+                                    </div>
+                                    <div class="skill">
+                                        <p>UIUX Design</p>
+                                        <div class="skill-bar skill1 skill3 wow slideInLeft  animated" style="visibility: visible; animation-name: slideInLeft;">
+                                            <span class="skill-count1">75%</span>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <div class="create-skills">
                             <div class="create-skills-wrap">
@@ -388,38 +434,64 @@
                                     <h3>Social Links</h3>
                                 </div>
                                 <div class="create-skills-right">
-                                    <a href="#">Edit</a>
-                                    <a href="#">Add New</a>
+                                    <a href="#popupL">Edit</a>
+                                    <a href="#popupL">Add New</a>
                                 </div>
                             </div>
-                            <form>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Facebook</label>
-                                            <input type="text" class="form-control" placeholder="https://www.facebook,com">
+                            <div class="popupL" id="popupL">
+                                <div class="popupL-inner">
+                                    <a class="popupL-close" href="#">&times;</a>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Facebook</label>
+                                                    <input type="text" class="form-control" placeholder="https://www.facebook,com">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Instagram</label>
+                                                    <input type="text" class="form-control" placeholder="https://www.instagram,com">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Linedin</label>
+                                                    <input type="text" class="form-control" placeholder="https://www.linkedin,com">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Dribbble</label>
+                                                    <input type="text" class="form-control" placeholder="https://www.dribble,com">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn create-ac-btn">Save</button>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Instagram</label>
-                                            <input type="text" class="form-control" placeholder="https://www.instagram,com">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Linedin</label>
-                                            <input type="text" class="form-control" placeholder="https://www.linkedin,com">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Dribbble</label>
-                                            <input type="text" class="form-control" placeholder="https://www.dribble,com">
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
+                            <div>
+                                <ol>
+                                        <li>
+                                            <i class="icofont-facebook"></i>
+                                            <a href="https://www.facebook.com" target="_blank">https://www.facebook.com</a>
+                                        </li>
+                                        <li>
+                                            <i class="icofont-instagram"></i>
+                                            <a href="https://www.instagram.com" target="_blank">https://www.instagram.com</a>
+                                        </li>
+                                        <li>
+                                            <i class="icofont-linkedin"></i>
+                                            <a href="https://www.linkedin.com" target="_blank">https://www.linkedin.com</a>
+                                        </li>
+                                        <li>
+                                            <i class="icofont-twitter"></i>
+                                            <a href="https://www.twitter.com" target="_blank">https://www.twitter.com</a>
+                                        </li>
+                                    </ol>
+                            </div>
                         </div>
                         <div class="text-left">
                             <button type="submit" class="btn create-ac-btn">Save</button>
