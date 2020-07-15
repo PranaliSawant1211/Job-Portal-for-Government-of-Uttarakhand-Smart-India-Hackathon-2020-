@@ -431,7 +431,7 @@ button:focus {
   display: inline-block;
   font-weight: 500;
   font-size: 16px;
-  color: #ecb3ff;
+  color: #d966ff;
   width: 210px;
   padding-top: 16px;
   padding-bottom: 16px;
@@ -673,8 +673,8 @@ button:focus {
   font-weight: 600;
   font-size: 28px;
   padding: 20px 70px;
-  -webkit-box-shadow: 0 0 0 10px #cce6cf;
-          box-shadow: 0 0 0 10px #cce6cf;
+  -webkit-box-shadow: 0 0 0 10px #f2ccff;
+          box-shadow: 0 0 0 10px #f2ccff;
 }
 
 .portal-item h2 {
@@ -724,7 +724,7 @@ button:focus {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 50px;
-  max-width: 770px;
+  max-width: 1200px;
   text-align: center;
 }
 
@@ -746,8 +746,8 @@ button:focus {
   border-image-source: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
   border-image-slice: 1;
   padding: 10px 25px;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin-right: 15px;
+  margin-left: 15px;
   position: relative;
   z-index: 1;
   transition: 0.5s all ease;
@@ -831,8 +831,8 @@ button:focus {
   display: block;
   font-weight: 500;
   font-size: 16px;
-  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
-  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#df80ff), color-stop(63%, #df80ff));
+  background: linear-gradient(90deg, #df80ff 0%, #df80ff 63%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -840,8 +840,8 @@ button:focus {
 }
 
 .job-item .job-inner .job-inner-left a:hover {
-  background: -webkit-gradient(linear, right top, left top, from(#ecb3ff), color-stop(63%, #d966ff));
-  background: linear-gradient(270deg, #ecb3ff 0%, #d966ff 63%);
+  background: -webkit-gradient(linear, right top, left top, from(#cc33ff), color-stop(63%, #cc33ff));
+  background: linear-gradient(270deg, #cc33ff 0%, #cc33ff 63%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1088,7 +1088,7 @@ button:focus {
   line-height: 50px;
   text-align: center;
   color: #047211;
-  background-color: #c0f3c6;
+  background-color: #ffff99;
   margin-right: 10px;
   font-size: 26px;
   border-radius: 12px;
@@ -1526,6 +1526,7 @@ button:focus {
           box-shadow: 0px 0px 20px 0px #dddddd80;
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
+
 }
 
 .blog-item:hover {
@@ -1553,7 +1554,7 @@ button:focus {
 .blog-item .blog-top span {
   font-weight: 500;
   font-size: 16px;
-  color: #3eb34c;
+  color: #cc33ff;
   background-color: #ffffff;
   position: absolute;
   bottom: -10px;
@@ -1602,7 +1603,7 @@ button:focus {
 
 .blog-item .blog-bottom ul li a {
   display: block;
-  color: #3eb34c;
+  color: #cc33ff;
   font-size: 14px;
   position: absolute;
   right: 0;
@@ -3053,8 +3054,8 @@ footer {
   display: inline-block;
   font-weight: 500;
   font-size: 16px;
-  background: -webkit-gradient(linear, left top, right top, from(#ecb3ff), color-stop(63%, #d966ff));
-  background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);
+  background: -webkit-gradient(linear, left top, right top, from(#cc33ff), color-stop(63%, #cc33ff));
+  background: linear-gradient(90deg,#cc33ff 0%, #cc33ff 63%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

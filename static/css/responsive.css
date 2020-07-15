@@ -172,8 +172,8 @@
   .portal-item .portal-trusted span {
     font-size: 18px;
     padding: 15px 50px;
-    -webkit-box-shadow: 0 0 0 5px #cce6cf;
-            box-shadow: 0 0 0 5px #cce6cf;
+    -webkit-box-shadow: 0 0 0 5px #f2ccff;
+            box-shadow: 0 0 0 5px #f2ccff;
   }
   .portal-item h2 {
     font-size: 20px;
@@ -1446,8 +1446,8 @@
   .portal-item .portal-trusted span {
     font-size: 18px;
     padding: 15px 50px;
-    -webkit-box-shadow: 0 0 0 5px #cce6cf;
-            box-shadow: 0 0 0 5px #cce6cf;
+    -webkit-box-shadow: 0 0 0 5px #f2ccff;
+            box-shadow: 0 0 0 5px #f2ccff;
   }
   .portal-item h2 {
     font-size: 20px;

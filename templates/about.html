@@ -26,6 +26,98 @@
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="static/css/responsive.css">
         <title>Gable - Job Portal HTML Template</title>
+        <style>
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  height:380px;
+  margin:auto;
+  width:1250px;
+
+
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container1 {
+    padding: 60px 0;
+    margin: auto;
+}
+.hoc {
+    display: block;
+    margin: 0 auto;
+}
+.clear, .clear::after, .group, .group::after {
+    clear: both;
+}
+
+
+.parent-container{
+
+position: relative;
+
+
+
+}
+
+.form{
+
+position: absolute;
+
+width:50%;
+
+height: 10%;
+
+
+
+left: 25%;
+
+}
+
+</style>
+<style>
+.zoom {
+  transition: transform .2s; /* Animation */
+  width: 600px;
+  height: 300px;
+  margin: auto;
+  margin-left:0px;
+}
+
+.zoom:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+body, html {
+  height: 100%;
+}
+
+.parallax {
+  /* The image used */
+  background-image: url("static/tree.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Turn off parallax scrolling for tablets and phones. Increase the pixels if needed */
+@media only screen and (max-device-width: 1366px) {
+  .parallax {
+    background-attachment: scroll;
+  }
+}
+</style>
 
         <link rel="icon" type="image/png" href="static/img/favicon.png">
     </head>
@@ -179,7 +271,8 @@
         <!-- End Navbar Area -->
 
         <!-- Page Title -->
-        <div class="page-title-area">
+        <div class="parallax">
+        <div class="page-title-area" style="background:#e699ff">
             <div class="d-table">
                 <div class="d-table-cell">
                     <div class="container">
@@ -199,358 +292,301 @@
                 </div>
             </div>
         </div>
+    </div>
+    
         <!-- End Page Title -->
+        
+    
+        <div class="parallax">
 
-        <!-- Category -->
-        <section class="category-area category-area-two pt-100 pb-70">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Choose Your Desire Category</h2>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4 col-lg-3">
-                        <div class="category-item">
-                            <i class="flaticon-settings"></i>
-                            <a href="#">Technical Support</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-lg-3">
-                        <div class="category-item category-two">
-                            <i class="flaticon-layers"></i>
-                            <a href="#">Business Development</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-lg-3">
-                        <div class="category-item category-three">
-                            <i class="flaticon-house"></i>
-                            <a href="#">Real Estate Business</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-lg-3">
-                        <div class="category-item category-four">
-                            <i class="flaticon-analysis"></i>
-                            <a href="#">Share Maeket Analysis</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-lg-3">
-                        <div class="category-item category-five">
-                            <i class="flaticon-sun"></i>
-                            <a href="#">Weather & Environment</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-lg-3">
-                        <div class="category-item category-six">
-                            <i class="flaticon-hand"></i>
-                            <a href="#">Finance & Banking Service</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-lg-3">
-                        <div class="category-item category-seven">
-                            <i class="flaticon-neural"></i>
-                            <a href="#">IT & Networing Sevices</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-lg-3">
-                        <div class="category-item category-eight">
-                            <i class="flaticon-dish"></i>
-                            <a href="#">Restaurant Services</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-lg-3">
-                        <div class="category-item category-nine">
-                            <i class="icofont-fire-burn"></i>
-                            <a href="#">Defence  & Fire Service</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 offset-sm-4 offset-lg-0 col-lg-3">
-                        <div class="category-item category-ten">
-                            <i class="flaticon-truck"></i>
-                            <a href="#">Home Delivery Services</a>
-                        </div>
-                    </div>
-                </div>
+        <div class="bgded overlay" style="background-image:url('static/br.jpg'); height:500px; ">
+        <section class="hoc container1 clear">
+            <div class="card">
+                <br><br>
+                <table>
+                    <tr>
+                        <td>
+                          <div class="col-sm-6 col-lg-4">
+                                    <div class="blog-item wow fadeInUp" data-wow-delay=".3s" style="margin-left:50px">
+                                        <div class="blog-top" style="width:350px">
+                                            <a href="blog-details.html">
+                                                <img class='zoom' src="static/mahesh.jpg" alt="Blog">
+                                            </a>
+
+                                            <span><b style="font-family:Comic Sans MS">Date of Birth:</b><br>20th September, 1998</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                    <td style="font-family:Comic Sans MS; color:#000000;width:750px">
+                        <div class="container" style="float:right;text-align:center">
+                            <h1><b>Mahesh Mahajan</b></h1>
+                            <h3>Full Stack Developer</h3>
+                            <h6>Bachelor's Degree in Information Technology</h6>
+                            <h6>Graduated from Mumbai University</h6>
+                            <h6>Placed in <a target="_blank" style="color:#d966ff" href="https://www.capgemini.com/in-en/">Capgemini India Pvt. Ltd.</a></h6>
+                            <h6>Email: <i>maheshmahajan.20998@gmail.com</i></h6>
+                            <h6><i>Connect me on <a href="https://www.linkedin.com/in/mahesh-mahajan">LinkedIn</a></i></h6>
+                            <br>
+                            <br>
+                            <br>
+                         </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </section>
-        <!-- End Category -->
+    </div>
+</div>
+   
+    <div class="parallax">
+    <div class="bgded overlay" style="background-image:url('static/bg.jpg'); height:500px; ">
+        <section class="hoc container1 clear">
+            <div class="card">
+                <br><br>
+                <table>
+                    <tr>
+                        <td style="font-family:Comic Sans MS; color:#000000; width:750px">
+                            <div class="container" style="text-align: center;">
+                            <h1><b>Neha Patil</b></h1>
+                            <h3>Full Stack Developer</h3>
+                            <h6>Bachelor's Degree in Information Technology</h6>
+                            <h6>Graduated from Mumbai University</h6>
+                            <h6>Placed in <a target="_blank" style="color:#d966ff" href="https://www.lntinfotech.com/">Larsen & Toubro Infotech Pvt. Ltd.</a></h6>
+                            <h6>Email: <i>nehamp.308@gmail.com</i></h6>
+                            <h6><i>Connect me on <a target="_blank" href="linkedin.com/in/patil-neha-a0600a181">LinkedIn</a></i></h6>
+                            <br>
+                            <br>
+                            <br>
+                            </div>
+                          </td>
+                        <td>
+                            <div class="col-sm-6 col-lg-4">
+                            <div class="blog-item wow fadeInUp" data-wow-delay=".3s" style="margin-left:50px">
+                                <div class="blog-top" style="width:350px">
+                                    <a href="blog-details.html">
+                                       <center> <img class='zoom' src="static/neha.jpg" alt="Blog"></center>
+                                    </a>
 
-        <!-- Portal -->
-        <div class="portal-area pt-100 pb-70">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="portal-item">
-                            <div class="row">
-                                <div class="col-lg-7">
-                                    <img src="static/img/home-1/1.jpg" alt="Portal">
-                                </div>
-                                <div class="col-lg-5">
-                                    <img src="static/img/home-1/2.jpg" alt="Portal">
-                                </div>
-                            </div>
-                            <div class="portal-trusted">
-                                <span>100% Trusted</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="portal-item portal-right portal-right-two">
-                            <h2>Trusted & Popular Job Portal</h2>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur.</p>
-                            <div class="portal-counter-area">
-                                <div class="row">
-                                    <div class="col-6 col-sm-4 col-lg-4">
-                                        <div class="counter-item">
-                                            <h3><span class="counter">14</span>K+</h3>
-                                            <p>Job Available</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm-4 col-lg-4">
-                                        <div class="counter-item">
-                                            <h3><span class="counter">18</span>K+</h3>
-                                            <p>Submitted CV</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm-4 col-lg-4">
-                                        <div class="counter-item">
-                                            <h3><span class="counter">9</span>K+</h3>
-                                            <p>Company</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm-6 col-lg-4 offset-lg-2">
-                                        <div class="counter-item">
-                                            <h3><span class="counter">22</span>K+</h3>
-                                            <p>Registered Member</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm-6 col-lg-4">
-                                        <div class="counter-item">
-                                            <h3><span class="counter">55</span>K+</h3>
-                                            <p>Appointed to Job</p>
-                                        </div>
-                                    </div>
+                                    <span><b style="font-family:Comic Sans MS">Date of Birth:</b><br>3rd August, 1998</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <!-- End Portal -->
+    </section>
+</div>
+</div>
 
-        <!-- Counter -->
-        <div class="counter-area pt-100 pb-70">
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 col-sm-3 col-lg-3">
-                        <div class="counter-item">
-                            <i class="flaticon-employee"></i>
-                            <h3><span class="counter">14</span>k+</h3>
-                            <p>Job Available</p>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-3 col-lg-3">
-                        <div class="counter-item">
-                            <i class="flaticon-curriculum"></i>
-                            <h3><span class="counter">18</span>k+</h3>
-                            <p>CV Submitted</p>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-3 col-lg-3">
-                        <div class="counter-item">
-                            <i class="flaticon-enterprise"></i>
-                            <h3><span class="counter">9</span>k+</h3>
-                            <p>Companies</p>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-3 col-lg-3">
-                        <div class="counter-item">
-                            <i class="flaticon-businessman-paper-of-the-application-for-a-job"></i>
-                            <h3><span class="counter">35</span>+</h3>
-                            <p>Appointed to Job</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Counter -->
+   
+<div class="parallax">
+<div class="bgded overlay" style="background-image:url('static/br.jpg'); height:500px; ">
+        <section class="hoc container1 clear">
+            <div class="card">
+                <br><br>
+                <table>
+                    <tr>
+                        <td style="font-family:Comic Sans MS; color:#000000">
+                          <div class="col-sm-6 col-lg-4">
+                                    <div class="blog-item wow fadeInUp" data-wow-delay=".3s" style="margin-left:50px">
+                                        <div class="blog-top" style="width:350px">
+                                            <a href="blog-details.html">
+                                                <img class='zoom' src="static/pranali1.jpg" alt="Blog">
+                                            </a>
 
-        <!-- Popular -->
-        <div class="popular-area pt-100 pb-70">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="popular-item">
-                            <div class="row align-items-center">
-                                <div class="col-lg-7">
-                                    <img src="static/img/home-1/3.jpg" alt="Popular">
-                                </div>
-                                <div class="col-lg-5">
-                                    <div class="practice-inner">
-                                        <img src="static/img/home-1/4.jpg" alt="Popular">
-                                        <img src="static/img/home-1/5.jpg" alt="Popular">
+                                            <span><b style="font-family:Comic Sans MS">Date of Birth:</b><br>12th November, 1998</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="popular-item popular-right">
-                            <div class="section-title text-left">
-                                <h2>Why We are Most Popular</h2>
-                            </div>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Quis ipsum suspendisse ultrices gravida</p>
-                            <div class="row popular-wrap">
-                                <div class="col-sm-6 col-lg-6">
-                                    <ul>
-                                        <li>
-                                            <i class="flaticon-approved"></i>
-                                            Trusted & Quality Job
-                                        </li>
-                                        <li>
-                                            <i class="flaticon-no-money"></i>
-                                            No Extra Charge
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6 col-lg-6">
-                                    <ul>
-                                        <li>
-                                            <i class="flaticon-enterprise"></i>
-                                            Top Companies
-                                        </li>
-                                        <li>
-                                            <i class="flaticon-employee"></i>
-                                            International Job
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Popular -->
-
-        <!-- Blog -->
-        <section class="blog-area">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Our Latest Blogs</h2>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".3s">
-                            <div class="blog-top">
-                                <a href="blog-details.html">
-                                    <img src="static/img/home-1/blog/1.jpg" alt="Blog">
-                                </a>
-                                <span>21 May, 2020</span>
-                            </div>
-                            <div class="blog-bottom">
-                                <h3>
-                                    <a href="blog-details.html">The next genaration IT will change the world</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <img src="static/img/home-1/blog/1.png" alt="Blog">
-                                        Aikin Ward
-                                    </li>
-                                    <li>
-                                        <a href="blog-details.html">Read More
-                                            <i class="icofont-simple-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".4s">
-                            <div class="blog-top">
-                                <a href="blog-details.html">
-                                    <img src="static/img/home-1/blog/2.jpg" alt="Blog">
-                                </a>
-                                <span>22 May, 2020</span>
-                            </div>
-                            <div class="blog-bottom">
-                                <h3>
-                                    <a href="blog-details.html">It is the most important sector in the world</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <img src="static/img/home-1/blog/1.png" alt="Blog">
-                                        Aikin Ward
-                                    </li>
-                                    <li>
-                                        <a href="blog-details.html">Read More
-                                            <i class="icofont-simple-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 offset-sm-3 offset-lg-0 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".5s">
-                            <div class="blog-top">
-                                <a href="blog-details.html">
-                                    <img src="static/img/home-1/blog/3.jpg" alt="Blog">
-                                </a>
-                                <span>23 May, 2020</span>
-                            </div>
-                            <div class="blog-bottom">
-                                <h3>
-                                    <a href="blog-details.html">Nowadays IT is being most popular</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <img src="static/img/home-1/blog/1.png" alt="Blog">
-                                        Aikin Ward
-                                    </li>
-                                    <li>
-                                        <a href="blog-details.html">Read More
-                                            <i class="icofont-simple-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </td>
+                    <td style="font-family:Comic Sans MS; color:#000000; width:750px">
+                        <div class="container" style="float:right;text-align: center">
+                            <h1><b>Pranali Sawant</b></h1>
+                            <h3>Full Stack Developer</h3>
+                            <h6>Bachelor's Degree in Information Technology</h6>
+                            <h6>Graduated from Mumbai University</h6>
+                            <h6>Placed in <a target="_blank" style="color:#d966ff" href="https://www.infosys.com/">Infosys Ltd.</a></h6>
+                            <h6>Email: <i>sawantpranali2429@gmail.com</i></h6>
+                            <h6><i>Connect me on <a target="_blank" href="#">LinkedIn</a></i></h6>
+                            <br>
+                            <br>
+                            <br>
+                         </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </section>
-        <!-- End Blog -->
+    </div>
+</div>
 
-        <!-- Footer -->
-        <footer>
-            <div class="container">
+    <div class="parallax">
+    <div class="bgded overlay" style="background-image:url('static/bg.jpg'); height:500px; ">
+        <section class="hoc container1 clear">
+            <div class="card">
+                <br><br>
+                <table>
+                    <tr>
+                        <td style="font-family:Comic Sans MS; color:#000000; width:750px">
+                            <div class="container" style="float:right;text-align: center">
+                            <h1><b>Preetam B. A.</b></h1>
+                            <h3>Backend Developer (M.L. & Database)</h3>
+                            <h6>Bachelor's Degree in Information Technology</h6>
+                            <h6>Graduating from Mumbai University</h6>
+                            <h6>Intern at <a target="_blank" style="color:#d966ff" href="https://www.jsw.in/">JSW Steels Pvt. Ltd.</a></h6>
+                            <h6>Email: <i>preetamba17ite@student.mes.ac.in</i></h6>
+                            <h6><i>Connect me on <a target="_blank" href="linkedin.com/in/preetam-b-a-162770154">LinkedIn</a></i></h6>
+                            <br>
+                            <br>
+                            <br>
+                            </div>
+                          </td>
+                        <td style="font-family:Comic Sans MS; color:#000000">
+                            <div class="col-sm-6 col-lg-4">
+                            <div class="blog-item wow fadeInUp" data-wow-delay=".3s" style="margin-left:50px">
+                                <div class="blog-top" style="width:350px">
+                                    <a href="blog-details.html">
+                                        <img class='zoom' src="static/preetam.jpg" alt="Blog">
+                                    </a>
 
-                <!-- Subscribe Form -->
-                <div class="subscribe-area">
-                    <div class="section-title">
-                        <h2>Subscribe Newsletter</h2>
-                    </div>
-                    <div class="subscribe-shape">
-                        <img src="static/img/shape/1.png" alt="Shape">
-                        <img src="static/img/shape/1.png" alt="Shape">
-                        <img src="static/img/shape/1.png" alt="Shape">
-                        <img src="static/img/shape/1.png" alt="Shape">
-                        <img src="static/img/shape/2.png" alt="Shape">
-                    </div>
-                    <div class="subscribe-item">
-                        <form class="newsletter-form" data-toggle="validator">
-                            <input type="email" class="form-control" placeholder="Enter Your Email" name="EMAIL" required autocomplete="off">
+                                    <span><b style="font-family:Comic Sans MS">Date of Birth:</b><br>23rd August, 1999</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</div>
+</div>
 
-                            <button class="btn subscribe-btn" type="submit">
-                                Subscribe
-                            </button>
 
-                            <div id="validator-newsletter" class="form-result"></div>
-                        </form>
-                    </div>
-                </div>
-                <!-- End Subscribe Form -->
+<div class="parallax">
+<div class="bgded overlay" style="background-image:url('static/br.jpg'); height:500px; ">
+        <section class="hoc container1 clear">
+            <div class="card">
+                <br><br>
+                <table>
+                    <tr>
+                        <td style="font-family:Comic Sans MS; color:#000000">
+                          <div class="col-sm-6 col-lg-4">
+                                    <div class="blog-item wow fadeInUp" data-wow-delay=".3s" style="margin-left:50px">
+                                        <div class="blog-top" style="width:350px">
+                                            <a href="blog-details.html">
+                                                <img class='zoom' src="static/images/home-1/blog/1.jpg" alt="Blog">
+                                            </a>
+
+                                            <span><b style="font-family:Comic Sans MS">Date of Birth:</b><br>21 May, 2020</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                    <td style="font-family:Comic Sans MS; color:#000000;width:750px">
+                        <div class="container" style="float:right;text-align: center">
+                            <h1><b>Lovkesh Sharma</b></h1>
+                            <h3>M.L & NLP</h3>
+                            <h6>Bachelor's Degree in Information Technology</h6>
+                            <h6>Graduated from Mumbai University</h6>
+                            <h6>Placed in <a target="_blank" style="color:#d966ff" href="https://www.lntinfotech.com/">Larsen & Toubro Infotech Pvt. Ltd.</a></h6>
+                            <h6>Email: <i>luckysharma698@gmail.com</i></h6>
+                            <h6><i>Connect me on <a target="_blank" href="linkedin.com/in/lovkesh-sharma-a9111517b">LinkedIn</a></i></h6>
+                            <br>
+                            <br>
+                            <br>
+                         </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </div>
+  
+    </div>
+
+    <div class="parallax">
+    <div class="bgded overlay" style="background-image:url('static/bg.jpg'); height:500px; ">
+        <section class="hoc container1 clear">
+            <div class="card">
+                <br><br>
+                <table>
+                    <tr>
+                        <td style="font-family:Comic Sans MS; color:#000000; width:750px">
+                            <div class="container" style="float:right; text-align:center">
+                            <h1><b>Karan Nair</b></h1>
+                            <h3>Full Stack Developer</h3>
+                            <h6>Bachelor's Degree in Information Technology</h6>
+                            <h6>Graduated from Mumbai University</h6>
+                            <h6>Placed in <a target="_blank" style="color:#d966ff" href="https://www.infosys.com/">Infosys Ltd.</a></h6>
+                            <h6>Email: <i>nairksce16e@student.mes.ac.in</i></h6>
+                            <h6><i>Connect me on <a target="_blank" href="linkedin.com/in/patil-neha-a0600a181">LinkedIn</a></i></h6>
+                            <br>
+                            <br>
+                            <br>
+                            </div>
+                          </td>
+                        <td style="font-family:Comic Sans MS; color:#000000">
+                            <div class="col-sm-6 col-lg-4">
+                            <div class="blog-item wow fadeInUp" data-wow-delay=".3s" style="margin-left:50px">
+                                <div class="blog-top" style="width:350px">
+                                    <a href="blog-details.html">
+                                        <img class='zoom' src="static/images/home-1/blog/1.jpg" alt="Blog">
+                                    </a>
+
+                                    <span><b style="font-family:Comic Sans MS">Date of Birth:</b><br>21 May, 2020</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</div>
+
+    </div>
+
+<div class="parallax">
+<div class="bgded overlay" style="background-image:url('static/br.jpg'); height:500px; ">
+        <section class="hoc container1 clear">
+            <div class="card">
+                <br><br>
+                <table>
+                    <tr>
+                        <td>
+                          <div class="col-sm-6 col-lg-4">
+                                    <div class="blog-item wow fadeInUp" data-wow-delay=".3s" style="margin-left:50px">
+                                        <div class="blog-top" style="width:350px">
+                                            <a href="blog-details.html">
+                                                <img class='zoom' src="static/images/home-1/blog/1.jpg" alt="Blog">
+                                            </a>
+
+                                            <span><b style="font-family:Comic Sans MS">Date of Birth:</b><br>21 May, 2020</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                    <td style="font-family:Comic Sans MS; color:#000000">
+                        <div class="container" style="float:right">
+                            Use a production WSGI server instead.
+                             * Debug mode: on
+                             * Restarting with stat
+                             * Debugger is active!
+                             * Debugger PIN: 287-353-670
+                             * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+                         </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    </div>
+
+    
 
                 
 
