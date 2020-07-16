@@ -32,8 +32,8 @@
 
         <link rel="icon" type="image/png" href="static/img/favicon.png">
     </head>
+    
     <body>
-
         <!-- Preloader -->
         
 
@@ -302,133 +302,306 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="create-education create-education-two">
+                        <a id="hello"></a>
+                        <div id="educationtag" class="create-education create-education-two">
                             <div class="create-education-wrap">
                                 <div class="create-education-left">
-                                    <h3>Education</h3>
-                                </div>
+                                <form action="{{ url_for('insertedu') }}" method="POST">
+                                        <h3>Education</h3>
+                                    </div>
                                 <div class="create-education-right">
-                                    <a href="#popupE">Edit</a>
-                                    <a href="#popupE" class="popup-open">Add Education</a>
+                                    <!-- <a href="/">Edit</a> -->
+                                    <button type="submit" class="btn create-ac-btn">Add Education</button>
                                 </div>
                             </div>
                             <div class="popupE" id="popupE">
                                 <div class="popupE-inner">
-                                    <a class="popupE-close" href="#">&times;</a>
+                                    
                                 
-                                    <form>
+                                    
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Title</label>
-                                                    <input type="text" class="form-control" placeholder="Under Graduate">
+                                                    <input name="Titleedu" type="text" class="form-control" placeholder="Under Graduate">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Degree</label>
-                                                    <input type="text" class="form-control" placeholder="BSC in Computer Science">
+                                                    <input  name="Degreeedu" type="text" class="form-control" placeholder="BSC in Computer Science">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Institute</label>
-                                                    <input type="text" class="form-control" placeholder="Gable University of Design & Arts">
+                                                    <input name="Instedu" type="text" class="form-control" placeholder="Gable University of Design & Arts">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Year</label>
-                                                    <input type="text" class="form-control" placeholder="2016-2019">
+                                                    <input  name="Yearedu" type="text" class="form-control" placeholder="2016-2019">
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn create-ac-btn">Save</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <div >
-                                <ol style="color: #495057" type="*">
-                                    <li>PHD degree in Criminal Law at University of Gable Internatinal (2006)</li>
-                                    <li>Master of Family Law  at University of Gable International  (2002)</li>
-                                    <li>MBBS LLB (Hon’s) in  at University of Gable International (2002)</li>
-                                    <li>Higher Secondary Certificate at Gable International collage  (1991)</li>
-                                </ol>
+
+                            <div>
+                                <table id="edubox" class="table table-striped">
+
+
+                                    <tr>
+                                      <th>Title</th>
+                                      <th>Degree</th>
+                                      <th>Institute</th>
+                                      <th>Year</th>
+                                      <th>Action</th>
+
+
+                                    </tr>
+
+                                        {% for row in students %}
+                                        <tr>
+                                            <td>{{row.2}}</td>
+                                            <td>{{row.3}}</td>
+                                            <td>{{row.4}}</td>
+                                            <td>{{row.5}}</td>
+                                            <td style="display:none;">{{row.0}}</td>
+                                            <td>
+                                               <button onclick="showDialog()" class="btn btn-warning btn-xs">Edit</button>
+                                               <input id='sr' type="hidden" value="{{row.0}}">
+                                                <a href="/deleteedu/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                                            </td>
+                                        </tr>
+
+                
+                                        {% endfor  %}
+
+                                 </table>
+                        </div>
+
+                        <div id='dialog'>
+                            
+        
+                
+                                <div class="create-education-right">
+                                    <!-- <a href="/">Edit</a> -->
+                                    
+                                </div>
+                            
+                            <div class="popupE" id="popupE">
+                                <div class="popupE-inner">
+                                     
+                                    <form action="{{ url_for('updateedu') }}" method="POST">
+                                         <input type="hidden" id="srno" name="srno">
+                                    
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Title</label>
+                                                    <input  name="Titleedu" id="Titleedu" type="text" class="form-control" placeholder="Under Graduate">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Degree</label>
+                                                    <input  name="Degreeedu" id="Degreeedu" type="text" class="form-control" placeholder="BSC in Computer Science">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Institute</label>
+                                                    <input name="Instedu" id="Instedu" type="text" class="form-control" placeholder="Gable University of Design & Arts">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Year</label>
+                                                    <input  name="Yearedu" id="Yearedu" type="text" class="form-control" placeholder="2016-2019">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn create-ac-btn" onclick="closeDialog">Add Education</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
                             </div>
                         </div>
-                        <div class="create-skills">
+                        <div id="skilltag" class="create-skills">
                             <div class="create-skills-wrap">
                                 <div class="create-skills-left">
                                     <h3>Skill</h3>
                                 </div>
                                 <div class="create-skills-right">
-                                    <a href="#popupS">Edit</a>
-                                    <a href="#popupS">Add Skill</a>
+                                    
+                                    <form action="{{ url_for('insertskill') }}" method="POST">
+                                    <button type="submit" class="btn create-ac-btn">Add Skill</button>
                                 </div>
                             </div>
                             <div class="popupS" id="popupS">
                                 <div class="popupS-inner">
-                                    <a class="popupS-close" href="#">&times;</a>
-                                    <form>
-                                        <div class="row">
+                                    
+                                        <div class="row">            
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Title</label>
-                                                    <input type="text" class="form-control" placeholder="Frontend Design">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="skill">
-                                                    <p>Percentage</p>
-                                                    <div class="skill-bar skill1 skill3 wow slideInLeft animated">
-                                                        <span class="skill-count1">60%</span>
+                                                        <input name='skname' type="text" class="form-control" placeholder="Frontend Design">
                                                     </div>
                                                 </div>
-                                            </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Name</label>
-                                                    <input type="text" class="form-control" placeholder="UX/UI Design">
+                                                    <label>Percentage</label>
+                                                    <input  name="prcnt" type="text" class="form-control" placeholder="56">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="skill">
-                                                    <p>Percentage</p>
-                                                    <div class="skill-bar skill1 skill4 wow slideInLeft animated">
-                                                        <span class="skill-count1">95%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button type="submit" class="btn create-ac-btn">Save</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                             <div >
                                 <div class="single-profile-skills">
-                                    
-                                    <div class="skill">
-                                        <p>Frontend Design</p>
-                                        <div class="skill-bar skill1 wow slideInLeft  animated" style="visibility: visible; animation-name: slideInLeft;">
-                                            <span class="skill-count1">70%</span>
-                                        </div>
-                                    </div>
-                                    <div class="skill">
-                                        <p>Software Development</p>
-                                        <div class="skill-bar skill1 skill2 wow slideInLeft  animated" style="visibility: visible; animation-name: slideInLeft;">
-                                            <span class="skill-count1">90%</span>
-                                        </div>
-                                    </div>
-                                    <div class="skill">
-                                        <p>UIUX Design</p>
-                                        <div class="skill-bar skill1 skill3 wow slideInLeft  animated" style="visibility: visible; animation-name: slideInLeft;">
-                                            <span class="skill-count1">75%</span>
-                                        </div>
-                                    </div>
+                                    <table id="skillbox" class="table table-striped">
+                                        <tbody width="100%">
+                                        <tr>
+                                        <th>Skill</th>
+                                        <th>Percentage</th>
+                                        <th>Action</th>
+                                        </tr>
+                                        {% for rowskill in tskills %}
+                                        <tr>
+                                            <td style="display:none;">{{rowskill.0}}</td>
+                                            <td>{{ rowskill.2 }}</td>
+                                            <td>{{ rowskill.3}}</td>
+                                        <td width="25%">
+                                               <button onclick="showDialogS()" class="btn btn-warning btn-xs">Edit</button>
+                                                <a href="/deleteskill/{{ rowskill.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                                            </td>
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                        <div class="create-skills">
+                        <div id="dialogS">
+                           <div class="popupS" id="popupS">
+                                <div class="popupS-inner">
+                                    <form action="{{ url_for('updateskill') }}" method="POST">   
+                                        <div class="row">            
+                                            <div class="col-lg-6">
+
+                                                <input type="hidden" id="Usrno" name="srno">
+                                                <div class="form-group">
+                                                    <label>Title</label>
+                                                        <input name='skname' id='uskname' type="text" class="form-control" placeholder="Frontend Design">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Percentage</label>
+                                                    <input  name="prcnt" id="uprcnt" type="text" class="form-control" placeholder="56">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn create-ac-btn" onclick="closeDialogS()">Add Skill</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <script type="text/javascript">
+    const showDialog = () => {
+  document.getElementById('dialog').classList.add('show')
+  const scrollY = document.documentElement.style.getPropertyValue('--scroll-y');
+  const body = document.body;
+  body.style.position = 'fixed';
+  body.style.top = `-${scrollY}`;
+};
+const closeDialog = () => {
+  const body = document.body;
+  const scrollY = body.style.top;
+  body.style.position = '';
+  body.style.top = '';
+  window.scrollTo(0, parseInt(scrollY || '0') * -1);
+  document.getElementById('dialog').classList.remove('show');
+}
+window.addEventListener('scroll', () => {
+  document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
+});
+
+const showDialogS = () => {
+  document.getElementById('dialogS').classList.add('show')
+  const scrollY = document.documentElement.style.getPropertyValue('--scroll-y');
+  const body = document.body;
+  body.style.position = 'fixed';
+  body.style.top = `-${scrollY}`;
+};
+const closeDialogS = () => {
+  const body = document.body;
+  const scrollY = body.style.top;
+  body.style.position = '';
+  body.style.top = '';
+  window.scrollTo(0, parseInt(scrollY || '0') * -1);
+  document.getElementById('dialogS').classList.remove('show');
+}
+window.addEventListener('scroll', () => {
+  document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
+});
+    
+</script>
+
+
+        <script>
+    
+                var table = document.getElementById('edubox');
+                
+                for(var i = 1; i < table.rows.length; i++)
+                {
+                    table.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         console.log(this.cells[0]);
+                         console.log(this.cells[0].innerHTML);
+                         document.getElementById("Titleedu").value = this.cells[0].innerHTML;
+                         document.getElementById("Degreeedu").value = this.cells[1].innerHTML;
+                         document.getElementById("Instedu").value = this.cells[2].innerHTML;
+                         document.getElementById("Yearedu").value = this.cells[3].innerHTML;
+                         document.getElementById("srno").value = this.cells[4].innerHTML;
+                         
+                         
+
+
+                    };
+                }
+
+                var tableU = document.getElementById('skillbox');
+                
+                for(var i = 1; i < tableU.rows.length; i++)
+                {
+                    tableU.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         document.getElementById("uskname").value = this.cells[1].innerHTML;
+                         document.getElementById("uprcnt").value = this.cells[2].innerHTML;
+                         
+                         document.getElementById("Usrno").value = this.cells[0].innerHTML;
+                         console.log(this.cells[0].innerHTML,this.cells[1].innerHTML,this.cells[2].innerHTML)
+                         
+
+
+                    };
+                }
+
+         </script>
+
+                        <div id="linktag" class="create-skills">
                             <div class="create-skills-wrap">
                                 <div class="create-skills-left">
                                     <h3>Social Links</h3>
@@ -440,7 +613,6 @@
                             </div>
                             <div class="popupL" id="popupL">
                                 <div class="popupL-inner">
-                                    <a class="popupL-close" href="#">&times;</a>
                                     <form>
                                         <div class="row">
                                             <div class="col-lg-6">
@@ -467,11 +639,19 @@
                                                     <input type="text" class="form-control" placeholder="https://www.dribble,com">
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn create-ac-btn">Save</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
+
+        {% if scroll %}
+    <script>
+    document.getElementById('{{ scroll }}').scrollIntoView();
+    // or
+    console.log('{{ scroll }}')
+    // document.location.hash = '#' + '{{ scroll }}';
+    </script>
+        {% endif %}
                             <div>
                                 <ol>
                                         <li>
@@ -757,6 +937,8 @@
         <script src="static/js/jquery.min.js"></script>
         <script src="static/js/popper.min.js"></script>
         <script src="static/js/bootstrap.min.js"></script>
+        
+
         <!-- Meanmenu JS -->
         <script src="static/js/jquery.meanmenu.js"></script>
         <!-- Nice Select JS -->
