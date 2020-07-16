@@ -1,96 +1,153 @@
-/*.edubox{
-	display: inline;
-	float: left;
+/* The Modal (background) */
+.modaledu {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-body {
-  font-size: 1.5em;
-  justify-content: center;
-  line-height: 1.5;
-  margin: 0;
-  padding: 1em 3em;
-}*/
 
+/* Modal Content */
+.modaledu-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
 
-#text {
-  max-width: 800px;
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
 }
-#show {
-  position: fixed;
-  top: 30px;
-  left: 10px;
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
 }
-#show,
-#close {
-  background: #da1b60;
-  /*border: none;*/
-  color: #fff;
-  display: block;
-  font-size: 1em;
-  padding: 1em;
-  width: 200px;
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
-#show:hover,
-#close:hover {
-  background: #ff8a00;
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
   cursor: pointer;
 }
-#dialog {
-  display: none;
-  position: fixed;
-  top: 20vh;
-  left: 10vw;
-  width: 60vw;
-  height: 30vw;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  padding: 10px;
-  text-align: center;
-  z-index: 1;
-  background-color: #444;
-  color: #fff;
+
+.modaledu-header {
+  padding: 20px 20px;
+  background-color: #d966ff ;
+  color: white;
 
 }
-#dialog.show {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+
+.modaledu-header h2{
+  color:white;
 }
 
-#dialogS {
-  display: none;
-  position: fixed;
-  top: 20vh;
-  left: 10vw;
-  width: 60vw;
-  height: 30vw;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  padding: 10px;
-  text-align: center;
-  z-index: 1;
-  background-color: #444;
-  color: #fff;
+.modaledu-body {padding: 25px 25px 25px 25px;}
 
-}
-#dialogS.show {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+.modaledu-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
 }
 
+.modalskill {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
+/* Modal Content */
+.modalskill-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
 
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
 
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
 
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
 
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 
+.modalskill-header {
+  padding: 20px 20px;
+  background-color: #d966ff ;
+  color: white;
 
+}
 
+.modalskill-header h2{
+  color:white;
+}
 
+.modalskill-body {padding: 25px 25px 25px 25px;}
 
+.modalskill-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
 
-
-
-
-
+.vertical-center {
+  transform: translateX(10px);
+}
 

@@ -357,7 +357,7 @@
                                       <th>Degree</th>
                                       <th>Institute</th>
                                       <th>Year</th>
-                                      <th>Action</th>
+                                      <th style="text-align: center;">Action</th>
 
 
                                     </tr>
@@ -369,8 +369,8 @@
                                             <td>{{row.4}}</td>
                                             <td>{{row.5}}</td>
                                             <td style="display:none;">{{row.0}}</td>
-                                            <td>
-                                               <button onclick="showDialog()" class="btn btn-warning btn-xs">Edit</button>
+                                            <td style="text-align:right;">
+                                               <button onclick="showDialog()"  class="btn btn-warning btn-xs">Edit</button>
                                                <input id='sr' type="hidden" value="{{row.0}}">
                                                 <a href="/deleteedu/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
                                             </td>
@@ -382,7 +382,7 @@
                                  </table>
                         </div>
 
-                        <div id='dialog'>
+                        <div id="myModal" class="modaledu">
                             
         
                 
@@ -391,8 +391,12 @@
                                     
                                 </div>
                             
-                            <div class="popupE" id="popupE">
-                                <div class="popupE-inner">
+                            <div class="modaledu-content">
+                                <div class="modaledu-header">
+                                    <span class="close" id="spanE">&times;</span>
+                                    <h2 style="color: white"> Update Details</h2>
+                                </div>
+                                <div class="modaledu-body">
                                      
                                     <form action="{{ url_for('updateedu') }}" method="POST">
                                          <input type="hidden" id="srno" name="srno">
@@ -422,7 +426,7 @@
                                                     <input  name="Yearedu" id="Yearedu" type="text" class="form-control" placeholder="2016-2019">
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn create-ac-btn" onclick="closeDialog">Add Education</button>
+                                            <button type="submit" class="btn create-ac-btn vertical-center">Add Education</button>
                                         </div>
                                     </form>
                                 </div>
@@ -475,7 +479,7 @@
                                             <td style="display:none;">{{rowskill.0}}</td>
                                             <td>{{ rowskill.2 }}</td>
                                             <td>{{ rowskill.3}}</td>
-                                        <td width="25%">
+                                        <td width="25%" style="text-align:right;">
                                                <button onclick="showDialogS()" class="btn btn-warning btn-xs">Edit</button>
                                                 <a href="/deleteskill/{{ rowskill.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
                                             </td>
@@ -487,26 +491,30 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="dialogS">
-                           <div class="popupS" id="popupS">
-                                <div class="popupS-inner">
+                        <div id="mymodalS" class="modaledu">
+                           <div class="modaledu-content" id="popupS">
+                                <div class="modaledu-header">
+                                    <span class="close" id="spanS">&times;</span>
+                                    <h2 style="color: white"> Update Details</h2>
+                                </div>
+                                <div class="modaledu-body">
                                     <form action="{{ url_for('updateskill') }}" method="POST">   
                                         <div class="row">            
                                             <div class="col-lg-6">
 
                                                 <input type="hidden" id="Usrno" name="srno">
                                                 <div class="form-group">
-                                                    <label>Title</label>
+                                                    <label style="color: #7f7e7e;">Title</label>
                                                         <input name='skname' id='uskname' type="text" class="form-control" placeholder="Frontend Design">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Percentage</label>
+                                                    <label style="color: #7f7e7e;" >Percentage</label>
                                                     <input  name="prcnt" id="uprcnt" type="text" class="form-control" placeholder="56">
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn create-ac-btn" onclick="closeDialogS()">Add Skill</button>
+                                            <button type="submit" class="btn create-ac-btn vertical-center" onclick="closeDialogS()">Add Skill</button>
                                         </div>
                                     </form>
                                 </div>
@@ -516,44 +524,52 @@
 
 
                         <script type="text/javascript">
-    const showDialog = () => {
-  document.getElementById('dialog').classList.add('show')
-  const scrollY = document.documentElement.style.getPropertyValue('--scroll-y');
-  const body = document.body;
-  body.style.position = 'fixed';
-  body.style.top = `-${scrollY}`;
-};
-const closeDialog = () => {
-  const body = document.body;
-  const scrollY = body.style.top;
-  body.style.position = '';
-  body.style.top = '';
-  window.scrollTo(0, parseInt(scrollY || '0') * -1);
-  document.getElementById('dialog').classList.remove('show');
-}
-window.addEventListener('scroll', () => {
-  document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
-});
 
-const showDialogS = () => {
-  document.getElementById('dialogS').classList.add('show')
-  const scrollY = document.documentElement.style.getPropertyValue('--scroll-y');
-  const body = document.body;
-  body.style.position = 'fixed';
-  body.style.top = `-${scrollY}`;
-};
-const closeDialogS = () => {
-  const body = document.body;
-  const scrollY = body.style.top;
-  body.style.position = '';
-  body.style.top = '';
-  window.scrollTo(0, parseInt(scrollY || '0') * -1);
-  document.getElementById('dialogS').classList.remove('show');
+
+var modaledu = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var spanE = document.getElementById("spanE");
+
+// When the user clicks the button, open the modal 
+function showDialog () { 
+  modaledu.style.display = "block";
 }
-window.addEventListener('scroll', () => {
-  document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
-});
-    
+
+// When the user clicks on <span> (x), close the modal
+spanE.onclick = function() {
+  modaledu.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modaledu.style.display = "none";
+    modalskl.style.display = "none";
+  }
+}
+
+var modalskl = document.getElementById("mymodalS");
+
+
+var spanS = document.getElementById("spanS");
+// Get the <span> element that closes the modal
+
+// When the user clicks the button, open the modal 
+function showDialogS () { 
+  modalskl.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+spanS.onclick = function() {
+  modalskl.style.display = "none";
+}
+
+
+
 </script>
 
 
