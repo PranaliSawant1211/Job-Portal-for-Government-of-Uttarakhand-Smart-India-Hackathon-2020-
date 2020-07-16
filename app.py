@@ -34,39 +34,67 @@ def home():
 
 @app.route('/create_account', methods = ['GET', 'POST'])
 def create_account():
-	if request.method == 'POST':
-		cursor = mysql.connection.cursor()
-		uname = request.form.get('uname')
-		cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
-		if cursor.fetchone() is not None:
-			flash("That username is already taken...", "error")
-			return render_template('create-account.html')
-		else:
-			fname = request.form.get('fname')
-			mname = request.form.get('mname')
-			lname = request.form.get('lname')
-			email = request.form.get('email')
-			dob = request.form.get('dob')
-			phone = request.form.get('phone')
-			address = request.form.get('address')
-			state = request.form.get('state')
-			city = request.form.get('city')
-			gender = request.form.get('gender')
-			description = request.form.get('fname')
-			password = request.form.get('password')
-			password = pwd_context.hash(password)
-			profpic = request.files['profpic']
-		
-		
+    choice = request.form.get('role')
+    if request.method == 'POST':
+        if(choice == "candidate" ):
+            cursor = mysql.connection.cursor()
+            uname = request.form.get('uname')
+            cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
+            if cursor.fetchone() is not None:
+                flash("The username is already taken...", "error")
+                return render_template('create-account.html')
+            else:
+                fname = request.form.get('fname')
+                mname = request.form.get('mname')
+                lname = request.form.get('lname')
+                email = request.form.get('email')
+                dob = request.form.get('dob')
+                phone = request.form.get('phone')
+                address = request.form.get('address')
+                state = request.form.get('state')
+                city = request.form.get('city')
+                gender = request.form.get('gender')
+                description = request.form.get('description')
+                password = request.form.get('password')
+                password = pwd_context.hash(password)
+                
+   
 
-		sql_insert_blob_query = """ INSERT INTO register(uname, fname, mname, lname,phone, email, dob, address, sex, city, state, password, profpic, descr) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-		cursor.execute(sql_insert_blob_query,(uname, fname, mname, lname,phone, email, dob, address, gender, city, state, password, profpic, description))
-		mysql.connection.commit()
-		cursor.close()
-		
-		flash('You are now registered and can log in', 'success')
-		return redirect(url_for('login'))
-	return render_template('create-account.html')
+                sql_insert_blob_query = """ INSERT INTO register(uname, fname, mname, lname,phone, email, dob, address, sex, city, state, password, descr) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+                cursor.execute(sql_insert_blob_query,(uname, fname, mname, lname,phone, email, dob, address, gender, city, state, password, description))
+                mysql.connection.commit()
+                cursor.close()
+
+                flash('You are now registered and can log in', 'success')
+                return redirect(url_for('login'))
+
+        elif(choice == "company"):
+            cursor = mysql.connection.cursor()
+            compid = request.form.get('compid')
+            cursor.execute("SELECT * FROM company_register WHERE compid = %s", [compid])
+            if cursor.fetchone() is not None:
+                flash("The username is already taken...", "error")
+                return render_template('create-account.html')
+            else:
+                compname = request.form.get('compname')
+                estdate = request.form.get('estdate')
+                compaddress = request.form.get('compaddress')
+                compemail = request.form.get('compemail')
+                compurl = request.form.get('compurl')
+                compphone = request.form.get('compphone')
+                compdescription = request.form.get('compdescription')
+                comppassword = request.form.get('comppassword')
+                comppassword = pwd_context.hash(comppassword)
+        
+                sql_insert_blob_query = """ INSERT INTO company_register(compid, compname, doe, compaddress, compemail, compurl, compphone, compdescription, comppassword) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+                cursor.execute(sql_insert_blob_query,(compid, compname, estdate, compaddress, compemail, compurl, compphone, compdescription, comppassword))
+                mysql.connection.commit()
+                cursor.close()
+
+                flash('You are now registered and can log in', 'success')
+                return redirect(url_for('login'))
+
+    return render_template('create-account.html')
 
 
 def convertToBinaryData(filename):
@@ -332,6 +360,11 @@ def updatelink():
 @app.route('/about')
 def about():
 	return render_template('about.html')
+
+@app.route('/companydetails')
+@login_required
+def companydetails():
+    return render_template('companydetails.html')
 
 if __name__ == '__main__':
 	app.secret_key =  'mahesh'

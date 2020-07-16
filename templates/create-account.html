@@ -39,12 +39,23 @@
     padding-bottom: 40px;
 }
 
+#buttn{
+    display:none;
+}
+#candidate{
+    display:none;
+}
+
+#company{
+    display:none;
+}
 
 
 .alert-error {
   border-color: darkred;
   background-color: red;
   color: white;
+  text-align: center;
 }
 
 .alert-info {
@@ -53,6 +64,14 @@
   color: black;
 }
         </style>
+        <script type="text/javascript">
+           function handleSelection(choice) {
+            document.getElementById("candidate").style.display="none"
+            document.getElementById("company").style.display="none"
+            document.getElementById(choice).style.display="block"
+            document.getElementById("buttn").style.display="flex"
+}
+        </script>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <script>
@@ -285,180 +304,239 @@
                             <span>Already create an account?</span>
                             <a href="#">Sign In</a>
                         </div>
-                        <form  action="{{ url_for('create_account') }}" method="POST" enctype="multipart/form-data">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4">
-                                    <div class="create-photo-item">
-                                        <div class="create-photo-left">
-                                            <div class="d-table">
-                                                <div class="d-table-cell">
-                                                    <div class="form-group">
-                                                        <i class="icofont-photobucket"></i>
-                                                        <input type="file" class="form-control-file" name='profpic'>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>``
-                                    </div>
+                         {% with messages = get_flashed_messages(with_categories=true) %}
+                          {% if messages %}
+                            {% for category, message in messages %}
+                              <p class="alert-{{ category }}">{{ message }}</p>
+                            {% endfor %}
+                          {% endif %}
+                        {% endwith %}          
+                    </div>
+                    
+                    <form  action="{{ url_for('create_account')}}" method="POST" enctype="multipart/form-data"> 
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <select name="role" id="role" class="form-control" onChange="handleSelection(value)">
+                                    <option value="" disabled selected>Select your role</option>
+                                    <option value="candidate">Candidate</option>
+                                    <option value="company">Company</option>
+                                </select>
                                 </div>
-                                <div class="col-lg-8">
-                                    <div class="create-photo-item">
-                                        <div class="create-photo-right">
+                            </div>
+                            
+                            <div id="candidate" class="candidate">     
+                                <h3>Basic Information</h3>
+                                    <div class="row">
+                                        <div class="col-lg-4">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Your User Name Here" name = "uname" required>
-                                            </div>
-                                            {% with messages = get_flashed_messages(with_categories=true) %}
-											  {% if messages %}
-											    {% for category, message in messages %}
-											      <p class="alert-{{ category }}">{{ message }}</p>
-											    {% endfor %}
-											  {% endif %}
-											{% endwith %}                                            	
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Profession">
+                                                <label>Your First Name</label>
+                                                <input type="text" class="form-control" name='fname' required>
                                             </div>
                                         </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Your Middle Name</label>
+                                                <input type="text" class="form-control" name='mname' required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Your Last Name</label>
+                                                <input type="text" class="form-control" name='lname' required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Your Email</label>
+                                                <input type="email" class="form-control" name='email' required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Date of Birth</label>
+                                                <input type="date" class="form-control" name='dob' required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Select a username</label>
+                                                <input type="text" class="form-control" placeholder="Your User Name Here" name = "uname" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Address:</label>
+                                                <input type="text" class="form-control" name='address' required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>State:</label>
+                                                <select name="state" id="state" class="form-control" onChange="changecat(this.value);" required>
+                                                <option value="" disabled selected>Select State/Union Territory</option>
+                                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                                <option value="Assam">Assam</option>
+                                                <option value="Bihar">Bihar</option>
+                                                <option value="Chandigarh">Chandigarh</option>
+                                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                                <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                                <option value="Daman and Diu">Daman and Diu</option>
+                                                <option value="Delhi">Delhi</option>
+                                                <option value="Lakshadweep">Lakshadweep</option>
+                                                <option value="Puducherry">Puducherry</option>
+                                                <option value="Goa">Goa</option>
+                                                <option value="Gujarat">Gujarat</option>
+                                                <option value="Haryana">Haryana</option>
+                                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                                <option value="Jharkhand">Jharkhand</option>
+                                                <option value="Karnataka">Karnataka</option>
+                                                <option value="Kerala">Kerala</option>
+                                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                                <option value="Maharashtra">Maharashtra</option>
+                                                <option value="Manipur">Manipur</option>
+                                                <option value="Meghalaya">Meghalaya</option>
+                                                <option value="Mizoram">Mizoram</option>
+                                                <option value="Nagaland">Nagaland</option>
+                                                <option value="Odisha">Odisha</option>
+                                                <option value="Punjab">Punjab</option>
+                                                <option value="Rajasthan">Rajasthan</option>
+                                                <option value="Sikkim">Sikkim</option>
+                                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                                <option value="Telangana">Telangana</option>
+                                                <option value="Tripura">Tripura</option>
+                                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                                <option value="Uttarakhand">Uttarakhand</option>
+                                                <option value="West Bengal">West Bengal</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                    <label>City:</label>
+                                                    <select class="form-control" id="response" name='city' required>
+                                                    <option value="" disabled selected>Select City</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <div class="gender-area">
+                                                    <span>Gender</span>
+                                                    <input type="radio" name="gender" id="male" value="male" checked required>
+                                                    <label for="male">Male</label>
+                                                    <input type="radio" name="gender" id="female" value="female" required>
+                                                    <label for="female">Female</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Your Phone</label>
+                                                <input type="phone" class="form-control" name='phone' required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" name='password' required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea  class="form-control" rows="8" name='description' required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                     
+                        
+                            <div id="company" class="company">
+                                <h3>Basic Information</h3>      
+                                   <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Company ID</label>
+                                            <input type="text" class="form-control" name='compid' required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Company Name</label>
+                                            <input type="text" class="form-control" name='compname' required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Date of Establishment</label>
+                                            <input type="date" class="form-control" name='estdate' required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Headquarters Address</label>
+                                            <input type="text" class="form-control" name='compaddress' required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Your Email</label>
+                                            <input type="email" class="form-control" name='compemail' required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Company URL</label>
+                                            <input type="url" class="form-control" name='compurl' required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Contact no</label>
+                                            <input type="phone" class="form-control" name = "compphone" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea  class="form-control" rows="8" name='compdescription' required></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                      
+                                    </div>
+                                    <div class="col-6">
+                                      <div class="form-group">
+                                            <label>Password</label>
+                                            <input type="password" class="form-control" name='comppassword' required>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                      fgfg
                                     </div>
                                 </div>
                             </div>
-                        
-                    </div>
-                    <div>
-                        
-                            <h3>Basic Information</h3>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Your First Name</label>
-                                        <input type="text" class="form-control" name='fname' required>
-                                    </div>
+                        </div>
+                        <div class="row" id="buttn">
+                            <div class="col">
+                                  
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <center><button class="already-create" style="height:60px; width:170px;border:0px; background:#d966ff;" type="submit">Signup</button></center>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Your Middle Name</label>
-                                        <input type="text" class="form-control" name='mname'>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Your Last Name</label>
-                                        <input type="text" class="form-control" name='lname' required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Your Email</label>
-                                        <input type="email" class="form-control" name='email' required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Date of Birth</label>
-                                        <input type="date" class="form-control" name='dob' required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Your Phone</label>
-                                        <input type="phone" class="form-control" name='phone' required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Address:</label>
-                                        <input type="text" class="form-control" name='address' required>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>State:</label>
-                                        <select name="state" id="state" class="form-control" onChange="changecat(this.value);" required>
-                                        <option value="" disabled selected>Select State/Union Territory</option>
-                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                        <option value="Assam">Assam</option>
-                                        <option value="Bihar">Bihar</option>
-                                        <option value="Chandigarh">Chandigarh</option>
-                                        <option value="Chhattisgarh">Chhattisgarh</option>
-                                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
-                                        <option value="Daman and Diu">Daman and Diu</option>
-                                        <option value="Delhi">Delhi</option>
-                                        <option value="Lakshadweep">Lakshadweep</option>
-                                        <option value="Puducherry">Puducherry</option>
-                                        <option value="Goa">Goa</option>
-                                        <option value="Gujarat">Gujarat</option>
-                                        <option value="Haryana">Haryana</option>
-                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                        <option value="Jharkhand">Jharkhand</option>
-                                        <option value="Karnataka">Karnataka</option>
-                                        <option value="Kerala">Kerala</option>
-                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                        <option value="Maharashtra">Maharashtra</option>
-                                        <option value="Manipur">Manipur</option>
-                                        <option value="Meghalaya">Meghalaya</option>
-                                        <option value="Mizoram">Mizoram</option>
-                                        <option value="Nagaland">Nagaland</option>
-                                        <option value="Odisha">Odisha</option>
-                                        <option value="Punjab">Punjab</option>
-                                        <option value="Rajasthan">Rajasthan</option>
-                                        <option value="Sikkim">Sikkim</option>
-                                        <option value="Tamil Nadu">Tamil Nadu</option>
-                                        <option value="Telangana">Telangana</option>
-                                        <option value="Tripura">Tripura</option>
-                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                        <option value="Uttarakhand">Uttarakhand</option>
-                                        <option value="West Bengal">West Bengal</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                            <label>City:</label>
-                                            <select class="form-control" id="response" name='city' required>
-                                            <option value="" disabled selected>Select City</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <div class="gender-area">
-                                            <span>Gender</span>
-                                            <input type="radio" name="gender" id="male" value="male" checked required>
-                                            <label for="male">Male</label>
-                                            <input type="radio" name="gender" id="female" value="female" required>
-                                            <label for="female">Female</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="password" class="form-control" name='password' required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea id="your_message" class="form-control" rows="8" name='decription'></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                              	<div class="form-group">
-                              		</div>
-                              	</div>
-
-                              <div class="col-lg-4">
-                              	<div class="form-group">
-                              		<button style="height:60px; width:170px; background: #cc0066" type="submit" class="btn btn-primary">Signup</button>
-                              	</div>
-                        
-                    </div>
-                    </div>
-                   </div> 
+                            </div>
+                            <div class="col">       
+                            </div>
+                        </div>  
                     </form>
                 </div>
             </div>
