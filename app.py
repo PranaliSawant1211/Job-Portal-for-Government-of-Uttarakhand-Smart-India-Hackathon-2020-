@@ -113,7 +113,72 @@ def logout():
 @app.route('/cdashboard')
 @login_required
 def cdashboard():
-	return render_template('candidatedashboard.html')
+    uname = session['username'] 
+    cursoredu = mysql.connection.cursor()
+    result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
+    edudata = cursoredu.fetchall()
+    cursoredu.close()
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM skills WHERE uname = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+
+    return render_template('candidatedashboard.html', students=edudata, tskills=skdata)
+
+@app.route('/cdashboardedu')
+@login_required
+def cdashboardedu():
+    uname = session['username'] 
+    cursoredu = mysql.connection.cursor()
+    result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
+    edudata = cursoredu.fetchall()
+    cursoredu.close()
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM skills WHERE uname = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM links WHERE uname = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+    return render_template('candidatedashboard.html', scroll='educationtag', students=edudata, tskills=skdata, ldata=lnkdata)
+
+@app.route('/cdashboardlink')
+@login_required
+def cdashboardlink():
+    uname = session['username'] 
+    cursoredu = mysql.connection.cursor()
+    result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
+    edudata = cursoredu.fetchall()
+    cursoredu.close()
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM skills WHERE uname = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM links WHERE uname = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+    return render_template('candidatedashboard.html', scroll='linktag', students=edudata, tskills=skdata, ldata=lnkdata)
+
+@app.route('/cdashboardskill')
+@login_required
+def cdashboardskill():
+    uname = session['username'] 
+    cursoredu = mysql.connection.cursor()
+    result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
+    edudata = cursoredu.fetchall()
+    cursoredu.close()
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM skills WHERE uname = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM links WHERE uname = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+    return render_template('candidatedashboard.html', scroll='skilltag', students=edudata, tskills=skdata, ldata=lnkdata)
+
 
 @app.route('/candidatedetails')
 def candidatedetails():
@@ -130,6 +195,138 @@ def companylist():
 @app.route('/joblist')
 def joblist():
 	return render_template('joblist.html')
+
+#**************************** Education operations start ****************************
+@app.route('/insertedu', methods = ['POST'])
+def insertedu():
+
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        Titleedu = request.form['Titleedu']
+        degree = request.form['Degreeedu']
+        inst = request.form['Instedu']
+        year = request.form['Yearedu']
+        uname = session['username'] 
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO `edu` (`uname`, `title`, `degree`, `institute`, `year`) VALUES (%s, %s, %s, %s, %s)", (uname, Titleedu, degree, inst, year))
+        mysql.connection.commit()
+        return redirect(url_for('cdashboardedu'))
+
+
+
+
+
+@app.route('/deleteedu/<string:id_data>', methods = ['GET'])
+def deleteedu(id_data):
+    flash("Record Has Been Deleted Successfully")
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM edu WHERE srno=%s", (id_data,))
+    mysql.connection.commit()
+    return redirect(url_for('cdashboardedu'))
+
+
+
+
+
+@app.route('/updateedu',methods=['POST','GET'])
+def updateedu():
+
+    if request.method == 'POST':
+        Titleedu = request.form['Titleedu']
+        degree = request.form['Degreeedu']
+        inst = request.form['Instedu']
+        year = request.form['Yearedu']
+        srno = request.form['srno']
+        uname = session['username'] 
+        cur = mysql.connection.cursor()
+        s=(Titleedu, degree, inst, year, srno)
+        print(s)
+        cur.execute("""
+               UPDATE edu
+               SET title=%s, degree=%s, institute=%s, year=%s
+               WHERE srno=%s
+            """, (Titleedu, degree, inst, year, srno))
+        flash("Data Updated Successfully")
+        mysql.connection.commit()
+        return redirect(url_for('cdashboardedu'))
+#**************************** Education operations end****************************
+
+
+#****************************skill operations start****************************
+@app.route('/insertskill', methods = ['POST'])
+def insertskill():
+
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        percent = request.form['prcnt']
+        skname = request.form['skname']
+        uname = session['username'] 
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO `skills` (`uname`, `skname`, `percent`)VALUES (%s, %s, %s)", (uname, skname, percent))
+        mysql.connection.commit()
+        return redirect(url_for('cdashboardskill'))
+
+
+
+
+
+@app.route('/deleteskill/<string:id_data>', methods = ['GET'])
+def deleteskill(id_data):
+    flash("Record Has Been Deleted Successfully")
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM skills WHERE srno=%s", (id_data,))
+    mysql.connection.commit()
+    return redirect(url_for('cdashboardskill'))
+
+
+
+
+
+@app.route('/updateskill',methods=['POST','GET'])
+def updateskill():
+
+    if request.method == 'POST':
+        percent = request.form['prcnt']
+        skname = request.form['skname']
+        uname = session['username'] 
+        srno = request.form['srno']
+        cur = mysql.connection.cursor()
+        print((skname, percent, uname))
+        cur.execute("""
+               UPDATE skills
+               SET skname=%s, percent=%s
+               WHERE srno=%s
+            """, (skname, percent, srno))
+        flash("Data Updated Successfully")
+        mysql.connection.commit()
+        return redirect(url_for('cdashboardskill'))
+
+#****************************skill operations end****************************
+
+#****************************link operations start****************************
+
+
+@app.route('/updatelink',methods=['POST','GET'])
+def updatelink():
+
+    if request.method == 'POST':
+        fblink = request.form['fblink']
+        llink = request.form['llink']
+        insta = request.form['insta']
+        dribble = request.form['dlink']
+        uname = session['username'] 
+        cur = mysql.connection.cursor()
+        cur.execute("""
+               UPDATE skills
+               SET skname=%s, percent=%s
+               WHERE uname=%s and skname=%s and percent=%s
+            """, (skname, percent, uname, skname, percent,))
+        flash("Data Updated Successfully")
+        mysql.connection.commit()
+        return redirect(url_for('cdashboardlink'))
+
+#****************************link operations end****************************
+
 
 
 @app.route('/about')
