@@ -199,8 +199,48 @@ def cdashboard():
     lnkdata = cursorlnk.fetchall()
     cursorskl.close()
 
-    return render_template('candidatedashboard.html', students=edudata, tlinks=lnkdata, tskills=skdata)
-workexp
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+    return render_template('candidatedashboard.html', students=edudata,detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+
+@app.route('/cdashboardwork')
+@login_required
+def cdashboardwork():
+    uname = session['username'] 
+    cursoredu = mysql.connection.cursor()
+    result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
+    edudata = cursoredu.fetchall()
+    cursoredu.close()
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM skills WHERE uname = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+    print(Mdata)
+    return render_template('candidatedashboard.html', scroll='worktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
+
+
+
 @app.route('/cdashboardedu')
 @login_required
 def cdashboardedu():
@@ -217,7 +257,16 @@ def cdashboardedu():
     result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
     lnkdata = cursorlnk.fetchall()
     cursorskl.close()
-    return render_template('candidatedashboard.html', scroll='educationtag', students=edudata, tlinks=lnkdata, tskills=skdata)
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+    return render_template('candidatedashboard.html', scroll='educationtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
 
 @app.route('/cdashboardlink')
 @login_required
@@ -235,8 +284,17 @@ def cdashboardlink():
     result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
     lnkdata = cursorlnk.fetchall()
     cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
     print(lnkdata)
-    return render_template('candidatedashboard.html', scroll='linktag', students=edudata, tlinks=lnkdata, tskills=skdata)
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+    return render_template('candidatedashboard.html', scroll='linktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
 
 @app.route('/cdashboardskill')
 @login_required
@@ -254,13 +312,71 @@ def cdashboardskill():
     result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
     lnkdata = cursorlnk.fetchall()
     cursorskl.close()
-    return render_template('candidatedashboard.html', scroll='skilltag', students=edudata, tlinks=lnkdata, tskills=skdata)
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+    
+    return render_template('candidatedashboard.html', scroll='skilltag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
+@app.route('/cdashboarddetail')
+@login_required
+def cdashboarddetail():
+    uname = session['username'] 
+    cursoredu = mysql.connection.cursor()
+    result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
+    edudata = cursoredu.fetchall()
+    cursoredu.close()
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM skills WHERE uname = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+    
+    return render_template('candidatedashboard.html', scroll='detailtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
+
 
 
 
 @app.route('/candidatedetails')
 def candidatedetails():
-	return render_template('candidatedetails.html')
+	
+    uname = session['username'] 
+    cursoredu = mysql.connection.cursor()
+    result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
+    edudata = cursoredu.fetchall()
+    cursoredu.close()
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM skills WHERE uname = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+    return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
 
 @app.route('/candidatelist')
 def candidatelist():
@@ -274,7 +390,7 @@ def companylist():
 def joblist():
 	return render_template('joblist.html')
 
-#**************************** Education operations start ****************************
+#**************************** details operations start ****************************
 @app.route('/updatedetails', methods = ['POST'])
 def updatedetails():
     if request.method == "POST":
@@ -289,16 +405,21 @@ def updatedetails():
         city = request.form.get('city')
         gender = request.form.get('gender')
         description = request.form.get('description')
+        uname = session['username'] 
+        cur = mysql.connection.cursor()
         cur.execute("""
-               UPDATE edu
-               SET fname=%s, mname=%s, lname=%s,phone=%s, email=%s, dob=%s, address=%s, gender=%s, city=%s, state=%s, password=%s, description=%s
-               WHERE srno=%s
-            """, (fname, mname, lname,phone, email, dob, address, gender, city, state, description))
+               UPDATE register
+               SET fname=%s, mname=%s, lname=%s,phone=%s, email=%s, dob=%s, address=%s, sex=%s, city=%s, state=%s, descr=%s
+               WHERE uname=%s
+            """, (fname, mname, lname,phone, email, dob, address, gender, city, state, description,uname))
+        mysql.connection.commit()
+        return redirect(url_for('cdashboarddetail'))
+        
                 
-                
+#**************************** Details operations end****************************
 
 
-#**************************** details operations start ****************************
+#**************************** Education operations start ****************************
 @app.route('/insertedu', methods = ['POST'])
 def insertedu():
 
@@ -316,7 +437,7 @@ def insertedu():
 
 
 
-#**************************** Details operations end****************************
+
 
 @app.route('/deleteedu/<string:id_data>', methods = ['GET'])
 def deleteedu(id_data):
@@ -404,6 +525,62 @@ def updateskill():
         return redirect(url_for('cdashboardskill'))
 
 #****************************skill operations end****************************
+
+#****************************Work operations end****************************
+@app.route('/insertwork', methods = ['POST'])
+def insertwork():
+
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        jobtitle = request.form['jobtitle']
+        org = request.form['org']
+        duration = request.form['dur']
+        yearwork = request.form['yearwork']
+        uname = session['username'] 
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO `work` (`uname`, `jobtitle`, `org`, `duration`, `year`) VALUES (%s, %s, %s, %s, %s)", (uname, jobtitle, org, duration, yearwork))
+        mysql.connection.commit()
+        return redirect(url_for('cdashboardwork'))
+
+
+
+
+
+@app.route('/deletework/<string:id_data>', methods = ['GET'])
+def deletework(id_data):
+    flash("Record Has Been Deleted Successfully")
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM work WHERE srno=%s", (id_data,))
+    mysql.connection.commit()
+    return redirect(url_for('cdashboardwork'))
+
+
+
+
+
+@app.route('/updatework',methods=['POST','GET'])
+def updatework():
+
+    if request.method == 'POST':
+        jobtitle = request.form['jobtitle']
+        org = request.form['org']
+        duration = request.form['dur']
+        yearwork = request.form['yearwork']
+        srno = request.form['srno']
+        uname = session['username'] 
+        cur = mysql.connection.cursor()
+        print((jobtitle, org, duration, yearwork, srno))
+        cur.execute("""
+               UPDATE work
+               SET jobtitle=%s, org=%s, duration=%s, year=%s
+               WHERE srno=%s
+            """, (jobtitle, org, duration, yearwork, srno))
+        flash("Data Updated Successfully")
+        mysql.connection.commit()
+        return redirect(url_for('cdashboardwork'))
+#**************************** Work operations end****************************
+
+
 
 #****************************link operations start****************************
 
