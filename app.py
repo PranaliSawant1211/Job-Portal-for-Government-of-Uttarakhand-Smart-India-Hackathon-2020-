@@ -151,8 +151,13 @@ def cdashboard():
     skdata = cursorskl.fetchall()
     cursorskl.close()
 
-    return render_template('candidatedashboard.html', students=edudata, tskills=skdata)
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
 
+    return render_template('candidatedashboard.html', students=edudata, tlinks=lnkdata, tskills=skdata)
+workexp
 @app.route('/cdashboardedu')
 @login_required
 def cdashboardedu():
@@ -166,10 +171,10 @@ def cdashboardedu():
     skdata = cursorskl.fetchall()
     cursorskl.close()
     cursorlnk = mysql.connection.cursor()
-    result3 = cursorlnk.execute("SELECT * FROM links WHERE uname = %s", [uname])
+    result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
     lnkdata = cursorlnk.fetchall()
     cursorskl.close()
-    return render_template('candidatedashboard.html', scroll='educationtag', students=edudata, tskills=skdata, ldata=lnkdata)
+    return render_template('candidatedashboard.html', scroll='educationtag', students=edudata, tlinks=lnkdata, tskills=skdata)
 
 @app.route('/cdashboardlink')
 @login_required
@@ -184,10 +189,11 @@ def cdashboardlink():
     skdata = cursorskl.fetchall()
     cursorskl.close()
     cursorlnk = mysql.connection.cursor()
-    result3 = cursorlnk.execute("SELECT * FROM links WHERE uname = %s", [uname])
+    result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
     lnkdata = cursorlnk.fetchall()
     cursorskl.close()
-    return render_template('candidatedashboard.html', scroll='linktag', students=edudata, tskills=skdata, ldata=lnkdata)
+    print(lnkdata)
+    return render_template('candidatedashboard.html', scroll='linktag', students=edudata, tlinks=lnkdata, tskills=skdata)
 
 @app.route('/cdashboardskill')
 @login_required
@@ -202,10 +208,11 @@ def cdashboardskill():
     skdata = cursorskl.fetchall()
     cursorskl.close()
     cursorlnk = mysql.connection.cursor()
-    result3 = cursorlnk.execute("SELECT * FROM links WHERE uname = %s", [uname])
+    result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
     lnkdata = cursorlnk.fetchall()
     cursorskl.close()
-    return render_template('candidatedashboard.html', scroll='skilltag', students=edudata, tskills=skdata, ldata=lnkdata)
+    return render_template('candidatedashboard.html', scroll='skilltag', students=edudata, tlinks=lnkdata, tskills=skdata)
+
 
 
 @app.route('/candidatedetails')
@@ -225,6 +232,30 @@ def joblist():
 	return render_template('joblist.html')
 
 #**************************** Education operations start ****************************
+@app.route('/updatedetails', methods = ['POST'])
+def updatedetails():
+    if request.method == "POST":
+        fname = request.form.get('fname')
+        mname = request.form.get('mname')
+        lname = request.form.get('lname')
+        email = request.form.get('email')
+        dob = request.form.get('dob')
+        phone = request.form.get('phone')
+        address = request.form.get('address')
+        state = request.form.get('state')
+        city = request.form.get('city')
+        gender = request.form.get('gender')
+        description = request.form.get('description')
+        cur.execute("""
+               UPDATE edu
+               SET fname=%s, mname=%s, lname=%s,phone=%s, email=%s, dob=%s, address=%s, gender=%s, city=%s, state=%s, password=%s, description=%s
+               WHERE srno=%s
+            """, (fname, mname, lname,phone, email, dob, address, gender, city, state, description))
+                
+                
+
+
+#**************************** details operations start ****************************
 @app.route('/insertedu', methods = ['POST'])
 def insertedu():
 
@@ -242,7 +273,7 @@ def insertedu():
 
 
 
-
+#**************************** Details operations end****************************
 
 @app.route('/deleteedu/<string:id_data>', methods = ['GET'])
 def deleteedu(id_data):
@@ -333,26 +364,53 @@ def updateskill():
 
 #****************************link operations start****************************
 
+@app.route('/insertlink', methods = ['POST'])
+def insertlink():
+
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        value = request.form['value']
+        link = request.form['link']
+        uname = session['username'] 
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO `link` (`link`, `value`, `uname`)VALUES (%s, %s, %s)", (link, value, uname))
+        mysql.connection.commit()
+        return redirect(url_for('cdashboardlink'))
+
+
+
+
+
+@app.route('/deletelink/<string:id_data>', methods = ['GET'])
+def deletelink(id_data):
+    flash("Record Has Been Deleted Successfully")
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM link WHERE srno=%s", (id_data,))
+    mysql.connection.commit()
+    return redirect(url_for('cdashboardlink'))
+
+
+
+
 
 @app.route('/updatelink',methods=['POST','GET'])
 def updatelink():
 
     if request.method == 'POST':
-        fblink = request.form['fblink']
-        llink = request.form['llink']
-        insta = request.form['insta']
-        dribble = request.form['dlink']
+        value = request.form['value']
+        link = request.form['link']
         uname = session['username'] 
+        srno = request.form['srno']
         cur = mysql.connection.cursor()
+        print((link, value, uname,srno))
         cur.execute("""
-               UPDATE skills
-               SET skname=%s, percent=%s
-               WHERE uname=%s and skname=%s and percent=%s
-            """, (skname, percent, uname, skname, percent,))
+               UPDATE link
+               SET link=%s, value=%s
+               WHERE srno=%s
+            """, (link, value, srno))
         flash("Data Updated Successfully")
         mysql.connection.commit()
         return redirect(url_for('cdashboardlink'))
-
 #****************************link operations end****************************
 
 
