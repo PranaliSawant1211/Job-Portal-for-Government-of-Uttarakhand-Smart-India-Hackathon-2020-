@@ -164,14 +164,13 @@
                                 </li>
                             </ul>
                             <div class="common-btn">
-                                <a class="login-btn" href="login.html">
-                                    <i class="icofont-plus-square"></i>
-                                    Login
-                                </a>
-                                <a class="sign-up-btn" href="create-account.html">
-                                    <i class="icofont-user-alt-4"></i>
-                                    Sign Up
-                                </a>
+                                {% if session.logged_in %}
+                                <a class="login-btn" href="/logout_company">Logout</a>
+                                <i class="icofont-logout"></i>
+                                {% else %}
+                                <a class="login-btn" href="/login">Login</a>
+                                <i class="icofont-plus-square"></i>
+                                {% endif %}
                             </div>
                         </div>
                     </nav>

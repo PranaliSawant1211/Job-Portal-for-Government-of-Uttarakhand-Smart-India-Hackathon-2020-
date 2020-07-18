@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zxx">
     <head>
@@ -6,11 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- Bootstrap CSS -->
-       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <!-- Meanmenu CSS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
         <!-- Icofont -->
-        <link rel="stylesheet" href="static/icofont/icofont.min.css">>
+        <link rel="stylesheet" href="static/icofont/icofont.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
 
         <!-- Nice Select JS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/nice-select.css')}}">
@@ -26,12 +32,9 @@
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
 
-        <title>Gable - Job Portal HTML Template</title>
-
-        <link rel="icon" type="image/png" href="assets/img/favicon.png">
-        <style>
+               <style>
             .footer {
-    background-color:#696969;
+    background-color:#d966ff;
     color: #FFFFFF;
     padding-left: 80px;
     padding-right: 80px;
@@ -40,55 +43,38 @@
    
 }
 
-.alert-error {
-  border-color: darkred;
-  background-color: red;
-  color: white;
-}
 
-.alert-info {
-  border-color: orange;
-  background-color: yellow;
-  color: black;
-}
-        </style>
-        <script>
-            function universal_validation(form){
-            var choice = document.forms["login"]["role"];
-            var uname = document.forms["login"]["uname"];
-            var password = document.forms["login"]["password"];
-            window.alert(choice.value);
-            if(choice.value =="")
-            {
-                window.alert("Please enter your role");
-                choice.focus();
-                return false;
-            }
-            else if(uname.value =="")
-            {
-                window.alert("Please enter your username");
-                uname.focus();
-                return false;
-            }
-            else if(password.value =="")
-            {
-                window.alert("Please enter your password");
-                password.focus();
-                return false;
-            }
-        }
-        </script>
+</style>
+
+        <title>Gable - Job Portal HTML Template</title>
+
+        <link rel="icon" type="image/png" href="static/img/favicon.png">
     </head>
     <body>
 
-        
+        <!-- Preloader 
+        <div class="loader">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        End Preloader -->
+
         <!-- Start Navbar Area -->
         <div class="navbar-area fixed-top">
 
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
                 <a href="index.html" class="logo">
-                    <img src="assets/img/logo.png" alt="Logo">
+                    <img src="static/img/logo.png" alt="Logo">
                 </a>
             </div>
 
@@ -97,7 +83,7 @@
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
                         <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" alt="Logo">
+                            <img src="" alt="Logo">
                         </a>
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
@@ -159,7 +145,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle active">Pages <i class="icofont-simple-down"></i></a>
+                                    <a href="#" class="nav-link dropdown-toggle">Pages <i class="icofont-simple-down"></i></a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a href="company-list.html" class="nav-link">Company List</a>
@@ -168,7 +154,7 @@
                                             <a href="company-details.html" class="nav-link">Company Details</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="login.html" class="nav-link active">Login Page</a>
+                                            <a href="login.html" class="nav-link">Login Page</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="create-account.html" class="nav-link">Create Account Page</a>
@@ -205,7 +191,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="contact.html" class="nav-link">Contact</a>
+                                    <a href="contact.html" class="nav-link active">Contact</a>
                                 </li>
                             </ul>
                             <div class="common-btn">
@@ -226,12 +212,12 @@
         <!-- End Navbar Area -->
 
         <!-- Page Title -->
-        <div class="page-title-area" style="height:250px; width:100%;">
+        <div class="page-title-area">
             <div class="d-table">
                 <div class="d-table-cell">
                     <div class="container">
-                        <div class="page-title-text" >
-                            <h2>Log In</h2>
+                        <div class="page-title-text">
+                            <h2>Contact</h2>
                             <ul>
                                 <li>
                                     <a href="index.html">Home</a>
@@ -239,7 +225,7 @@
                                 <li>
                                     <i class="icofont-simple-right"></i>
                                 </li>
-                                <li>Log In</li>
+                                <li>Contact</li>
                             </ul>
                         </div>
                     </div>
@@ -248,89 +234,124 @@
         </div>
         <!-- End Page Title -->
 
-        <!-- Login -->
-        
-        <div class="login-area pt-100" style="border: 1px solid">
-            <div class="container">
-                <div class="create-information">
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                      {% if messages %}
-                        {% for category, message in messages %}
-                          <p class="alert-{{ category }}">{{ message }}</p>
-                        {% endfor %}
-                      {% endif %}
-                    {% endwith %}
-                <h2>Login Your Account</h2>
-
-                
-
-                <form name="login" action="{{ url_for('login') }}" method="POST" onsubmit="return universal_validation()">
-                    <div class="form-group">
-                        <select name="role" id="role" class="form-control">
-                        <option value="" disabled selected>Select your role</option>
-                        <option value="candidate">Candidate</option>
-                        <option value="company">Company</option>
-                    </select>
-                    </div>                            
-                    <div class="form-group">
-                        <input type="text" class="form-control" name= "uname" placeholder="Your username">
+        <!-- Contact Form -->
+        <div class="contact-form-area ptb-100">
+            <div class="container-fluid">
+                <form action="{{ url_for('contactform') }}" method="POST">
+                    <div class="row contact-wrap">
+                        <div class="col-sm-6 col-lg-6">
+                            <div class="form-group">
+                                <input type="text" name="name" id="name" class="form-control"  placeholder="Your Full Name" required>
+                                
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-6 col-lg-6">
+                            <div class="form-group">
+                                <input type="email" name="email" id="email" class="form-control"   placeholder="Your Email" required >
+                                
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-6 col-lg-6">
+                            <div class="form-group">
+                                <input type="text" name="phone_number" id="phone_number"   class="form-control" placeholder="Your Phone" required>
+                                
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-6 col-lg-6">
+                            <div class="form-group">
+                                <input type="text" name="msg_subject" id="msg_subject" class="form-control" placeholder="Subject" required>
+                                
+                            </div>
+                        </div>
+    
+                        <div class="col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <textarea name="message" class="form-control" id="message" cols="30" rows="8" placeholder="Job Description" required></textarea>
+                                
+                            </div>
+                        </div>
+    
+                        <div class="col-md-12 col-lg-12">
+                            <div class="text-center">
+                                <input type="submit" class="btn contact-btn" value="Submit">
+                            </div>
+                            <div id="msgSubmit" class="h3 text-center hidden"></div>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Password">
-                    </div>
-                
-
-                <div class="login-sign-in">
-                    <a href="#">Forgot Password?</a>
-                    <ul>
-                        <li>Don’t Have Account ?</li>
-                        <li>
-                            <a href="create-account.html">Sign Up Here</a>
-                        </li>
-                    </ul>
-                    <div class="text-center">
-                        <button type="submit" class="btn login-btn">Sign In</button>
-                    </div>
-                </div>
                 </form>
-
-               </div> 
             </div>
         </div>
-        <!-- End Login -->
+        <!-- End Contact Form -->
 
-<div class="footer" style="font-size: 20px;"><center><p> © 2000 – 2018 Code_Crunch Pty.Ltd all rights reserved<br>
+        <!-- Start Map Area -->
+		<div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Mumbai,%20India+(India)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="http://www.gps.ie/">Google Maps GPS</a></div>
+		<!-- End Map Area -->
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+
+                <!-- Subscribe Form -->
+                <div class="subscribe-area">
+                    <div class="section-title">
+                        <h2>Subscribe Newsletter</h2>
+                    </div>
+                    <div class="subscribe-shape">
+                        <img src="static/img/shape/1.png" alt="Shape">
+                        <img src="static/img/shape/1.png" alt="Shape">
+                        <img src="static/img/shape/1.png" alt="Shape">
+                        <img src="static/img/shape/1.png" alt="Shape">
+                        <img src="static/img/shape/2.png" alt="Shape">
+                    </div>
+                    <div class="subscribe-item">
+                        <form class="newsletter-form" data-toggle="validator">
+                            <input type="email" class="form-control" placeholder="Enter Your Email" name="EMAIL"  autocomplete="off">
+
+                            <button class="btn subscribe-btn" type="submit">
+                                Subscribe
+                            </button>
+
+                            <div id="validator-newsletter" class="form-result"></div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End Subscribe Form -->
+
+               <div class="footer" style="font-size: 20px;"><center><p> © 2000 – 2018 Code_Crunch Pvt.Ltd All Rights reserved<br>
     All trademarks and copyrights held by respective owners. <br>
-        Terms and Policy</p></center>
+        Terms and Policy</p></center></div>
+        <!-- End Footer -->
 
 
         <!-- Essential JS -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <!-- Meanmenu JS -->
-        <script src="assets/js/jquery.meanmenu.js"></script>
-        <!-- Nice Select JS -->
-        <script src="assets/js/jquery.nice-select.min.js"></script>
-        <!-- Mixitup JS -->
-        <script src="assets/js/jquery.mixitup.min.js"></script>
-        <!-- Counter JS -->
-        <script src="assets/js/waypoints.min.js"></script>
-        <script src="assets/js/jquery.counterup.min.js"></script>
-        <!-- Owl Carousel JS -->
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <!-- Form Ajaxchimp JS -->
-		<script src="assets/js/jquery.ajaxchimp.min.js"></script>
-		<!-- Form Validator JS -->
-		<script src="assets/js/form-validator.min.js"></script>
-		<!-- Contact JS -->
-        <script src="assets/js/contact-form-script.js"></script>
-        <!-- Wow JS -->
-        <script src="assets/js/wow.min.js"></script>
-        <!-- Custom JS -->
-        <script src="assets/js/custom.js"></script>
 
-       
+        <script src="static/js/popper.min.js"></script>
+        <script src="static/js/bootstrap.min.js"></script>
+        <!-- Meanmenu JS -->
+        <script src="static/js/jquery.meanmenu.js"></script>
+        <!-- Nice Select JS -->
+        <script src="static/js/jquery.nice-select.min.js"></script>
+        <!-- Mixitup JS -->
+        <script src="static/js/jquery.mixitup.min.js"></script>
+        <!-- Counter JS -->
+        <script src="static/js/waypoints.min.js"></script>
+        <script src="static/js/jquery.counterup.min.js"></script>
+        <!-- Owl Carousel JS -->
+        <script src="static/js/owl.carousel.min.js"></script>
+        <!-- Form Ajaxchimp JS -->
+		<script src="static/js/jquery.ajaxchimp.min.js"></script>
+		<!-- Form Validator JS -->
+		<script src="static/js/form-validator.min.js"></script>
+		<!-- Contact JS -->
+        <script src="static/js/contact-form-script.js"></script>
+        <!-- Wow JS -->
+        <script src="static/js/wow.min.js"></script>
+        <!-- Custom JS -->
+        <script src="static/js/custom.js"></script>
 
     </body>
 </html>

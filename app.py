@@ -27,6 +27,18 @@ def login_required(f):
 
     return wrap
 
+
+def login_required_company(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash("You need to login first","error")
+            return redirect(url_for('login'))
+
+    return wrap
+
 @app.route('/')
 def home():
 	session.clear()
@@ -108,31 +120,62 @@ def convertToBinaryData(filename):
 def login():
     if request.method == 'POST':
         session.pop('username', None)
+        session.pop('comp_username', None)
         cursor = mysql.connection.cursor()
-        uname = request.form.get('uname')
-        password = request.form.get('password')
-        result = cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
-        if result > 0:
-            data = cursor.fetchone()
-            password_db = data[11]
-            if (pwd_context.verify(password, password_db)):
-                session['logged_in'] = True
-                session['username'] = uname
-                flash('You are now logged in', 'success')
-                return redirect(url_for('cdashboard'))
+        choice = request.form.get('role')
+        if(choice == "candidate"):
+            uname = request.form.get('uname')
+            password = request.form.get('password')
+            result = cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
+            if result > 0:
+                data = cursor.fetchone()
+                password_db = data[11]
+                if (pwd_context.verify(password, password_db)):
+                    session['logged_in'] = True
+                    session['username'] = uname
+                    flash('You are now logged in', 'success')
+                    return redirect(url_for('cdashboard'))
+                else:
+                    flash('Invalid Login', 'error')
+                    return render_template('login.html')
+                cursor.close()
             else:
-                flash('Invalid Login', 'error')
+                flash('User not found', 'error')
                 return render_template('login.html')
-            cursor.close()
-        else:
-            flash('User not found', 'error')
-            return render_template('login.html')
+
+        elif(choice == "company"):
+            uname = request.form.get('uname')
+            password = request.form.get('password')
+            result = cursor.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+            if result > 0:
+                data = cursor.fetchone()
+                password_db = data[8]
+                if (pwd_context.verify(password, password_db)):
+                    session['logged_in'] = True
+                    session['comp_username'] = uname
+                    flash('You are now logged in', 'success')
+                    return redirect(url_for('companydetails'))
+                else:
+                    flash('Invalid Login', 'error')
+                    return render_template('login.html')
+                cursor.close()
+            else:
+                flash('User not found', 'error')
+                return render_template('login.html')
+
     return render_template('login.html')
 
 
 @app.route('/logout')
 @login_required
 def logout():
+    session.clear()
+    flash('You are now logged out', 'success')
+    return redirect(url_for('login'))
+
+@app.route('/logout_company')
+@login_required_company
+def logout_company():
     session.clear()
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
@@ -361,8 +404,24 @@ def updatelink():
 def about():
 	return render_template('about.html')
 
+@app.route('/contactform', methods=['GET','POST'])
+def contactform():
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone_number = request.form.get('phone_number')
+        msg_subject = request.form.get('msg_subject')
+        message = request.form.get('message') 
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO `contact` (`name`, `email`, `phone_number`, `msg_subject`, `message`) VALUES (%s, %s, %s, %s, %s)", (name, email, phone_number, msg_subject, message))
+        mysql.connection.commit()
+        cur.close()
+        return redirect(url_for('contactform'))
+    return render_template('contact.html') 
+
 @app.route('/companydetails')
-@login_required
+@login_required_company
 def companydetails():
     return render_template('companydetails.html')
 
