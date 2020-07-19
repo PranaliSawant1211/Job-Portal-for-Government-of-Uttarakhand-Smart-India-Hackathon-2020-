@@ -655,6 +655,25 @@ def contactform():
         return redirect(url_for('contactform'))
     return render_template('contact.html') 
 
+
+@app.route('/addblog', methods = ['GET', 'POST'])
+def addblog():
+    if request.method == 'POST':
+        cursor = mysql.connection.cursor()
+
+        pname = request.form.get('pname')
+        email = request.form.get('email')
+        dob = request.form.get('dob')
+        phone = request.form.get('phone')
+        blogg = request.form.get('blogg')
+
+        sql_insert_blob_query = """ INSERT INTO blog(pname, email,dob,phone, blogg) VALUES (%s,%s,%s,%s,%s)"""
+        cursor.execute(sql_insert_blob_query,(pname, email, dob, phone, blogg ))
+        mysql.connection.commit()
+        cursor.close()
+
+    return render_template('addblog.html')
+
 @app.route('/companydetails')
 @login_required_company
 def companydetails():
