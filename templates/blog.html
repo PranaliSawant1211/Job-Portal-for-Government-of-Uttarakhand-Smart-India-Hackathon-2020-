@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <!-- Meanmenu CSS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
         <!-- Icofont -->
@@ -28,20 +28,18 @@
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
 
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
+
         <title>Gable - Job Portal HTML Template</title>
-        
- 
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
     </head>
     <body>
 
-        <!-- Preloader -->
-        
-        <!-- End Preloader -->
+
 
         <!-- Start Navbar Area -->
-        {% if session.logged_in %}
+
+            {% if session.logged_in %}
         <style>
         .main-nav nav .navbar-nav .nav-item {
         position: relative;
@@ -186,7 +184,7 @@
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-title-text">
-                            <h2>Write A Blog</h2>
+                            <h2>Blog</h2>
                             <ul>
                                 <li>
                                     <a href="index.html">Home</a>
@@ -194,8 +192,7 @@
                                 <li>
                                     <i class="icofont-simple-right"></i>
                                 </li>
-                                <li>Write A Blog
-                            </li>
+                                <li>Blog</li>
                             </ul>
                         </div>
                     </div>
@@ -204,65 +201,173 @@
         </div>
         <!-- End Page Title -->
 
-        <!-- Blog Details -->
-        <!-- Dashboard -->
-        <div class="dashboard-area pt-100">
+        <!-- Blog -->
+        <section class="blog-area pt-100">
             <div class="container">
-                <div class="row align-items-center">
-                    
-                
-                        <div class="create-information">
-                            <form action={{url_for("addblog")}} method="POST">
-                               <h3>Fill in Details</h3>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Your Name</label>
-                                            <input type="text" class="form-control" name="pname"  placeholder="Aikin Ward" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Your Email</label>
-                                            <input type="email" class="form-control" name="email"  placeholder="hello@gable.com" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Date of Birth</label>
-                                            <input type="date" class="form-control" name="dob"  placeholder="21 / 2 / 1997" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Your Phone</label>
-                                            <input type="text" class="form-control" name="phone"  placeholder="+12345678910" required>
-                                        </div>
-                                    </div><br>
-                                    <h3>Write Blog Here</h3>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label>Blog</label>
-                                            <textarea id="your_message" class="form-control" name="blogg"  rows="19" required></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="login-sign-in">
-                      <div class="text-center">
-                        <button type="submit" class="btn login-btn" style="background: linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);font-size: 16px;padding: 12px 70px;margin-top: 20px;margin-bottom: 35px; color: #ffffff"><b>Sign In</b></button>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="blog-item wow fadeInUp" data-wow-delay=".3s">
+                            <div class="blog-top">
+                                <a href="blog-details.html">
+                                    <img src="assets/img/home-1/blog/1.jpg" alt="Blog">
+                                </a>
+                                <span>21 May, 2020</span>
+                            </div>
+                            <div class="blog-bottom">
+                                <h3>
+                                    <a href="blog-details.html">The next genaration IT will change the world</a>
+                                </h3>
+                                <ul>
+                                    <li>
+                                        <img src="assets/img/home-1/blog/1.png" alt="Blog">
+                                        Aikin Ward
+                                    </li>
+                                    <li>
+                                        <a href="blog-details.html">Read More
+                                            <i class="icofont-simple-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>     
-                            </form>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="blog-item wow fadeInUp" data-wow-delay=".4s">
+                            <div class="blog-top">
+                                <a href="blog-details.html">
+                                    <img src="assets/img/home-1/blog/2.jpg" alt="Blog">
+                                </a>
+                                <span>22 May, 2020</span>
+                            </div>
+                            <div class="blog-bottom">
+                                <h3>
+                                    <a href="blog-details.html">IT is the most important sector in the world</a>
+                                </h3>
+                                <ul>
+                                    <li>
+                                        <img src="assets/img/home-1/blog/1.png" alt="Blog">
+                                        Daniel Henry
+                                    </li>
+                                    <li>
+                                        <a href="blog-details.html">Read More
+                                            <i class="icofont-simple-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="blog-item wow fadeInUp" data-wow-delay=".5s">
+                            <div class="blog-top">
+                                <a href="blog-details.html">
+                                    <img src="assets/img/home-1/blog/3.jpg" alt="Blog">
+                                </a>
+                                <span>23 May, 2020</span>
+                            </div>
+                            <div class="blog-bottom">
+                                <h3>
+                                    <a href="blog-details.html">Nowadays IT is being most popular</a>
+                                </h3>
+                                <ul>
+                                    <li>
+                                        <img src="assets/img/home-1/blog/1.png" alt="Blog">
+                                        Lucas Mason
+                                    </li>
+                                    <li>
+                                        <a href="blog-details.html">Read More
+                                            <i class="icofont-simple-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="blog-item wow fadeInUp" data-wow-delay=".3s">
+                            <div class="blog-top">
+                                <a href="blog-details.html">
+                                    <img src="assets/img/home-1/blog/4.jpg" alt="Blog">
+                                </a>
+                                <span>26 May, 2020</span>
+                            </div>
+                            <div class="blog-bottom">
+                                <h3>
+                                    <a href="blog-details.html">IT job is an smart profession in the world</a>
+                                </h3>
+                                <ul>
+                                    <li>
+                                        <img src="assets/img/home-1/blog/1.png" alt="Blog">
+                                        William James
+                                    </li>
+                                    <li>
+                                        <a href="blog-details.html">Read More
+                                            <i class="icofont-simple-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="blog-item wow fadeInUp" data-wow-delay=".4s">
+                            <div class="blog-top">
+                                <a href="blog-details.html">
+                                    <img src="assets/img/home-1/blog/5.jpg" alt="Blog">
+                                </a>
+                                <span>27 May, 2020</span>
+                            </div>
+                            <div class="blog-bottom">
+                                <h3>
+                                    <a href="blog-details.html">Economy growth is being increased by IT sectors</a>
+                                </h3>
+                                <ul>
+                                    <li>
+                                        <img src="assets/img/home-1/blog/1.png" alt="Blog">
+                                        Liam Noah
+                                    </li>
+                                    <li>
+                                        <a href="blog-details.html">Read More
+                                            <i class="icofont-simple-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="blog-item wow fadeInUp" data-wow-delay=".5s">
+                            <div class="blog-top">
+                                <a href="blog-details.html">
+                                    <img src="assets/img/home-1/blog/6.jpg" alt="Blog">
+                                </a>
+                                <span>28 May, 2020</span>
+                            </div>
+                            <div class="blog-bottom">
+                                <h3>
+                                    <a href="blog-details.html">Every country is giving priority in IT sector</a>
+                                </h3>
+                                <ul>
+                                    <li>
+                                        <img src="assets/img/home-1/blog/1.png" alt="Blog">
+                                        Tom Potter
+                                    </li>
+                                    <li>
+                                        <a href="blog-details.html">Read More
+                                            <i class="icofont-simple-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-                           
-                                      
-        
+        </section>
+        <!-- End Blog -->
 
-                <!-- Subscribe Form -->
-               
+
+
 
         <!-- Essential JS -->
         <script src="assets/js/jquery.min.js"></script>

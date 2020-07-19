@@ -6,25 +6,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <!-- Meanmenu CSS -->
-        <link rel="stylesheet" href="static/css/meanmenu.css">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
         <!-- Icofont -->
-        <link rel="stylesheet" href="static/icofont/icofont.min.css">
-        <link rel="stylesheet" href="static/icofont/icofont.css">
+        <link rel="stylesheet" href="C:/Users/Mahajan/Desktop/SIH2020 july/icofont/icofont.min.css">
+        <link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css" integrity="sha384-jbCTJB16Q17718YM9U22iJkhuGbS0Gd2LjaWb4YJEZToOPmnKDjySVa323U+W7Fv" crossorigin="anonymous">
+
         <!-- Nice Select JS -->
-        <link rel="stylesheet" href="static/css/nice-select.css">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/nice-select.css')}}">
         <!-- Owl Carousel CSS -->
-        <link rel="stylesheet" href="static/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="static/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/owl.carousel.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/owl.theme.default.min.css')}}">
         <!-- Animate CSS -->
-        <link rel="stylesheet" href="static/css/animate.css">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/animate.css')}}">
         <!-- Flaticon CSS -->
-        <link rel="stylesheet" href="static/fonts/flaticon.css">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/flaticon.css')}}">
         <!-- Style CSS -->
-        <link rel="stylesheet" href="static/css/style.css">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css')}}">
         <!-- Responsive CSS -->
-        <link rel="stylesheet" href="static/css/responsive.css">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
+
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
         <title>Gable - Job Portal HTML Template</title>
 
         <link rel="icon" type="image/png" href="static/img/favicon.png">
@@ -35,137 +38,134 @@
         
 
         <!-- Start Navbar Area -->
+
+    {% if session.logged_in %}
+        <style>
+        .main-nav nav .navbar-nav .nav-item {
+        position: relative;
+        padding: 15px 8px;
+        }
+        </style>
         <div class="navbar-area fixed-top">
 
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
-                <a href="index.html" class="logo">
+                <a href="index.html" class="logo" >
                     <img src="static/img/logo.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Menu For Desktop Device -->
             <div class="main-nav">
+                <a class="navbar-brand" href="index.html">
+                    <img src="" alt="Logo">
+                </a>
                 <div class="container">
-                    <nav class="navbar navbar-expand-md navbar-light">
-                        <a class="navbar-brand" href="index.html">
-                            <img src="static/img/logo.png" alt="Logo">
-                        </a>
+                    <nav class="navbar navbar-expand-md navbar-light" style="margin-top:-40px">
+                        
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                            <ul class="navbar-nav">
+                            <ul class="navbar-nav" style="padding: 0px 210px;">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Home <i class="icofont-simple-down"></i></a>
+                                    <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Dashboard <i class="icofont-simple-down"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url_for('candidatedetails')}}" class="nav-link">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link dropdown-toggle">Jobs <i class="icofont-simple-down"></i></a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a href="index.html" class="nav-link">Home Page 1</a>
+                                            <a href="{{url_for('joblist')}}" class="nav-link">Job List</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="index-2.html" class="nav-link">Home Page 2</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="index-3.html" class="nav-link">Home Page 3</a>
+                                            <a href="" class="nav-link">Saved Jobs</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="about.html" class="nav-link">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle active">Jobs <i class="icofont-simple-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="job-list.html" class="nav-link active">Job List</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="favourite-job.html" class="nav-link">Favourite Jobs</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="job-details.html" class="nav-link">Job Details</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="post-a-job.html" class="nav-link">Post A Job</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Candidates <i class="icofont-simple-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="candidate-list.html" class="nav-link">Candidate List</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="candidate-details.html" class="nav-link">Candidate Details</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="single-resume.html" class="nav-link">Single Resume</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="submit-resume.html" class="nav-link">Submit Resume</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="pricing.html" class="nav-link">Pricing</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="dashboard.html" class="nav-link">Candidate dashboard</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Pages <i class="icofont-simple-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="company-list.html" class="nav-link">Company List</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="company-details.html" class="nav-link">Company Details</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="login.html" class="nav-link">Login Page</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="create-account.html" class="nav-link">Create Account Page</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="profile.html" class="nav-link">Profile</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="single-profile.html" class="nav-link">Single Profile</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="404.html" class="nav-link">404</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="faq.html" class="nav-link">FAQ</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="terms-and-conditions.html" class="nav-link">Terms and Conditions</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
-                                        </li>
-                                    </ul>
+                                    <a href="{{url_for('companylist')}}" class="nav-link">Companies</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link dropdown-toggle">Blogs <i class="icofont-simple-down"></i></a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a href="blog.html" class="nav-link">Blog</a>
+                                            <a href="{{ url_for('blog')}}" class="nav-link">Read Blog</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">Blog Details</a>
+                                            <a href="{{ url_for('addblog')}}" class="nav-link">Write a Blog</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="contact.html" class="nav-link">Contact</a>
+                                    <a href="{{url_for('contactform')}}" class="nav-link">Contact</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url_for('about')}}" class="nav-link">About</a>
+                                </li>
+                            </ul>
+                            <div class="common-btn" style="float: right">
+                                {% if session.logged_in %}
+                                <a class="login-btn" href="/logout">Logout</a>
+                                <i class="icofont-logout"></i>
+                                {% else %}
+                                <a class="login-btn" href="/login">Login</a>
+                                <i class="icofont-plus-square"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>  
+        {% else %}
+        <div class="navbar-area fixed-top" style="text-align: right;">
+
+            <!-- Menu For Mobile Device -->
+            <div class="mobile-nav">
+                <a href="index.html" class="logo">
+                    <img src="assets/img/logo.png" alt="Logo">
+                </a>
+            </div>
+
+            <!-- Menu For Desktop Device -->
+            <div class="main-nav">
+                <a class="navbar-brand" href="index.html" style="float: left">
+                    <img src="assets/img/logo.png" alt="Logo">
+                </a>
+                <div class="container" style="float: right">
+                    <nav class="navbar navbar-expand-md navbar-light" style="margin-bottom:0px;">
+                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                            <ul class="navbar-nav" style="padding: 0px 187px;">
+                                <li class="nav-item">
+                                    <a href="{{ url_for('home')}}" class="nav-link dropdown-toggle">Home <i class="icofont-simple-down"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url_for('about')}}" class="nav-link">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url_for('joblist')}}" class="nav-link dropdown-toggle">Jobs <i class="icofont-simple-down"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link dropdown-toggle">Blogs <i class="icofont-simple-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="{{ url_for('blog')}}" class="nav-link">Read Blog</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ url_for('addblog')}}" class="nav-link">Write a Blog</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url_for('contactform')}}" class="nav-link">Contact</a>
                                 </li>
                             </ul>
                             <div class="common-btn">
-                                <a class="login-btn" href="login.html">
+                                <a class="login-btn" href="{{url_for('login')}}">
                                     <i class="icofont-plus-square"></i>
                                     Login
                                 </a>
-                                <a class="sign-up-btn" href="create-account.html">
+                                <a class="sign-up-btn" href="{{url_for('create_account')}}">
                                     <i class="icofont-user-alt-4"></i>
                                     Sign Up
                                 </a>
@@ -175,6 +175,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         <!-- End Navbar Area -->
 
         <!-- Page Title -->
@@ -458,33 +459,7 @@
         <!-- End Jobs -->
 
         <!-- Footer -->
-        <footer>
-            <div class="container">
-
-                <!-- Subscribe Form -->
-                <div class="subscribe-area">
-                    <div class="section-title">
-                        <h2>Subscribe Newsletter</h2>
-                    </div>
-                    <div class="subscribe-shape">
-                        <img src="static/img/shape/1.png" alt="Shape">
-                        <img src="static/img/shape/1.png" alt="Shape">
-                        <img src="static/img/shape/1.png" alt="Shape">
-                        <img src="static/img/shape/1.png" alt="Shape">
-                        <img src="static/img/shape/2.png" alt="Shape">
-                    </div>
-                    <div class="subscribe-item">
-                        <form class="newsletter-form" data-toggle="validator">
-                            <input type="email" class="form-control" placeholder="Enter Your Email" name="EMAIL" required autocomplete="off">
-
-                            <button class="btn subscribe-btn" type="submit">
-                                Subscribe
-                            </button>
-
-                            <div id="validator-newsletter" class="form-result"></div>
-                        </form>
-                    </div>
-                </div>
+        
                 <!-- End Subscribe Form -->
 
                 
