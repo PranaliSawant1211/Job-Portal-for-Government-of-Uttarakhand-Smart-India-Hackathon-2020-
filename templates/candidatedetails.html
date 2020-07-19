@@ -213,59 +213,40 @@
                                     <ul>
                                         <li>
                                             <i class="icofont-ui-call"></i>
-                                            <a href="tel:+07554332322">Call : +07 554 332 322</a>
+                                            <a href="tel:{{ detail[0][5]}}">Call : {{ detail[0][4]}}</a>
                                         </li>
                                         <li>
                                             <i class="icofont-email"></i>
-                                            <a href="mailto:hello@gable.com">hello@gable.com</a>
+                                            <a href="mailto:{{ detail[0][5]}}">{{ detail[0][5]}}</a>
                                         </li>
                                         <li>
                                             <i class="icofont-location-pin"></i>
-                                            4th Floor, 408 No Chamber
+                                            {{ detail[0][7]}},{{ detail[0][9]}},{{ detail[0][10]}}
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="single-profile-social">
                                     <h3>Social Links</h3>
                                     <ul>
-                                        <li>
-                                            <i class="icofont-facebook"></i>
-                                            <a href="https://www.facebook.com" target="_blank">https://www.facebook.com</a>
+                                        {% for rowlink in tlinks %}
+                                        <li> 
+                                            <!-- <i class="icofont-facebook"></i> -->
+                                            <p style="color: #d966ff;">{{rowlink.2}}</p>
+                                            <a href="https://www.facebook.com" target="_blank">{{rowlink.3}}</a>
                                         </li>
-                                        <li>
-                                            <i class="icofont-instagram"></i>
-                                            <a href="https://www.instagram.com" target="_blank">https://www.instagram.com</a>
-                                        </li>
-                                        <li>
-                                            <i class="icofont-linkedin"></i>
-                                            <a href="https://www.linkedin.com" target="_blank">https://www.linkedin.com</a>
-                                        </li>
-                                        <li>
-                                            <i class="icofont-twitter"></i>
-                                            <a href="https://www.twitter.com" target="_blank">https://www.twitter.com</a>
-                                        </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                                 <div class="single-profile-skills">
                                     <h3>My Skills</h3>
+                                    {% for rowskill in tskills %}
                                     <div class="skill">
-                                        <p>Frontend Design</p>
+                                        <p>{{rowskill.2}}</p>
                                         <div class="skill-bar skill1 wow slideInLeft animated">
-                                            <span class="skill-count1">70%</span>
+                                            <span class="skill-count1">{{rowskill.3}}%</span>
                                         </div>
                                     </div>
-                                    <div class="skill">
-                                        <p>Software Development</p>
-                                        <div class="skill-bar skill1 skill2 wow slideInLeft animated">
-                                            <span class="skill-count1">90%</span>
-                                        </div>
-                                    </div>
-                                    <div class="skill">
-                                        <p>UIUX Design</p>
-                                        <div class="skill-bar skill1 skill3 wow slideInLeft animated">
-                                            <span class="skill-count1">75%</span>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -274,7 +255,7 @@
                         <div class="single-profile-item">
                             <div class="single-profile-right">
                                 <div class="single-profile-name">
-                                    <h2>Jac Jacson</h2>
+                                    <h2>{{detail[0][1]}} {{ detail[0][2]}} {{ detail[0][3]}} </h2>
                                     <span>Web Consultant</span>
                                     <p>Bachelor of Business Administation university of Gable</p>
                                     <a href="#">
@@ -292,8 +273,7 @@
                                         <h3>Description</h3>
                                     </div>
                                     <div class="single-profile-paragraph">
-                                        <p class="single-profile-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                                        <p>Risus commodo viverra maecenas accumsan lacus vel facilisis.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                                        <p class="single-profile-p">{{ detail[0][13]}}</p>
                                     </div>
                                     <div class="single-profile-heading">
                                         <span></span>
@@ -301,10 +281,10 @@
                                     </div>
                                     <div class="single-profile-paragraph">
                                         <ul>
-                                            <li>PHD degree in Criminal Law at University of Gable Internatinal (2006)</li>
-                                            <li>Master of Family Law  at University of Gable International  (2002)</li>
-                                            <li>MBBS LLB (Hon’s) in  at University of Gable International (2002)</li>
-                                            <li>Higher Secondary Certificate at Gable International collage  (1991)</li>
+                                            {% for rowedu in students %}
+                                            <li>{{rowedu.2}} {{rowedu.3}} at {{rowedu.4}} ({{rowedu.5}})</li>
+                                            {% endfor %}
+                                            
                                         </ul>
                                     </div>
                                     <div class="single-profile-heading">
@@ -320,10 +300,9 @@
                                     </div>
                                     <div class="single-profile-paragraph">
                                         <ul>
-                                            <li>Hand On experience with Wordpress</li>
-                                            <li> Better knowledge of front-end technologies, including HTML5, CSS3, JavaScript, jQuery</li>
-                                            <li>Belief – believing in yourself and those around you</li>
-                                            <li>Experience designing and developing responsive design websites</li>
+                                            {% for rowwork in twork %}
+                                            <li>{{ rowwork.2 }} at {{ rowwork.3 }} for {{ rowwork.4 }} in {{rowwork.5}}</li>
+                                            {% endfor %}
                                         </ul>
                                     </div>
                                 </div>
