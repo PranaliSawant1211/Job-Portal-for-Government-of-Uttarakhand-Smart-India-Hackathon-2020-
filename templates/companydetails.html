@@ -211,8 +211,8 @@
                             <div class="company-details-logo">
                                 <img src="static/img/home-1/companies/1.png" alt="Logo">
                                 <div class="company-logo-inner">
-                                    <h3>Winbrans.com</h3>
-                                    <p><i class="icofont-location-pin"></i>210-27 Quadra, Market Street, Victoria Canada</p>
+                                    <h3>{{detail[0][1]}}</h3>
+                                    <p><i class="icofont-location-pin"></i>{{detail[0][3]}}</p>
                                 </div>
                             </div>
                             <div class="company-details-share">
@@ -277,7 +277,7 @@
                             </div>
                             <div class="company-details-description">
                                 <h3>Description</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                <p>{{detail[0][7]}}</p>
                             </div>
                             <div class="text-center">
                                 <a class="job-details-btn" href="create-account.html">Apply Now</a>
@@ -287,57 +287,25 @@
                     <div class="col-lg-4">
                         <div class="company-details-item">
                             <div class="single-resume-category">
-                                <h3>Job Categories</h3>
+                                <h3>Field of work</h3>
                                 <ul>
+                                    {% for i in tcfow %}
                                     <li>
-                                        <a href="#">Web Developer</a>
-                                        <span>(5)</span>
+                                        <a href="#">{{i.2}}, {{i.3}}</a>
+                                        <!-- <span>(4)</span> -->
                                     </li>
-                                    <li>
-                                        <a href="#">Web Designer</a>
-                                        <span>(2)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">UX/UI Designer</a>
-                                        <span>(7)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Marketing</a>
-                                        <span>(0)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">SEO</a>
-                                        <span>(1)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Networking</a>
-                                        <span>(0)</span>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                             <div class="single-resume-category single-resume-types">
-                                <h3>Job Locations</h3>
+                                <h3>Grographic Presence</h3>
                                 <ul>
+                                    {% for i in tlinks %}
                                     <li>
-                                        <a href="#">New York</a>
-                                        <span>(4)</span>
+                                        <a href="#">{{i.2}}, {{i.3}}</a>
+                                        <!-- <span>(4)</span> -->
                                     </li>
-                                    <li>
-                                        <a href="#">Washington</a>
-                                        <span>(5)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Chicago</a>
-                                        <span>(3)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Houston</a>
-                                        <span>(1)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Los Angeles</a>
-                                        <span>(0)</span>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
