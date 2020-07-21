@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,redirect, url_for,g,session
+from flask import Flask, render_template, request,redirect, url_for,g,session, send_from_directory, jsonify
 from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
 from flask import flash
@@ -6,6 +6,11 @@ from passlib.hash import sha256_crypt
 from werkzeug.security import generate_password_hash, check_password_hash
 from passlib.apps import custom_app_context as pwd_context
 from functools import wraps
+import os
+import numpy as np
+import pandas as pd
+import camelot
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -682,6 +687,75 @@ def blog():
 @login_required_company
 def companydetails():
     return render_template('companydetails.html')
+
+#*****************************Functions related to job**************************************#
+
+@app.route('/postajob')
+def job_post():
+    df = pd.DataFrame()
+    return render_template('postajob.html',  tables=[df.to_html(classes='table table-hover', table_id="tblData" ,header="true")])
+
+
+
+@app.route('/uploadajax', methods=("POST", "GET"))
+def upldfile():
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    print("Upload Ajax")
+    if request.method == 'POST':
+        files = request.files['file']
+        #if files and allowed_file(files.filename):
+        filename = secure_filename(files.filename)
+        app.logger.info('FileName: ' + filename)
+        updir = os.path.join(basedir, 'static/')
+        files.save(os.path.join(updir, filename))
+        file_size = os.path.getsize(os.path.join(updir, filename))
+        print(filename)
+        # myFunc(filename)s
+        full_filename = os.path.join('static/', filename)
+        print(full_filename)
+
+        tables = camelot.read_pdf(full_filename)
+        df = tables[0].df
+        new_header = df.iloc[0] 
+        df = df[1:] 
+        df.columns = new_header
+
+        print(df)
+        t = df.to_html(classes='table table-hover', table_id="tblData", header="true")
+        return jsonify(name=filename, size=file_size, user_image=full_filename, table = t)
+
+
+@app.route('/uploadfajax', methods=("POST", "GET"))
+def upldjob():
+    if request.method == 'POST':
+        cur = mysql.connection.cursor()
+        _json = request.json
+        _jtl  = _json['jtl']
+        _al  = _json['al'] 
+        _sal  = _json['sal'] 
+        _vac  = _json['vac'] 
+        _loc  = _json['loc'] 
+        _ld  = _json['ld'] 
+        _exp  = _json['exp'] 
+        _jtype  = _json['jtype'] 
+        _jd  = _json['jd']
+
+        if _ld != "":
+            _ldo = datetime.strptime(_ld, "%Y-%m-%d")
+            _ld = _ldo.strftime("%Y-%m-%d")
+        '''INSERT INTO `jobs`(`jtitle`, `jdescription`, `jagelimit`, `jcompanyid`, `jsalary`, `jvacancies`, `jlocation`, `jlastd`, `jtype`, `jexperience`)
+         VALUES ('Java Developer', 'developing java apps', 55, 200000, 500.0, 10, 'Banglore', STR_TO_DATE('10-09-2020', '%d-%m-%Y'), 'Full Time', 5) '''
+        sql = """ INSERT INTO `jobs`(`jtitle`, `jdescription`, `jagelimit`, `jcompanyid`, `jsalary`, `jvacancies`, `jlocation`, `jlastd`, `jtype`, `jexperience`)
+         VALUES (%s, %s, %s, 200000, %s, %s, %s, %s, %s, %s)"""
+        cur.execute(sql,(_jtl, _jd, _al, _sal, _vac, _loc, _ld, _jtype, _exp))
+        mysql.connection.commit()
+        cur.close()
+
+        resp = jsonify({'message' : 'Data Uploaded Successfully!'})
+        resp.status_code = 201
+        return resp
+
+#***************************************End of Functions related to job*********************************#
 
 if __name__ == '__main__':
 	app.secret_key =  'mahesh'
