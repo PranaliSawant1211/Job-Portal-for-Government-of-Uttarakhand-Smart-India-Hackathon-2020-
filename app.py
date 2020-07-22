@@ -6,6 +6,8 @@ from passlib.hash import sha256_crypt
 from werkzeug.security import generate_password_hash, check_password_hash
 from passlib.apps import custom_app_context as pwd_context
 from functools import wraps
+from flask_mail import Mail, Message
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 import os
 import numpy as np
 import pandas as pd
@@ -14,6 +16,11 @@ from datetime import datetime
 
 
 app = Flask(__name__)
+app.config.from_pyfile('config.cfg')
+mail = Mail(app)
+s = URLSafeTimedSerializer('Thisisasecret!')
+global fields1
+
 app.config['MySQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
@@ -76,16 +83,19 @@ def create_account():
                 description = request.form.get('description')
                 password = request.form.get('password')
                 password = pwd_context.hash(password)
+                global fields
+                fields = (uname, fname, mname, lname,phone, email, dob, address, gender, city, state, password, description)
                 
+                token = s.dumps(email, salt='email-confirm')
+                msg = Message('Confirm Email', sender='code.crunch.sih@gmail.com', recipients=[email])
+                link = url_for('confirm_email', token=token, _external=True)
+                msg.body = 'Your link is {}'.format(link)
+                mail.send(msg)
+
+                return '<h1>The email you entered is {}. Please click the link in your mail for account verification!'.format(email)
    
 
-                sql_insert_blob_query = """ INSERT INTO register(uname, fname, mname, lname,phone, email, dob, address, sex, city, state, password, descr) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-                cursor.execute(sql_insert_blob_query,(uname, fname, mname, lname,phone, email, dob, address, gender, city, state, password, description))
-                mysql.connection.commit()
-                cursor.close()
-
-                flash('You are now registered and can log in', 'success')
-                return redirect(url_for('login'))
+                
 
         elif(choice == "company"):
             cursor = mysql.connection.cursor()
@@ -104,17 +114,54 @@ def create_account():
                 compdescription = request.form.get('compdescription')
                 comppassword = request.form.get('comppassword')
                 comppassword = pwd_context.hash(comppassword)
-        
-                sql_insert_blob_query = """ INSERT INTO company_register(compid, compname, doe, compaddress, compemail, compurl, compphone, compdescription, comppassword) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-                cursor.execute(sql_insert_blob_query,(compid, compname, estdate, compaddress, compemail, compurl, compphone, compdescription, comppassword))
-                mysql.connection.commit()
-                cursor.close()
+                global fields1
+                fields1 = (compid, compname, estdate, compaddress, compemail, compurl, compphone, compdescription, comppassword)
 
-                flash('You are now registered and can log in', 'success')
-                return redirect(url_for('login'))
+                token = s.dumps(compemail, salt='email-confirm')
+                msg = Message('Confirm Email', sender='code.crunch.sih@gmail.com', recipients=[compemail])
+                link = url_for('confirm_email_company', token=token, _external=True)
+                msg.body = 'Your link is {}'.format(link)
+                mail.send(msg)
+
+                return '<h1>The email you entered is {}. Please click the link in your mail for account verification!'.format(compemail)
+        
+                
 
     return render_template('create-account.html')
 
+@app.route('/confirm_email/<token>')
+def confirm_email(token):
+    try:
+        email = s.loads(token, salt='email-confirm', max_age=3600)
+        cursor = mysql.connection.cursor()
+        sql_insert_blob_query = """ INSERT INTO register(uname, fname, mname, lname,phone, email, dob, address, sex, city, state, password, descr) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        cursor.execute(sql_insert_blob_query,fields)
+        del(fields)
+        mysql.connection.commit()
+        cursor.close()
+
+        flash('You are now registered and can log in', 'success')
+        return redirect(url_for('login'))
+    except SignatureExpired:
+        return '<h1>The token is expired!</h1>'
+
+
+@app.route('/confirm_email_company/<token>')
+def confirm_email_company(token):
+    try:
+        email = s.loads(token, salt='email-confirm', max_age=3600)
+        cursor = mysql.connection.cursor()
+        sql_insert_blob_query = """ INSERT INTO company_register(compid, compname, doe, compaddress, compemail, compurl, compphone, compdescription, comppassword) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        cursor.execute(sql_insert_blob_query,fields1)
+        del(fields1)
+        mysql.connection.commit()
+        cursor.close()
+
+        flash('You are now registered and can log in', 'success')
+        return redirect(url_for('login'))
+    except SignatureExpired:
+        return '<h1>The token is expired!</h1>'
+    
 
 def convertToBinaryData(filename):
     # Convert digital data to binary format
