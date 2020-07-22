@@ -39,6 +39,8 @@ def login_required_company(f):
 
     return wrap
 
+
+      
 @app.route('/')
 def home():
 	session.clear()
