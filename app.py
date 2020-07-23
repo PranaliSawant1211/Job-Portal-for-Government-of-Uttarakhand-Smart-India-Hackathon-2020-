@@ -6,6 +6,8 @@ from passlib.hash import sha256_crypt
 from werkzeug.security import generate_password_hash, check_password_hash
 from passlib.apps import custom_app_context as pwd_context
 from functools import wraps
+from flask_mail import Mail, Message
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 import os
 import numpy as np
 import pandas as pd
@@ -14,6 +16,11 @@ from datetime import datetime
 
 
 app = Flask(__name__)
+app.config.from_pyfile('config.cfg')
+mail = Mail(app)
+s = URLSafeTimedSerializer('Thisisasecret!')
+global fields1
+
 app.config['MySQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
@@ -44,6 +51,8 @@ def login_required_company(f):
 
 	return wrap
 
+
+      
 @app.route('/')
 def home():
 	session.clear()
@@ -51,68 +60,110 @@ def home():
 
 @app.route('/create_account', methods = ['GET', 'POST'])
 def create_account():
-	choice = request.form.get('role')
-	if request.method == 'POST':
-		if(choice == "candidate" ):
-			cursor = mysql.connection.cursor()
-			uname = request.form.get('uname')
-			cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
-			if cursor.fetchone() is not None:
-				flash("The username is already taken...", "error")
-				return render_template('create-account.html')
-			else:
-				fname = request.form.get('fname')
-				mname = request.form.get('mname')
-				lname = request.form.get('lname')
-				email = request.form.get('email')
-				dob = request.form.get('dob')
-				phone = request.form.get('phone')
-				address = request.form.get('address')
-				state = request.form.get('state')
-				city = request.form.get('city')
-				gender = request.form.get('gender')
-				description = request.form.get('description')
-				password = request.form.get('password')
-				password = pwd_context.hash(password)
-				
+
+    choice = request.form.get('role')
+    if request.method == 'POST':
+        if(choice == "candidate" ):
+            cursor = mysql.connection.cursor()
+            uname = request.form.get('uname')
+            cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
+            if cursor.fetchone() is not None:
+                flash("The username is already taken...", "error")
+                return render_template('create-account.html')
+            else:
+                fname = request.form.get('fname')
+                mname = request.form.get('mname')
+                lname = request.form.get('lname')
+                email = request.form.get('email')
+                dob = request.form.get('dob')
+                phone = request.form.get('phone')
+                address = request.form.get('address')
+                state = request.form.get('state')
+                city = request.form.get('city')
+                gender = request.form.get('gender')
+                description = request.form.get('description')
+                password = request.form.get('password')
+                password = pwd_context.hash(password)
+                global fields
+                fields = (uname, fname, mname, lname,phone, email, dob, address, gender, city, state, password, description)
+                
+                token = s.dumps(email, salt='email-confirm')
+                msg = Message('Confirm Email', sender='code.crunch.sih@gmail.com', recipients=[email])
+                link = url_for('confirm_email', token=token, _external=True)
+                msg.body = 'Your link is {}'.format(link)
+                mail.send(msg)
+
+                return '<h1>The email you entered is {}. Please click the link in your mail for account verification!'.format(email)
    
 
-				sql_insert_blob_query = """ INSERT INTO register(uname, fname, mname, lname,phone, email, dob, address, sex, city, state, password, descr) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-				cursor.execute(sql_insert_blob_query,(uname, fname, mname, lname,phone, email, dob, address, gender, city, state, password, description))
-				mysql.connection.commit()
-				cursor.close()
+                
 
-				flash('You are now registered and can log in', 'success')
-				return redirect(url_for('login'))
+        elif(choice == "company"):
+            cursor = mysql.connection.cursor()
+            compid = request.form.get('compid')
+            cursor.execute("SELECT * FROM company_register WHERE compid = %s", [compid])
+            if cursor.fetchone() is not None:
+                flash("The username is already taken...", "error")
+                return render_template('create-account.html')
+            else:
+                compname = request.form.get('compname')
+                estdate = request.form.get('estdate')
+                compaddress = request.form.get('compaddress')
+                compemail = request.form.get('compemail')
+                compurl = request.form.get('compurl')
+                compphone = request.form.get('compphone')
+                compdescription = request.form.get('compdescription')
+                comppassword = request.form.get('comppassword')
+                comppassword = pwd_context.hash(comppassword)
+                global fields1
+                fields1 = (compid, compname, estdate, compaddress, compemail, compurl, compphone, compdescription, comppassword)
 
-		elif(choice == "company"):
-			cursor = mysql.connection.cursor()
-			compid = request.form.get('compid')
-			cursor.execute("SELECT * FROM company_register WHERE compid = %s", [compid])
-			if cursor.fetchone() is not None:
-				flash("The username is already taken...", "error")
-				return render_template('create-account.html')
-			else:
-				compname = request.form.get('compname')
-				estdate = request.form.get('estdate')
-				compaddress = request.form.get('compaddress')
-				compemail = request.form.get('compemail')
-				compurl = request.form.get('compurl')
-				compphone = request.form.get('compphone')
-				compdescription = request.form.get('compdescription')
-				comppassword = request.form.get('comppassword')
-				comppassword = pwd_context.hash(comppassword)
-		
-				sql_insert_blob_query = """ INSERT INTO company_register(compid, compname, doe, compaddress, compemail, compurl, compphone, compdescription, comppassword) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-				cursor.execute(sql_insert_blob_query,(compid, compname, estdate, compaddress, compemail, compurl, compphone, compdescription, comppassword))
-				mysql.connection.commit()
-				cursor.close()
+                token = s.dumps(compemail, salt='email-confirm')
+                msg = Message('Confirm Email', sender='code.crunch.sih@gmail.com', recipients=[compemail])
+                link = url_for('confirm_email_company', token=token, _external=True)
+                msg.body = 'Your link is {}'.format(link)
+                mail.send(msg)
 
-				flash('You are now registered and can log in', 'success')
-				return redirect(url_for('login'))
+                return '<h1>The email you entered is {}. Please click the link in your mail for account verification!'.format(compemail)
+        
+                
 
-	return render_template('create-account.html')
+    return render_template('create-account.html')
 
+
+@app.route('/confirm_email/<token>')
+def confirm_email(token):
+    try:
+        email = s.loads(token, salt='email-confirm', max_age=3600)
+        cursor = mysql.connection.cursor()
+        sql_insert_blob_query = """ INSERT INTO register(uname, fname, mname, lname,phone, email, dob, address, sex, city, state, password, descr) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        cursor.execute(sql_insert_blob_query,fields)
+        del(fields)
+        mysql.connection.commit()
+        cursor.close()
+
+        flash('You are now registered and can log in', 'success')
+        return redirect(url_for('login'))
+    except SignatureExpired:
+        return '<h1>The token is expired!</h1>'
+
+
+@app.route('/confirm_email_company/<token>')
+def confirm_email_company(token):
+    try:
+        email = s.loads(token, salt='email-confirm', max_age=3600)
+        cursor = mysql.connection.cursor()
+        sql_insert_blob_query = """ INSERT INTO company_register(compid, compname, doe, compaddress, compemail, compurl, compphone, compdescription, comppassword) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        cursor.execute(sql_insert_blob_query,fields1)
+        del(fields1)
+        mysql.connection.commit()
+        cursor.close()
+
+        flash('You are now registered and can log in', 'success')
+        return redirect(url_for('login'))
+    except SignatureExpired:
+        return '<h1>The token is expired!</h1>'
+    
 
 def convertToBinaryData(filename):
 	# Convert digital data to binary format
@@ -123,52 +174,54 @@ def convertToBinaryData(filename):
 @app.route('/login', methods = ['GET', 'POST'])
 # @login_required
 def login():
-	if request.method == 'POST':
-		session.pop('username', None)
-		session.pop('comp_username', None)
-		cursor = mysql.connection.cursor()
-		choice = request.form.get('role')
-		if(choice == "candidate"):
-			uname = request.form.get('uname')
-			password = request.form.get('password')
-			result = cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
-			if result > 0:
-				data = cursor.fetchone()
-				password_db = data[11]
-				if (pwd_context.verify(password, password_db)):
-					session['logged_in'] = True
-					session['username'] = uname
-					flash('You are now logged in', 'success')
-					return redirect(url_for('cdashboard'))
-				else:
-					flash('Invalid Login', 'error')
-					return render_template('login.html')
-				cursor.close()
-			else:
-				flash('User not found', 'error')
-				return render_template('login.html')
 
-		elif(choice == "company"):
-			uname = request.form.get('uname')
-			password = request.form.get('password')
-			result = cursor.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
-			if result > 0:
-				data = cursor.fetchone()
-				password_db = data[8]
-				if (pwd_context.verify(password, password_db)):
-					session['logged_in'] = True
-					session['comp_username'] = uname
-					flash('You are now logged in', 'success')
-					return redirect(url_for('companydetails'))
-				else:
-					flash('Invalid Login', 'error')
-					return render_template('login.html')
-				cursor.close()
-			else:
-				flash('User not found', 'error')
-				return render_template('login.html')
+    if request.method == 'POST':
+        session.pop('username', None)
+        session.pop('comp_username', None)
+        cursor = mysql.connection.cursor()
+        choice = request.form.get('role')
+        if(choice == "candidate"):
+            uname = request.form.get('uname')
+            password = request.form.get('password')
+            result = cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
+            if result > 0:
+                data = cursor.fetchone()
+                password_db = data[11]
+                if (pwd_context.verify(password, password_db)):
+                    session['logged_in'] = True
+                    session['username'] = uname
+                    flash('You are now logged in', 'success')
+                    return redirect(url_for('cdashboard'))
+                else:
+                    flash('Invalid Login', 'error')
+                    return render_template('login.html')
+                cursor.close()
+            else:
+                flash('User not found', 'error')
+                return render_template('login.html')
 
-	return render_template('login.html')
+        elif(choice == "company"):
+            uname = request.form.get('uname')
+            password = request.form.get('password')
+            result = cursor.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+            if result > 0:
+                data = cursor.fetchone()
+                password_db = data[8]
+                if (pwd_context.verify(password, password_db)):
+                    session['logged_in'] = True
+                    session['comp_username'] = uname
+                    flash('You are now logged in', 'success')
+                    return redirect(url_for('compdashboard'))
+                else:
+                    flash('Invalid Login', 'error')
+                    return render_template('login.html')
+                cursor.close()
+            else:
+                flash('User not found', 'error')
+                return render_template('login.html')
+
+    return render_template('login.html')
+
 
 
 @app.route('/logout')
@@ -184,6 +237,189 @@ def logout_company():
 	session.clear()
 	flash('You are now logged out', 'success')
 	return redirect(url_for('login'))
+
+@app.route('/compdashboard')
+@login_required_company
+def compdashboard():
+    uname=session['comp_username']
+
+
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM award WHERE compid = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM geoloc WHERE compid = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM keypeep WHERE compid = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM fow ")
+    tfowd = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
+    tcfowd = cursorlnk.fetchall()
+    cursorlnk.close()
+    return render_template('companydashboard.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+@app.route('/compdashboardgeoloc')
+@login_required_company
+def compdashboardgeoloc():
+    uname=session['comp_username']
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM award WHERE compid = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM geoloc WHERE compid = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM fow ")
+    tfowd = cursorlnk.fetchall()
+    cursorskl.close()
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname])
+    tcfowd = cursorlnk.fetchall()
+    cursorlnk.close()
+    return render_template('companydashboard.html', scroll="geotag" ,tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+@app.route('/compdashboardaward')
+@login_required_company
+def compdashboardaward():
+    uname=session['comp_username']
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM award WHERE compid = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM geoloc WHERE compid = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM fow ")
+    tfowd = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname])
+    tcfowd = cursorlnk.fetchall()
+    cursorlnk.close()
+    return render_template('companydashboard.html', scroll="awardtag" ,tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+
+@app.route('/compdashboardfow')
+@login_required_company
+def compdashboardfow():
+    uname=session['comp_username']
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM award WHERE compid = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM geoloc WHERE compid = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM fow ")
+    tfowd = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
+    tcfowd = cursorlnk.fetchall()
+    cursorlnk.close()
+    return render_template('companydashboard.html', scroll="aowtag" ,tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+
+@app.route('/compdashboardkey')
+@login_required_company
+def compdashboardkey():
+    uname=session['comp_username']
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM skills WHERE uname = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM geoloc WHERE compid = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM fow ")
+    tfowd = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
+    tcfowd = cursorlnk.fetchall()
+    cursorlnk.close()
+    return render_template('companydashboard.html', scroll="keytag" , tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
 
 
 @app.route('/cdashboard')
@@ -357,6 +593,48 @@ def cdashboarddetail():
 
 
 
+@app.route('/companydetails')
+@login_required_company
+def companydetails():
+    uname=session['comp_username']
+
+
+    cursorskl = mysql.connection.cursor()
+    result2 = cursorskl.execute("SELECT * FROM award WHERE compid = %s", [uname])
+    skdata = cursorskl.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result3 = cursorlnk.execute("SELECT * FROM geoloc WHERE compid = %s", [uname])
+    lnkdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM keypeep WHERE compid = %s", [uname])
+    workdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+    Mdata = cursorlnk.fetchall()
+    cursorskl.close()
+
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM fow ")
+    tfowd = cursorlnk.fetchall()
+    cursorskl.close()
+
+    cursorlnk = mysql.connection.cursor()
+    result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
+    tcfowd = cursorlnk.fetchall()
+    cursorlnk.close()
+    return render_template('companydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+
+
+
+
 @app.route('/candidatedetails')
 def candidatedetails():
 	
@@ -390,6 +668,7 @@ def candidatelist():
 @app.route('/companylist')
 def companylist():
 	return render_template('companylist.html')
+
 
 #**************************** details operations start ****************************
 @app.route('/updatedetails', methods = ['POST'])
@@ -679,10 +958,209 @@ def addblog():
 def blog():
 	return render_template('blog.html')
 
-@app.route('/companydetails')
-@login_required_company
-def companydetails():
-	return render_template('companydetails.html')
+
+
+
+
+#**************************** company details operations start ****************************
+@app.route('/updatecompdetails', methods = ['POST'])
+def updatecompdetails():
+    if request.method == "POST":
+
+        compname = request.form.get('compname')
+        estdate = request.form.get('estdate')
+        compaddress = request.form.get('compaddress')
+        compemail = request.form.get('compemail')
+        compurl = request.form.get('compurl')
+        compphone = request.form.get('compphone')
+        compdescription = request.form.get('compdescription')
+        uname = session['comp_username'] 
+        cur = mysql.connection.cursor()
+        cur.execute(""" 
+                    UPDATE company_register
+                    SET compname=%s, doe=%s, compaddress=%s, compemail=%s, compurl=%s, compphone=%s, compdescription=%s
+                    where compid = %s
+                """,(compname, estdate, compaddress, compemail, compurl, compphone, compdescription,uname ))
+        mysql.connection.commit()
+        cur.close()
+        return redirect(url_for('compdashboard'))
+        
+                
+#**************************** company Details operations end****************************
+
+
+
+#**************************** Field of work operations start ****************************
+@app.route('/insertaow', methods = ['POST'])
+def insertaow():
+
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        cfow = request.form.getlist('cfow')
+        uname = session['comp_username'] 
+        cur = mysql.connection.cursor()
+        print(cfow)
+
+        for i in cfow:
+            cur.execute("INSERT INTO `compfow` (`compid`, `fow`) VALUES (%s, %s)", (uname, i))
+            mysql.connection.commit()
+        return redirect(url_for('compdashboardaow'))
+
+
+
+
+
+@app.route('/deleteaow/<string:id_data>', methods = ['GET'])
+def deleteaow(id_data):
+    flash("Record Has Been Deleted Successfully")
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM compfow WHERE srno=%s", (id_data,))
+    mysql.connection.commit()
+    return redirect(url_for('compdashboardfow'))
+
+
+
+#**************************** field of work operations end****************************
+
+#**************************** Geo Location operations start ****************************
+@app.route('/insertgeo', methods = ['POST'])
+def insertgeo():
+
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        compcity = request.form['compcity']
+        compcount = request.form['compcount']
+        uname = session['comp_username'] 
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO `geoloc` (`compid`, `city`,`country`) VALUES (%s, %s, %s)", (uname, compcity,compcount))
+        mysql.connection.commit()
+        return redirect(url_for('compdashboardgeoloc'))
+
+
+
+
+
+@app.route('/deletegeo/<string:id_data>', methods = ['GET'])
+def deletegeo(id_data):
+    flash("Record Has Been Deleted Successfully")
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM geoloc WHERE srno=%s", (id_data,))
+    mysql.connection.commit()
+    return redirect(url_for('compdashboardgeoloc'))
+
+
+@app.route('/updategeo',methods=['POST','GET'])
+def updategeo():
+
+    if request.method == 'POST':
+        compcity = request.form['compcity']
+        compcount = request.form['compcount']
+        srno = request.form['srno']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+               UPDATE geoloc
+               SET compcity=%s, compcount=%s
+               WHERE srno=%s
+            """, (compcity, compcount, srno))
+        flash("Data Updated Successfully")
+        mysql.connection.commit()
+        return redirect(url_for('compdashboardgeoloc'))
+#**************************** geo location operations end****************************
+
+#**************************** Awards operations start ****************************
+@app.route('/insertaward', methods = ['POST'])
+def insertaward():
+
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        awardtitle = request.form['awardtitle']
+        from_org = request.form['from_org']
+        awardyear = request.form['awardyear']
+        uname = session['comp_username'] 
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO `award` (`compid`, `title`,`from_org`,`year`) VALUES (%s, %s, %s, %s)", (uname, awardtitle,from_org,awardyear))
+        mysql.connection.commit()
+        return redirect(url_for('compdashboardaward'))
+
+
+
+
+
+@app.route('/deleteaward/<string:id_data>', methods = ['GET'])
+def deleteaward(id_data):
+    flash("Record Has Been Deleted Successfully")
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM award WHERE srno=%s", (id_data,))
+    mysql.connection.commit()
+    return redirect(url_for('compdashboardaward'))
+
+
+@app.route('/updateaward',methods=['POST','GET'])
+def updateaward():
+
+    if request.method == 'POST':
+        awardtitle = request.form['awardtitle']
+        from_org = request.form['from_org']
+        awardyear = request.form['awardyear']
+        srno = request.form['srno']
+        cur = mysql.connection.cursor()
+        print((link, value, uname,srno))
+        cur.execute("""
+               UPDATE award
+               SET title=%s, from_org=%s, year=%s
+               WHERE srno=%s
+            """, (awardtitle, from_org, awardyear, srno))
+        flash("Data Updated Successfully")
+        mysql.connection.commit()
+        return redirect(url_for('compdashboardaward'))
+#**************************** Awards operations end****************************
+
+#**************************** kep people operations start ****************************
+@app.route('/insertkey', methods = ['POST'])
+def insertkey():
+
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        name = request.form['keyname']
+        designation = request.form['keydesig']
+        uname = session['comp_username'] 
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO `keypeep` (`compid`, `name`,`designation`) VALUES (%s, %s, %s)", (uname, name, designation))
+        mysql.connection.commit()
+        return redirect(url_for('compdashboardkey'))
+
+
+
+
+
+@app.route('/deletekey/<string:id_data>', methods = ['GET'])
+def deletekey(id_data):
+    flash("Record Has Been Deleted Successfully")
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM keypeep WHERE srno=%s", (id_data,))
+    mysql.connection.commit()
+    return redirect(url_for('compdashboardkey'))
+
+
+@app.route('/updatekey',methods=['POST','GET'])
+def updatekey():
+
+    if request.method == 'POST':
+        name = request.form['keyname']
+        designation = request.form['keydesig']
+        srno = request.form['srno']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+               UPDATE keypeep
+               SET name=%s, designation=%s
+               WHERE srno=%s
+            """, (name, designation,srno))
+        flash("Data Updated Successfully")
+        mysql.connection.commit()
+        return redirect(url_for('compdashboardkey'))
+#**************************** kep people operations end****************************
+
+
 
 #*****************************Functions related to job**************************************#
 

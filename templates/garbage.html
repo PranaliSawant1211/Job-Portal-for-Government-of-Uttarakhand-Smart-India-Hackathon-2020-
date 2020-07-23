@@ -470,3 +470,18 @@
             </div>
         </div>
         {% endif %}
+
+
+
+
+
+
+@app.route('/uploader', methods = ['GET', 'POST'])
+def upload_file():
+   if request.method == 'POST':
+      f = request.files['file']
+      #f.save(secure_filename(f.filename))
+      updir = os.path.join(basedir, 'static/')
+      files.save(os.path.join(updir, f.filename))
+
+      full_filename = os.path.join('static/', f.filename)
