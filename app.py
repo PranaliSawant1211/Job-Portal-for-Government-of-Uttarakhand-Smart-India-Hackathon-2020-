@@ -19,7 +19,6 @@ app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
 mail = Mail(app)
 s = URLSafeTimedSerializer('Thisisasecret!')
-global fields1
 
 app.config['MySQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -60,7 +59,8 @@ def home():
 
 @app.route('/create_account', methods = ['GET', 'POST'])
 def create_account():
-
+    global fields
+    fields = ()
     choice = request.form.get('role')
     if request.method == 'POST':
         if(choice == "candidate" ):
@@ -84,8 +84,9 @@ def create_account():
                 description = request.form.get('description')
                 password = request.form.get('password')
                 password = pwd_context.hash(password)
-                global fields
+                
                 fields = (uname, fname, mname, lname,phone, email, dob, address, gender, city, state, password, description)
+                flash(fields)
                 
                 token = s.dumps(email, salt='email-confirm')
                 msg = Message('Confirm Email', sender='code.crunch.sih@gmail.com', recipients=[email])
@@ -115,8 +116,8 @@ def create_account():
                 compdescription = request.form.get('compdescription')
                 comppassword = request.form.get('comppassword')
                 comppassword = pwd_context.hash(comppassword)
-                global fields1
-                fields1 = (compid, compname, estdate, compaddress, compemail, compurl, compphone, compdescription, comppassword)
+                
+                fields = (compid, compname, estdate, compaddress, compemail, compurl, compphone, compdescription, comppassword)
 
                 token = s.dumps(compemail, salt='email-confirm')
                 msg = Message('Confirm Email', sender='code.crunch.sih@gmail.com', recipients=[compemail])
@@ -137,6 +138,8 @@ def confirm_email(token):
         email = s.loads(token, salt='email-confirm', max_age=3600)
         cursor = mysql.connection.cursor()
         sql_insert_blob_query = """ INSERT INTO register(uname, fname, mname, lname,phone, email, dob, address, sex, city, state, password, descr) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        global fields
+        print(fields)
         cursor.execute(sql_insert_blob_query,fields)
         del(fields)
         mysql.connection.commit()
@@ -154,8 +157,10 @@ def confirm_email_company(token):
         email = s.loads(token, salt='email-confirm', max_age=3600)
         cursor = mysql.connection.cursor()
         sql_insert_blob_query = """ INSERT INTO company_register(compid, compname, doe, compaddress, compemail, compurl, compphone, compdescription, comppassword) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        cursor.execute(sql_insert_blob_query,fields1)
-        del(fields1)
+        global fields
+        print(fields)
+        cursor.execute(sql_insert_blob_query,fields)
+        del(fields)
         mysql.connection.commit()
         cursor.close()
 
