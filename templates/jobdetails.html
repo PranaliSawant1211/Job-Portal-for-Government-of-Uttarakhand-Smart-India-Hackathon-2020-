@@ -254,7 +254,7 @@
                             </div>
                             
                             <div class="text-center">
-                                <a class="job-details-btn" href="https://templates.hibootstrap.com/gable/default/create-account.html">Apply Now</a>
+                                <a class="btn create-ac-btn" href="/apply/{{data[4]}}/{{data[0]}}">Apply Now</a>
                             </div>
                         </div>
                     </div>
@@ -283,18 +283,20 @@
                             <div class="job-overview job-company">
                                 <h3>Company Address</h3>
                                 <ul>
+                                    {% for i in jtable %}
                                     <li>
                                         <i class="icofont-location-pin"></i>
-                                        <span>4th Floor, 408 No Chamber</span>
+                                        <span>{{i.3}}</span>
                                     </li>
                                     <li>
                                         <i class="icofont-ui-call"></i>
-                                        <a href="tel:+07554332322">Call : +07 554 332 322</a>
+                                        <a href="tel:{{i.6}}">Call : {{i.6}}</a>
                                     </li>
                                     <li>
                                         <i class="icofont-ui-email"></i>
-                                        <a href="mailto:hello@gable.com">hello@gable.com</a>
+                                        <a href="mailto:{{i.4}}">{{i.4}}</a>
                                     </li>
+                                    {%endfor%}
                                 </ul>
                             </div>
                         </div>

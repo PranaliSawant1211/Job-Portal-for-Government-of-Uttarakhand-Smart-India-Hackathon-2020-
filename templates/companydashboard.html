@@ -499,7 +499,7 @@
                                             <td style="display:none;">{{rowskill.0}}</td>
                                             <td>{{ rowskill.2 }}</td>
                                             <td>{{ rowskill.3}}</td>
-                                            <td></td>
+                                            <td>{{rowskill.4}}</td>
                                         <td width="25%" style="text-align:right;">
                                                <button onclick="showDialogS()" class="btn btn-warning btn-xs">Edit</button>
                                                 <a href="/deleteaward/{{ rowskill.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
@@ -594,8 +594,8 @@
 
                                         {% for row in twork %}
                                         <tr>
-                                            <td>{{row.2}}</td>
                                             <td>{{row.3}}</td>
+                                            <td>{{row.2}}</td>
                                             
                                             <td style="display:none;">{{row.0}}</td>
                                             <td style="text-align:right;">
@@ -663,7 +663,7 @@
                                 <div class="create-skills-right">
                                     
                                     <form action="{{ url_for('insertgeo') }}" method="POST">
-                                    <button type="submit" class="btn create-ac-btn">Add Link</button>
+                                    <button type="submit" class="btn create-ac-btn">Add Location</button>
                                 </div>
                             </div>
                             <div class="popupL" id="popupL">
@@ -736,13 +736,13 @@
 
                                                 <input type="hidden" id="lsrno" name="srno">
                                                 <div class="form-group">
-                                                    <label style="color: #7f7e7e;">PLatform</label>
+                                                    <label style="color: #7f7e7e;">City</label>
                                                         <input name='compcity' id='link' type="text" class="form-control" placeholder="NY">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label style="color: #7f7e7e;" >Link</label>
+                                                    <label style="color: #7f7e7e;" >Country</label>
                                                     <input  name="compcount" id="value" type="text" class="form-control" placeholder="United States">
                                                 </div>
                                             </div>
@@ -760,6 +760,8 @@
                             <a href="/companydetails" class="btn create-ac-btn">View Profile</a>
                         </div>
                     </div>
+                </form>
+
 
 <script type="text/javascript">
 

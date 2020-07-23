@@ -583,7 +583,16 @@
                     data: JSON.stringify({'jtl': jtl, 'al': al, 'sal': sal, 'vac': vac, 'loc': loc, 'ld': ld, 'exp': exp, 'jtype': jtype, 'jd': jd}),
                     dataType: "json",
                     success: function(data) {
-                        $('#msg1').html('<span style="color: green;">Data Uploaded Successfully</span>');
+                        alert("Data Uploaded Successfully!");
+                        $('#jtl').val("");
+                        $('#jd').val("");
+                        $('#al').val("");
+                        $('#sal').val("");
+                        $('#vac').val("");
+                        $('#loc').val("");
+                        $('#ld').val("");
+                        $('#exp').val("");
+                        //$('#msg1').html('<span style="color: green;">Data Uploaded Successfully</span>');
                     }
 
                     });

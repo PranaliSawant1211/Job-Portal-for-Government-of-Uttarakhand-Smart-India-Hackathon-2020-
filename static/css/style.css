@@ -3532,6 +3532,8 @@ footer {
   padding: 40px 50px;
   margin-bottom: 30px;
   border: 1px solid #80829159;
+  width:90%;
+  min-width:455px;
 }
 
 .job-details-item .job-overview h3 {
