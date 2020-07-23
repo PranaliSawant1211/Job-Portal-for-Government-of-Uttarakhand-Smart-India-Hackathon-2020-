@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- <link rel="stylesheet" href="static/css/try.css">         -->
+
+        
+        <!-- Bootstrap CSS -->
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <!-- Meanmenu CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
+        <!-- Icofont -->
+        <link rel="stylesheet" href="C:/Users/Mahajan/Desktop/SIH2020 july/icofont/icofont.min.css">
+        <link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css" integrity="sha384-jbCTJB16Q17718YM9U22iJkhuGbS0Gd2LjaWb4YJEZToOPmnKDjySVa323U+W7Fv" crossorigin="anonymous">
+
+        <!-- Nice Select JS -->
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/nice-select.css')}}">
+        <!-- Owl Carousel CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/owl.carousel.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/owl.theme.default.min.css')}}">
+        <!-- Animate CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/animate.css')}}">
+        <!-- Flaticon CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/flaticon.css')}}">
+        <!-- Style CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css')}}">
+        <!-- Responsive CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
+
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
+        <style>
+            .main-nav nav .navbar-nav .nav-item {
+            position: relative;
+            padding: 15px 8px;
+}
+        </style>
+
+<title>Jobs You've Posted</title>
+
+<link rel="icon" type="image/png" href="static/img/favicon.png">
+</head>
+<body>
+
+        <!-- Start Navbar Area -->
+        <div class="navbar-area fixed-top">
+
+            <!-- Menu For Mobile Device -->
+            <div class="mobile-nav">
+                <a href="index.html" class="logo" >
+                    <img src="static/img/logo.png" alt="Logo">
+                </a>
+            </div>
+
+            <!-- Menu For Desktop Device -->
+            <div class="main-nav">
+                <a class="navbar-brand" href="index.html">
+                    <img src="" alt="Logo">
+                </a>
+                <div class="container">
+                    <nav class="navbar navbar-expand-md navbar-light" style="margin-top:-40px">
+                        
+                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                            <ul class="navbar-nav" style="padding: 0px 210px;">
+                                <li class="nav-item">
+                                    <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Dashboard <i class="icofont-simple-down"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url_for('candidatedetails')}}" class="nav-link">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link dropdown-toggle">Jobs <i class="icofont-simple-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="{{url_for('joblist')}}" class="nav-link">Job List</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">Saved Jobs</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url_for('companylist')}}" class="nav-link">Companies</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link dropdown-toggle">Blogs <i class="icofont-simple-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="{{ url_for('blog')}}" class="nav-link">Read Blog</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ url_for('addblog')}}" class="nav-link">Write a Blog</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url_for('contactform')}} class="nav-link">Contact</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url_for('about')}}" class="nav-link">About</a>
+                                </li>
+                            </ul>
+                            <div class="common-btn" style="float: right">
+                                {% if session.logged_in %}
+                                <a class="login-btn" href="/logout">Logout</a>
+                                <i class="icofont-logout"></i>
+                                {% else %}
+                                <a class="login-btn" href="/login">Login</a>
+                                <i class="icofont-plus-square"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- End Navbar Area -->
+
+        <!-- Page Title -->
+        <div class="page-title-area">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-title-text">
+                            <h2>Jobs Posted By Me</h2>
+                            <ul>
+                                <li>
+                                    <a href="index.html">Home</a>
+                                </li>
+                                <li>
+                                    <i class="icofont-simple-right"></i>
+                                </li>
+                                <li>My Jobs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Title -->
+
+
+<div id="educationtag" class="create-education create-education-two">
+<div id = "jobtag">
+	<table id="joblistbox" class="table table-striped">
+
+
+		<tr>
+			<th>Job Title</th>
+			<th>Age Limit</th>
+			<th>Salary</th>
+			<th>Vacancies</th>
+			<th>Location</th>
+			<th>Posted On</th>
+			<th>Last Date</th>
+			<th>Job Type</th>
+			<th>Experience Required</th>
+			<th>Job Description</th>
+			<th style="text-align: center;">Action</th>
+		</tr>
+		
+		{% for row in data %}
+		<tr>
+			<td>{{row.1}}</td>
+			<td>{{row.3}}</td>
+			<td>{{row.5}}</td>
+			<td>{{row.6}}</td>
+			<td>{{row.7}}</td>
+			<td>{{row.12}}</td>
+			<td>{{row.13}}</td>
+			<td>{{row.10}}</td>
+			<td>{{row.11}}</td>
+			<td>{{row.2}}</td>
+			<td style="display:none;">{{row.0}}</td>
+			<td>
+				<button onclick="showDialog()"  class="btn btn-warning btn-xs">Edit</button>
+				<input id='sr' type="hidden" value="{{row.0}}">
+				<a href="/deletejob/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+			</td>
+		</tr>
+
+
+		{% endfor  %}
+
+	</table>
+</div>
+</div>
+<div id="myModal" class="modaledu">
+	<div class="modaledu-content">
+		<div class="modaledu-header">
+			<span class="close" id="spanJ">&times;</span>
+			<h2 style="color: white"> Update Job Details</h2>
+		</div>
+		<div class="modaledu-body">
+
+			<form action="{{ url_for('updatejob') }}" method="POST">
+
+				        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label style="color: black">Job Title</label>
+                                    <input type="text" class="form-control" placeholder="UX/UI Designer", 
+                                    name = "jtl", id="jtl" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label style="color: black">Age Limit</label>
+                                    <input type="text" class="form-control" placeholder="55", name = "al", id = "al">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label style="color: black">Salary</label>
+                                    <input type="text" class="form-control" placeholder="Winbrans.com", name = "sal", id = "sal">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label style="color: black">Vacancies</label>
+                                    <input type="text" class="form-control" placeholder="10", name="vac", id = "vac">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label style="color: black">Location</label>
+                                    <input type="text" class="form-control" placeholder="210-27 Quadra, Market Street, Victoria Canada", name="loc", id = "loc">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label style="color: black">Last Date</label>
+                                    <input type="date" class="form-control", name = "ld", id = "ld">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label style="color: black">Experience Required (In Years)</label>
+                                    <input type="text" class="form-control" placeholder="10", name = "exp", id = "exp">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <div class="job-type-area col-lg-6" >
+                                        <span style="color: black">Job Type</span>
+                                        <select name="jtype" id="jtype">
+                                          <option value="Full Time">Full Time</option>
+                                          <option value="Part Time">Part Time</option>
+                                          <option value="Intern">Intern</option>
+                                      </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <input type="hidden" name="jid" id ="jid">
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label style="color: black">Job Description</label>
+                                    <textarea id="jd" rows="8" class="form-control" name="jd"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn create-ac-btn vertical-center">Update Job</button>
+                        </div>
+
+			</form>
+		</div>
+	</div>
+
+
+</div>
+
+<script type="text/javascript">
+	
+	var modaledu = document.getElementById("myModal");
+	var spanJ = document.getElementById("spanJ");
+	var table = document.getElementById('joblistbox');
+
+	function showDialog () { 
+		modaledu.style.display = "block";
+	}
+
+	
+
+	for(var i = 1; i < table.rows.length; i++)
+	{
+		table.rows[i].onclick = function()
+		{
+
+                         //rIndex = this.rowIndex;
+                         console.log(this.cells[0]);
+                         console.log(this.cells[0].innerHTML);
+                         document.getElementById("jtl").value = this.cells[0].innerHTML;
+                         document.getElementById("al").value = this.cells[1].innerHTML;
+                         document.getElementById("sal").value = this.cells[2].innerHTML;
+                         document.getElementById("vac").value = this.cells[3].innerHTML;
+                         document.getElementById("loc").value = this.cells[4].innerHTML;
+                         document.getElementById("ld").value = this.cells[6].innerHTML;
+                         document.getElementById("exp").value = this.cells[8].innerHTML;
+                         document.getElementById("jtype").value = this.cells[7].innerHTML;
+                         document.getElementById("jd").value = this.cells[9].innerHTML;
+                         document.getElementById("jid").value = this.cells[10].innerHTML;
+                         //document.getElementById("srno").value = this.cells[4].innerHTML;
+                         
+                         
+
+
+         };
+    }
+
+    spanJ.onclick = function() {
+  modaledu.style.display = "none";
+}
+</script>
+
+
+</body>
+</html>
