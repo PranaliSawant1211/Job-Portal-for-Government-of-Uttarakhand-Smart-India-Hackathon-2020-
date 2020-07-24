@@ -151,11 +151,11 @@
                                 <div class="single-profile-left" >
                                 
                                 <div class="single-profile-heading" >
-                                    <h4>JOB TITLE: <a href = "/jobdetails/{{data[1]}}" style = "color: #68369B">{{jtitle.upper()}}</a></h4>
+                                    <h4>TEST</h4>
                                 </div>
                                 <div class="single-profile-heading">
                                     <span></span>
-                                    <h4>COMPANY NAME: <a href = "/publiccompanydetails/{{data[3]}}"style = "color: #68369B">{{compname.upper()}}</a></h4>
+                                    <h4>Enter you marks carefull!..No Cheating huh</h4>
                                 </div>
                            
                             </div>
@@ -173,89 +173,20 @@
                         <div class="single-profile-item">
                             <div class="single-profile-right">
                                 <div class="card" style="width: 70rem;">
-                                <div class="single-profile-left">
-                                    <div class="single-profile-textarea">
+                                    <div class="single-profile-left">
 
-                                        <div class="single-profile-heading">
-                                            <span></span>
-                                            <h3>No. of Applicants: </h3>
-                                        </div>
-                                        
-                                        <div class="single-profile-paragraph" style="color: black;">
-                                            <pre></pre>
-                                            {{noa}} 
-                                            <pre></pre>
-                                       </div>
+                                        <form action="/completetest" method="POST">
+                                            
+                                            <label style="color: black;">Enter You marks</label>: <input type="text" name="marks" id= "marks">
+                                            <input type="hidden" name="aid" value = "{{aid}}">
+                                            <br>
 
-                                        <div class="single-profile-heading">
-                                            <span></span>
-                                            <h3>Applied On: </h3>
-                                        </div>
-                                        
-                                        <div class="single-profile-paragraph" style="color: black;">
-                                            <pre></pre>
-                                            {{adate}} 
-                                            <pre></pre>
-                                       </div>
-                                       
-                                        <div class="single-profile-heading">
-                                            <span></span>
-                                            <h3>Status: </h3>
-                                        </div>
-        
-                                        <div class="single-profile-paragraph" style="color: black;">
-                                            <pre></pre>
-                                            {{data[4]}}
-                                            <pre></pre>
-                                        </div>
+                                            <input type="submit" name="submit">
 
-                                        {% if data[4] != "Rejected" %}
+                                        </form>
 
-                                        {% if data[7] %}
-                                        <div class="single-profile-heading">
-                                            <span></span>
-                                            <h3>Test Details</h3>
-                                        </div>
-                                        <div class="single-profile-paragraph">
-                                            <ul>
-                                                
-                                                <li style="color: black;">Test Link: <a href = {{data[8]}}> {{data[8]}} </a></li>
-
-                                                <li style="color: black;">Marks: {{data[6]}}</li>
-                                                
-                                            </ul>
-                                        {% else %}
-                                        <div class="single-profile-paragraph">
-                                            <span></span>
-                                            <h3 style="color: red;">Employer Haven't yet approved you for Test</h3>
-                                        </div>
-                                        {% endif %}
-
-
-                                        {% if data[9] %}
-                                        <div class="single-profile-heading">
-                                            <span></span>
-                                            <h3>Test Details</h3>
-                                        </div>
-                                        <div class="single-profile-paragraph">
-                                            <ul>
-                                                
-                                                <li style="color: black;">Interview Link: <a href = {{data[8]}}>{{data[10]}}</a></li>
-
-                                                <li style="color: black;">Date and Time: {{data[11]}}</li>
-                                                
-                                            </ul>
-                                        {% else %}
-                                        <div class="single-profile-paragraph">
-                                            <span></span>
-                                            <h3 style="color: orange;">Employer Haven't yet approved you for Interview</h3>
-                                        </div>
-                                        {% endif %}
-
-                                        {% endif %}
                                     </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>

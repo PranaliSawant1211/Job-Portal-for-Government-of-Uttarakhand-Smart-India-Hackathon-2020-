@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
+    <!-- Icofont -->
+    <link rel="stylesheet" href="C:/Users/Mahajan/Desktop/SIH2020 july/icofont/icofont.min.css">
+    <link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css" integrity="sha384-jbCTJB16Q17718YM9U22iJkhuGbS0Gd2LjaWb4YJEZToOPmnKDjySVa323U+W7Fv" crossorigin="anonymous">
+
+    <!-- Nice Select JS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/nice-select.css')}}">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/owl.theme.default.min.css')}}">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/animate.css')}}">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/flaticon.css')}}">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css')}}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
+
+    <title>Gable - Job Portal HTML Template</title>
+    <style>
+        .main-nav nav .navbar-nav .nav-item {
+            position: relative;
+            padding: 15px 8px;
+        }
+    </style>
+
+    <link rel="icon" type="image/png" href="static/img/favicon.png">
+</head>
+<body>
+
+
+
+    <!-- Start Navbar Area -->
+    <div class="navbar-area fixed-top">
+
+        <!-- Menu For Mobile Device -->
+        <div class="mobile-nav">
+            <a href="index.html" class="logo" >
+                <img src="static/img/logo.png" alt="Logo">
+            </a>
+        </div>
+
+        <!-- Menu For Desktop Device -->
+        <div class="main-nav">
+            <a class="navbar-brand" href="index.html">
+                <img src="" alt="Logo">
+            </a>
+            <div class="container">
+                <nav class="navbar navbar-expand-md navbar-light" style="margin-top:-40px">
+
+                    <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                        <ul class="navbar-nav" style="padding: 0px 210px;">
+                            <li class="nav-item">
+                                <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Dashboard <i class="icofont-simple-down"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url_for('candidatedetails')}}" class="nav-link">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link dropdown-toggle">Jobs <i class="icofont-simple-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="{{url_for('joblist')}}" class="nav-link">Job List</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" class="nav-link">Saved Jobs</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url_for('companylist')}}" class="nav-link">Companies</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link dropdown-toggle">Blogs <i class="icofont-simple-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="{{ url_for('blog')}}" class="nav-link">Read Blog</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ url_for('addblog')}}" class="nav-link">Write a Blog</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url_for('contactform')}}" class="nav-link">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url_for('about')}}" class="nav-link">About</a>
+                            </li>
+                        </ul>
+                        <div class="common-btn" style="float: right">
+                            {% if session.logged_in %}
+                            <a class="login-btn" href="/logout">Logout</a>
+                            <i class="icofont-logout"></i>
+                            {% else %}
+                            <a class="login-btn" href="/login">Login</a>
+                            <i class="icofont-plus-square"></i>
+                            {% endif %}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- End Navbar Area -->
+
+    <!-- Page Title -->
+    <div class="page-title-area">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="page-title-text">
+                        <h2>Application Status</h2>
+                        <ul>
+                            <li>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <i class="icofont-simple-right"></i>
+                            </li>
+                            <li>Application Status</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- Candidate Details -->
+
+    <div class="single-profile-area pt-100" style="padding-bottom: 0px; padding-left: 33%">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="single-profile-item">
+                    <div class="single-profile-item">
+                        <div class="single-profile-right">
+                            <div class="single-profile-left" >
+
+                                <div class="single-profile-heading" >
+                                    <h4>JOB TITLE: <a href = "/jobdetails/{{data[1]}}" style = "color: #68369B">{{jtitle.upper()}}</a></h4>
+                                </div>
+                                <div class="single-profile-heading">
+                                    <span></span>
+                                    <h4>APPLICANT: <a href = "/publiccandidatedetails/{{data[2]}}"style = "color: #68369B">{{uname.upper()}}</a></h4>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>     
+
+    <div class="single-profile-area pt-40 col-lg-12">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="single-profile-item">
+                    <div class="single-profile-item">
+                        <div class="single-profile-right">
+                            <div class="card" style="width: 70rem;">
+                                <div class="single-profile-left">
+                                    <div class="single-profile-textarea">
+
+                                        <div class="single-profile-heading">
+                                            <span></span>
+                                            <h3>Applications vs Vacancies: </h3>
+                                        </div>
+                                        <ul>
+
+                                            <li>
+                                                <div class="single-profile-paragraph" style="color: black;">
+                                                    <pre></pre>
+                                                    <i class="icofont-attachment"></i>
+                                                    No. of Applications: {{noa}} 
+                                                    <pre></pre>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <div class="single-profile-paragraph" style="color: black;">
+                                                    <pre></pre>
+                                                    <i class="icofont-ui-call"></i>
+                                                    No. of Vacanies: {{jvacancies}} 
+                                                    <pre></pre>
+                                                </div>
+                                            </li>
+
+
+                                        </ul>
+                                        <div class="single-profile-heading">
+                                            <span></span>
+                                            <h3>Applied On: </h3>
+                                        </div>
+                                        
+                                        <div class="single-profile-paragraph" style="color: black;">
+                                            <pre></pre>
+                                            {{adate}} 
+                                            <pre></pre>
+                                        </div>
+
+                                        <div class="single-profile-heading">
+                                            <span></span>
+                                            <h3>Status: </h3>
+                                        </div>
+
+                                        <div class="single-profile-paragraph" style="color: black;">
+                                            <pre></pre>
+                                            {{data[4]}}
+                                            <pre></pre>
+                                        </div>
+                                        
+                                        <div class="single-profile-heading">
+                                            <span></span>
+                                            <h3>Test Details</h3>
+
+                                            
+
+                                            <div class="col text-right">
+                                                <a href = "/allowtest/{{data[0]}}" class="btn btn-success" style= "padding-right: 10px;" onclick="return confirm('Test Link Will be Sent to Applicant');">Allow</a>
+                                                <a href = "/rejectapp/{{data[0]}}" class="btn btn-warning" onclick="return confirm('This will straight away REJECT the application')">Reject</a>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="single-profile-paragraph">
+                                            <ul>
+
+                                                <li style="color: black;">Test Link: <a href = {{data[8]}}> {{data[8]}} </a></li>
+
+                                                <li style="color: black;">Marks: {{data[6]}}</li>
+                                                
+                                            </ul>
+
+
+                                            <div class="single-profile-heading">
+                                                <span></span>
+                                                <h3>Interview Details</h3>
+
+                                                <div class="col text-right">
+                                                    <button class="btn btn-success" style= "padding-right: 10px;" onclick="return setMeet();">Schedule an Interview</button>
+                                                    <a href = "/rejectapp/{{data[0]}}" class="btn btn-warning" onclick="return confirm('This will straight away REJECT the application')">Reject</a>
+                                                </div>
+                                            </div>
+                                            <div class="single-profile-paragraph">
+                                                <ul>
+
+                                                    <li style="color: black;">Interview Link: <a href = {{data[8]}}>{{data[10]}}</a></li>
+
+                                                    <li style="color: black;">Date and Time: {{data[11]}}</li>
+
+                                                </ul>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-center">
+                                        <div class="col text-center">
+                                                    <a href = "/acceptapp/{{data[0]}}"class="btn btn-success" style= "padding-right: 10px;" onclick="return confirm('You are Accepting the Application... Please Confirm');">Accept</a>
+                                                    <a href = "/rejectapp/{{data[0]}}" class="btn btn-warning" onclick="return confirm('This will straight away REJECT the application;')">Reject</a>
+                                        </div>
+                                    </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            <!-- End Candidate Details -->
+
+            <div id="myModal" class="modaledu">
+                <div class="modaledu-content">
+                    <div class="modaledu-header">
+                        <span class="close" id="spanJ">&times;</span>
+                        <h2 style="color: white"> Schedule an Interview</h2>
+                    </div>
+                    <div class="modaledu-body">
+
+                        <form action="{{ url_for('setinterview') }}" method="POST">
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label style="color: black">Set Date</label>
+                                        <input type="date" class="form-control" name = "ed", id="ed" >
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label style="color: black">Set Time</label>
+                                        <input type="time" class="form-control" name = "et", id = "et">
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="hidden" name="aid" id ="aid", value= "{{data[0]}}">
+                                </div>
+                            <br>
+                            <button type="submit" class="btn create-ac-btn vertical-center">Schedule Interview</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+        <script type="text/javascript">
+
+            var modalint = document.getElementById("myModal");
+            var spanJ = document.getElementById("spanJ");
+            //var table = document.getElementById('joblistbox');
+
+            function setMeet () { 
+                modalint.style.display = "block";
+            }
+
+            spanJ.onclick = function() {
+              modalint.style.display = "none";
+            }
+        </script>
+
+
+
+
+        <!-- Essential JS -->
+        <script src="static/js/jquery.min.js"></script>
+        <script src="static/js/popper.min.js"></script>
+        <script src="static/js/bootstrap.min.js"></script>
+        <!-- Meanmenu JS -->
+        <script src="static/js/jquery.meanmenu.js"></script>
+        <!-- Nice Select JS -->
+        <script src="static/js/jquery.nice-select.min.js"></script>
+        <!-- Mixitup JS -->
+        <script src="static/js/jquery.mixitup.min.js"></script>
+        <!-- Counter JS -->
+        <script src="static/js/waypoints.min.js"></script>
+        <script src="static/js/jquery.counterup.min.js"></script>
+        <!-- Owl Carousel JS -->
+        <script src="static/js/owl.carousel.min.js"></script>
+        <!-- Form Ajaxchimp JS -->
+        <script src="static/js/jquery.ajaxchimp.min.js"></script>
+        <!-- Form Validator JS -->
+        <script src="static/js/form-validator.min.js"></script>
+        <!-- Contact JS -->
+        <script src="static/js/contact-form-script.js"></script>
+        <!-- Wow JS -->
+        <script src="static/js/wow.min.js"></script>
+        <!-- Custom JS -->
+        <script src="static/js/custom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js" integrity="sha512-9CWGXFSJ+/X0LWzSRCZFsOPhSfm6jbnL+Mpqo0o8Ke2SYr8rCTqb4/wGm+9n13HtDE1NQpAEOrMecDZw4FXQGg==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous"></script>
+
+    </body>
+    </html>

@@ -650,12 +650,75 @@ def companydetails():
 	cursorlnk.close()
 	return render_template('companydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
 
+@app.route('/publiccompanydetails/<compid>')
+def publiccompanydetails(compid):
+	#uname=session['comp_username']
+
+
+	cursorskl = mysql.connection.cursor()
+	result2 = cursorskl.execute("SELECT * FROM award WHERE compid = %s", [compid])
+	skdata = cursorskl.fetchall()
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result3 = cursorlnk.execute("SELECT * FROM geoloc WHERE compid = %s", [compid])
+	lnkdata = cursorlnk.fetchall()
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM keypeep WHERE compid = %s", [compid])
+	workdata = cursorlnk.fetchall()
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM company_register WHERE compid = %s", [compid])
+	Mdata = cursorlnk.fetchall()
+	cursorskl.close()
+
+
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM fow ")
+	tfowd = cursorlnk.fetchall()
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [compid] )
+	tcfowd = cursorlnk.fetchall()
+	cursorlnk.close()
+
+	return render_template('companydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
 
 
 @app.route('/candidatedetails')
 def candidatedetails():
 	
 	uname = session['username'] 
+	cursoredu = mysql.connection.cursor()
+	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
+	edudata = cursoredu.fetchall()
+	cursoredu.close()
+	cursorskl = mysql.connection.cursor()
+	result2 = cursorskl.execute("SELECT * FROM skills WHERE uname = %s", [uname])
+	skdata = cursorskl.fetchall()
+	cursorskl.close()
+	cursorlnk = mysql.connection.cursor()
+	result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
+	lnkdata = cursorlnk.fetchall()
+	cursorskl.close()
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+	workdata = cursorlnk.fetchall()
+	cursorskl.close()
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
+	Mdata = cursorlnk.fetchall()
+	cursorskl.close()
+	return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
+
+@app.route('/publiccandidatedetails/<duname>')
+def publiccandidatedetails(duname):
+	
+	uname = duname
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -1273,7 +1336,6 @@ def joblist():
 	return render_template('joblist.html', data = jdata)
 
 @app.route('/jobdetails/<job_id>', methods = ['GET'])
-@login_required
 def getjobdetails(job_id):
 	print("Jobid: {}".format(job_id))
 	jcursor = mysql.connection.cursor()
@@ -1476,17 +1538,195 @@ def candidateappstatus(aid):
 	aresults = cur.execute(sql,[aid])
 	adata = cur.fetchall()
 
-	return render_template('candappstatus.html', data = adata)
+	jid = adata[0][1]
+	compid = adata[0][3]
+	adate = adata[0][5].strftime("%Y-%m-%d")
+
+	sql4 = "SELECT * FROM app_status WHERE jid = %s"
+	ajresult = cur.execute(sql4, [jid])
+
+	sql2 = "SELECT jtitle FROM jobs WHERE jid = %s"
+	jresult = cur.execute(sql2, [jid])
+	jdata = cur.fetchall()
+
+	jtitle = jdata[0][0]
+
+	sql3 = "SELECT compname FROM company_register WHERE compid = %s"
+	cpmpresult = cur.execute(sql3, [compid])
+	compdata = cur.fetchall()
+
+	compname = compdata[0][0]
+
+	return render_template('candappstatus.html', data = adata[0], jtitle = jtitle, compname = compname, adate = adate, noa = ajresult)
+
+
+#---------------------------------------Application Status fro Companies---------------------------------------------#
+
+@app.route('/companywisejobsapps')
+@login_required_company
+def companywisejobsapps():
+	compid = session['comp_username']
+	cur = mysql.connection.cursor()
+	sql  = "SELECT * FROM app_status WHERE compid = %s"
+	aresults = cur.execute(sql,[compid])
+	adata = cur.fetchall()
+
+	data= []
+
+	for i in adata:
+
+		uname = i[2]
+		jid = i[1]
+
+		sql2 = "SELECT jtitle, jvacancies FROM jobs WHERE jid = %s"
+		jresult = cur.execute(sql2,[jid])
+		jdata = cur.fetchall()
+		jtitle = jdata[0][0]
+		jvacancies = jdata[0][1]
+
+		sql3 = "SELECT fname, mname, lname FROM register WHERE uname = %s"
+		uresult = cur.execute(sql3,[uname])
+		udata = cur.fetchall()
+		fname = udata[0][0]
+		mname = udata[0][1]
+		lname = udata[0][2]
+
+		sql4 = "SELECT * FROM app_status WHERE jid = %s"
+		ajresult = cur.execute(sql4,[jid])
+		noa = ajresult
+
+		data.append([i, jtitle, fname, mname, lname, jvacancies, ajresult])
+
+	return render_template('companywisejobsapps.html', data= data)
+
+
+
+@app.route('/compappstatus/<aid>')
+@login_required_company
+def companyappstatus(aid):
+	
+	cur = mysql.connection.cursor()
+	sql  = "SELECT * FROM app_status WHERE appid = %s"
+	aresults = cur.execute(sql,[aid])
+	adata = cur.fetchall()
+
+	jid = adata[0][1]
+	uid = adata[0][2]
+	adate = adata[0][5].strftime("%Y-%m-%d")
+
+	sql4 = "SELECT * FROM app_status WHERE jid = %s"
+	ajresult = cur.execute(sql4, [jid])
+
+	sql2 = "SELECT jtitle, jvacancies FROM jobs WHERE jid = %s"
+	jresult = cur.execute(sql2, [jid])
+	jdata = cur.fetchall()
+
+	jtitle = jdata[0][0]
+	jvacancies = jdata[0][1]
+
+	sql3 = "SELECT fname, mname, lname FROM register WHERE uname = %s"
+	uresult = cur.execute(sql3, [uid])
+	udata = cur.fetchall()
+
+	uname = udata[0][0] + " " + udata[0][1] + " " + udata[0][2]
+
+	return render_template('compappstatus.html', data = adata[0], jtitle = jtitle, uname = uname, adate = adate, noa = ajresult, jvacancies = jvacancies)
 
 @app.route('/applicationstatus')
 def applicationstatus():
 	return render_template('applicationstatus.html')
 
 
+#******************************Application Event Functions************************************#
+
+@app.route('/testpage/<aid>')
+@login_required
+def testpage(aid):
+	return render_template('testpage.html', aid = aid)
+
+@app.route('/completetest', methods=['POST','GET'])
+def completetest():
+	if request.method == 'POST':
+		
+		marks = request.form['marks']
+		aid = request.form['aid']
+		status = "Test Completed"
+
+		cur = mysql.connection.cursor()
+		sql = "UPDATE app_status SET status = %s, test_score = %s WHERE appid = %s"
+		cur.execute(sql, (status, marks, aid))
+		mysql.connection.commit()
+		cur.close()
+
+	return redirect(url_for('myapplications'))
+
+@app.route('/setinterview', methods=['POST','GET'])
+@login_required_company
+def setinterview():
+	if request.method == 'POST':
+
+		status = "Interview Scheduled"
+		il = "https://meet.google.com/"
+		date = request.form['ed']
+		time = request.form['et']
+		aid = request.form['aid']
+
+		datetime = str(date)+" "+str(time)+":00"
+
+		sql = """UPDATE `app_status` SET `status` = %s, `iei` = 1, `interview_link` = %s,`idate` = %s WHERE `appid` = %s;"""
+		cur = mysql.connection.cursor()
+
+		cur.execute(sql, (status, il, datetime, aid))
+		mysql.connection.commit()
+		cur.close()
 
 
+		print("Time:"+str(date)+str(time)+":00")
+		print(date, time, aid)
+
+		return redirect(url_for('companywisejobsapps'))
 
 
+@app.route('/allowtest/<aid>')
+@login_required_company
+def allowtest(aid):
+
+
+	status = "Test Pending"
+	iet = "1"
+	test_link = "/testpage/"+aid
+
+	cur = mysql.connection.cursor()
+	sql = "UPDATE app_status SET status = %s, iet = %s, test_link = %s WHERE appid = %s"
+
+	cur.execute(sql, (status, iet, test_link, aid))
+	mysql.connection.commit()
+	cur.close()
+
+	return redirect(url_for('companywisejobsapps'))
+
+
+@app.route('/acceptapp/<aid>')
+@login_required_company
+def acceptapp(aid):
+	sql = "UPDATE app_status SET status = 'Accepted' WHERE appid = %s"
+	cur = mysql.connection.cursor()
+	cur.execute(sql, [aid])
+	mysql.connection.commit()
+	cur.close()
+
+	return redirect(url_for('companywisejobsapps'))
+
+@app.route('/rejectapp/<aid>')
+@login_required_company
+def rejectapp(aid):
+	sql = "UPDATE app_status SET status = 'Rejected' WHERE appid = %s"
+	cur = mysql.connection.cursor()
+	cur.execute(sql, [aid])
+	mysql.connection.commit()
+	cur.close()
+
+	return redirect(url_for('companywisejobsapps'))
 
 if __name__ == '__main__':
 	app.secret_key =  'mahesh'
