@@ -40,6 +40,9 @@
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
 
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
+        <title>Recruit Uttarakhand</title>
+
+        <link rel="icon" type="image/png" href="static/Capture1.png">
         <style>
             .main-nav nav .navbar-nav .nav-item {
             position: relative;
@@ -50,7 +53,7 @@
 
         </style>
 
-        <title>Gable - Job Portal HTML Template</title>
+       
         <script>
 
             var stateArr = {"Andhra Pradesh" :['Visakhapatnam', 'Vijayawada', 'Guntur', 'Nellore', 'Kurnool', 'Rajahmundry', 'Kakinada', 'Tirupati', 'Anantapur', 'Kadapa', 'Vizianagaram', 'Eluru', 'Ongole', 'Nandyal', 'Machilipatnam', 'Adoni', 'Tenali', 'Chittoor', 'Hindupur', 'Proddatur', 'Bhimavaram', 'Madanapalle', 'Guntakal', 'Dharmavaram', 'Gudivada', 'Srikakulam', 'Narasaraopet', 'Rajampet', 'Tadpatri', 'Tadepalligudem', 'Chilakaluripet', 'Yemmiganur', 'Kadiri', 'Chirala', 'Anakapalle', 'Kavali', 'Palacole', 'Sullurpeta', 'Tanuku', 'Rayachoti', 'Srikalahasti', 'Bapatla', 'Naidupet', 'Nagari', 'Gudur', 'Vinukonda', 'Narasapuram', 'Nuzvid', 'Markapur', 'Ponnur', 'Kandukur', 'Bobbili', 'Rayadurg', 'Samalkot', 'Jaggaiahpet', 'Tuni', 'Amalapuram', 'Bheemunipatnam', 'Venkatagiri', 'Sattenapalle', 'Pithapuram', 'Palasa', 'Kasibugga', 'Parvathipuram', 'Macherla', 'Gooty', 'Salur', 'Mandapeta', 'Jammalamadugu', 'Peddapuram', 'Punganur', 'Nidadavole', 'Repalle', 'Ramachandrapuram', 'Kovvur', 'Tiruvuru', 'Uravakonda', 'Narsipatnam', 'Yerraguntla', 'Pedana', 'Puttur', 'Renigunta', 'Rajam', 'Srisailam Project(Right Flank Colony)', 'Township'],
@@ -125,12 +128,11 @@
             </div>
 
             <!-- Menu For Desktop Device -->
-            <div class="main-nav">
-                <a class="navbar-brand" href="index.html">
-                    <img src="" alt="Logo">
-                </a>
+             <div class="main-nav">
+                <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
+                    <img src="static/lastt.png" alt="Logo" style="height:53px; width: 90px"> </a>
                 <div class="container">
-                    <nav class="navbar navbar-expand-md navbar-light" style="margin-top:-40px">
+                    <nav class="navbar navbar-expand-md navbar-light">
                         
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav" style="padding: 0px 210px;">
@@ -499,7 +501,7 @@
                                             <td style="display:none;">{{rowskill.0}}</td>
                                             <td>{{ rowskill.2 }}</td>
                                             <td>{{ rowskill.3}}</td>
-                                            <td>{{rowskill.4}}</td>
+                                            <td></td>
                                         <td width="25%" style="text-align:right;">
                                                <button onclick="showDialogS()" class="btn btn-warning btn-xs">Edit</button>
                                                 <a href="/deleteaward/{{ rowskill.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
@@ -594,8 +596,8 @@
 
                                         {% for row in twork %}
                                         <tr>
-                                            <td>{{row.3}}</td>
                                             <td>{{row.2}}</td>
+                                            <td>{{row.3}}</td>
                                             
                                             <td style="display:none;">{{row.0}}</td>
                                             <td style="text-align:right;">
@@ -663,7 +665,7 @@
                                 <div class="create-skills-right">
                                     
                                     <form action="{{ url_for('insertgeo') }}" method="POST">
-                                    <button type="submit" class="btn create-ac-btn">Add Location</button>
+                                    <button type="submit" class="btn create-ac-btn">Add Link</button>
                                 </div>
                             </div>
                             <div class="popupL" id="popupL">
@@ -736,13 +738,13 @@
 
                                                 <input type="hidden" id="lsrno" name="srno">
                                                 <div class="form-group">
-                                                    <label style="color: #7f7e7e;">City</label>
+                                                    <label style="color: #7f7e7e;">PLatform</label>
                                                         <input name='compcity' id='link' type="text" class="form-control" placeholder="NY">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label style="color: #7f7e7e;" >Country</label>
+                                                    <label style="color: #7f7e7e;" >Link</label>
                                                     <input  name="compcount" id="value" type="text" class="form-control" placeholder="United States">
                                                 </div>
                                             </div>
@@ -760,8 +762,6 @@
                             <a href="/companydetails" class="btn create-ac-btn">View Profile</a>
                         </div>
                     </div>
-                </form>
-
 
 <script type="text/javascript">
 
