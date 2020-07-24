@@ -681,13 +681,13 @@ def candidatedetails():
 
 #********************************Details page ends*************************************************
 
-# @app.route('/candidatelist')
-# def candidatelist():
-# 	return render_template('candidatelist.html')
+@app.route('/candidatelist')
+def candidatelist():
+	return render_template('candidatelist.html')
 
-# @app.route('/companylist')
-# def companylist():
-# 	return render_template('companylist.html')
+@app.route('/companylist')
+def companylist():
+	return render_template('companylist.html')
 
 
 #**************************** details operations start ****************************
@@ -1466,6 +1466,17 @@ def deleteapplications(aid):
 # 	cur.execute(sql, (jid, uname, compid, status))
 # 	mysql.connection.commit()
 # 	return redirect(url_for('applicationstatus'))
+
+@app.route('/candappstatus/<aid>')
+@login_required
+def candidateappstatus(aid):
+	flash("Record Has Been Deleted Successfully")
+	cur = mysql.connection.cursor()
+	sql  = "SELECT * FROM app_status WHERE appid = %s"
+	aresults = cur.execute(sql,[aid])
+	adata = cur.fetchall()
+
+	return render_template('candappstatus.html', data = adata)
 
 @app.route('/applicationstatus')
 def applicationstatus():

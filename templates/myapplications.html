@@ -165,7 +165,7 @@
 			
 			<td style="display:none;">{{row.0}}</td>
 			<td>
-				<button onclick="/applications_status/{{row[0]}}"  class="btn btn-warning btn-xs">View Application</button>
+				<a href="/candappstatus/{{row.0}}"  class="btn btn-warning btn-xs">View Application</a>
 				<input id='sr' type="hidden" value="{{row.0}}">
 				<a href="/deleteapplications/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
 			</td>
