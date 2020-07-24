@@ -156,7 +156,9 @@
 			<th>Job Type</th>
 			<th>Experience Required</th>
 			<th>Job Description</th>
-			<th style="text-align: center;">Action</th>
+			<th style="text-align: right;">Action</th>
+            <th style="text-align: right;"> </th>
+
 		</tr>
 		
 		{% for row in data %}
@@ -170,11 +172,12 @@
 			<td>{{row.13}}</td>
 			<td>{{row.10}}</td>
 			<td>{{row.11}}</td>
-			<td>{{row.2}}</td>
+			<td>{{row[2][0:20]+"...."}}</td>
 			<td style="display:none;">{{row.0}}</td>
 			<td>
 				<button onclick="showDialog()"  class="btn btn-warning btn-xs">Edit</button>
-				<input id='sr' type="hidden" value="{{row.0}}">
+	        </td>
+            <td>   	
 				<a href="/deletejob/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
 			</td>
 		</tr>

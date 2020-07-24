@@ -123,7 +123,7 @@
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-title-text">
-                            <h2>Application Status</h2>
+                            <h2>Candidate Details</h2>
                             <ul>
                                 <li>
                                     <a href="index.html">Home</a>
@@ -131,7 +131,7 @@
                                 <li>
                                     <i class="icofont-simple-right"></i>
                                 </li>
-                                <li>Application Status</li>
+                                <li>Applcations Recieved</li>
                             </ul>
                         </div>
                     </div>
@@ -139,32 +139,8 @@
             </div>
         </div>
         <!-- End Page Title -->
-
-        <!-- Candidate Details -->
-        
-        <div class="single-profile-area pt-100" style="padding-bottom: 0px; padding-left: 33%">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="single-profile-item">
-                        <div class="single-profile-item">
-                            <div class="single-profile-right">
-                                <div class="single-profile-left" >
-                                
-                                <div class="single-profile-heading" >
-                                    <h4>JOB TITLE: <a href = "/jobdetails/{{data[1]}}" style = "color: #68369B">{{jtitle.upper()}}</a></h4>
-                                </div>
-                                <div class="single-profile-heading">
-                                    <span></span>
-                                    <h4>COMPANY NAME: <a href = "/publiccompanydetails/{{data[3]}}"style = "color: #68369B">{{compname.upper()}}</a></h4>
-                                </div>
-                           
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>     
+        <br>
+        <!-- Application Details -->    
 
         <div class="single-profile-area pt-40 col-lg-12">
             <div class="container">
@@ -173,96 +149,60 @@
                         <div class="single-profile-item">
                             <div class="single-profile-right">
                                 <div class="card" style="width: 70rem;">
-                                <div class="single-profile-left">
-                                    <div class="single-profile-textarea">
+                                    <div class="single-profile-left">
 
-                                        <div class="single-profile-heading">
-                                            <span></span>
-                                            <h3>No. of Applicants: </h3>
+
+                                        <div id = "jobtag">
+                                            <table id="joblistbox" class="table table-striped">
+
+
+                                                <tr>
+                                                    <th>Application No.</th>
+                                                    <th>Job Title</th>
+                                                    <th>User Name</th>
+                                                    <th>Vacancies</th>
+                                                    <th>No. of Applicants</th>
+                                                    <th>Applied On</th>
+                                                    <th>Status</th>
+                                                    <th>Interview</th>
+                                                    <th style="text-align: right;">Action</th>
+                                                    <th style="text-align: right;">  </th>
+                                                </tr>
+
+                                                {% for row in data %}
+                                                <tr>
+                                                    <td>{{row[0][0]}}</td>
+                                                    <td><a href = "/jobdetails/{{row[0][1]}}">{{row[1]}}</a></td>
+                                                    <td>{{row[2]+" "+row[3]+" "+row[4]}}</td>
+                                                    <td>{{row[5]}}</td>
+                                                    <td>{{row[6]}}</td>
+                                                    <td>{{row[0][5].strftime("%Y-%m-%d")}}</td>
+                                                    <td>{{row[0][4]}}</td>
+                                                    <td>{% if row[0][9] %}{{row[0][11]}}{% else %}NA{% endif %}</td>
+                                                    <td style="display:none;">{{row.0}}</td>
+                                                    <td>
+                                                        <a href ="compappstatus/{{row[0][0]}}"  class="btn btn-warning btn-xs">View Application</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/publiccandidatedetails/{{row[0][2]}}" class="btn btn-danger btn-xs" >View Profile</a>
+                                                    </td>
+                                                </tr>
+
+
+                                                {% endfor %}
+
+                                            </table>
                                         </div>
-                                        
-                                        <div class="single-profile-paragraph" style="color: black;">
-                                            <pre></pre>
-                                            {{noa}} 
-                                            <pre></pre>
-                                       </div>
 
-                                        <div class="single-profile-heading">
-                                            <span></span>
-                                            <h3>Applied On: </h3>
-                                        </div>
-                                        
-                                        <div class="single-profile-paragraph" style="color: black;">
-                                            <pre></pre>
-                                            {{adate}} 
-                                            <pre></pre>
-                                       </div>
-                                       
-                                        <div class="single-profile-heading">
-                                            <span></span>
-                                            <h3>Status: </h3>
-                                        </div>
-        
-                                        <div class="single-profile-paragraph" style="color: black;">
-                                            <pre></pre>
-                                            {{data[4]}}
-                                            <pre></pre>
-                                        </div>
-
-                                        {% if data[4] != "Rejected" %}
-
-                                        {% if data[7] %}
-                                        <div class="single-profile-heading">
-                                            <span></span>
-                                            <h3>Test Details</h3>
-                                        </div>
-                                        <div class="single-profile-paragraph">
-                                            <ul>
-                                                
-                                                <li style="color: black;">Test Link: <a href = {{data[8]}}> {{data[8]}} </a></li>
-
-                                                <li style="color: black;">Marks: {{data[6]}}</li>
-                                                
-                                            </ul>
-                                        {% else %}
-                                        <div class="single-profile-paragraph">
-                                            <span></span>
-                                            <h3 style="color: red;">Employer Haven't yet approved you for Test</h3>
-                                        </div>
-                                        {% endif %}
-
-
-                                        {% if data[9] %}
-                                        <div class="single-profile-heading">
-                                            <span></span>
-                                            <h3>Test Details</h3>
-                                        </div>
-                                        <div class="single-profile-paragraph">
-                                            <ul>
-                                                
-                                                <li style="color: black;">Interview Link: <a href = {{data[8]}}>{{data[10]}}</a></li>
-
-                                                <li style="color: black;">Date and Time: {{data[11]}}</li>
-                                                
-                                            </ul>
-                                        {% else %}
-                                        <div class="single-profile-paragraph">
-                                            <span></span>
-                                            <h3 style="color: orange;">Employer Haven't yet approved you for Interview</h3>
-                                        </div>
-                                        {% endif %}
-
-                                        {% endif %}
                                     </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Candidate Details -->
+        <!-- End Application Details -->
 
         
 
