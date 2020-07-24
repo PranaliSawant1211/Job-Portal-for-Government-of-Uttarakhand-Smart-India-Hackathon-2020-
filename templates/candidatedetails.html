@@ -28,6 +28,8 @@
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
 
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
+        
+
 
         <title>Gable - Job Portal HTML Template</title>
             <style>
@@ -182,7 +184,7 @@
                                     {% for rowskill in tskills %}
                                     <div class="skill">
                                         <p>{{rowskill.2}}</p>
-                                        <div class="skill-bar skill1 wow slideInLeft animated">
+                                        <div class="skill-bar skill1 wow slideInLeft animated" style="width:{{rowskill.3}}%">
                                             <span class="skill-count1">{{rowskill.3}}%</span>
                                         </div>
                                     </div>
