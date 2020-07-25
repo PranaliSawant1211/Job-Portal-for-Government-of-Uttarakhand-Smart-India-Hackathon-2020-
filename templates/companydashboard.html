@@ -240,6 +240,13 @@
                                     <a class="nav-link" id="pills-logout-tab" data-toggle="pill" href="#pills-logout" role="tab" aria-controls="pills-logout" aria-selected="false">Logout</a>
                                 </li>
                             </ul>
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                              {% if messages %}
+                                {% for category, message in messages %}
+                                  <p class="alert-{{ category }}">{{ message }}</p>
+                                {% endfor %}
+                              {% endif %}
+                            {% endwith %}
                         </div>
                     </div>
                 </div>
@@ -951,15 +958,15 @@ spanD.onclick = function() {
                             <form>
                                 <div class="form-group">
                                     <label>Current Password:</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" name="curpw" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>New Password:</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" name="newpw" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Confirm Password:</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" name="newcpw" class="form-control">
                                 </div>
                                 <div class="text-left">
                                     <button type="submit" class="btn change-pass-btn">Save</button>

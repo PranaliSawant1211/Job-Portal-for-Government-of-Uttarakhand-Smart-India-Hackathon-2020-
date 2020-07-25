@@ -231,6 +231,13 @@
                                     <a class="nav-link" id="pills-logout-tab" data-toggle="pill" href="#pills-logout" role="tab" aria-controls="pills-logout" aria-selected="false">Logout</a>
                                 </li>
                             </ul>
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                              {% if messages %}
+                                {% for category, message in messages %}
+                                  <p class="alert-{{ category }}">{{ message }}</p>
+                                {% endfor %}
+                              {% endif %}
+                            {% endwith %}
                         </div>
                     </div>
                 </div>
@@ -316,7 +323,7 @@
                                     </div>
                                     <div class="col-lg-12" style="text-align: center;">
                             <!-- </form> -->
-                                        <button onclick="showDialogD()" class="btn btn-warning btn-xs">Edit</button>
+                                        <button onclick="showDialogD()" style="height:60px; width:170px;border:0px;background:linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);font-family: 'Poppins';font-size: 20px; font-weight:500; color: #ffffff;" >Edit</button>
                                     </div>
                                 </div>
                             </form>
@@ -536,9 +543,9 @@
                                             <td>{{row.5}}</td>
                                             <td style="display:none;">{{row.0}}</td>
                                             <td style="text-align:right;">
-                                               <button onclick="showDialog()"  class="btn btn-warning btn-xs">Edit</button>
+                                               <button onclick="showDialog()"class="btn btn-outline-info waves-effect">Edit</button>
                                                <input id='sr' type="hidden" value="{{row.0}}">
-                                                <a href="/deleteedu/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                                                <a href="/deleteedu/{{ row.0 }}" class="btn btn-outline-danger waves-effect" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
                                             </td>
                                         </tr>
 
@@ -1113,18 +1120,18 @@ spanD.onclick = function() {
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <div class="change-password-area">
                             <h2>Change Your Password</h2>
-                            <form>
+                            <form action="{{ url_for('changepassword') }}" method="POST">
                                 <div class="form-group">
                                     <label>Current Password:</label>
-                                    <input type="password" class="form-control">
+                                    <input name="currpw" type="password" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>New Password:</label>
-                                    <input type="password" class="form-control">
+                                    <input name="newpw" type="password" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Confirm Password:</label>
-                                    <input type="password" class="form-control">
+                                    <input name="newcpw" type="password" class="form-control">
                                 </div>
                                 <div class="text-left">
                                     <button type="submit" class="btn change-pass-btn">Save</button>

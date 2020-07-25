@@ -10,7 +10,7 @@
         <!-- Meanmenu CSS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
         <!-- Icofont -->
-        <link rel="stylesheet" href="static/icofont/icofont.min.css">>
+        <link rel="stylesheet" href="static/icofont/icofont.min.css">
 
         <!-- Nice Select JS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/nice-select.css')}}">
@@ -28,7 +28,7 @@
 
        <title>Recruit Uttarakhand</title>
 
-        <link rel="icon" type="image/png" href="static/Capture1.png">
+        <link rel="icon" type="image/png" href="{{url_for('static', filename= 'Capture1.png')}}">
 
         <style>
             .footer {
@@ -59,7 +59,6 @@
             var choice = document.forms["login"]["role"];
             var uname = document.forms["login"]["uname"];
             var password = document.forms["login"]["password"];
-            window.alert(choice.value);
             if(choice.value =="")
             {
                 window.alert("Please enter your role");
@@ -188,6 +187,7 @@
 
                 <form name="login" action="{{ url_for('login') }}" method="POST" onsubmit="return universal_validation()">
                     <div class="form-group">
+                        <label>Role</label>
                         <select name="role" id="role" class="form-control">
                         <option value="" disabled selected>Select your role</option>
                         <option value="candidate">Candidate</option>
@@ -205,11 +205,11 @@
                 
 
                 <div class="login-sign-in">
-                    <a href="#">Forgot Password?</a>
+                    <a href="#" onclick="return setMeet();">Forgot Password?</a>
                     <ul>
                         <li>Don’t Have Account ?</li>
                         <li>
-                            <a href="create-account.html">Sign Up Here</a>
+                            <a href="{{url_for('create_account')}}">Sign Up Here</a>
                         </li>
                     </ul>
                     <div class="text-center">
@@ -222,6 +222,49 @@
             </div>
         </div>
         <!-- End Login -->
+
+
+<div id="myModal" class="modaledu">
+                <div class="modaledu-content">
+                    <div class="modaledu-header">
+                        <span class="close" id="spanJ">&times;</span>
+                        <h2 style="color: white"> Reset Password link will be mailed to your registered email address! </h2>
+                    </div>
+                    <div class="modaledu-body">
+
+                        <form action="{{ url_for('sendemail') }}" method="POST">
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label style="color: black">Enter your registered email</label>
+                                        <input type="email" class="form-control" name = "rstpw", id="ed" >
+                                    </div>
+                                </div>
+                            <br>
+                            <button type="submit" class="btn create-ac-btn vertical-center">Send link</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+<script type="text/javascript">
+
+            var modalint = document.getElementById("myModal");
+            var spanJ = document.getElementById("spanJ");
+            //var table = document.getElementById('joblistbox');
+
+            function setMeet () { 
+                modalint.style.display = "block";
+            }
+
+            spanJ.onclick = function() {
+              modalint.style.display = "none";
+            }
+        </script>
+
 
 <div class="footer" style="font-size: 20px;"><center><p> © 2000 – 2018 Code_Crunch Pty.Ltd all rights reserved<br>
     All trademarks and copyrights held by respective owners. <br>
