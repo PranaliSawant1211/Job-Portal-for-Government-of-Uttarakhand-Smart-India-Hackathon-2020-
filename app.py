@@ -229,7 +229,7 @@ def test(user):
     global score
     res_time=user
     # Loading the ML model 
-    clf = joblib.load('dec_tree_model.pkl')
+    clf = joblib.load('./static/dec_tree_model.pkl')
     # Passing the 3 inputs(current difficulty of the question, response time recorded, if the question is correct or not)
     # to the model and getting the predicted difficulty of the next question
     next_diff=clf.predict([[curr_level,res_time,correctness]])
@@ -237,8 +237,9 @@ def test(user):
     print(next_diff)
     print(clf)
     print(type(clf)) 
-    # Calculating score considering the above mentioned 3 parameters 
-    score=score+((curr_level*correctness)/res_time)
+    # Calculating score considering the above mentioned 3 parameters
+    #((curr_level*correctness)/res_time) 
+    score=score+correctness*0.1*curr_level
     correctness=0
     with open('./static/Test.csv') as csvfile:
         pred_read = list(csv.reader(csvfile, delimiter=','))
@@ -367,7 +368,15 @@ def test(user):
             if(inc==5):
                 # Calculating and displaying final score after the user has attempted all the 30 questions
                 score = score*10
-                return render_template('final.html',score=score)
+                return redirect(url_for('final_score', score=score))
+
+@app.route('/final_score')
+def final_score():
+    return render_template('final.html', score=score)
+
+@app.route('/read_celltemp')
+def read_celltemp():
+    return render_template("button.html")
 
 #****************************Submit Test ends***********************************************
 

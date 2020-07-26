@@ -1,105 +1,108 @@
 
 <!DOCTYPE html>
 <html lang="zxx">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Bootstrap CSS -->
-       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <!-- Meanmenu CSS -->
-        <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
-        <!-- Icofont -->
-        <link rel="stylesheet" href="static/icofont/icofont.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
+    <!-- Icofont -->
+    <link rel="stylesheet" href="C:/Users/Mahajan/Desktop/SIH2020 july/icofont/icofont.min.css">
+    <link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css" integrity="sha384-jbCTJB16Q17718YM9U22iJkhuGbS0Gd2LjaWb4YJEZToOPmnKDjySVa323U+W7Fv" crossorigin="anonymous">
 
-        <!-- Nice Select JS -->
-        <link rel="stylesheet" href="{{url_for('static', filename= 'css/nice-select.css')}}">
-        <!-- Owl Carousel CSS -->
-        <link rel="stylesheet" href="{{url_for('static', filename= 'css/owl.carousel.min.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename= 'css/owl.theme.default.min.css')}}">
-        <!-- Animate CSS -->
-        <link rel="stylesheet" href="{{url_for('static', filename= 'css/animate.css')}}">
-        <!-- Flaticon CSS -->
-        <link rel="stylesheet" href="{{url_for('static', filename= 'css/flaticon.css')}}">
-        <!-- Style CSS -->
-        <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css')}}">
-        <!-- Responsive CSS -->
-        <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
+    <!-- Nice Select JS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/nice-select.css')}}">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/owl.theme.default.min.css')}}">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/animate.css')}}">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/flaticon.css')}}">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css')}}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
 
-       <title>Recruit Uttarakhand</title>
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
 
-        <link rel="icon" type="image/png" href="{{url_for('static', filename= 'Capture1.png')}}">
+    <title>Recruit Uttarakhand</title>
 
-        <style>
-            .footer {
-    background-color:#696969;
-    color: #FFFFFF;
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-   
-}
+    <link rel="icon" type="image/png" href="{{url_for('static', filename= 'Capture1.png')}}">
 
-.alert-error {
-  border-color: darkred;
-  background-color: red;
-  color: white;
-}
+    <style>
+        .footer {
+            background-color:#696969;
+            color: #FFFFFF;
+            padding-left: 80px;
+            padding-right: 80px;
+            padding-top: 40px;
+            padding-bottom: 40px;
 
-.alert-info {
-  border-color: orange;
-  background-color: yellow;
-  color: black;
-}
-        </style>
-
-        <script>
-            function universal_validation(form){
-            var choice = document.forms["login"]["role"];
-            var uname = document.forms["login"]["uname"];
-            var password = document.forms["login"]["password"];
-            if(choice.value =="")
-            {
-                window.alert("Please enter your role");
-                choice.focus();
-                return false;
-            }
-            else if(uname.value =="")
-            {
-                window.alert("Please enter your username");
-                uname.focus();
-                return false;
-            }
-            else if(password.value =="")
-            {
-                window.alert("Please enter your password");
-                password.focus();
-                return false;
-            }
         }
-        </script>
-        
-    </head>
-    <body>
 
-        
-        <!-- Start Navbar Area -->
+        .alert-error {
+          border-color: darkred;
+          background-color: red;
+          color: white;
+      }
 
-            <div class="navbar-area fixed-top" style="text-align: right;">
+      .alert-info {
+          border-color: orange;
+          background-color: yellow;
+          color: black;
+      }
+  </style>
 
-            <!-- Menu For Mobile Device -->
-             <div class="mobile-nav">
-                <a href="index.html" class="logo" >
-                    <img src="static/img/logo.png" alt="Logo">
-                </a>
-            </div>
-          
+  <script>
+    function universal_validation(form){
+        var choice = document.forms["login"]["role"];
+        var uname = document.forms["login"]["uname"];
+        var password = document.forms["login"]["password"];
+        if(choice.value =="")
+        {
+            window.alert("Please enter your role");
+            choice.focus();
+            return false;
+        }
+        else if(uname.value =="")
+        {
+            window.alert("Please enter your username");
+            uname.focus();
+            return false;
+        }
+        else if(password.value =="")
+        {
+            window.alert("Please enter your password");
+            password.focus();
+            return false;
+        }
+    }
+</script>
 
-            <!-- Menu For Desktop Device -->
-            <div class="main-nav">
-                <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
-                    <img src="static/lastt.png" alt="Logo" style="height:53px; width: 90px"> </a>
+</head>
+<body>
+
+
+    <!-- Start Navbar Area -->
+
+    <div class="navbar-area fixed-top" style="text-align: right;">
+
+        <!-- Menu For Mobile Device -->
+        <div class="mobile-nav">
+            <a href="index.html" class="logo" >
+                <img src="static/img/logo.png" alt="Logo">
+            </a>
+        </div>
+
+
+        <!-- Menu For Desktop Device -->
+        <div class="main-nav">
+            <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
+                <img src="static/lastt.png" alt="Logo" style="height:53px; width: 90px"> </a>
 
                 <div class="container" style="float: right">
                     <nav class="navbar navbar-expand-md navbar-light" style="margin-bottom:0px;">
@@ -175,72 +178,80 @@
             <div class="container">
                 <div class="create-information">
                     {% with messages = get_flashed_messages(with_categories=true) %}
-                      {% if messages %}
-                        {% for category, message in messages %}
-                          <p class="alert-{{ category }}">{{ message }}</p>
-                        {% endfor %}
-                      {% endif %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <p class="alert-{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
                     {% endwith %}
-                <h2>Login Your Account</h2>
+                    <h2>Login Your Account</h2>
 
-                
 
-                <form name="login" action="{{ url_for('login') }}" method="POST" onsubmit="return universal_validation()">
-                    <div class="form-group">
-                        <label>Role</label>
-                        <select name="role" id="role" class="form-control">
-                        <option value="" disabled selected>Select your role</option>
-                        <option value="candidate">Candidate</option>
-                        <option value="company">Company</option>
-                    </select>
-                    </div>                            
-                    <div class="form-group">
-                        <label>Enter Username</label>
-                        <input type="text" class="form-control" name= "uname" placeholder="Your username">
-                    </div>
-                    <div class="form-group">
-                        <label>Enter Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="Password">
-                    </div>
-                
 
-                <div class="login-sign-in">
-                    <a href="#" onclick="return setMeet();">Forgot Password?</a>
-                    <ul>
-                        <li>Don’t Have Account ?</li>
-                        <li>
-                            <a href="{{url_for('create_account')}}">Sign Up Here</a>
-                        </li>
-                    </ul>
-                    <div class="text-center">
-                        <button type="submit" class="btn login-btn">Sign In</button>
-                    </div>
-                </div>
-                </form>
+                    <form name="login" action="{{ url_for('login') }}" method="POST" onsubmit="return universal_validation()">
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select name="role" id="role" class="form-control">
+                                <option value="" disabled selected>Select your role</option>
+                                <option value="candidate">Candidate</option>
+                                <option value="company">Company</option>
+                            </select>
+                        </div>                            
+                        <div class="form-group">
+                            <label>Enter Username</label>
+                            <input type="text" class="form-control" name= "uname" placeholder="Your username">
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
 
-               </div> 
+
+                        <div class="login-sign-in">
+                            <a href="#" onclick="return setMeet();">Forgot Password?</a>
+                            <ul>
+                                <li>Don’t Have Account ?</li>
+                                <li>
+                                    <a href="{{url_for('create_account')}}">Sign Up Here</a>
+                                </li>
+                            </ul>
+                            <div class="text-center">
+                                <button type="submit" class="btn login-btn">Sign In</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div> 
             </div>
         </div>
         <!-- End Login -->
 
 
-<div id="myModal" class="modaledu">
-                <div class="modaledu-content">
-                    <div class="modaledu-header">
-                        <span class="close" id="spanJ">&times;</span>
-                        <h2 style="color: white"> Reset Password link will be mailed to your registered email address! </h2>
-                    </div>
-                    <div class="modaledu-body">
 
-                        <form action="{{ url_for('sendemail') }}" method="POST">
 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label style="color: black">Enter your registered email</label>
-                                        <input type="email" class="form-control" name = "rstpw", id="ed" >
-                                    </div>
+        <div class="footer" style="font-size: 20px;"><center><p> © 2000 – 2018 Code_Crunch Pty.Ltd all rights reserved<br>
+            All trademarks and copyrights held by respective owners. <br>
+        Terms and Policy</p></center></div>
+
+
+
+        <div id="myModal" class="modaledu">
+            <div class="modaledu-content">
+                <div class="modaledu-header">
+                    <span class="close" id="spanJ">&times;</span>
+                    <h2 style="color: white"> Reset Password link will be mailed to your registered email address! </h2>
+                </div>
+                <div class="modaledu-body">
+
+                    <form action="{{ url_for('sendemail') }}" method="POST">
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label style="color: black">Enter your registered email</label>
+                                    <input type="email" class="form-control" name = "rstpw", id="ed" >
                                 </div>
+                            </div>
                             <br>
                             <button type="submit" class="btn create-ac-btn vertical-center">Send link</button>
                         </div>
@@ -250,25 +261,8 @@
             </div>
         </div>
 
-<script type="text/javascript">
+        
 
-            var modalint = document.getElementById("myModal");
-            var spanJ = document.getElementById("spanJ");
-            //var table = document.getElementById('joblistbox');
-
-            function setMeet () { 
-                modalint.style.display = "block";
-            }
-
-            spanJ.onclick = function() {
-              modalint.style.display = "none";
-            }
-        </script>
-
-
-<div class="footer" style="font-size: 20px;"><center><p> © 2000 – 2018 Code_Crunch Pty.Ltd all rights reserved<br>
-    All trademarks and copyrights held by respective owners. <br>
-        Terms and Policy</p></center>
 
 
         <!-- Essential JS -->
@@ -287,17 +281,30 @@
         <!-- Owl Carousel JS -->
         <script src="assets/js/owl.carousel.min.js"></script>
         <!-- Form Ajaxchimp JS -->
-		<script src="assets/js/jquery.ajaxchimp.min.js"></script>
-		<!-- Form Validator JS -->
-		<script src="assets/js/form-validator.min.js"></script>
-		<!-- Contact JS -->
+        <script src="assets/js/jquery.ajaxchimp.min.js"></script>
+        <!-- Form Validator JS -->
+        <script src="assets/js/form-validator.min.js"></script>
+        <!-- Contact JS -->
         <script src="assets/js/contact-form-script.js"></script>
         <!-- Wow JS -->
         <script src="assets/js/wow.min.js"></script>
         <!-- Custom JS -->
         <script src="assets/js/custom.js"></script>
 
-       
+        <script type="text/javascript">
 
-    </body>
-</html>
+            var modalint = document.getElementById("myModal");
+            var spanJ = document.getElementById("spanJ");
+            //var table = document.getElementById('joblistbox');
+
+            function setMeet () { 
+                modalint.style.display = "block";
+            }
+
+            spanJ.onclick = function() {
+              modalint.style.display = "none";
+          }
+      </script>
+
+  </body>
+  </html>
