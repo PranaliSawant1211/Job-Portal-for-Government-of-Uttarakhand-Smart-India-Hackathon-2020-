@@ -104,6 +104,12 @@ def login_required_company(f):
 	return wrap
 
 #***********************Submit test part begins*******************************************
+
+
+@app.route('/read_celltemp')
+def read_celltemp():
+    return render_template("button.html")
+
 @app.route('/submittest')
 def submittest():
     global score
