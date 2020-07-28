@@ -8,6 +8,8 @@ from passlib.apps import custom_app_context as pwd_context
 from functools import wraps
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
+from apiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
 import csv
 from sklearn.externals import joblib
 import random
@@ -15,7 +17,9 @@ import os
 import numpy as np
 import pandas as pd
 import camelot
-from datetime import datetime
+from datetime import datetime, timedelta
+import pickle
+
 
 
 app = Flask(__name__)
@@ -38,36 +42,36 @@ h2 = []
 h3 = []
 
 with open('./static/ques_data.csv') as csvfile:
-    readCSV = list(csv.reader(csvfile, delimiter=','))
-    for i in range(0,650):
-        row_you_want = readCSV[i]
-        if(row_you_want[10]=='0' and row_you_want[9]=='0'):
-            # List of question indices with Easy Level 0 Difficulty
-            e1.append(i)
-        if(row_you_want[10]=='0' and row_you_want[9]=='1'):
-            # List of question indices with Easy Level 1 Difficulty
-            e2.append(i)
-        if(row_you_want[10]=='0' and row_you_want[9]=='2'):
-            # List of question indices with Easy Level 2 Difficulty
-            e3.append(i)
-        if(row_you_want[10]=='1' and row_you_want[9]=='0'):
-            # List of question indices with Medium Level 0 Difficulty
-            m1.append(i)
-        if(row_you_want[10]=='1' and row_you_want[9]=='1'):
-            # List of question indices with Medium Level 1 Difficulty
-            m2.append(i)
-        if(row_you_want[10]=='1' and row_you_want[9]=='2'):
-            # List of question indices with Medium Level 2 Difficulty
-            m3.append(i)
-        if(row_you_want[10]=='2' and row_you_want[9]=='0'):
-            # List of question indices with Hard Level 0 Difficulty
-            h1.append(i)
-        if(row_you_want[10]=='2' and row_you_want[9]=='1'):
-            # List of question indices with Hard Level 1 Difficulty
-            h2.append(i)
-        if(row_you_want[10]=='2' and row_you_want[9]=='2'):
-            # List of question indices with Hard Level 2 Difficulty
-            h3.append(i)
+	readCSV = list(csv.reader(csvfile, delimiter=','))
+	for i in range(0,650):
+		row_you_want = readCSV[i]
+		if(row_you_want[10]=='0' and row_you_want[9]=='0'):
+			# List of question indices with Easy Level 0 Difficulty
+			e1.append(i)
+		if(row_you_want[10]=='0' and row_you_want[9]=='1'):
+			# List of question indices with Easy Level 1 Difficulty
+			e2.append(i)
+		if(row_you_want[10]=='0' and row_you_want[9]=='2'):
+			# List of question indices with Easy Level 2 Difficulty
+			e3.append(i)
+		if(row_you_want[10]=='1' and row_you_want[9]=='0'):
+			# List of question indices with Medium Level 0 Difficulty
+			m1.append(i)
+		if(row_you_want[10]=='1' and row_you_want[9]=='1'):
+			# List of question indices with Medium Level 1 Difficulty
+			m2.append(i)
+		if(row_you_want[10]=='1' and row_you_want[9]=='2'):
+			# List of question indices with Medium Level 2 Difficulty
+			m3.append(i)
+		if(row_you_want[10]=='2' and row_you_want[9]=='0'):
+			# List of question indices with Hard Level 0 Difficulty
+			h1.append(i)
+		if(row_you_want[10]=='2' and row_you_want[9]=='1'):
+			# List of question indices with Hard Level 1 Difficulty
+			h2.append(i)
+		if(row_you_want[10]=='2' and row_you_want[9]=='2'):
+			# List of question indices with Hard Level 2 Difficulty
+			h3.append(i)
 
 app.config.from_pyfile('config.cfg')
 mail = Mail(app)
@@ -77,6 +81,7 @@ app.config['MySQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'sih'
+
 
 mysql = MySQL(app)
 
@@ -95,7 +100,7 @@ def login_required(f):
 def login_required_company(f):
 	@wraps(f)
 	def wrap(*args, **kwargs):
-		if 'logged_in' in session:
+		if 'logged_in_company' in session:
 			return f(*args, **kwargs)
 		else:
 			flash("You need to login first","error")
@@ -108,272 +113,272 @@ def login_required_company(f):
 
 @app.route('/read_celltemp')
 def read_celltemp():
-    return render_template("button.html")
+	return render_template("button.html")
 
 @app.route('/submittest')
 def submittest():
-    global score
-    global y
-    global student_id
-    y=1
-    total_score=score
-    score=0
-    # Create cursor
-    cur = mysql.connection.cursor()
+	global score
+	global y
+	global student_id
+	y=1
+	total_score=score
+	score=0
+	# Create cursor
+	cur = mysql.connection.cursor()
 
-    # Execute query
-    # cur.execute("UPDATE users SET total_score = ? WHERE id = ?", (total_score) [student_id])
-    cur.execute ("UPDATE users SET total_score=%d WHERE id='%s' " % (total_score,student_id))
+	# Execute query
+	# cur.execute("UPDATE users SET total_score = ? WHERE id = ?", (total_score) [student_id])
+	cur.execute ("UPDATE users SET total_score=%d WHERE id='%s' " % (total_score,student_id))
 
-    # Commit to DB
-    mysql.connection.commit()
+	# Commit to DB
+	mysql.connection.commit()
 
-    # Close connection
-    cur.close()
-    session.clear()
-    flash('You are now logged out', 'success')
-    return redirect(url_for('login'))
+	# Close connection
+	cur.close()
+	session.clear()
+	flash('You are now logged out', 'success')
+	return redirect(url_for('login'))
 
 
 @app.route("/read_cell", methods=['POST','GET'])
 def read_cell():
-    global y
-    global correct_answer1
-    global curr_level
-    # Reading the CSV file of questions
-    with open('./static/ques_data.csv') as csvfile:
-        readCSV = list(csv.reader(csvfile, delimiter=','))
+	global y
+	global correct_answer1
+	global curr_level
+	# Reading the CSV file of questions
+	with open('./static/ques_data.csv') as csvfile:
+		readCSV = list(csv.reader(csvfile, delimiter=','))
 
-        # Displaying First question to the user of Medium Level 0 Difficulty
+		# Displaying First question to the user of Medium Level 0 Difficulty
 
-        if(y<len(readCSV)):
-            
-            qid = random.choice(m1) # Randomly selecting one question index
-            row_you_want = readCSV[qid]
-            question=row_you_want[2]
-            option1=row_you_want[3]
-            option2=row_you_want[4]
-            option3=row_you_want[5]
-            option4=row_you_want[6]
-            correct_answer1=row_you_want[8] # Storing the correct answer for checking later
-            curr_level=int(float(row_you_want[12]))
-            ID = qid
-            y+=1
-            return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,curr_level=curr_level, ID = ID)
+		if(y<len(readCSV)):
+			
+			qid = random.choice(m1) # Randomly selecting one question index
+			row_you_want = readCSV[qid]
+			question=row_you_want[2]
+			option1=row_you_want[3]
+			option2=row_you_want[4]
+			option3=row_you_want[5]
+			option4=row_you_want[6]
+			correct_answer1=row_you_want[8] # Storing the correct answer for checking later
+			curr_level=int(float(row_you_want[12]))
+			ID = qid
+			y+=1
+			return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,curr_level=curr_level, ID = ID)
 
 
 @app.route('/check_answer', methods=['POST','GET'])
 def check_answer():
-    # Retriving timer value from 12.html(this value is hidden in 12.html).This value is retrived only when user clicks the Next button.
-    if request.method == 'POST':
-      user = int(request.form['nm'])
-    else:
-      user = int(60) # If the user runs out of time and doesn't click the next button then the respopnse time 60 seconds is stored here
-    global score
-    global correct_answer1
-    global correctness
-    correctness=0
-    global next_diff
-    with open('./static/ques_data.csv') as csvfile:
-        readCSV = list(csv.reader(csvfile, delimiter=','))
+	# Retriving timer value from 12.html(this value is hidden in 12.html).This value is retrived only when user clicks the Next button.
+	if request.method == 'POST':
+	  user = int(request.form['nm'])
+	else:
+	  user = int(60) # If the user runs out of time and doesn't click the next button then the respopnse time 60 seconds is stored here
+	global score
+	global correct_answer1
+	global correctness
+	correctness=0
+	global next_diff
+	with open('./static/ques_data.csv') as csvfile:
+		readCSV = list(csv.reader(csvfile, delimiter=','))
 
-        # Checking which option is set True(selected by the user)
-        option1a = request.form.get("option1") != None
-        option2a = request.form.get("option2") != None
-        option3a = request.form.get("option3") != None
-        option4a = request.form.get("option4") != None
-        
-        # option 1(if selected by the user)
-        if(option1a==True):
-            given_answer="Answer: Option A"
-            correct_answer=correct_answer1
-            if(given_answer==correct_answer):
-                correctness=1
-            return test(user) # passing the response time in the test() function
+		# Checking which option is set True(selected by the user)
+		option1a = request.form.get("option1") != None
+		option2a = request.form.get("option2") != None
+		option3a = request.form.get("option3") != None
+		option4a = request.form.get("option4") != None
+		
+		# option 1(if selected by the user)
+		if(option1a==True):
+			given_answer="Answer: Option A"
+			correct_answer=correct_answer1
+			if(given_answer==correct_answer):
+				correctness=1
+			return test(user) # passing the response time in the test() function
 
 
-        # option 2(if selected by the user)
-        elif(option2a==True):
-            given_answer="Answer: Option B"
-            correct_answer=correct_answer1
-            if(given_answer==correct_answer):
-                correctness=1
-            return test(user) # passing the response time in the test() function
+		# option 2(if selected by the user)
+		elif(option2a==True):
+			given_answer="Answer: Option B"
+			correct_answer=correct_answer1
+			if(given_answer==correct_answer):
+				correctness=1
+			return test(user) # passing the response time in the test() function
 
-        # option3(if selected by the user)
-        elif(option3a==True):
-            given_answer="Answer: Option C"
-            correct_answer=correct_answer1
-            if(given_answer==correct_answer):
-               
-                correctness=1
+		# option3(if selected by the user)
+		elif(option3a==True):
+			given_answer="Answer: Option C"
+			correct_answer=correct_answer1
+			if(given_answer==correct_answer):
+			   
+				correctness=1
 
-            return test(user) # passing the response time in the test() function
+			return test(user) # passing the response time in the test() function
 
-        # option4(if selected by the user)
-        elif(option4a==True):
-            given_answer="Answer: Option D"
-            correct_answer=correct_answer1
-            if(given_answer==correct_answer):
-                correctness=1  
-            return test(user) # passing the response time in the test() function
+		# option4(if selected by the user)
+		elif(option4a==True):
+			given_answer="Answer: Option D"
+			correct_answer=correct_answer1
+			if(given_answer==correct_answer):
+				correctness=1  
+			return test(user) # passing the response time in the test() function
 
-        # if no option is selected by the user
-        else:
-            correctness=0
-            return test(user) # passing the response time in the test() function
+		# if no option is selected by the user
+		else:
+			correctness=0
+			return test(user) # passing the response time in the test() function
 
 
 @app.route('/test', methods=['POST','GET'])
 def test(user):
-    global inc
-    global old_index
-    global correct_answer1
-    global next_diff
-    global correctness
-    global curr_level
-    global score
-    res_time=user
-    # Loading the ML model 
-    clf = joblib.load('dec_tree_model.pkl')
-    # Passing the 3 inputs(current difficulty of the question, response time recorded, if the question is correct or not)
-    # to the model and getting the predicted difficulty of the next question
-    next_diff=clf.predict([[curr_level,res_time,correctness]])
-    next_diff=int(next_diff)
-    print(next_diff)
-    print(clf)
-    print(type(clf)) 
-    # Calculating score considering the above mentioned 3 parameters 
-    score=score+((curr_level*correctness)/res_time)
-    correctness=0
-    with open('./static/Test.csv') as csvfile:
-        pred_read = list(csv.reader(csvfile, delimiter=','))
-        with open('./static/ques_data.csv') as csvfile:
-            readCSV = list(csv.reader(csvfile, delimiter=','))
-            # Displaying 30 questions to the user
-            if(inc<5):
-                # Selecting a question of the predicted difficulty 
-                if(next_diff==0):
-                    qid = random.choice(e1)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
-                if(next_diff==1):
-                    qid = random.choice(e2)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
-                if(next_diff==2):
-                    qid = random.choice(e3)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
-                if(next_diff==3):
-                    qid = random.choice(m1)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid                 
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)                  
-                if(next_diff==4):
-                    qid = random.choice(m2)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid                  
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)                  
-                if(next_diff==5):
-                    qid = random.choice(m3)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)        
-                if(next_diff==6):
-                    qid = random.choice(h1)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid                  
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)     
-                if(next_diff==7):
-                    qid = random.choice(h2)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid                    
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
-                if(next_diff==8):
-                    qid = random.choice(h3)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid                   
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
-            if(inc==5):
-                # Calculating and displaying final score after the user has attempted all the 30 questions
-                score = score*10
-                return render_template('final.html',score=score)
+	global inc
+	global old_index
+	global correct_answer1
+	global next_diff
+	global correctness
+	global curr_level
+	global score
+	res_time=user
+	# Loading the ML model 
+	clf = joblib.load('dec_tree_model.pkl')
+	# Passing the 3 inputs(current difficulty of the question, response time recorded, if the question is correct or not)
+	# to the model and getting the predicted difficulty of the next question
+	next_diff=clf.predict([[curr_level,res_time,correctness]])
+	next_diff=int(next_diff)
+	print(next_diff)
+	print(clf)
+	print(type(clf)) 
+	# Calculating score considering the above mentioned 3 parameters 
+	score=score+((curr_level*correctness)/res_time)
+	correctness=0
+	with open('./static/Test.csv') as csvfile:
+		pred_read = list(csv.reader(csvfile, delimiter=','))
+		with open('./static/ques_data.csv') as csvfile:
+			readCSV = list(csv.reader(csvfile, delimiter=','))
+			# Displaying 30 questions to the user
+			if(inc<5):
+				# Selecting a question of the predicted difficulty 
+				if(next_diff==0):
+					qid = random.choice(e1)
+					row_you_want1 = readCSV[qid]
+					question=row_you_want1[2]
+					option1=row_you_want1[3]
+					option2=row_you_want1[4]
+					option3=row_you_want1[5]
+					option4=row_you_want1[6]
+					correct_answer1 = row_you_want1[8]
+					curr_level=int(float(row_you_want1[12]))
+					ID=qid
+					inc+=1
+					return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
+				if(next_diff==1):
+					qid = random.choice(e2)
+					row_you_want1 = readCSV[qid]
+					question=row_you_want1[2]
+					option1=row_you_want1[3]
+					option2=row_you_want1[4]
+					option3=row_you_want1[5]
+					option4=row_you_want1[6]
+					correct_answer1 = row_you_want1[8]
+					curr_level=int(float(row_you_want1[12]))
+					ID=qid
+					inc+=1
+					return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
+				if(next_diff==2):
+					qid = random.choice(e3)
+					row_you_want1 = readCSV[qid]
+					question=row_you_want1[2]
+					option1=row_you_want1[3]
+					option2=row_you_want1[4]
+					option3=row_you_want1[5]
+					option4=row_you_want1[6]
+					correct_answer1 = row_you_want1[8]
+					curr_level=int(float(row_you_want1[12]))
+					ID=qid
+					inc+=1
+					return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
+				if(next_diff==3):
+					qid = random.choice(m1)
+					row_you_want1 = readCSV[qid]
+					question=row_you_want1[2]
+					option1=row_you_want1[3]
+					option2=row_you_want1[4]
+					option3=row_you_want1[5]
+					option4=row_you_want1[6]
+					correct_answer1 = row_you_want1[8]
+					curr_level=int(float(row_you_want1[12]))
+					ID=qid                 
+					inc+=1
+					return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)                  
+				if(next_diff==4):
+					qid = random.choice(m2)
+					row_you_want1 = readCSV[qid]
+					question=row_you_want1[2]
+					option1=row_you_want1[3]
+					option2=row_you_want1[4]
+					option3=row_you_want1[5]
+					option4=row_you_want1[6]
+					correct_answer1 = row_you_want1[8]
+					curr_level=int(float(row_you_want1[12]))
+					ID=qid                  
+					inc+=1
+					return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)                  
+				if(next_diff==5):
+					qid = random.choice(m3)
+					row_you_want1 = readCSV[qid]
+					question=row_you_want1[2]
+					option1=row_you_want1[3]
+					option2=row_you_want1[4]
+					option3=row_you_want1[5]
+					option4=row_you_want1[6]
+					correct_answer1 = row_you_want1[8]
+					curr_level=int(float(row_you_want1[12]))
+					ID=qid
+					inc+=1
+					return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)        
+				if(next_diff==6):
+					qid = random.choice(h1)
+					row_you_want1 = readCSV[qid]
+					question=row_you_want1[2]
+					option1=row_you_want1[3]
+					option2=row_you_want1[4]
+					option3=row_you_want1[5]
+					option4=row_you_want1[6]
+					correct_answer1 = row_you_want1[8]
+					curr_level=int(float(row_you_want1[12]))
+					ID=qid                  
+					inc+=1
+					return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)     
+				if(next_diff==7):
+					qid = random.choice(h2)
+					row_you_want1 = readCSV[qid]
+					question=row_you_want1[2]
+					option1=row_you_want1[3]
+					option2=row_you_want1[4]
+					option3=row_you_want1[5]
+					option4=row_you_want1[6]
+					correct_answer1 = row_you_want1[8]
+					curr_level=int(float(row_you_want1[12]))
+					ID=qid                    
+					inc+=1
+					return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
+				if(next_diff==8):
+					qid = random.choice(h3)
+					row_you_want1 = readCSV[qid]
+					question=row_you_want1[2]
+					option1=row_you_want1[3]
+					option2=row_you_want1[4]
+					option3=row_you_want1[5]
+					option4=row_you_want1[6]
+					correct_answer1 = row_you_want1[8]
+					curr_level=int(float(row_you_want1[12]))
+					ID=qid                   
+					inc+=1
+					return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
+			if(inc==5):
+				# Calculating and displaying final score after the user has attempted all the 30 questions
+				score = score*10
+				return render_template('final.html',score=score)
 
 #****************************Submit Test ends***********************************************
 
@@ -540,7 +545,7 @@ def login():
 				data = cursor.fetchone()
 				password_db = data[8]
 				if (pwd_context.verify(password, password_db)):
-					session['logged_in'] = True
+					session['logged_in_company'] = True
 					session['comp_username'] = uname
 					flash('You are now logged in', 'success')
 					return redirect(url_for('compdashboard'))
@@ -575,91 +580,91 @@ def logout_company():
 @app.route('/changepassword',methods=['POST','GET'])
 @login_required
 def changepassword():
-    if request.method =='POST':
-        curpw=request.form.get('curpw')
-        newpw=request.form.get('newpw')
-        newcpw= request.form.get('newcpw')
-        if(newpw != newcpw):
-            flash("Passwords dont match!","error")
-            return redirect(url_for('cdashboard'))
-        else:
-            newpw = pwd_context.hash(newpw)
-            sql=""" UPDATE register SET password = %s WHERE uname= %s"""
-            cursor = mysql.connection.cursor()
-            cursor.execute(sql,(newpw,session['username']))
-            mysql.connection.commit()
-            cursor.close()
-            flash("Password Changed Successfully","success")
-            return redirect(url_for('cdashboard'))          
-    return redirect(url_for('cdashboard'))
+	if request.method =='POST':
+		curpw=request.form.get('curpw')
+		newpw=request.form.get('newpw')
+		newcpw= request.form.get('newcpw')
+		if(newpw != newcpw):
+			flash("Passwords dont match!","error")
+			return redirect(url_for('cdashboard'))
+		else:
+			newpw = pwd_context.hash(newpw)
+			sql=""" UPDATE register SET password = %s WHERE uname= %s"""
+			cursor = mysql.connection.cursor()
+			cursor.execute(sql,(newpw,session['username']))
+			mysql.connection.commit()
+			cursor.close()
+			flash("Password Changed Successfully","success")
+			return redirect(url_for('cdashboard'))          
+	return redirect(url_for('cdashboard'))
 
 @app.route('/changepasswordcompany',methods=['POST','GET'])
-@login_required
+@login_required_company
 def changepasswordcompany():
-    if request.method =='POST':
-        curpw=request.form.get('curpw')
-        newpw=request.form.get('newpw')
-        newcpw= request.form.get('newcpw')
-        if(newpw != newcpw):
-            flash("Passwords dont match!","error")
-            return redirect(url_for('compdashboard'))
-        else:
-            newpw = pwd_context.hash(newpw)
-            sql=""" UPDATE company_register SET comppassword = %s WHERE compid= %s"""
-            cursor = mysql.connection.cursor()
-            cursor.execute(sql,(newpw,session['comp_username']))
-            mysql.connection.commit()
-            cursor.close()
-            flash("Password Changed Successfully","success")
-            return redirect(url_for('compdashboard'))          
-    return redirect(url_for('compdashboard'))
+	if request.method =='POST':
+		curpw=request.form.get('curpw')
+		newpw=request.form.get('newpw')
+		newcpw= request.form.get('newcpw')
+		if(newpw != newcpw):
+			flash("Passwords dont match!","error")
+			return redirect(url_for('compdashboard'))
+		else:
+			newpw = pwd_context.hash(newpw)
+			sql=""" UPDATE company_register SET comppassword = %s WHERE compid= %s"""
+			cursor = mysql.connection.cursor()
+			cursor.execute(sql,(newpw,session['comp_username']))
+			mysql.connection.commit()
+			cursor.close()
+			flash("Password Changed Successfully","success")
+			return redirect(url_for('compdashboard'))          
+	return redirect(url_for('compdashboard'))
 
 
 @app.route('/sendemail', methods=['POST','GET'])
 def sendemail():
-    if request.method =="POST":
-        rstpw = request.form.get("rstpw")
-        token = s.dumps(rstpw, salt='passwordreset')
-        msg = Message('Click link to reset password', sender='code.crunch.sih@gmail.com', recipients=[rstpw])
-        link = url_for('resetpassword', token=token, _external=True)
-        msg.body = 'Your link is {}'.format(link)
-        mail.send(msg)
+	if request.method =="POST":
+		rstpw = request.form.get("rstpw")
+		token = s.dumps(rstpw, salt='passwordreset')
+		msg = Message('Click link to reset password', sender='code.crunch.sih@gmail.com', recipients=[rstpw])
+		link = url_for('resetpassword', token=token, _external=True)
+		msg.body = 'Your link is {}'.format(link)
+		mail.send(msg)
 
-        return '<h1>The email you entered is {}. Please click the link in your mail for password reset!'.format(rstpw)
+		return '<h1>The email you entered is {}. Please click the link in your mail for password reset!'.format(rstpw)
 
 @app.route('/resetpassword/<token>')
 def resetpassword(token):
-    try:
-        rstpw = s.loads(token, salt='passwordreset', max_age=600)
-        return redirect(url_for('passwordresetform'))
-    except SignatureExpired:
-        return '<h1>The token is expired!</h1>'
+	try:
+		rstpw = s.loads(token, salt='passwordreset', max_age=600)
+		return redirect(url_for('passwordresetform'))
+	except SignatureExpired:
+		return '<h1>The token is expired!</h1>'
 
 @app.route('/passwordresetform', methods=['POST','GET'])
 def passwordresetform():
-    if request.method == 'POST':
-        role = request.form.get('role')
-        email = request.form.get('email')
-        password = request.form.get('password')
-        password = pwd_context.hash(password)
+	if request.method == 'POST':
+		role = request.form.get('role')
+		email = request.form.get('email')
+		password = request.form.get('password')
+		password = pwd_context.hash(password)
 
-        if( role == "candidate"):
-            sql = """ UPDATE register SET password = %s WHERE email= %s """
-            cursor = mysql.connection.cursor()
-            cursor.execute(sql,(password,email))
-            mysql.connection.commit()
-            cursor.close()
-            flash("Password Changed Successfully","success")
-            return redirect(url_for('login'))
-        elif( role == "company"):
-            sql = """ UPDATE company_register SET password = %s WHERE email= %s """
-            cursor = mysql.connection.cursor()
-            cursor.execute(sql,(password,email))
-            mysql.connection.commit()
-            cursor.close()
-            flash("Password Changed Successfully","success")
-            return redirect(url_for('login'))
-    return render_template('passwordresetform.html')
+		if( role == "candidate"):
+			sql = """ UPDATE register SET password = %s WHERE email= %s """
+			cursor = mysql.connection.cursor()
+			cursor.execute(sql,(password,email))
+			mysql.connection.commit()
+			cursor.close()
+			flash("Password Changed Successfully","success")
+			return redirect(url_for('login'))
+		elif( role == "company"):
+			sql = """ UPDATE company_register SET password = %s WHERE email= %s """
+			cursor = mysql.connection.cursor()
+			cursor.execute(sql,(password,email))
+			mysql.connection.commit()
+			cursor.close()
+			flash("Password Changed Successfully","success")
+			return redirect(url_for('login'))
+	return render_template('passwordresetform.html')
 
 
 
@@ -1112,6 +1117,7 @@ def publiccompanydetails(compid):
 
 
 @app.route('/candidatedetails')
+@login_required
 def candidatedetails():
 	
 	uname = session['username'] 
@@ -1177,6 +1183,7 @@ def companylist():
 
 #**************************** details operations start ****************************
 @app.route('/updatedetails', methods = ['POST'])
+@login_required
 def updatedetails():
 	if request.method == "POST":
 		fname = request.form.get('fname')
@@ -1206,6 +1213,7 @@ def updatedetails():
 
 #**************************** Education operations start ****************************
 @app.route('/insertedu', methods = ['POST'])
+@login_required
 def insertedu():
 
 	if request.method == "POST":
@@ -1225,6 +1233,7 @@ def insertedu():
 
 
 @app.route('/deleteedu/<string:id_data>', methods = ['GET'])
+@login_required
 def deleteedu(id_data):
 	flash("Record Has Been Deleted Successfully")
 	cur = mysql.connection.cursor()
@@ -1237,6 +1246,7 @@ def deleteedu(id_data):
 
 
 @app.route('/updateedu',methods=['POST','GET'])
+@login_required
 def updateedu():
 
 	if request.method == 'POST':
@@ -1262,6 +1272,7 @@ def updateedu():
 
 #****************************skill operations start****************************
 @app.route('/insertskill', methods = ['POST'])
+@login_required
 def insertskill():
 
 	if request.method == "POST":
@@ -1279,6 +1290,7 @@ def insertskill():
 
 
 @app.route('/deleteskill/<string:id_data>', methods = ['GET'])
+@login_required
 def deleteskill(id_data):
 	flash("Record Has Been Deleted Successfully")
 	cur = mysql.connection.cursor()
@@ -1291,6 +1303,7 @@ def deleteskill(id_data):
 
 
 @app.route('/updateskill',methods=['POST','GET'])
+@login_required
 def updateskill():
 
 	if request.method == 'POST':
@@ -1313,6 +1326,7 @@ def updateskill():
 
 #****************************Work operations end****************************
 @app.route('/insertwork', methods = ['POST'])
+@login_required
 def insertwork():
 
 	if request.method == "POST":
@@ -1332,6 +1346,7 @@ def insertwork():
 
 
 @app.route('/deletework/<string:id_data>', methods = ['GET'])
+@login_required
 def deletework(id_data):
 	flash("Record Has Been Deleted Successfully")
 	cur = mysql.connection.cursor()
@@ -1344,6 +1359,7 @@ def deletework(id_data):
 
 
 @app.route('/updatework',methods=['POST','GET'])
+@login_required
 def updatework():
 
 	if request.method == 'POST':
@@ -1370,6 +1386,7 @@ def updatework():
 #****************************link operations start****************************
 
 @app.route('/insertlink', methods = ['POST'])
+@login_required
 def insertlink():
 
 	if request.method == "POST":
@@ -1387,6 +1404,7 @@ def insertlink():
 
 
 @app.route('/deletelink/<string:id_data>', methods = ['GET'])
+@login_required
 def deletelink(id_data):
 	flash("Record Has Been Deleted Successfully")
 	cur = mysql.connection.cursor()
@@ -1399,6 +1417,7 @@ def deletelink(id_data):
 
 
 @app.route('/updatelink',methods=['POST','GET'])
+@login_required
 def updatelink():
 
 	if request.method == 'POST':
@@ -1469,6 +1488,7 @@ def blog():
 
 #**************************** company details operations start ****************************
 @app.route('/updatecompdetails', methods = ['POST'])
+@login_required_company
 def updatecompdetails():
 	if request.method == "POST":
 
@@ -1497,6 +1517,7 @@ def updatecompdetails():
 
 #**************************** Field of work operations start ****************************
 @app.route('/insertaow', methods = ['POST'])
+@login_required_company
 def insertaow():
 
 	if request.method == "POST":
@@ -1516,6 +1537,7 @@ def insertaow():
 
 
 @app.route('/deleteaow/<string:id_data>', methods = ['GET'])
+@login_required_company
 def deleteaow(id_data):
 	flash("Record Has Been Deleted Successfully")
 	cur = mysql.connection.cursor()
@@ -1529,6 +1551,7 @@ def deleteaow(id_data):
 
 #**************************** Geo Location operations start ****************************
 @app.route('/insertgeo', methods = ['POST'])
+@login_required_company
 def insertgeo():
 
 	if request.method == "POST":
@@ -1546,6 +1569,7 @@ def insertgeo():
 
 
 @app.route('/deletegeo/<string:id_data>', methods = ['GET'])
+@login_required_company
 def deletegeo(id_data):
 	flash("Record Has Been Deleted Successfully")
 	cur = mysql.connection.cursor()
@@ -1555,6 +1579,7 @@ def deletegeo(id_data):
 
 
 @app.route('/updategeo',methods=['POST','GET'])
+@login_required_company
 def updategeo():
 
 	if request.method == 'POST':
@@ -1574,6 +1599,7 @@ def updategeo():
 
 #**************************** Awards operations start ****************************
 @app.route('/insertaward', methods = ['POST'])
+@login_required_company
 def insertaward():
 
 	if request.method == "POST":
@@ -1592,6 +1618,7 @@ def insertaward():
 
 
 @app.route('/deleteaward/<string:id_data>', methods = ['GET'])
+@login_required_company
 def deleteaward(id_data):
 	flash("Record Has Been Deleted Successfully")
 	cur = mysql.connection.cursor()
@@ -1601,6 +1628,7 @@ def deleteaward(id_data):
 
 
 @app.route('/updateaward',methods=['POST','GET'])
+@login_required_company
 def updateaward():
 
 	if request.method == 'POST':
@@ -1622,6 +1650,7 @@ def updateaward():
 
 #**************************** kep people operations start ****************************
 @app.route('/insertkey', methods = ['POST'])
+@login_required_company
 def insertkey():
 
 	if request.method == "POST":
@@ -1639,6 +1668,7 @@ def insertkey():
 
 
 @app.route('/deletekey/<string:id_data>', methods = ['GET'])
+@login_required_company
 def deletekey(id_data):
 	flash("Record Has Been Deleted Successfully")
 	cur = mysql.connection.cursor()
@@ -1648,6 +1678,7 @@ def deletekey(id_data):
 
 
 @app.route('/updatekey',methods=['POST','GET'])
+@login_required_company
 def updatekey():
 
 	if request.method == 'POST':
@@ -1671,7 +1702,7 @@ def updatekey():
 
 @app.route('/postajob')
 @login_required_company
-def job_post():
+def postajob():
 	df = pd.DataFrame()
 	return render_template('postajob.html',  tables=[df.to_html(classes='table table-hover', table_id="tblData" ,header="true")])
 
@@ -1795,7 +1826,7 @@ def getjobdetails(job_id):
 
 @app.route('/companywisejobs', methods = ['GET'])
 @login_required_company
-def getcwisejobdetails():
+def companywisejobs():
 	compid = session['comp_username']
 	jcursor = mysql.connection.cursor()
 	jresult = jcursor.execute("SELECT * FROM `jobs` WHERE `compid` = %s", [compid])
@@ -1813,6 +1844,7 @@ def getcwisejobdetails():
 	return render_template('companywisejobs.html', data = jdata)
 
 @app.route('/companywisejobseditable', methods = ['GET'])
+@login_required_company
 def getcwisejobdetailseditable():
 	compid = 200000
 	jcursor = mysql.connection.cursor()
@@ -1831,6 +1863,7 @@ def getcwisejobdetailseditable():
 	return render_template('companywisejobs.html', scroll='jobtag', data = jdata)
 
 @app.route('/updatejob',methods=['POST','GET'])
+@login_required_company
 def updatejob():
 	
 	if request.method == 'POST':
@@ -1860,6 +1893,7 @@ def updatejob():
 	return redirect(url_for('getcwisejobdetailseditable'))
 
 @app.route('/deletejob/<jid>', methods = ['GET'])
+@login_required_company
 def deletejob(jid):
 	flash("Record Has Been Deleted Successfully")
 	cur = mysql.connection.cursor()
@@ -1876,7 +1910,7 @@ def deletejob(jid):
 #***************************************Start of Functions for appying for jobs*********************************#
 
 @app.route('/apply/<compid>/<jid>')
-@login_required
+@login_required_company
 def apply(compid,jid):
 	cur = mysql.connection.cursor()
 	uname = session['username']
@@ -2088,23 +2122,98 @@ def setinterview():
 	if request.method == 'POST':
 
 		status = "Interview Scheduled"
-		il = "https://meet.google.com/"
 		date = request.form['ed']
 		time = request.form['et']
 		aid = request.form['aid']
 
-		datetime = str(date)+" "+str(time)+":00"
 
+		cur = mysql.connection.cursor()
+		sql1 = """ SELECT * from register r, app_status a WHERE r.uname = a.uname AND a.appid = %s """
+		result = cur.execute(sql1, (aid))
+		if result>0:
+			lst = cur.fetchone()
+			print(lst)
+			email = lst[5]
+			fname=lst[1]
+			mysql.connection.commit()
+			cur.close()
+
+
+		date1 = str(date)
+		date2 = date1.split("-")
+		year = int(date2[0])
+		month = int(date2[1])
+		day= int(date2[2])
+		time1 = str(time)
+		time2 = time1.split(':')
+		hour = int(time2[0])
+		minute = int(time2[1])
+
+		credentials = pickle.load(open("token.pkl", "rb"))
+		service = build("calendar", "v3", credentials=credentials)
+		start_time = datetime(year, month, day, hour, minute, 0)
+		end_time = start_time + timedelta(hours=4)
+		timezone = 'Asia/Kolkata'
+
+		event = {
+		  'summary': 'Interview',
+		  'location': 'Google Meet',
+		  'description': 'company details',
+		  'start': {
+		    'dateTime': start_time.strftime("%Y-%m-%dT%H:%M:%S"),
+		    'timeZone': timezone,
+		  },
+		  'end': {
+		    'dateTime': end_time.strftime("%Y-%m-%dT%H:%M:%S"),
+		    'timeZone': timezone,
+		  },
+		    
+		  'reminders': {
+		    'useDefault': False,
+		    'overrides': [
+		      {'method': 'email', 'minutes': 24 * 60},
+		      {'method': 'popup', 'minutes': 10},
+		    ],
+		  },
+		    'attendees':[
+		    {'email': email },
+		  ]
+		    ,
+		  'conferenceData': {
+		      'createRequest': {
+		          'requestId':'its done baby',
+		          'conferenceSolutionKey': {
+		                  'type': 'hangoutsMeet'
+		              }
+		          
+		      }
+		  },
+		    'reminders': {
+		        'useDefault': False,
+		        'overrides': [
+		          {'method': 'email', 'minutes': 5},
+		        ],
+		      },
+		}
+
+		a = service.events().insert(calendarId='maheshmahajan.20998@gmail.com', body=event, conferenceDataVersion=1).execute()
+		link = a['hangoutLink']
+
+
+
+		datetime1 = str(date)+" "+str(time)+":00"
 		sql = """UPDATE `app_status` SET `status` = %s, `iei` = 1, `interview_link` = %s,`idate` = %s WHERE `appid` = %s;"""
 		cur = mysql.connection.cursor()
-
-		cur.execute(sql, (status, il, datetime, aid))
+		cur.execute(sql, (status, link, datetime1, aid))
 		mysql.connection.commit()
 		cur.close()
-
-
 		print("Time:"+str(date)+str(time)+":00")
 		print(date, time, aid)
+		msg = Message('Interview link and schedule.', sender='code.crunch.sih@gmail.com', recipients=[email])
+		msg.html = '<h1>Hello {},<h1><br> <h5>Your Interview is scheduled on <b>{}</b> at <b>{}</b> and the link for the interview is <a href="{}">{}</a></h5>'.format(fname,date,time,link,link)
+		mail.send(msg)
+
+
 
 		return redirect(url_for('companywisejobsapps'))
 

@@ -30,13 +30,14 @@
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css')}}">
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
         <!-- <style>
             .main-nav nav .navbar-nav .nav-item {
             position: relative;
             padding: 15px 8px;
 }
-        </style> -->
-
+        </style>
+ -->
         <style>
             .footer {
     background-color:#d966ff;
@@ -140,7 +141,14 @@ left: 25%;
 
 }
 
+
+.ml15 .word {
+  display: inline-block;
+  line-height: 1em;
+}
+
 </style>
+
 
         <title>Recruit Uttarakhand</title>
 
@@ -172,31 +180,30 @@ left: 25%;
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
                 <a href="index.html" class="logo">
-                    <img src="static/lastt.png" alt="Logo">
+                    <img src="assets/img/logo.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Menu For Desktop Device -->
             <div class="main-nav">
                 <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
-                    <img src="static/lastt.png" alt="Logo" style="height:53px; width: 90px"> </a>
-
-                
+                    <img src="static/lastt.png" alt="Logo" style="height:53px; width: 90px">
+                </a>
                 <div class="container" style="float: right">
                     <nav class="navbar navbar-expand-md navbar-light" style="margin-bottom:0px;">
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav" style="padding: 0px 187px;">
                                 <li class="nav-item">
-                                    <a href="{{ url_for('home')}}" class="nav-link dropdown-toggle">Home <i class="icofont-simple-down"></i></a>
+                                    <a href="{{ url_for('home')}}" class="nav-link dropdown-toggle">Home </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ url_for('about')}}" class="nav-link">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ url_for('joblist')}}" class="nav-link dropdown-toggle">Jobs <i class="icofont-simple-down"></i></a>
+                                    <a href="{{ url_for('joblist')}}" class="nav-link dropdown-toggle">Jobs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Blogs <i class="icofont-simple-down"></i></a>
+                                    <a href="#" class="nav-link dropdown-toggle">Blogs</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a href="{{ url_for('blog')}}" class="nav-link">Read Blog</a>
@@ -245,13 +252,13 @@ left: 25%;
 
       <div class="item active">
         
-        <img src="/static/bl.jpg" alt="Los Angeles" style="width: 100%; opacity: 0.8 ">
+        <img src="/static/flag.jpg" alt="Los Angeles" style="width: 100%; opacity: 0.8 ">
         
       </div>
 
       <div class="item">
         
-        <img src="/static/heyy.jpg" alt="Chicago" style="width: 100%; height:700px; opacity: 0.8 ">
+        <img src="/static/rii.jpg" alt="Chicago" style="width: 100%; height:700px; opacity: 0.8 ">
         
       </div>
     
@@ -275,10 +282,18 @@ left: 25%;
   <div class="text0">
     
     <div class="banner-text">
-                            <h1 style="font-family:Optima; font-weight: 400;
-    letter-spacing: 1px;font-size: 50px;"><span>Namaste</span>, In search for a <span>Job</span>?</h1>
-                            <p id="demo" style="font-family: 'Cormorant Garamond', serif;
-    font-weight: 200;font-size: 30px;letter-spacing: 1px;"></p> 
+        <h1 class="ml15" style="font-family:Optima; font-weight: 400;letter-spacing: 2px;font-size: 50px;">
+          <span class="word">Namaste</span>
+          <span class="word" style="color: #ffffff">,</span>
+          <span class="word" style="color: #ffffff">In</span>
+          <span class="word" style="color: #ffffff">Search</span>
+          <span class="word" style="color: #ffffff">For</span>
+          <span class="word" style="color: #ffffff">A</span>
+          <span class="word">Job</span>
+          <span class="word" style="color: #ffffff">?</span>
+        </h1>
+
+    <p id="demo" style="font-family: 'Cormorant Garamond', serif;font-weight: 200;font-size: 30px;letter-spacing: 1px;"></p> 
     <div class="text1">
   <div class="banner-form-area">
   <form >
@@ -1319,7 +1334,7 @@ left: 25%;
         <script>
 var i = 0;
 var txt = 'GRAB AN OPPORTUNITY';
-var speed = 84;
+var speed = 80;
 
 function typeWriter() {
   if (i < txt.length) {
@@ -1329,7 +1344,27 @@ function typeWriter() {
   }
 }
 </script>
+<script>
+anime.timeline({loop: true})
+  .add({
+    targets: 'span.ml15 span.word',
+    scale: [5,1],
+    opacity: [0,1],
+    easing: "easeOutCirc",
+    duration: 800,
+    delay: (el, i) => 800 * i
+  })
+  .add({
+    targets: 'span.ml15 span.word',
+    opacity: 2,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000
+  });
+</script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+
 
         <!-- Essential JS -->
         <script src="static/js/jquery.min.js"></script>
