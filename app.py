@@ -9,7 +9,8 @@ from functools import wraps
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 import csv
-from sklearn.externals import joblib
+#from sklearn.externals import joblib
+import joblib
 import random
 import os
 import numpy as np
@@ -19,55 +20,7 @@ from datetime import datetime
 
 
 app = Flask(__name__)
-y=0
-score=0
-next_diff=""
-curr_level=""
-correctness=0
-correct_answer1=""
-score=0
-inc=1
-e1 = []
-e2 = []
-e3 = []
-m1 = []
-m2 = []
-m3 = []
-h1 = []
-h2 = []
-h3 = []
 
-with open('./static/ques_data.csv') as csvfile:
-    readCSV = list(csv.reader(csvfile, delimiter=','))
-    for i in range(0,650):
-        row_you_want = readCSV[i]
-        if(row_you_want[10]=='0' and row_you_want[9]=='0'):
-            # List of question indices with Easy Level 0 Difficulty
-            e1.append(i)
-        if(row_you_want[10]=='0' and row_you_want[9]=='1'):
-            # List of question indices with Easy Level 1 Difficulty
-            e2.append(i)
-        if(row_you_want[10]=='0' and row_you_want[9]=='2'):
-            # List of question indices with Easy Level 2 Difficulty
-            e3.append(i)
-        if(row_you_want[10]=='1' and row_you_want[9]=='0'):
-            # List of question indices with Medium Level 0 Difficulty
-            m1.append(i)
-        if(row_you_want[10]=='1' and row_you_want[9]=='1'):
-            # List of question indices with Medium Level 1 Difficulty
-            m2.append(i)
-        if(row_you_want[10]=='1' and row_you_want[9]=='2'):
-            # List of question indices with Medium Level 2 Difficulty
-            m3.append(i)
-        if(row_you_want[10]=='2' and row_you_want[9]=='0'):
-            # List of question indices with Hard Level 0 Difficulty
-            h1.append(i)
-        if(row_you_want[10]=='2' and row_you_want[9]=='1'):
-            # List of question indices with Hard Level 1 Difficulty
-            h2.append(i)
-        if(row_you_want[10]=='2' and row_you_want[9]=='2'):
-            # List of question indices with Hard Level 2 Difficulty
-            h3.append(i)
 
 app.config.from_pyfile('config.cfg')
 mail = Mail(app)
@@ -95,7 +48,7 @@ def login_required(f):
 def login_required_company(f):
 	@wraps(f)
 	def wrap(*args, **kwargs):
-		if 'logged_in' in session:
+		if 'logged_in_company' in session:
 			return f(*args, **kwargs)
 		else:
 			flash("You need to login first","error")
@@ -106,283 +59,137 @@ def login_required_company(f):
 #***********************Submit test part begins*******************************************
 
 
-@app.route('/read_celltemp')
-def read_celltemp():
-    return render_template("button.html")
+@app.route('/takethetest/<aid>')
+@login_required
+def read_celltemp(aid):
+    score = 0
+    inc = 0
 
-@app.route('/submittest')
-def submittest():
-    global score
-    global y
-    global student_id
-    y=1
-    total_score=score
-    score=0
-    # Create cursor
+    sql = "SELECT * FROM app_status WHERE appid = %s"
     cur = mysql.connection.cursor()
 
-    # Execute query
-    # cur.execute("UPDATE users SET total_score = ? WHERE id = ?", (total_score) [student_id])
-    cur.execute ("UPDATE users SET total_score=%d WHERE id='%s' " % (total_score,student_id))
+    aresult = cur.execute(sql, [aid])
+    adata = cur.fetchall()
+    isattempted = 0
+    if adata[0][6] != 'Not Attempted':
+        isattempted = 1
 
-    # Commit to DB
-    mysql.connection.commit()
-
-    # Close connection
-    cur.close()
-    session.clear()
-    flash('You are now logged out', 'success')
-    return redirect(url_for('login'))
+    return render_template("button.html", isattempted = isattempted, aid = aid, inc = int(inc), score=int(score))
 
 
-@app.route("/read_cell", methods=['POST','GET'])
-def read_cell():
-    global y
-    global correct_answer1
-    global curr_level
+
+
+@app.route("/read_cell/<aid>", methods=['POST','GET'])
+@login_required
+def read_cell(aid):
+    
+
+    inc = request.form['inc']
+    score = request.form['score']
     # Reading the CSV file of questions
     with open('./static/ques_data.csv') as csvfile:
         readCSV = list(csv.reader(csvfile, delimiter=','))
 
         # Displaying First question to the user of Medium Level 0 Difficulty
 
-        if(y<len(readCSV)):
-            
-            qid = random.choice(m1) # Randomly selecting one question index
-            row_you_want = readCSV[qid]
-            question=row_you_want[2]
-            option1=row_you_want[3]
-            option2=row_you_want[4]
-            option3=row_you_want[5]
-            option4=row_you_want[6]
-            correct_answer1=row_you_want[8] # Storing the correct answer for checking later
-            curr_level=int(float(row_you_want[12]))
-            ID = qid
-            y+=1
-            return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,curr_level=curr_level, ID = ID)
+
+        
+        qid = random.choice(range(0,651,1)) # Randomly selecting one question index
+        row_you_want = readCSV[qid]
+        question=row_you_want[2]
+        option1=row_you_want[3]
+        option2=row_you_want[4]
+        option3=row_you_want[5]
+        option4=row_you_want[6]
+        correct_answer1=row_you_want[8] 
+        ID = qid
+
+        return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score, ID = ID, correct_answer = correct_answer1, inc = int(inc), a = aid)
 
 
-@app.route('/check_answer', methods=['POST','GET'])
-def check_answer():
+@app.route('/check_answer/<aid>', methods=['POST','GET'])
+@login_required
+def check_answer(aid):
     # Retriving timer value from 12.html(this value is hidden in 12.html).This value is retrived only when user clicks the Next button.
     if request.method == 'POST':
       user = int(request.form['nm'])
     else:
       user = int(60) # If the user runs out of time and doesn't click the next button then the respopnse time 60 seconds is stored here
-    global score
-    global correct_answer1
-    global correctness
-    correctness=0
-    global next_diff
+    
+
+    inc = int(request.form['inc'])
+    score = int(request.form['score'])
+    correct_answer1 = request.form['correct_answer1']
+
     with open('./static/ques_data.csv') as csvfile:
         readCSV = list(csv.reader(csvfile, delimiter=','))
 
-        # Checking which option is set True(selected by the user)
-        option1a = request.form.get("option1") != None
-        option2a = request.form.get("option2") != None
-        option3a = request.form.get("option3") != None
-        option4a = request.form.get("option4") != None
         
-        # option 1(if selected by the user)
-        if(option1a==True):
-            given_answer="Answer: Option A"
-            correct_answer=correct_answer1
-            if(given_answer==correct_answer):
-                correctness=1
-            return test(user) # passing the response time in the test() function
+        given_answer = request.form.get('option')
+        correct_answer = correct_answer1
 
+        if  given_answer == correct_answer1:
+            correct_answer1 = 1
+            score+=1
+            return test(user = user, aid = aid, inc = inc, score = score)
 
-        # option 2(if selected by the user)
-        elif(option2a==True):
-            given_answer="Answer: Option B"
-            correct_answer=correct_answer1
-            if(given_answer==correct_answer):
-                correctness=1
-            return test(user) # passing the response time in the test() function
-
-        # option3(if selected by the user)
-        elif(option3a==True):
-            given_answer="Answer: Option C"
-            correct_answer=correct_answer1
-            if(given_answer==correct_answer):
-               
-                correctness=1
-
-            return test(user) # passing the response time in the test() function
-
-        # option4(if selected by the user)
-        elif(option4a==True):
-            given_answer="Answer: Option D"
-            correct_answer=correct_answer1
-            if(given_answer==correct_answer):
-                correctness=1  
-            return test(user) # passing the response time in the test() function
-
-        # if no option is selected by the user
         else:
             correctness=0
-            return test(user) # passing the response time in the test() function
+            return test(user = user, aid = aid, inc = inc, score = score)
 
+
+       
 
 @app.route('/test', methods=['POST','GET'])
-def test(user):
-    global inc
-    global old_index
-    global correct_answer1
-    global next_diff
-    global correctness
-    global curr_level
-    global score
+@login_required
+def test(user, aid, inc, score):
+    
+
     res_time=user
-    # Loading the ML model 
-    clf = joblib.load('./static/dec_tree_model.pkl')
-    # Passing the 3 inputs(current difficulty of the question, response time recorded, if the question is correct or not)
-    # to the model and getting the predicted difficulty of the next question
-    next_diff=clf.predict([[curr_level,res_time,correctness]])
-    next_diff=int(next_diff)
-    print(next_diff)
-    print(clf)
-    print(type(clf)) 
-    # Calculating score considering the above mentioned 3 parameters
-    #((curr_level*correctness)/res_time) 
-    score=score+correctness*0.1*curr_level
+
+    
     correctness=0
     with open('./static/Test.csv') as csvfile:
         pred_read = list(csv.reader(csvfile, delimiter=','))
         with open('./static/ques_data.csv') as csvfile:
             readCSV = list(csv.reader(csvfile, delimiter=','))
             # Displaying 30 questions to the user
-            if(inc<5):
-                # Selecting a question of the predicted difficulty 
-                if(next_diff==0):
-                    qid = random.choice(e1)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
-                if(next_diff==1):
-                    qid = random.choice(e2)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
-                if(next_diff==2):
-                    qid = random.choice(e3)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
-                if(next_diff==3):
-                    qid = random.choice(m1)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid                 
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)                  
-                if(next_diff==4):
-                    qid = random.choice(m2)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid                  
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)                  
-                if(next_diff==5):
-                    qid = random.choice(m3)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)        
-                if(next_diff==6):
-                    qid = random.choice(h1)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid                  
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)     
-                if(next_diff==7):
-                    qid = random.choice(h2)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid                    
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
-                if(next_diff==8):
-                    qid = random.choice(h3)
-                    row_you_want1 = readCSV[qid]
-                    question=row_you_want1[2]
-                    option1=row_you_want1[3]
-                    option2=row_you_want1[4]
-                    option3=row_you_want1[5]
-                    option4=row_you_want1[6]
-                    correct_answer1 = row_you_want1[8]
-                    curr_level=int(float(row_you_want1[12]))
-                    ID=qid                   
-                    inc+=1
-                    return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,pred=next_diff,res_time=res_time,curr_level=curr_level,ID=ID,user=user)
-            if(inc==5):
+            if(inc<9):
+
+                qid = random.choice(range(0,651,1))
+                row_you_want1 = readCSV[qid]
+                question=row_you_want1[2]
+                option1=row_you_want1[3]
+                option2=row_you_want1[4]
+                option3=row_you_want1[5]
+                option4=row_you_want1[6]
+                correct_answer1 = row_you_want1[8]
+                curr_level=int(float(row_you_want1[12]))
+                ID=qid
+                inc+=1
+                return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,res_time=res_time,ID=ID,user=user, correct_answer = correct_answer1, inc= inc, a = aid)
+                
+            if(inc==9):
                 # Calculating and displaying final score after the user has attempted all the 30 questions
-                score = score*10
-                return redirect(url_for('final_score', score=score))
+                score = score
+                return redirect(url_for('final_score', score=score, aid = aid))
 
 @app.route('/final_score')
 def final_score():
-    return render_template('final.html', score=score)
 
-@app.route('/read_celltemp')
-def read_celltemp():
-    return render_template("button.html")
+    s = request.args['score']
+    a = request.args['aid']
+    
+    cur = mysql.connection.cursor()
+
+    sql = "UPDATE app_status SET test_score = %s WHERE appid = %s"
+    cur.execute (sql, (s,a))
+    mysql.connection.commit()
+    cur.close()
+    
+    return render_template('final.html', score=s, aid = a)
+
+
 
 #****************************Submit Test ends***********************************************
 
@@ -549,7 +356,7 @@ def login():
 				data = cursor.fetchone()
 				password_db = data[8]
 				if (pwd_context.verify(password, password_db)):
-					session['logged_in'] = True
+					session['logged_in_company'] = True
 					session['comp_username'] = uname
 					flash('You are now logged in', 'success')
 					return redirect(url_for('compdashboard'))
@@ -669,8 +476,6 @@ def passwordresetform():
             flash("Password Changed Successfully","success")
             return redirect(url_for('login'))
     return render_template('passwordresetform.html')
-
-
 
 
 
@@ -2125,7 +1930,7 @@ def allowtest(aid):
 
 	status = "Test Pending"
 	iet = "1"
-	test_link = "/testpage/"+aid
+	test_link = "/takethetest/"+aid
 
 	cur = mysql.connection.cursor()
 	sql = "UPDATE app_status SET status = %s, iet = %s, test_link = %s WHERE appid = %s"
