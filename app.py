@@ -2210,7 +2210,7 @@ def setinterview():
 		print("Time:"+str(date)+str(time)+":00")
 		print(date, time, aid)
 		msg = Message('Interview link and schedule.', sender='code.crunch.sih@gmail.com', recipients=[email])
-		msg.html = '<h1>Hello {},<h1><br> <h5>Your Interview is scheduled on <b>{}</b> at <b>{}</b> and the link for the interview is <a href="{}">{}</a></h5>'.format(fname,date,time,link,link)
+		msg.html = '<h1>Hello {},<h1><br><h3>Your Interview is scheduled on <b>{}</b> at <b>{}</b> and the link for the interview is <a href="{}">{}</a></h3>'.format(fname,date,time,link,link)
 		mail.send(msg)
 
 
