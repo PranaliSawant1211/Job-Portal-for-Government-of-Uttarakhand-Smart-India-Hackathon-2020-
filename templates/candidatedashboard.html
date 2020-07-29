@@ -9,6 +9,7 @@
         
         <!-- Bootstrap CSS -->
        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+       <link rel="stylesheet" href="static/icofont/icofont.min.css">
         <!-- Meanmenu CSS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
         <!-- Icofont -->
@@ -117,24 +118,23 @@
             </div>
 
             <!-- Menu For Desktop Device -->
-           <div class="main-nav">
-                <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
-                    <img src="static/lastt.png" alt="Logo" style="height:53px; width: 90px"> </a>
-
+            <div class="main-nav">
+                <a class="navbar-brand" href="index.html">
+                    <img src="" alt="Logo">
                 </a>
                 <div class="container">
-                    <nav class="navbar navbar-expand-md navbar-light">
+                    <nav class="navbar navbar-expand-md navbar-light" style="margin-top:-40px">
                         
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav" style="padding: 0px 210px;">
                                 <li class="nav-item">
-                                    <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Dashboard <i class="icofont-simple-down"></i></a>
+                                    <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Dashboard </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{url_for('candidatedetails')}}" class="nav-link">Profile</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Jobs <i class="icofont-simple-down"></i></a>
+                                    <a href="{{url_for('joblist')}}" class="nav-link dropdown-toggle">Jobs </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a href="{{url_for('joblist')}}" class="nav-link">Job List</a>
@@ -142,13 +142,16 @@
                                         <li class="nav-item">
                                             <a href="" class="nav-link">Saved Jobs</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a href="{{url_for('myapplications')}}" class="nav-link">My Applications</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{url_for('companylist')}}" class="nav-link">Companies</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Blogs <i class="icofont-simple-down"></i></a>
+                                    <a href="#" class="nav-link dropdown-toggle">Blogs</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a href="{{ url_for('blog')}}" class="nav-link">Read Blog</a>
@@ -159,7 +162,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url_for('contactform')}} class="nav-link">Contact</a>
+                                    <a href="{{url_for('contactform')}}" class="nav-link">Contact</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{url_for('about')}}" class="nav-link">About</a>
@@ -168,10 +171,10 @@
                             <div class="common-btn" style="float: right">
                                 {% if session.logged_in %}
                                 <a class="login-btn" href="/logout">Logout</a>
-                                <i class="icofont-logout"></i>
+                                
                                 {% else %}
                                 <a class="login-btn" href="/login">Login</a>
-                                <i class="icofont-plus-square"></i>
+                                
                                 {% endif %}
                             </div>
                         </div>
@@ -323,7 +326,7 @@
                                     </div>
                                     <div class="col-lg-12" style="text-align: center;">
                             <!-- </form> -->
-                                        <button onclick="showDialogD()" style="height:60px; width:170px;border:0px;background:linear-gradient(90deg, #ecb3ff 0%, #d966ff 63%);font-family: 'Poppins';font-size: 20px; font-weight:500; color: #ffffff;" >Edit</button>
+                                        <button onclick="showDialogD()" style="height:60px; width:170px;border:0px;background:linear-gradient(90deg, #ffd9b3 0%, #ffb366 63%);font-family: 'Poppins';font-size: 20px; font-weight:500; color: #ffffff;" >Edit</button>
                                     </div>
                                 </div>
                             </form>
@@ -333,7 +336,7 @@
                            <div class="modaldetails-content" id="popupS">
                                 <div class="modaldetails-header">
                                     <span class="close" id="spanD">&times;</span>
-                                    <h2 style="color: white"> Update Details</h2>
+                                    <h2 style="color: white;font-family:optima"> Update Details</h2>
                                 </div>
                                 <div class="modaldetails-body">
                                 <form action="{{ url_for('updatedetails')}}" method="POST" > 
@@ -567,7 +570,7 @@
                             <div class="modaledu-content">
                                 <div class="modaledu-header">
                                     <span class="close" id="spanE">&times;</span>
-                                    <h2 style="color: white"> Update Details</h2>
+                                    <h2 style="color: white;font-family:optima"> Update Details</h2>
                                 </div>
                                 <div class="modaledu-body">
                                      
@@ -653,8 +656,8 @@
                                             <td>{{ rowskill.2 }}</td>
                                             <td>{{ rowskill.3}}</td>
                                         <td width="25%" style="text-align:right;">
-                                               <button onclick="showDialogS()" class="btn btn-warning btn-xs">Edit</button>
-                                                <a href="/deleteskill/{{ rowskill.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                                               <button onclick="showDialogS()" class="btn btn-outline-info waves-effect">Edit</button>
+                                                <a href="/deleteskill/{{ rowskill.0 }}" class="btn btn-outline-danger waves-effect" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
                                             </td>
 
                                         </tr>
@@ -668,7 +671,7 @@
                            <div class="modaledu-content" id="popupS">
                                 <div class="modaledu-header">
                                     <span class="close" id="spanS">&times;</span>
-                                    <h2 style="color: white"> Update Details</h2>
+                                    <h2 style="color: white;font-family:optima"> Update Details</h2>
                                 </div>
                                 <div class="modaledu-body">
                                     <form action="{{ url_for('updateskill') }}" method="POST">   
@@ -762,9 +765,9 @@
                                             <td>{{row.5}}</td>
                                             <td style="display:none;">{{row.0}}</td>
                                             <td style="text-align:right;">
-                                               <button onclick="showDialogW()"  class="btn btn-warning btn-xs">Edit</button>
+                                               <button onclick="showDialogW()"  class="btn btn-outline-info waves-effect">Edit</button>
                                                <input id='sr' type="hidden" value="{{row.0}}">
-                                                <a href="/deletework/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                                                <a href="/deletework/{{ row.0 }}" class="btn btn-outline-danger waves-effect" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
                                             </td>
                                         </tr>
 
@@ -786,7 +789,7 @@
                             <div class="modalwork-content">
                                 <div class="modalwork-header">
                                     <span class="close" id="spanW">&times;</span>
-                                    <h2 style="color: white"> Update Details</h2>
+                                    <h2 style="color: white;font-family:optima"> Update Details</h2>
                                 </div>
                                 <div class="modalwork-body">
                                      
@@ -885,8 +888,8 @@
                                             <td>{{ rowlink.2 }}</td>
                                             <td>{{ rowlink.3}}</td>
                                         <td width="25%" style="text-align:right;">
-                                               <button onclick="showDialogL()" class="btn btn-warning btn-xs">Edit</button>
-                                                <a href="/deletelink/{{ rowlink.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                                               <button onclick="showDialogL()" class="btn btn-outline-info waves-effect">Edit</button>
+                                                <a href="/deletelink/{{ rowlink.0 }}" class="btn btn-outline-danger waves-effect" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
                                             </td>
 
                                         </tr>
@@ -901,7 +904,7 @@
                            <div class="modaledu-content" id="popupS">
                                 <div class="modallink-header">
                                     <span class="close" id="spanL">&times;</span>
-                                    <h2 style="color: white"> Update Details</h2>
+                                    <h2 style="color: white;font-family:optima"> Update Details</h2>
                                 </div>
                                 <div class="modallink-body">
                                     <form action="{{ url_for('updatelink') }}" method="POST">   

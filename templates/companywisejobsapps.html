@@ -34,7 +34,10 @@
             .main-nav nav .navbar-nav .nav-item {
             position: relative;
             padding: 15px 8px;
+
+
 }
+
         </style>
 
         <link rel="icon" type="image/png" href="static/img/favicon.png">
@@ -64,27 +67,30 @@
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav" style="padding: 0px 210px;">
                                 <li class="nav-item">
-                                    <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Dashboard <i class="icofont-simple-down"></i></a>
+                                    <a href="{{url_for('compdashboard')}}" class="nav-link dropdown-toggle">Dashboard</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url_for('candidatedetails')}}" class="nav-link">Profile</a>
+                                    <a href="{{url_for('companydetails')}}" class="nav-link">Profile</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Jobs <i class="icofont-simple-down"></i></a>
+                                    <a href="{{url_for('companywisejobs')}}" class="nav-link dropdown-toggle">Jobs</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a href="{{url_for('joblist')}}" class="nav-link">Job List</a>
+                                            <a href="{{url_for('postajob')}}" class="nav-link"> Post A New Job</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="" class="nav-link">Saved Jobs</a>
+                                            <a href="{{url_for('companywisejobs')}}" class="nav-link">Posted Jobs</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{url_for('companywisejobsapps')}}" class="nav-link">Applications Recieved</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url_for('companylist')}}" class="nav-link">Companies</a>
+                                    <a href="{{url_for('candidatelist')}}" class="nav-link">Candidates</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Blogs <i class="icofont-simple-down"></i></a>
+                                    <a href="#" class="nav-link dropdown-toggle">Blogs</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a href="{{ url_for('blog')}}" class="nav-link">Read Blog</a>
@@ -102,12 +108,12 @@
                                 </li>
                             </ul>
                             <div class="common-btn" style="float: right">
-                                {% if session.logged_in %}
-                                <a class="login-btn" href="/logout">Logout</a>
-                                <i class="icofont-logout"></i>
+                                {% if session.logged_in_company %}
+                                <a class="login-btn" href="/logout_company">Logout</a>
+                                
                                 {% else %}
                                 <a class="login-btn" href="/login">Login</a>
-                                <i class="icofont-plus-square"></i>
+                                
                                 {% endif %}
                             </div>
                         </div>
@@ -181,10 +187,10 @@
                                                     <td>{% if row[0][9] %}{{row[0][11]}}{% else %}NA{% endif %}</td>
                                                     <td style="display:none;">{{row.0}}</td>
                                                     <td>
-                                                        <a href ="compappstatus/{{row[0][0]}}"  class="btn btn-warning btn-xs">View Application</a>
+                                                        <a href ="compappstatus/{{row[0][0]}}"  class="btn btn-outline-info waves-effect">View Application</a>
                                                     </td>
                                                     <td>
-                                                        <a href="/publiccandidatedetails/{{row[0][2]}}" class="btn btn-danger btn-xs" >View Profile</a>
+                                                        <a href="/publiccandidatedetails/{{row[0][2]}}" class="btn btn-outline-danger waves-effect" >View Profile</a>
                                                     </td>
                                                 </tr>
 
