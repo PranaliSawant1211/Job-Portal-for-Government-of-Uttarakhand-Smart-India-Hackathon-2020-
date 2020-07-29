@@ -7,6 +7,7 @@
 
         <!-- Bootstrap CSS -->
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+                <link rel="stylesheet" href="static/icofont/icofont.min.css">
         <!-- Meanmenu CSS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
         <!-- Icofont -->
@@ -64,13 +65,13 @@
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav" style="padding: 0px 210px;">
                                 <li class="nav-item">
-                                    <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Dashboard <i class="icofont-simple-down"></i></a>
+                                    <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Dashboard </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{url_for('candidatedetails')}}" class="nav-link">Profile</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Jobs <i class="icofont-simple-down"></i></a>
+                                    <a href="#" class="nav-link dropdown-toggle">Jobs</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a href="{{url_for('joblist')}}" class="nav-link">Job List</a>
@@ -78,13 +79,16 @@
                                         <li class="nav-item">
                                             <a href="" class="nav-link">Saved Jobs</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a href="{{url_for('myapplications')}}" class="nav-link">My Applications</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{url_for('companylist')}}" class="nav-link">Companies</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Blogs <i class="icofont-simple-down"></i></a>
+                                    <a href="#" class="nav-link dropdown-toggle">Blogs</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a href="{{ url_for('blog')}}" class="nav-link">Read Blog</a>
@@ -104,10 +108,10 @@
                             <div class="common-btn" style="float: right">
                                 {% if session.logged_in %}
                                 <a class="login-btn" href="/logout">Logout</a>
-                                <i class="icofont-logout"></i>
+                                
                                 {% else %}
                                 <a class="login-btn" href="/login">Login</a>
-                                <i class="icofont-plus-square"></i>
+                                
                                 {% endif %}
                             </div>
                         </div>
