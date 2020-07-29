@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <!-- saved from url=(0063)https://templates.hibootstrap.com/gable/default/post-a-job.html -->
 <html lang="zxx"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-        <!-- Meanmenu CSS -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/meanmenu.css') }}">
-        <!-- Icofont -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/icofont.min.css') }}">
-        <!-- Nice Select JS -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}">
-        <!-- Owl Carousel CSS -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
-        <!-- Animate CSS -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
-        <!-- Flaticon CSS -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
-        <!-- Style CSS -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-        <!-- Responsive CSS -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        
-        <style type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/meanmenu.css') }}">
+    <!-- Icofont -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icofont.min.css') }}">
+    <!-- Nice Select JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style type="text/css">
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -47,505 +47,707 @@
             background-color: #ddeedd;
         }
         .highlight {
-        background-color: Yellow;
-        color: Green;
+            background-color: Yellow;
+            color: Green;
         }
     </style>
-        <title>Gable - Job Portal HTML Template</title>
+    <title>Gable - Job Portal HTML Template</title>
 
-        <link rel="icon" type="image/png" href="https://templates.hibootstrap.com/gable/default/assets/img/favicon.png">
-    </head>
-    <body>
+    <link rel="icon" type="image/png" href="https://templates.hibootstrap.com/gable/default/assets/img/favicon.png">
+</head>
+<body>
 
-        <!-- Preloader -->
-        <div class="loader" style="display: none;">
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="spinner">
-                        <div class="rect1"></div>
-                        <div class="rect2"></div>
-                        <div class="rect3"></div>
-                        <div class="rect4"></div>
-                        <div class="rect5"></div>
-                    </div>
+    <!-- Preloader -->
+    <div class="loader" style="display: none;">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="spinner">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
                 </div>
             </div>
         </div>
-        <!-- End Preloader -->
+    </div>
+    <!-- End Preloader -->
 
-        <!-- Start Navbar Area -->
-        <div class="navbar-area fixed-top">
+    <!-- Start Navbar Area -->
+    <div class="navbar-area fixed-top">
 
-            <!-- Menu For Mobile Device -->
-            <div class="mobile-nav">
-                <a href="https://templates.hibootstrap.com/gable/default/index.html" class="logo">
-                    <img src="./Gable - Job Portal HTML Template_files/logo.png" alt="Logo">
-                </a>
+        <!-- Menu For Mobile Device -->
+        <div class="mobile-nav">
+            <a href="https://templates.hibootstrap.com/gable/default/index.html" class="logo">
+                <img src="./Gable - Job Portal HTML Template_files/logo.png" alt="Logo">
+            </a>
+        </div>
+
+        <!-- Menu For Desktop Device -->
+        <div class="main-nav">
+            <div class="container">
+                <nav class="navbar navbar-expand-md navbar-light">
+                    <a class="navbar-brand" href="https://templates.hibootstrap.com/gable/default/index.html">
+                        <img src="./Gable - Job Portal HTML Template_files/logo.png" alt="Logo">
+                    </a>
+                    <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent" style="display: block;">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#" class="nav-link dropdown-toggle">Home <i class="icofont-simple-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/index.html" class="nav-link">Home Page 1</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/index-2.html" class="nav-link">Home Page 2</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/index-3.html" class="nav-link">Home Page 3</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://templates.hibootstrap.com/gable/default/about.html" class="nav-link">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#" class="nav-link dropdown-toggle active">Jobs <i class="icofont-simple-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/job-list.html" class="nav-link">Job List</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/favourite-job.html" class="nav-link">Favourite Jobs</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/job-details.html" class="nav-link">Job Details</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html" class="nav-link active">Post A Job</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#" class="nav-link dropdown-toggle">Candidates <i class="icofont-simple-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/candidate-list.html" class="nav-link">Candidate List</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/candidate-details.html" class="nav-link">Candidate Details</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/single-resume.html" class="nav-link">Single Resume</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/submit-resume.html" class="nav-link">Submit Resume</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/pricing.html" class="nav-link">Pricing</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/dashboard.html" class="nav-link">Candidate dashboard</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#" class="nav-link dropdown-toggle">Pages <i class="icofont-simple-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/company-list.html" class="nav-link">Company List</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/company-details.html" class="nav-link">Company Details</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/login.html" class="nav-link">Login Page</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/create-account.html" class="nav-link">Create Account Page</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/profile.html" class="nav-link">Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/single-profile.html" class="nav-link">Single Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/404.html" class="nav-link">404</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/faq.html" class="nav-link">FAQ</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/terms-and-conditions.html" class="nav-link">Terms and Conditions</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/privacy-policy.html" class="nav-link">Privacy Policy</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#" class="nav-link dropdown-toggle">Blogs <i class="icofont-simple-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/blog.html" class="nav-link">Blog</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://templates.hibootstrap.com/gable/default/blog-details.html" class="nav-link">Blog Details</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://templates.hibootstrap.com/gable/default/contact.html" class="nav-link">Contact</a>
+                            </li>
+                        </ul>
+                        <div class="common-btn">
+                            <a class="login-btn" href="https://templates.hibootstrap.com/gable/default/login.html">
+                                <i class="icofont-plus-square"></i>
+                                Login
+                            </a>
+                            <a class="sign-up-btn" href="https://templates.hibootstrap.com/gable/default/create-account.html">
+                                <i class="icofont-user-alt-4"></i>
+                                Sign Up
+                            </a>
+                        </div>
+                    </div>
+                </nav>
             </div>
+        </div>
+    </div>
+    <!-- End Navbar Area -->
 
-            <!-- Menu For Desktop Device -->
-            <div class="main-nav">
+    <!-- Page Title -->
+    <div class="page-title-area">
+
+        <div class="d-table">
+            <div class="d-table-cell">
                 <div class="container">
-                    <nav class="navbar navbar-expand-md navbar-light">
-                        <a class="navbar-brand" href="https://templates.hibootstrap.com/gable/default/index.html">
-                            <img src="./Gable - Job Portal HTML Template_files/logo.png" alt="Logo">
-                        </a>
-                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent" style="display: block;">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#" class="nav-link dropdown-toggle">Home <i class="icofont-simple-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/index.html" class="nav-link">Home Page 1</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/index-2.html" class="nav-link">Home Page 2</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/index-3.html" class="nav-link">Home Page 3</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://templates.hibootstrap.com/gable/default/about.html" class="nav-link">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#" class="nav-link dropdown-toggle active">Jobs <i class="icofont-simple-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/job-list.html" class="nav-link">Job List</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/favourite-job.html" class="nav-link">Favourite Jobs</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/job-details.html" class="nav-link">Job Details</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html" class="nav-link active">Post A Job</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#" class="nav-link dropdown-toggle">Candidates <i class="icofont-simple-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/candidate-list.html" class="nav-link">Candidate List</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/candidate-details.html" class="nav-link">Candidate Details</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/single-resume.html" class="nav-link">Single Resume</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/submit-resume.html" class="nav-link">Submit Resume</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/pricing.html" class="nav-link">Pricing</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/dashboard.html" class="nav-link">Candidate dashboard</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#" class="nav-link dropdown-toggle">Pages <i class="icofont-simple-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/company-list.html" class="nav-link">Company List</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/company-details.html" class="nav-link">Company Details</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/login.html" class="nav-link">Login Page</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/create-account.html" class="nav-link">Create Account Page</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/profile.html" class="nav-link">Profile</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/single-profile.html" class="nav-link">Single Profile</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/404.html" class="nav-link">404</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/faq.html" class="nav-link">FAQ</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/terms-and-conditions.html" class="nav-link">Terms and Conditions</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/privacy-policy.html" class="nav-link">Privacy Policy</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#" class="nav-link dropdown-toggle">Blogs <i class="icofont-simple-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/blog.html" class="nav-link">Blog</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="https://templates.hibootstrap.com/gable/default/blog-details.html" class="nav-link">Blog Details</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://templates.hibootstrap.com/gable/default/contact.html" class="nav-link">Contact</a>
-                                </li>
-                            </ul>
-                            <div class="common-btn">
-                                <a class="login-btn" href="https://templates.hibootstrap.com/gable/default/login.html">
-                                    <i class="icofont-plus-square"></i>
-                                    Login
-                                </a>
-                                <a class="sign-up-btn" href="https://templates.hibootstrap.com/gable/default/create-account.html">
-                                    <i class="icofont-user-alt-4"></i>
-                                    Sign Up
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <!-- End Navbar Area -->
-
-        <!-- Page Title -->
-        <div class="page-title-area">
-
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="container">
-                        <div class="page-title-text">
-                            <h2>Post A Job</h2>
-                            <ul>
-                                <li>
-                                    <a href="https://templates.hibootstrap.com/gable/default/index.html">Home</a>
-                                </li>
-                                <li>
-                                    <i class="icofont-simple-right"></i>
-                                </li>
-                                <li>Post A Job</li>
-                            </ul>
-                        </div>
+                    <div class="page-title-text">
+                        <h2>Post A Job</h2>
+                        <ul>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/index.html">Home</a>
+                            </li>
+                            <li>
+                                <i class="icofont-simple-right"></i>
+                            </li>
+                            <li>Post A Job</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Page Title -->
+    </div>
+    <!-- End Page Title -->
 
-        <!-- Post A Job -->
-        <div class="post-job-area pt-100">
-            <div class="container">
-                <div class="post-job-item">
-                    <form id="uploadform" method = "POST" enctype = "multipart/form-data">
-                       <input type = "file" name = "file" />
-                       <button id="gettable" type="button">Upload</button>
-                   </form>
-
-                   <p style="color:black;">Result: <span id="resultFullName" style="color:black;"> here</span></p>
-                   <p><span id = "spnText"></span></p>
-                   <span id = "noid"></span>
-                    
-                </div>
-                <div class="post-job-item">
-
-                    <form>
-
-                        <div class="post-job-heading">
-                            <h2>Post a Job</h2>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Job Title</label>
-                                    <input type="text" class="form-control" placeholder="UX/UI Designer", 
-                                    name = "jtl", id="jtl" >
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Age Limit</label>
-                                    <input type="text" class="form-control" placeholder="55", name = "al", id = "al">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Salary</label>
-                                    <input type="text" class="form-control" placeholder="Winbrans.com", name = "sal", id = "sal">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Vacancies</label>
-                                    <input type="text" class="form-control" placeholder="10", name="vac", id = "vac">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Location</label>
-                                    <input type="text" class="form-control" placeholder="210-27 Quadra, Market Street, Victoria Canada", name="loc", id = "loc">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Last Date</label>
-                                    <input type="date" class="form-control", name = "ld", id = "ld">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Experience Required (In Years)</label>
-                                    <input type="text" class="form-control" placeholder="10", name = "exp", id = "exp">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <div class="job-type-area col-lg-6" >
-                                        <span>Job Type</span>
-                                        <select name="jtype" id="jtype">
-                                          <option value="Full Time">Full Time</option>
-                                          <option value="Part Time">Part Time</option>
-                                          <option value="Intern">Intern</option>
-                                      </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Job Description</label>
-                                    <textarea id="jd" rows="8" class="form-control" name="jd"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class="col-lg-6">
-                                <button type="button" class="btn create-ac-btn" id="jobformupload">Post</button>
-                            </div>
-                            <div class = "col-lg-6" id = "msg1">
-                                
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- End Post A Job -->
-
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-
-                <!-- Subscribe Form -->
-                <div class="subscribe-area">
-                    <div class="section-title">
-                        <h2>Subscribe Newsletter</h2>
-                    </div>
-                    <div class="subscribe-shape">
-                        <img src="./Gable - Job Portal HTML Template_files/1.png" alt="Shape">
-                        <img src="./Gable - Job Portal HTML Template_files/1.png" alt="Shape">
-                        <img src="./Gable - Job Portal HTML Template_files/1.png" alt="Shape">
-                        <img src="./Gable - Job Portal HTML Template_files/1.png" alt="Shape">
-                        <img src="./Gable - Job Portal HTML Template_files/2.png" alt="Shape">
-                    </div>
-                    <div class="subscribe-item">
-                        <form class="newsletter-form" data-toggle="validator" novalidate="true">
-                            <input type="email" class="form-control" placeholder="Enter Your Email" name="EMAIL" required="" autocomplete="off">
-
-                            <button class="btn subscribe-btn disabled" type="submit" style="pointer-events: all; cursor: pointer;">
-                                Subscribe
-                            </button>
-
-                            <div id="validator-newsletter" class="form-result"></div>
-                        </form>
-                    </div>
-                </div>
-                <!-- End Subscribe Form -->
-
-                <div class="row">
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="footer-item">
-                            <div class="footer-logo">
-                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
-                                    <img src="./Gable - Job Portal HTML Template_files/logo-two.png" alt="Logo">
-                                </a>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p>
-                                <ul>
-                                    <li>
-                                        <a href="https://www.youtube.com/" target="_blank">
-                                            <i class="icofont-youtube-play"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <i class="icofont-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.instagram.com/" target="_blank">
-                                            <i class="icofont-instagram"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.twitter.com/" target="_blank">
-                                            <i class="icofont-twitter"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="footer-item">
-                            <div class="footer-category">
-                                <h3>Category</h3>
-                                <ul>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Development
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Business
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Tech &amp; IT
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Finance
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Networking
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="footer-item">
-                            <div class="footer-category">
-                                <h3>Quick Links</h3>
-                                <ul>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/index.html">
-                                            <i class="icofont-simple-right"></i>
-                                            Home
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/about.html">
-                                            <i class="icofont-simple-right"></i>
-                                            About Us
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/blog.html">
-                                            <i class="icofont-simple-right"></i>
-                                            Blogs
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/company-list.html">
-                                            <i class="icofont-simple-right"></i>
-                                            Companies
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Testimonials
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="footer-item">
-                            <div class="footer-find">
-                                <h3>Find Us</h3>
-                                <ul>
-                                    <li>
-                                        <i class="icofont-location-pin"></i>
-                                        28/A Street, New York City
-                                    </li>
-                                    <li>
-                                        <i class="icofont-ui-call"></i>
-                                        <a href="tel:+880123456789">
-                                            +88 0123 456 789
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="icofont-ui-email"></i>
-                                        <a href="mailto:hello@gable.com">
-                                            hello@gable.com
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="copyright-area">
+    <!-- Post A Job -->
+    <div class="post-job-area pt-100">
+        <div class="container">
+            <div class="post-job-item">
+                <form id="uploadform" method = "POST" enctype = "multipart/form-data">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="copyright-item">
-                                <p>Copyright @2020 Gable. Designed by <a href="https://hibootstrap.com/" target="_blank">HiBootstrap</a></p>
-                            </div>
+
+                        <div class="col-lg-5">
+                            <input class="form-control-file" type = "file" name = "file" style="color: black;" />
                         </div>
-                        <div class="col-lg-6">
-                            <div class="copyright-item copyright-right">
-                                <ul>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/terms-and-conditions.html" target="_blank">Terms &amp; Conditions</a>
-                                    </li>
-                                    <li>
-                                        <span>-</span>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/privacy-policy.html" target="_blank">Privacy Policy</a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-3">
+                            <button id="gettable" type="button">Upload</button>
                         </div>
+
+                    </div>
+
+
+                </form>
+
+                <p style="color:black;">Result: <span id="resultFullName" style="color:black;"> here</span></p>
+                <p><span id = "spnText"></span></p>
+                <span id = "noid"></span>
+
+                <form>
+                <div class="row">
+
+                    <div class="col-lg-3">
+                        <label> Job Title: </label>
+                        <select class="mdb-select md-form">
+                          <option value="" disabled selected>Select Column</option>
+                          <option value="1">Column 1</option>
+                          <option value="2">Column 2</option>
+                          <option value="3">Column 3</option>
+                          <option value="4">Column 4</option>
+                          <option value="5">Column 5</option>
+                          <option value="6">Column 6</option>
+                          <option value="7">Column 7</option>
+                          <option value="8">Column 8</option>
+                          <option value="9">Column 9</option>
+                          <option value="10">Column 10</option>
+                          <option value="11">Column 11</option>
+                          <option value="12">Column 12</option>
+                          <option value="13">Column 13</option>
+                          <option value="14">Column 14</option>
+                          <option value="15">Column 15</option>
+                      </select>
+                  </div>
+
+                  <div class="col-lg-3">
+                        <label> Age Limit: </label>
+                        <select class="mdb-select md-form">
+                          <option value="" disabled selected>Select Column</option>
+                          <option value="1">Column 1</option>
+                          <option value="2">Column 2</option>
+                          <option value="3">Column 3</option>
+                          <option value="4">Column 4</option>
+                          <option value="5">Column 5</option>
+                          <option value="6">Column 6</option>
+                          <option value="7">Column 7</option>
+                          <option value="8">Column 8</option>
+                          <option value="9">Column 9</option>
+                          <option value="10">Column 10</option>
+                          <option value="11">Column 11</option>
+                          <option value="12">Column 12</option>
+                          <option value="13">Column 13</option>
+                          <option value="14">Column 14</option>
+                          <option value="15">Column 15</option>
+                      </select>
+                  </div>
+                  <div class="col-lg-3">
+                        <label> Salary: </label>
+                        <select class="mdb-select md-form">
+                          <option value="" disabled selected>Select Column</option>
+                          <option value="1">Column 1</option>
+                          <option value="2">Column 2</option>
+                          <option value="3">Column 3</option>
+                          <option value="4">Column 4</option>
+                          <option value="5">Column 5</option>
+                          <option value="6">Column 6</option>
+                          <option value="7">Column 7</option>
+                          <option value="8">Column 8</option>
+                          <option value="9">Column 9</option>
+                          <option value="10">Column 10</option>
+                          <option value="11">Column 11</option>
+                          <option value="12">Column 12</option>
+                          <option value="13">Column 13</option>
+                          <option value="14">Column 14</option>
+                          <option value="15">Column 15</option>
+                      </select>
+                  </div>
+                  <div class="col-lg-3">
+                        <label> Vacancies: </label>
+                        <select class="mdb-select md-form">
+                          <option value="" disabled selected>Select Column</option>
+                          <option value="1">Column 1</option>
+                          <option value="2">Column 2</option>
+                          <option value="3">Column 3</option>
+                          <option value="4">Column 4</option>
+                          <option value="5">Column 5</option>
+                          <option value="6">Column 6</option>
+                          <option value="7">Column 7</option>
+                          <option value="8">Column 8</option>
+                          <option value="9">Column 9</option>
+                          <option value="10">Column 10</option>
+                          <option value="11">Column 11</option>
+                          <option value="12">Column 12</option>
+                          <option value="13">Column 13</option>
+                          <option value="14">Column 14</option>
+                          <option value="15">Column 15</option>
+                      </select>
+                  </div>
+
+              </div>
+
+              <div class="row">
+
+                    <div class="col-lg-3">
+                        <label> Job Title: </label>
+                        <select class="mdb-select md-form">
+                          <option value="" disabled selected>Select Column</option>
+                          <option value="1">Column 1</option>
+                          <option value="2">Column 2</option>
+                          <option value="3">Column 3</option>
+                          <option value="4">Column 4</option>
+                          <option value="5">Column 5</option>
+                          <option value="6">Column 6</option>
+                          <option value="7">Column 7</option>
+                          <option value="8">Column 8</option>
+                          <option value="9">Column 9</option>
+                          <option value="10">Column 10</option>
+                          <option value="11">Column 11</option>
+                          <option value="12">Column 12</option>
+                          <option value="13">Column 13</option>
+                          <option value="14">Column 14</option>
+                          <option value="15">Column 15</option>
+                      </select>
+                  </div>
+
+                  <div class="col-lg-3">
+                        <label> Age Limit: </label>
+                        <select class="mdb-select md-form">
+                          <option value="" disabled selected>Select Column</option>
+                          <option value="1">Column 1</option>
+                          <option value="2">Column 2</option>
+                          <option value="3">Column 3</option>
+                          <option value="4">Column 4</option>
+                          <option value="5">Column 5</option>
+                          <option value="6">Column 6</option>
+                          <option value="7">Column 7</option>
+                          <option value="8">Column 8</option>
+                          <option value="9">Column 9</option>
+                          <option value="10">Column 10</option>
+                          <option value="11">Column 11</option>
+                          <option value="12">Column 12</option>
+                          <option value="13">Column 13</option>
+                          <option value="14">Column 14</option>
+                          <option value="15">Column 15</option>
+                      </select>
+                  </div>
+                  <div class="col-lg-3">
+                        <label> Salary: </label>
+                        <select class="mdb-select md-form">
+                          <option value="" disabled selected>Select Column</option>
+                          <option value="1">Column 1</option>
+                          <option value="2">Column 2</option>
+                          <option value="3">Column 3</option>
+                          <option value="4">Column 4</option>
+                          <option value="5">Column 5</option>
+                          <option value="6">Column 6</option>
+                          <option value="7">Column 7</option>
+                          <option value="8">Column 8</option>
+                          <option value="9">Column 9</option>
+                          <option value="10">Column 10</option>
+                          <option value="11">Column 11</option>
+                          <option value="12">Column 12</option>
+                          <option value="13">Column 13</option>
+                          <option value="14">Column 14</option>
+                          <option value="15">Column 15</option>
+                      </select>
+                  </div>
+                  <div class="col-lg-3">
+                        <label> Vacancies: </label>
+                        <select class="mdb-select md-form">
+                          <option value="" disabled selected>Select Column</option>
+                          <option value="1">Column 1</option>
+                          <option value="2">Column 2</option>
+                          <option value="3">Column 3</option>
+                          <option value="4">Column 4</option>
+                          <option value="5">Column 5</option>
+                          <option value="6">Column 6</option>
+                          <option value="7">Column 7</option>
+                          <option value="8">Column 8</option>
+                          <option value="9">Column 9</option>
+                          <option value="10">Column 10</option>
+                          <option value="11">Column 11</option>
+                          <option value="12">Column 12</option>
+                          <option value="13">Column 13</option>
+                          <option value="14">Column 14</option>
+                          <option value="15">Column 15</option>
+                      </select>
+                  </div>
+
+              </div>
+
+              
+
+              
+              </form>
+
+          </div>
+          <div class="post-job-item">
+
+            <form>
+
+                <div class="post-job-heading">
+                    <h2>Post a Job</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            <input type="text" class="form-control" placeholder="UX/UI Designer", 
+                            name = "jtl", id="jtl" >
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Age Limit</label>
+                            <input type="text" class="form-control" placeholder="55", name = "al", id = "al">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Salary</label>
+                            <input type="text" class="form-control" placeholder="Winbrans.com", name = "sal", id = "sal">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Vacancies</label>
+                            <input type="text" class="form-control" placeholder="10", name="vac", id = "vac">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" class="form-control" placeholder="210-27 Quadra, Market Street, Victoria Canada", name="loc", id = "loc">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Last Date</label>
+                            <input type="date" class="form-control", name = "ld", id = "ld">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Experience Required (In Years)</label>
+                            <input type="text" class="form-control" placeholder="10", name = "exp", id = "exp">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <div class="job-type-area col-lg-6" >
+                                <span>Job Type</span>
+                                <select name="jtype" id="jtype">
+                                  <option value="Full Time">Full Time</option>
+                                  <option value="Part Time">Part Time</option>
+                                  <option value="Intern">Intern</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Job Description</label>
+                        <textarea id="jd" rows="8" class="form-control" name="jd"></textarea>
                     </div>
                 </div>
             </div>
-        </footer>
-        <!-- End Footer -->
+            <div class = "row">
+                <div class="col-lg-6">
+                    <button type="button" class="btn create-ac-btn" id="jobformupload">Post</button>
+                </div>
+                <div class = "col-lg-6" id = "msg1">
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<!-- End Post A Job -->
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+
+        <!-- Subscribe Form -->
+        <div class="subscribe-area">
+            <div class="section-title">
+                <h2>Subscribe Newsletter</h2>
+            </div>
+            <div class="subscribe-shape">
+                <img src="./Gable - Job Portal HTML Template_files/1.png" alt="Shape">
+                <img src="./Gable - Job Portal HTML Template_files/1.png" alt="Shape">
+                <img src="./Gable - Job Portal HTML Template_files/1.png" alt="Shape">
+                <img src="./Gable - Job Portal HTML Template_files/1.png" alt="Shape">
+                <img src="./Gable - Job Portal HTML Template_files/2.png" alt="Shape">
+            </div>
+            <div class="subscribe-item">
+                <form class="newsletter-form" data-toggle="validator" novalidate="true">
+                    <input type="email" class="form-control" placeholder="Enter Your Email" name="EMAIL" required="" autocomplete="off">
+
+                    <button class="btn subscribe-btn disabled" type="submit" style="pointer-events: all; cursor: pointer;">
+                        Subscribe
+                    </button>
+
+                    <div id="validator-newsletter" class="form-result"></div>
+                </form>
+            </div>
+        </div>
+        <!-- End Subscribe Form -->
+
+        <div class="row">
+            <div class="col-sm-6 col-lg-3">
+                <div class="footer-item">
+                    <div class="footer-logo">
+                        <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
+                            <img src="./Gable - Job Portal HTML Template_files/logo-two.png" alt="Logo">
+                        </a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p>
+                        <ul>
+                            <li>
+                                <a href="https://www.youtube.com/" target="_blank">
+                                    <i class="icofont-youtube-play"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/" target="_blank">
+                                    <i class="icofont-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/" target="_blank">
+                                    <i class="icofont-instagram"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.twitter.com/" target="_blank">
+                                    <i class="icofont-twitter"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="footer-item">
+                    <div class="footer-category">
+                        <h3>Category</h3>
+                        <ul>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
+                                    <i class="icofont-simple-right"></i>
+                                    Development
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
+                                    <i class="icofont-simple-right"></i>
+                                    Business
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
+                                    <i class="icofont-simple-right"></i>
+                                    Tech &amp; IT
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
+                                    <i class="icofont-simple-right"></i>
+                                    Finance
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
+                                    <i class="icofont-simple-right"></i>
+                                    Networking
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="footer-item">
+                    <div class="footer-category">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/index.html">
+                                    <i class="icofont-simple-right"></i>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/about.html">
+                                    <i class="icofont-simple-right"></i>
+                                    About Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/blog.html">
+                                    <i class="icofont-simple-right"></i>
+                                    Blogs
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/company-list.html">
+                                    <i class="icofont-simple-right"></i>
+                                    Companies
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/post-a-job.html#">
+                                    <i class="icofont-simple-right"></i>
+                                    Testimonials
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="footer-item">
+                    <div class="footer-find">
+                        <h3>Find Us</h3>
+                        <ul>
+                            <li>
+                                <i class="icofont-location-pin"></i>
+                                28/A Street, New York City
+                            </li>
+                            <li>
+                                <i class="icofont-ui-call"></i>
+                                <a href="tel:+880123456789">
+                                    +88 0123 456 789
+                                </a>
+                            </li>
+                            <li>
+                                <i class="icofont-ui-email"></i>
+                                <a href="mailto:hello@gable.com">
+                                    hello@gable.com
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="copyright-item">
+                        <p>Copyright @2020 Gable. Designed by <a href="https://hibootstrap.com/" target="_blank">HiBootstrap</a></p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="copyright-item copyright-right">
+                        <ul>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/terms-and-conditions.html" target="_blank">Terms &amp; Conditions</a>
+                            </li>
+                            <li>
+                                <span>-</span>
+                            </li>
+                            <li>
+                                <a href="https://templates.hibootstrap.com/gable/default/privacy-policy.html" target="_blank">Privacy Policy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer -->
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script>        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>        
 
-            $('#noid').on('DOMSubtreeModified', function() {
-                $('#tblData tbody').on('click', 'tr', function() {
+    // Material Select Initialization
+    $(document).ready(function() {
+        $('.mdb-select').materialSelect();
+    });
+
+    $('#noid').on('DOMSubtreeModified', function() {
+        $('#tblData tbody').on('click', 'tr', function() {
                     //get row contents into an array
                     var tableData = $(this).children("td").map(function() {
                         return $(this).text();
                     }).get();
 
-    
+
                     $('#jtl').val(tableData[1]);
                     $('#jd').val(tableData[2]);
                     $('#al').val(tableData[3]);
@@ -555,101 +757,101 @@
                     //$('#ld').val(tableData[7]);
                 });
 
-                
-                
-            });    
-        </script>
+
+
+    });    
+</script>
 
 
 
-        <script type="text/javascript">
-            $(function() {
+<script type="text/javascript">
+    $(function() {
 
-                $('#jobformupload').click(function(e) {
-                    var jtl = $('#jtl').val();
-                    var al = $('#al').val();
-                    var sal = $('#sal').val();
-                    var vac = $('#vac').val();
-                    var loc = $('#loc').val();
-                    var ld = $('#ld').val();
-                    var exp = $('#exp').val();
-                    var jtype = $('#jtype').val();
-                    var jd = $('#jd').val();
-                    console.log(jtl, al, sal, vac, loc, ld, exp, jtype, jd);
-                    $.ajax({
-                    method: "POST",
-                    url: '/uploadfajax',
-                    contentType: 'application/json;charset=UTF-8',
-                    data: JSON.stringify({'jtl': jtl, 'al': al, 'sal': sal, 'vac': vac, 'loc': loc, 'ld': ld, 'exp': exp, 'jtype': jtype, 'jd': jd}),
-                    dataType: "json",
-                    success: function(data) {
-                        alert("Data Uploaded Successfully!");
-                        $('#jtl').val("");
-                        $('#jd').val("");
-                        $('#al').val("");
-                        $('#sal').val("");
-                        $('#vac').val("");
-                        $('#loc').val("");
-                        $('#ld').val("");
-                        $('#exp').val("");
+        $('#jobformupload').click(function(e) {
+            var jtl = $('#jtl').val();
+            var al = $('#al').val();
+            var sal = $('#sal').val();
+            var vac = $('#vac').val();
+            var loc = $('#loc').val();
+            var ld = $('#ld').val();
+            var exp = $('#exp').val();
+            var jtype = $('#jtype').val();
+            var jd = $('#jd').val();
+            console.log(jtl, al, sal, vac, loc, ld, exp, jtype, jd);
+            $.ajax({
+                method: "POST",
+                url: '/uploadfajax',
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify({'jtl': jtl, 'al': al, 'sal': sal, 'vac': vac, 'loc': loc, 'ld': ld, 'exp': exp, 'jtype': jtype, 'jd': jd}),
+                dataType: "json",
+                success: function(data) {
+                    alert("Data Uploaded Successfully!");
+                    $('#jtl').val("");
+                    $('#jd').val("");
+                    $('#al').val("");
+                    $('#sal').val("");
+                    $('#vac').val("");
+                    $('#loc').val("");
+                    $('#ld').val("");
+                    $('#exp').val("");
                         //$('#msg1').html('<span style="color: green;">Data Uploaded Successfully</span>');
                     }
 
-                    });
-             }); 
-
-
-                
-                $('#gettable').click(function() {
-                    console.log('Reached Jquery');
-                    event.preventDefault();
-                    var form_data = new FormData($('#uploadform')[0]);
-                    $.ajax({
-                        type: 'POST',
-                        url: '/uploadajax',
-                        data: form_data,
-                        contentType: false,
-                        processData: false,
-                        dataType: 'json'
-                    }).done(function(data, textStatus, jqXHR){
-                        console.log(data);
-                        console.log(textStatus);
-                        console.log(jqXHR);
-                        console.log('Success!');
-                        $("#noid").html(data['table']);
-                        $("#resultFullName").text(data['user_image']);
-                    }).fail(function(data){
-                        alert('error!');
-                    });
                 });
-            }); 
-        </script>
-        
-        <!-- Essential JS -->
-        <script src="./Gable - Job Portal HTML Template_files/jquery.min.js.download"></script>
-        <script src="./Gable - Job Portal HTML Template_files/popper.min.js.download"></script>
-        <script src="./Gable - Job Portal HTML Template_files/bootstrap.min.js.download"></script>
-        <!-- Meanmenu JS -->
-        <script src="./Gable - Job Portal HTML Template_files/jquery.meanmenu.js.download"></script>
-        <!-- Nice Select JS -->
-        <script src="./Gable - Job Portal HTML Template_files/jquery.nice-select.min.js.download"></script>
-        <!-- Mixitup JS -->
-        <script src="./Gable - Job Portal HTML Template_files/jquery.mixitup.min.js.download"></script>
-        <!-- Counter JS -->
-        <script src="./Gable - Job Portal HTML Template_files/waypoints.min.js.download"></script>
-        <script src="./Gable - Job Portal HTML Template_files/jquery.counterup.min.js.download"></script>
-        <!-- Owl Carousel JS -->
-        <script src="./Gable - Job Portal HTML Template_files/owl.carousel.min.js.download"></script>
-        <!-- Form Ajaxchimp JS -->
-		<script src="./Gable - Job Portal HTML Template_files/jquery.ajaxchimp.min.js.download"></script>
-		<!-- Form Validator JS -->
-		<script src="./Gable - Job Portal HTML Template_files/form-validator.min.js.download"></script>
-		<!-- Contact JS -->
-        <script src="./Gable - Job Portal HTML Template_files/contact-form-script.js.download"></script>
-        <!-- Wow JS -->
-        <script src="./Gable - Job Portal HTML Template_files/wow.min.js.download"></script>
-        <!-- Custom JS -->
-        <script src="./Gable - Job Portal HTML Template_files/custom.js.download"></script>
+        }); 
 
-    
+
+
+        $('#gettable').click(function() {
+            console.log('Reached Jquery');
+            event.preventDefault();
+            var form_data = new FormData($('#uploadform')[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/uploadajax',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                dataType: 'json'
+            }).done(function(data, textStatus, jqXHR){
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+                console.log('Success!');
+                $("#noid").html(data['table']);
+                $("#resultFullName").text(data['user_image']);
+            }).fail(function(data){
+                alert('error!');
+            });
+        });
+    }); 
+</script>
+
+<!-- Essential JS -->
+<script src="./Gable - Job Portal HTML Template_files/jquery.min.js.download"></script>
+<script src="./Gable - Job Portal HTML Template_files/popper.min.js.download"></script>
+<script src="./Gable - Job Portal HTML Template_files/bootstrap.min.js.download"></script>
+<!-- Meanmenu JS -->
+<script src="./Gable - Job Portal HTML Template_files/jquery.meanmenu.js.download"></script>
+<!-- Nice Select JS -->
+<script src="./Gable - Job Portal HTML Template_files/jquery.nice-select.min.js.download"></script>
+<!-- Mixitup JS -->
+<script src="./Gable - Job Portal HTML Template_files/jquery.mixitup.min.js.download"></script>
+<!-- Counter JS -->
+<script src="./Gable - Job Portal HTML Template_files/waypoints.min.js.download"></script>
+<script src="./Gable - Job Portal HTML Template_files/jquery.counterup.min.js.download"></script>
+<!-- Owl Carousel JS -->
+<script src="./Gable - Job Portal HTML Template_files/owl.carousel.min.js.download"></script>
+<!-- Form Ajaxchimp JS -->
+<script src="./Gable - Job Portal HTML Template_files/jquery.ajaxchimp.min.js.download"></script>
+<!-- Form Validator JS -->
+<script src="./Gable - Job Portal HTML Template_files/form-validator.min.js.download"></script>
+<!-- Contact JS -->
+<script src="./Gable - Job Portal HTML Template_files/contact-form-script.js.download"></script>
+<!-- Wow JS -->
+<script src="./Gable - Job Portal HTML Template_files/wow.min.js.download"></script>
+<!-- Custom JS -->
+<script src="./Gable - Job Portal HTML Template_files/custom.js.download"></script>
+
+
 <div id="toTop" class="back-to-top-btn" style="display: none;"><i class="icofont-dotted-up"></i></div></body></html>
