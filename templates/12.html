@@ -1,4 +1,4 @@
-<!--->Exam Page<!--->
+<!---Exam Page-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +53,7 @@
 
     }
 
-        
+
     .button {
       display: inline-block;
       border-radius: 4px;
@@ -97,236 +97,279 @@
       right: 0;
     }
     .text-block {
-        
-       
-       position: absolute;
-        bottom: 250px;
-        right: 500px;
-        background-color: black;
-        color: white;
-        padding-left: 80px;
-        padding-right: 60px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        opacity: 0.5;
-
-    }
 
 
-    .container {
-      position: relative;
-      width: 100%;
-      max-width: 400px;
-    }
+     position: absolute;
+     bottom: 250px;
+     right: 500px;
+     background-color: black;
+     color: white;
+     padding-left: 80px;
+     padding-right: 60px;
+     padding-top: 20px;
+     padding-bottom: 20px;
+     opacity: 0.5;
 
-    .container img {
-      width: 100%;
-      height: auto;
-    }
+   }
 
-    .container .btn {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      background-color: #555;
-      color: white;
-      font-size: 16px;
-      padding: 12px 24px;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      text-align: center;
-    }
 
-    .container .btn:hover {
-      background-color: black;
-    }
+   .container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+  }
 
-    .carousel-inner{
-      
-      height: 600px;
-    }
-    .container {
-      position: relative;
-      
-    }
+  .container img {
+    width: 100%;
+    height: auto;
+  }
 
-    .image {
-      display: block;
-      width: 100%;
-      height: auto;
-      opacity: 0.5;
-    }
+  .container .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+  }
 
-    .overlay {
-      
-     
-      opacity: 0;
-      transition: .5s ease;
-      background-color: #008CBA;
-    }
+  .container .btn:hover {
+    background-color: black;
+  }
 
-    .container:hover .overlay {
-      opacity: 1;
+  .carousel-inner{
 
-    }
+    height: 600px;
+  }
+  .container {
+    position: relative;
 
-    .text {
-      color: white;
-      font-size: 20px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
+  }
+
+  .image {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.5;
+  }
+
+  .overlay {
+
+
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #008CBA;
+  }
+
+  .container:hover .overlay {
+    opacity: 1;
+
+  }
+
+  .text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
 </style>
-</head>
-<body>
-<!-- Loading countdown() function as soon as the html page is displayed -->
-<body onload="countdown()"> 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+<script type="text/javascript">
+  
+ window.history.forward();
+
+
+ function noBack() { window.history.forward(); }
+
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+    </script>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <div class="ab">
-      <ul class="nav navbar-nav">
-        
-        <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        <li><a href="/login"><span class="glyphicon glyphicon-earphone"></span> Contact</a></li>
-        <li><a href="/register"><span class="glyphicon glyphicon-envelope"></span> Feedback</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-globe"></span> About Us</a></li>
-      </ul></div>
-      <ul class="nav navbar-nav navbar-right">
-        <form class="navbar-form navbar-right" role="search">
-        <div class="form-group input-group">
-          <input type="text" class="form-control" placeholder="Search..">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </span>        
+</head>
+<body onload="start();" onpageshow="if (event.persisted) start();" onunload="">
+  <!-- Loading countdown() function as soon as the html page is displayed -->
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="#">Logo</a>
         </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <div class="ab">
+            <ul class="nav navbar-nav">
+
+              <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+              <li><a href="/login"><span class="glyphicon glyphicon-earphone"></span> Contact</a></li>
+              <li><a href="/register"><span class="glyphicon glyphicon-envelope"></span> Feedback</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-globe"></span> About Us</a></li>
+            </ul></div>
+            <ul class="nav navbar-nav navbar-right">
+              <form class="navbar-form navbar-right" role="search">
+                <div class="form-group input-group">
+                  <input type="text" class="form-control" placeholder="Search..">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                      <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                  </span>        
+                </div>
+              </form>
+
+              <ul class="nav navbar-nav navbar-right">
+
+
+                <li><a href="/logout">Logout</a></li>
+
+              </ul>
+
+
+              <li style="font-size: 15px;"><a href="/profile">Profile</a></li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+      <!-- checkanswer() function of app1.py is called whenever the user clicks the Next button -->
+      <form method="POST" action="/check_answer/{{a}}">
+        <div class="col-sm-8 text-left" style="margin-left: 300px">
+          <!-- Timer--> <h4 style='color:red'>Time Left:</h4><h4 id="timespan" style='color:red'></h4><h4 style='color:red'>seconds</h4>
+          <!-- Below input passes the response time to app1.py retrived from javascript -->
+          <input type="hidden" id="wakanda" name = "nm" value=" "/>
+
+          <label>Question No.: {{inc+1}}/10</label>
+
+          <h3 id = "question">{{question}}</h3>
+
+
+          <div style="margin-left: 50px;font-size: 20px">
+            <div class="radio">
+              <input type="radio" id="option1" name="option" value="Answer: Option A" required>
+              <label for="{{option}}">{{option1}}</label><br>
+            </div>
+            <div class="radio">
+              <input type="radio" id="option2" name="option" value="Answer: Option B">
+              <label for="{{option2}}">{{option2}}</label><br>
+            </div>
+            <div class="radio">
+              <input type="radio" id="option3" name="option" value="Answer: Option C">
+              <label for="{{option3}}">{{option3}}</label><br>
+            </div>
+            <div class="radio">
+              <input type="radio" id="option4" name="option" value="Answer: Option D">
+              <label for="{{option4}}">{{option4}}</label><br>
+            </div>
+
+            <input type="hidden" name="score" value="{{score}}">
+            <input type="hidden" name="inc" value="{{inc}}">
+            <input type="hidden" name="correct_answer1" value="{{correct_answer}}">
+
+            <label>Score-</label>          
+            <label>{{score}}</label>
+            <label>Response Time-</label>
+            <label>{{res_time}}</label>
+            <label>Question ID-</label>
+            <label>{{ID}}</label>
+            <label>Correct </label>
+            <label>{{correct_answer}}</label>
+          </div>
+
+          <div align="center"><button type="submit" id = "myBtn" class="btn btn-info" onclick="cdpause()">Next</button></div>        
+        </div>
+
       </form>
 
-      <ul class="nav navbar-nav navbar-right">
-        
-        
-    <li><a href="/logout">Logout</a></li>
-    
-  </ul>
 
 
-    <li style="font-size: 15px;"><a href="/profile">Profile</a></li>
-      </ul>
-      </ul>
-    </div>
-  </div>
-  </nav>
-  <body onload="countdown()">
+      <script type="text/javascript">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
-</script>
-<!-- checkanswer() function of app1.py is called whenever the user clicks the Next button -->
-  <form method="POST" action="/check_answer">
-    <div class="col-sm-8 text-left" style="margin-left: 300px">
-        <!-- Timer--> <h4 style='color:red'>Time Left:</h4><h4 id="timespan" style='color:red'></h4><h4 style='color:red'>seconds</h4>
-        <!-- Below input passes the response time to app1.py retrived from javascript -->
-        <input type="hidden" id="wakanda" name = "nm" value=" "/>
-
-        <h3 id = "question">{{question}}</h3>
-        <div style="margin-left: 50px;font-size: 20px">
-          <div class="checkbox">
-            <label id="option1"><input type="checkbox" name="option1">{{option1}}</label>
-          </div>
-          <div class="checkbox">
-            <label id="option2"><input type="checkbox" name="option2">{{option2}}</label>
-          </div>
-          <div class="checkbox">
-            <label id="option3"><input type="checkbox" name="option3">{{option3}}</label>
-          </div>
-          <div class="checkbox">
-            <label id="option4"><input type="checkbox" name="option4">{{option4}}</label>
-          </div>
-          <label>Score-</label>          
-          <label>{{score}}</label>
-          <label>Predicted Difficulty-</label>          
-          <label>{{pred}}</label>
-          <label>Response Time-</label>
-          <label>{{res_time}}</label>
-          <label>Current Level</label>
-          <label>{{curr_level}}</label>
-          <label>Question ID-</label>
-          <label>{{ID}}</label>
-          <label>{{user}}</label>
-        </div>
-
-        <div align="center"><button type="submit" class="btn btn-info" onclick="cdpause()">Next</button></div>        
-      </div>
-
-</form>
-<script type="text/javascript">
+        var CCOUNT=60;
+        var time;
+        cdreset();
+        var t, count;
+        var flag=0;
 
 
-    var CCOUNT=60;
-    var time;
-    cdreset();
-    var t, count;
+        function cddisplay() {
+          document.getElementById('timespan').innerHTML = count;
+        }
 
+        function countdown() {
 
-    function cddisplay() {
-        document.getElementById('timespan').innerHTML = count;
-    }
+          flag = 1;
 
-    function countdown() {
-
-        cddisplay();
-        if (count === 0) {
+          cddisplay();
+          if (count === 0) {
             // time is up
             cdpause();
-            location.href = '{{ url_for( 'check_answer' ) }}'
-        } else {
+
+            document.getElementById('option1').checked = true
+            document.getElementById('myBtn').click()
+
+            //location.href = '/checkanswer/{{aid}}'
+          } else {
             count--;
             t = setTimeout(countdown, 1000);
+          }
         }
-    }
 
-    function cdpause() {
+        function cdpause() {
         // pauses countdown
         clearTimeout(t);
         time=(60-count);
         document.getElementById('wakanda').value=time;
 
-    }
+      }
 
-    function cdreset() {
+      function cdreset() {
         // resets countdown
         cdpause();
         count = CCOUNT;
         // countdown();
-    }
+      }
 
-    function reset() {
+      function reset(CCOUNT) {
         // resets countdown
         cdpause();
         count = CCOUNT;
         countdown();
-    }
-</script>
-</body>
+      }
+
+      function start(){
+          noBack();
+          if (flag == 0){
+            countdown();
+          }else{
+              reset(count)
+          }
+          
+        }
+
+      // $(document).ready(function() {
+      //    function disablePrev() { window.history.forward() }
+      //    window.onload = disablePrev();
+      //    window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+      // });
+
+
+    </script>
+  </body>
 </html>
