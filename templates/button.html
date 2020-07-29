@@ -251,16 +251,29 @@
     </div>
   </div>
   </nav>
-<form action="/read_cell" method="POST">
+
+{% if isattempted %}
+
+<div class="text-center" style="padding-top: 10%;">
+  <h4 style="color: red;">    
+    You have already attempted the Test!
+  </h4>
+  <a href="/candappstatus/{{aid}}" class="btn btn-primary">View Application</a>
+</div>
+
+{% else %}
+
+<form action="/read_cell/{{aid}}" method="POST">
   <div align="center">
     <h2>Instructions</h2>
     <h4>1.Each Student will appear for a set of 30 questions</h4>
     <h4>2.For each question 1 minute will be given</h4>
 
+    <input type="hidden" name="score" value="{{score}}">
+    <input type="hidden" name="inc" value="{{inc}}">
 
-  
   <button>Start the test</button>
-</div>
-  
-
+  </div>
 </form>
+
+{% endif %}
