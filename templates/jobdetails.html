@@ -31,25 +31,11 @@
 
         <title>Job Details</title>
 
-        <link rel="icon" type="image/png" href="https://templates.hibootstrap.com/gable/default/assets/img/favicon.png">
+        <link rel="icon" type="image/png" href="static/title1.png">
     </head>
     <body>
 
-        <!-- Preloader -->
-        <div class="loader" style="display: none;">
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="spinner">
-                        <div class="rect1"></div>
-                        <div class="rect2"></div>
-                        <div class="rect3"></div>
-                        <div class="rect4"></div>
-                        <div class="rect5"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Preloader -->
+       
 
         <!-- Start Navbar Area -->
         {% if session.logged_in %}
@@ -64,14 +50,14 @@
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
                 <a href="index.html" class="logo" >
-                    <img src="static/img/logo.png" alt="Logo">
+                    <img src="static/logo1.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Menu For Desktop Device -->
             <div class="main-nav">
                 <a class="navbar-brand" href="index.html">
-                    <img src="" alt="Logo">
+                    <img src="static/logo1.png" alt="Logo">
                 </a>
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light" style="margin-top:-40px">
@@ -309,198 +295,20 @@
         <!-- End Job Details -->
 
         <!-- Footer -->
-        <footer>
-            <div class="container">
-
-                <!-- Subscribe Form -->
-                <div class="subscribe-area">
-                    <div class="section-title">
-                        <h2>Subscribe Newsletter</h2>
-                    </div>
-                    <div class="subscribe-shape">
-                        <img src="./job-details_files/1.png" alt="Shape">
-                        <img src="./job-details_files/1.png" alt="Shape">
-                        <img src="./job-details_files/1.png" alt="Shape">
-                        <img src="./job-details_files/1.png" alt="Shape">
-                        <img src="./job-details_files/2.png" alt="Shape">
-                    </div>
-                    <div class="subscribe-item">
-                        <form class="newsletter-form" data-toggle="validator" novalidate="true">
-                            <input type="email" class="form-control" placeholder="Enter Your Email" name="EMAIL" required="" autocomplete="off">
-
-                            <button class="btn subscribe-btn disabled" type="submit" style="pointer-events: all; cursor: pointer;">
-                                Subscribe
-                            </button>
-
-                            <div id="validator-newsletter" class="form-result"></div>
-                        </form>
-                    </div>
-                </div>
-                <!-- End Subscribe Form -->
-
-                <div class="row">
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="footer-item">
-                            <div class="footer-logo">
-                                <a href="https://templates.hibootstrap.com/gable/default/job-details.html#">
-                                    <img src="./job-details_files/logo-two.png" alt="Logo">
-                                </a>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p>
-                                <ul>
-                                    <li>
-                                        <a href="https://www.youtube.com/" target="_blank">
-                                            <i class="icofont-youtube-play"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <i class="icofont-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.instagram.com/" target="_blank">
-                                            <i class="icofont-instagram"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.twitter.com/" target="_blank">
-                                            <i class="icofont-twitter"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="footer-item">
-                            <div class="footer-category">
-                                <h3>Category</h3>
-                                <ul>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/job-details.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Development
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/job-details.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Business
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/job-details.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Tech &amp; IT
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/job-details.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Finance
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/job-details.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Networking
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="footer-item">
-                            <div class="footer-category">
-                                <h3>Quick Links</h3>
-                                <ul>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/index.html">
-                                            <i class="icofont-simple-right"></i>
-                                            Home
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/about.html">
-                                            <i class="icofont-simple-right"></i>
-                                            About Us
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/blog.html">
-                                            <i class="icofont-simple-right"></i>
-                                            Blogs
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/company-list.html">
-                                            <i class="icofont-simple-right"></i>
-                                            Companies
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/job-details.html#">
-                                            <i class="icofont-simple-right"></i>
-                                            Testimonials
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="footer-item">
-                            <div class="footer-find">
-                                <h3>Find Us</h3>
-                                <ul>
-                                    <li>
-                                        <i class="icofont-location-pin"></i>
-                                        28/A Street, New York City
-                                    </li>
-                                    <li>
-                                        <i class="icofont-ui-call"></i>
-                                        <a href="tel:+880123456789">
-                                            +88 0123 456 789
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="icofont-ui-email"></i>
-                                        <a href="mailto:hello@gable.com">
-                                            hello@gable.com
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="copyright-area">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="copyright-item">
-                                <p>Copyright @2020 Gable. Designed by <a href="https://hibootstrap.com/" target="_blank">HiBootstrap</a></p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="copyright-item copyright-right">
-                                <ul>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/terms-and-conditions.html" target="_blank">Terms &amp; Conditions</a>
-                                    </li>
-                                    <li>
-                                        <span>-</span>
-                                    </li>
-                                    <li>
-                                        <a href="https://templates.hibootstrap.com/gable/default/privacy-policy.html" target="_blank">Privacy Policy</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <style>
+        .footer {
+        background-color:#ffd9b3;
+        background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366));
+        color: #FFFFFF;
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        }
+        </style>
+        <div class="footer" style="font-size: 20px;"><center><p> © 2000 – 2018 Code_Crunch Pvt.Ltd All Rights reserved<br>
+    All trademarks and copyrights held by respective owners. <br>
+        Terms and Policy</p></center></div>
         <!-- End Footer -->
 
 

@@ -30,11 +30,12 @@
 
        <title>Recruit Uttarakhand</title>
 
-        <link rel="icon" type="image/png" href="static/Capture1.png">
+        <link rel="icon" type="image/png" href="static/title1.png">
 
         <style>
         	.footer {
     background-color:#696969;
+    background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366));
     color: #FFFFFF;
     padding-left: 80px;
     padding-right: 80px;
@@ -304,7 +305,7 @@
             }
         </script>
 
-        <link rel="icon" type="image/png" href="assets/img/favicon.png">
+        <link rel="icon" type="image/png" href="assets/title1.png">
         <script>
             var stateArr = {"Andhra Pradesh" :['Visakhapatnam', 'Vijayawada', 'Guntur', 'Nellore', 'Kurnool', 'Rajahmundry', 'Kakinada', 'Tirupati', 'Anantapur', 'Kadapa', 'Vizianagaram', 'Eluru', 'Ongole', 'Nandyal', 'Machilipatnam', 'Adoni', 'Tenali', 'Chittoor', 'Hindupur', 'Proddatur', 'Bhimavaram', 'Madanapalle', 'Guntakal', 'Dharmavaram', 'Gudivada', 'Srikakulam', 'Narasaraopet', 'Rajampet', 'Tadpatri', 'Tadepalligudem', 'Chilakaluripet', 'Yemmiganur', 'Kadiri', 'Chirala', 'Anakapalle', 'Kavali', 'Palacole', 'Sullurpeta', 'Tanuku', 'Rayachoti', 'Srikalahasti', 'Bapatla', 'Naidupet', 'Nagari', 'Gudur', 'Vinukonda', 'Narasapuram', 'Nuzvid', 'Markapur', 'Ponnur', 'Kandukur', 'Bobbili', 'Rayadurg', 'Samalkot', 'Jaggaiahpet', 'Tuni', 'Amalapuram', 'Bheemunipatnam', 'Venkatagiri', 'Sattenapalle', 'Pithapuram', 'Palasa', 'Kasibugga', 'Parvathipuram', 'Macherla', 'Gooty', 'Salur', 'Mandapeta', 'Jammalamadugu', 'Peddapuram', 'Punganur', 'Nidadavole', 'Repalle', 'Ramachandrapuram', 'Kovvur', 'Tiruvuru', 'Uravakonda', 'Narsipatnam', 'Yerraguntla', 'Pedana', 'Puttur', 'Renigunta', 'Rajam', 'Srisailam Project(Right Flank Colony)', 'Township'],
                     "Andaman and Nicobar Islands" :['Alipur ', ' Andaman Island ', ' Anderson Island ', ' Arainj-Laka-Punga ', ' Austinabad ', ' Bamboo Flat ', ' Barren Island ', ' Beadonabad ', ' Betapur ', ' Bindraban ', ' Bonington ', ' Brookesabad ', ' Cadell Point ', ' Calicut ', ' Chetamale ', ' Cinque Islands ', ' Defence Island ', ' Digilpur ', ' Dolyganj ', ' Flat Island ', ' Geinyale ', ' Great Coco Island ', ' Haddo ', ' Havelock Island ', ' Henry Lawrence Island ', ' Herbertabad ', ' Hobdaypur ', ' Ilichar ', ' Ingoie ', ' Inteview Island ', ' Jangli Ghat ', ' Jhon Lawrence Island ', ' Karen ', ' Kartara ', ' KYD Islannd ', ' Landfall Island ', ' Little Andmand ', ' Little Coco Island ', ' Long Island ', ' Maimyo ', ' Malappuram ', ' Manglutan ', ' Manpur ', ' Mitha Khari ', ' Neill Island ', ' Nicobar Island ', ' North Brother Island ', ' North Passage Island ', ' North Sentinel Island ', ' Nothen Reef Island ', ' Outram Island ', ' Pahlagaon ', ' Palalankwe ', ' Passage Island ', ' Phaiapong ', ' Phoenix Island ', ' Port Blair ', ' Preparis Island ', ' Protheroepur ', ' Rangachang ', ' Rongat ', ' Rutland Island ', ' Sabari ', ' Saddle Peak ', ' Shadipur ', ' Smith Island ', ' Sound Island ', ' South Sentinel Island ', ' Spike Island ', ' Tarmugli Island ', ' Taylerabad ', ' Titaije ', ' Toibalawe ', ' Tusonabad ', ' West Island ', ' Wimberleyganj ', ' Yadita'],
@@ -369,14 +370,14 @@
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
                 <a href="index.html" class="logo">
-                    <img src="assets/img/logo.png" alt="Logo">
+                    <img src="assets/logo1.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Menu For Desktop Device -->
             <div class="main-nav">
                 <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
-                    <img src="static/lastt.png" alt="Logo" style="height:53px; width: 90px"> </a>
+                    <img src="static/logo1.png" alt="Logo" style="height:53px; width: 90px"> </a>
 
                 <div class="container" style="float: right">
                     <nav class="navbar navbar-expand-md navbar-light" style="margin-bottom:0px;">
@@ -453,7 +454,7 @@
                     <div class="create-photo">
                         <div class="already-create">
                             <span>Already create an account?</span>
-                            <a href="#">Sign In</a>
+                            <a href="{{url_for('login')}}">Sign In</a>
                         </div>
                          {% with messages = get_flashed_messages(with_categories=true) %}
                           {% if messages %}
@@ -728,8 +729,8 @@
 
 
 
-<!---> footer <!--->
-      <div class="footer" style="font-size: 20px;"><center><p> © 2000 – 2018 Code_Crunch Pty.Ltd all rights reserved<br>
+<!-- footer -->
+      <div class="footer" style="font-size: 20px;"><center><p> © 2000 – 2018 Code_Crunch Pvt.Ltd all rights reserved<br>
     All trademarks and copyrights held by respective owners. <br>
         Terms and Policy</p></center>
 

@@ -652,3 +652,59 @@ def upload_file():
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+@app.route('/login', methods = ['GET', 'POST'])
+# @login_required
+def login():
+
+    if request.method == 'POST':
+        session.pop('username', None)
+        session.pop('comp_username', None)
+        cursor = mysql.connection.cursor()
+        choice = request.form.get('role')
+        if(choice == "candidate"):
+            uname = request.form.get('uname')
+            password = request.form.get('password')
+            result = cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
+            if result > 0:
+                data = cursor.fetchone()
+                password_db = data[11]
+                if (pwd_context.verify(password, password_db)):
+                    session['logged_in'] = True
+                    session['username'] = uname
+                    flash('You are now logged in', 'success')
+                    return redirect(url_for('cdashboard'))
+                else:
+                    flash('Invalid Login', 'error')
+                    return render_template('login.html')
+                cursor.close()
+            else:
+                flash('User not found', 'error')
+                return render_template('login.html')
+
+        elif(choice == "company"):
+            uname = request.form.get('uname')
+            password = request.form.get('password')
+            result = cursor.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+            if result > 0:
+                data = cursor.fetchone()
+                password_db = data[8]
+                if (pwd_context.verify(password, password_db)):
+                    session['logged_in_company'] = True
+                    session['comp_username'] = uname
+                    flash('You are now logged in', 'success')
+                    return redirect(url_for('compdashboard'))
+                else:
+                    flash('Invalid Login', 'error')
+                    return render_template('login.html')
+                cursor.close()
+            else:
+                flash('User not found', 'error')
+                return render_template('login.html')
+
+    return render_template('login.html')
