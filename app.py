@@ -1415,7 +1415,7 @@ def addblog():
 
 @app.route('/blog')
 def blog():
-		return render_template('blog.html')
+	return render_template('blog.html')
 
 
 
@@ -1887,6 +1887,7 @@ def notificationviewed():
 	result2 = cur.execute("""UPDATE `notification-candidate` SET viewed = %s WHERE uname = %s""", [view,uname])
 	mysql.connection.commit()
 	cur.close()
+	return ""
 
 @app.route('/myapplications')
 @login_required
@@ -1920,7 +1921,12 @@ def myapplications():
 		compname = compdata[0][0]
 
 		data.append([appid, jtitle, compname, applied_on, status])
-	return render_template('myapplications.html', data=data)
+	viewed="0"
+	
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
+	Ndata = cursorlnk.fetchall()
+	return render_template('myapplications.html', data=data,tnoti=Ndata, noticount=result4)
 
 
 @app.route('/deleteapplications/<aid>')
