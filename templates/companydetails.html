@@ -125,7 +125,7 @@
         <!-- End Navbar Area -->
 
         <!-- Page Title -->
-        <div class="page-title-area">
+        <div class="page-title-area"style="height:250px; width:100%;">
             <div class="d-table">
                 <div class="d-table-cell">
                     <div class="container">
@@ -191,42 +191,18 @@
                                     <li>
                                         <a href="#">
                                             <i class="icofont-web"></i>
-                                            http://gable.com
+                                            {{detail[0][5]}}
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icofont-facebook"></i>
-                                            gable.com
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icofont-linkedin"></i>
-                                            gable.com
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icofont-twitter"></i>
-                                            gable.com
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icofont-google-plus"></i>
-                                            gable.com
-                                        </a>
-                                    </li>
+                                    
                                 </ul>
                             </div>
+
                             <div class="company-details-description">
                                 <h3>Description</h3>
                                 <p>{{detail[0][7]}}</p>
                             </div>
-                            <div class="text-center">
-                                <a class="job-details-btn" href="create-account.html">Apply Now</a>
-                            </div>
+                           
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -236,7 +212,7 @@
                                 <ul>
                                     {% for i in tcfow %}
                                     <li>
-                                        <a href="#">{{i.2}}, {{i.3}}</a>
+                                        <a href="#">{{i.2}} {{i.3}}</a>
                                         <!-- <span>(4)</span> -->
                                     </li>
                                     {% endfor %}
