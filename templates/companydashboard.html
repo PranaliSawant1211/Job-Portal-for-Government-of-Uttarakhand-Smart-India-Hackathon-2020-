@@ -332,44 +332,44 @@
 	                                    <div class="col-lg-6">
 	                                        <div class="form-group">
 	                                            <label>Company Name</label>
-	                                            <input type="text" class="form-control" name='compname' value="{{ detail[0][1]}}" >
+	                                            <input type="text" class="form-control" name='compname' value="{{ detail[0][1]}}" required>
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-lg-6">
 	                                        <div class="form-group">
 	                                            <label>Date of Establishment</label>
-	                                            <input type="date" class="form-control" name='estdate' value="{{ detail[0][2]}}" >
+	                                            <input type="date" class="form-control" name='estdate' value="{{ detail[0][2]}}" required>
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-lg-6">
 	                                        <div class="form-group">
 	                                            <label>Headquarters Address</label>
-	                                            <input type="text" class="form-control" name='compaddress' value="{{ detail[0][3]}}" >
+	                                            <input type="text" class="form-control" name='compaddress' value="{{ detail[0][3]}}" required>
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-lg-6">
 	                                        <div class="form-group">
 	                                            <label>Your Email</label>
-	                                            <input type="email" class="form-control" name='compemail' value="{{ detail[0][4]}}" >
+	                                            <input type="email" class="form-control" name='compemail' value="{{ detail[0][4]}}" required>
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-lg-6">
 	                                        <div class="form-group">
 	                                            <label>Company URL</label>
-	                                            <input type="url" class="form-control" name='compurl' value="{{ detail[0][5]}}" >
+	                                            <input type="url" class="form-control" name='compurl' value="{{ detail[0][5]}}" required>
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-lg-6">
 	                                        <div class="form-group">
 	                                            <label>Contact no</label>
-	                                            <input type="phone" class="form-control" name = "compphone" value="{{ detail[0][6]}}" >
+	                                            <input type="phone" class="form-control" name = "compphone" value="{{ detail[0][6]}}" required>
 	                                        </div>
 	                                    </div>
 	                                    
 	                                    <div class="col-lg-12">
 	                                        <div class="form-group">
 	                                            <label>Description</label>
-	                                            <textarea  class="form-control" rows="8" name='compdescription' >{{ detail[0][7]}}</textarea>
+	                                            <textarea  class="form-control" rows="8" name='compdescription' required>{{ detail[0][7]}}</textarea>
 	                                        </div>
 	                                    </div> 
 
@@ -403,7 +403,7 @@
 	                        <div>
 	                            {% for i in tcfow %}
 	                            
-	                            <a href="/deleteaow/{{ i.0 }}"" type="button" class="btn btn-outline-success btn-rounded waves-effect" onclick="return confirm('Are You Sure For Delete?')">{{i.2}}</a>
+	                            <a href="/deleteaow/{{ i.0 }}" type="button" class="btn btn-outline-success btn-rounded waves-effect" onclick="return confirm('Are You Sure For Delete?')">{{i.2}}</a>
 	                            {% endfor %}
 	                            
 		                    </div>
@@ -427,7 +427,7 @@
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     
-                                                <input name="cfow" type="checkbox" id="test{{rowfow.0}}" value="{{ rowfow.1}}" />
+                                                <input name="cfow" type="checkbox" id="test{{rowfow.0}}" value="{{ rowfow.1}}" required />
                                                 <label style="" for="test{{rowfow.0}}">{{ rowfow.1}}</label>
                                                 </div>
                                             </div>
@@ -460,19 +460,19 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Title</label>
-                                                        <input name='awardtitle' type="text" class="form-control" placeholder="Best Media">
+                                                        <input name='awardtitle' type="text" class="form-control" placeholder="Best Media" required>
                                                     </div>
                                                 </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>From</label>
-                                                    <input  name="from_org" type="text" class="form-control" placeholder="ZEE Business">
+                                                    <input  name="from_org" type="text" class="form-control" placeholder="ZEE Business" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Year</label>
-                                                    <input  name="awardyear" type="text" class="form-control" placeholder="2020">
+                                                    <input  name="awardyear" type="Number" class="form-control" placeholder="2020" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -495,7 +495,7 @@
                                     <td style="display:none;">{{rowskill.0}}</td>
                                     <td>{{ rowskill.2 }}</td>
                                     <td>{{ rowskill.3}}</td>
-                                    <td></td>
+                                    <td>{{ rowskill.4}}</td>
                                 <td width="25%" style="text-align:right;">
                                        <button onclick="showDialogS()"   class="btn btn-outline-info waves-effect">Edit</button>
                                         <a href="/deleteaward/{{ rowskill.0 }}" class="btn btn-outline-danger waves-effect" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
@@ -519,21 +519,24 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Title</label>
-                                                        <input name='awardtitle' type="text" class="form-control" placeholder="Best Media">
+                                                        <input name='awardtitle' type="text" class="form-control" placeholder="Best Media" required>
                                                     </div>
                                                 </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>From</label>
-                                                    <input  name="from_org" type="text" class="form-control" placeholder="ZEE Business">
+                                                    <input  name="from_org" type="text" class="form-control" placeholder="ZEE Business" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Year</label>
-                                                    <input  name="awardyear" type="text" class="form-control" placeholder="2020">
+                                                    <input  name="awardyear" type="Number" class="form-control" placeholder="2020" required>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-12">
+                                            	<button type="submit" class="btn create-ac-btn vertical-center">Add Award</button>
+                                        	</div>
                                         </div>
                                     </form>
                                 </div>
@@ -560,13 +563,13 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Designation</label>
-                                                    <input name="keydesig" type="text" class="form-control" placeholder="CEO">
+                                                    <input name="keydesig" type="text" class="form-control" placeholder="CEO" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Name of Person</label>
-                                                    <input  name="keyname" type="text" class="form-control" placeholder="Sundar pichai">
+                                                    <input  name="keyname" type="text" class="form-control" placeholder="Sundar pichai" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -589,14 +592,14 @@
 
                                         {% for row in twork %}
                                         <tr>
-                                            <td>{{row.2}}</td>
                                             <td>{{row.3}}</td>
+                                            <td>{{row.2}}</td>
                                             
                                             <td style="display:none;">{{row.0}}</td>
                                             <td style="text-align:right;">
                                                <button onclick="showDialogW()"    class="btn btn-outline-info waves-effect">Edit</button>
                                                <input id='sr' type="hidden" value="{{row.0}}">
-                                                <a href="/deletekey/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                                                <a href="/deletekey/{{ row.0 }}" class="btn btn-outline-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
                                             </td>
                                         </tr>
 
@@ -630,13 +633,13 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Designation</label>
-                                                    <input name="keydesig" type="text" class="form-control" placeholder="CEO">
+                                                    <input name="keydesig" type="text" class="form-control" placeholder="CEO" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Name of Person</label>
-                                                    <input  name="keyname" type="text" class="form-control" placeholder="Sundar pichai">
+                                                    <input  name="keyname" type="text" class="form-control" placeholder="Sundar pichai" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -668,13 +671,13 @@
 	                                            <div class="col-lg-6">
 	                                                <div class="form-group">
 	                                                    <label>City</label>
-	                                                        <input name='compcity' type="text" class="form-control" placeholder="New York">
+	                                                        <input name='compcity' type="text" class="form-control" placeholder="New York" required>
 	                                                    </div>
 	                                                </div>
 	                                            <div class="col-lg-6">
 	                                                <div class="form-group">
 	                                                    <label>Country</label>
-	                                                    <input  name="compcount" type="text" class="form-control" placeholder="United States">
+	                                                    <input  name="compcount" type="text" class="form-control" placeholder="United States" required>
 	                                                </div>
 	                                            </div>
 	                                        </div>
@@ -726,13 +729,13 @@
                                                 <input type="hidden" id="lsrno" name="srno">
                                                 <div class="form-group">
                                                     <label style="color: #7f7e7e;">PLatform</label>
-                                                        <input name='compcity' id='link' type="text" class="form-control" placeholder="NY">
+                                                        <input name='compcity' id='link' type="text" class="form-control" placeholder="NY" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label style="color: #7f7e7e;" >Link</label>
-                                                    <input  name="compcount" id="value" type="text" class="form-control" placeholder="United States">
+                                                    <input  name="compcount" id="value" type="text" class="form-control" placeholder="United States" required>
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn create-ac-btn vertical-center" onclick="closeDialogL()">Save</button>
