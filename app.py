@@ -1327,9 +1327,11 @@ def addblog():
 
 	return render_template('addblog.html')
 
+
+
 @app.route('/blog')
 def blog():
-	return render_template('blog.html')
+		return render_template('blog.html')
 
 
 
