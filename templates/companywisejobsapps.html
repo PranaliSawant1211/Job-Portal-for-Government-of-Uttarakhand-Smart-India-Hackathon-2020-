@@ -150,6 +150,13 @@
 
         <div class="single-profile-area pt-40 col-lg-12">
             <div class="container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <p class="alert-{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
                 <div class="row align-items-center">
                     <div class="single-profile-item">
                         <div class="single-profile-item">

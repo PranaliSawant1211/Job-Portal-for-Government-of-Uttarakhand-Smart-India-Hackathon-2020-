@@ -182,6 +182,13 @@
         <!-- Post A Job -->
         <div class="post-job-area pt-100">
             <div class="container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <p class="alert-{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
                 <div class="post-job-item">
                     <form id="uploadform" method = "POST" enctype = "multipart/form-data">
                        <input class="btn btn-outline-info waves-effect" type = "file" name = "file" />

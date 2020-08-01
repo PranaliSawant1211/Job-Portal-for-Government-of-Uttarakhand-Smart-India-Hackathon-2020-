@@ -150,6 +150,13 @@
         <!-- Company Details -->
         <div class="company-details-area pt-100">
             <div class="container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <p class="alert-{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="company-details-item">

@@ -26,6 +26,10 @@
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="static/css/responsive.css">
 
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
         <title>Recruit Uttarakhand</title>
         <style>
             .main-nav nav .navbar-nav .nav-item {
@@ -37,7 +41,7 @@
 
         </style>
 
-        <link rel="icon" type="image/png" href="static/title1.png">
+        <link rel="icon" type="image/png" href="static/Capture1.png">
     </head>
     <body>
 
@@ -49,17 +53,19 @@
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
                 <a href="index.html" class="logo" >
-                    <img src="static/logo1.png" alt="Logo">
+                    <img src="static/img/logo.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Menu For Desktop Device -->
             <div class="main-nav">
-                <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
-                    <img src="static/logo1.png" alt="Logo" style="height:53px; width: 90px">
+                <a class="navbar-brand" href="index.html">
+                    <img src="" alt="Logo">
                 </a>
+
                 <div class="container" style="max-width: 100%">
                     <nav class="navbar navbar-expand-md navbar-light">
+
                         
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav" style="padding: 0% 0% 0% 25%;">
@@ -146,143 +152,37 @@
         <!-- Profile -->
         <section class="profile-area profile-area-two pt-100">
             <div class="container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                                              {% if messages %}
+                                                {% for category, message in messages %}
+                                                  <p class="alert-{{ category }}">{{ message }}</p>
+                                                {% endfor %}
+                                              {% endif %}
+                                            {% endwith %}
                 <div class="row">
-                    <div class="col-sm-6 col-lg-3">
+
+
+                    {% for j in data %}
+
+                        <div class="col-sm-6 col-lg-3">
                         <div class="profile-item wow fadeInUp" data-wow-delay=".3s">
                             <img src="static/img/home-1/profile/1.jpg" alt="Profile">
                             <div class="profile-inner">
-                                <h3>Jerry Hudson</h3>
-                                <span>Business Consultant</span>
-                                <a href="candidate-details.html">View Profile
+                                <h3>{{j[1] + " " + j[3]}}</h3>
+                                <a href = "/publiccandidatedetails/{{j[0]}}">View Profile
                                     <i class="icofont-swoosh-right"></i>
                                 </a>
-                                <div class="profile-heart">
-                                    <a href="candidate-details.html">
-                                        <i class="icofont-heart-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="profile-item wow fadeInUp" data-wow-delay=".4s">
-                            <img src="static/img/home-1/profile/2.jpg" alt="Profile">
-                            <div class="profile-inner">
-                                <h3>Jac Jacson</h3>
-                                <span>Web Consultant</span>
-                                <a href="candidate-details.html">View Profile
-                                    <i class="icofont-swoosh-right"></i>
+                                <input type="hidden" name="iuid" value = {{j[0]}}>
+                                <a href="#" class = "offerbutton" style="padding-left: 2%;">
+                                        Offer a Job
                                 </a>
-                                <div class="profile-heart">
-                                    <a href="candidate-details.html">
-                                        <i class="icofont-heart-alt"></i>
-                                    </a>
-                                </div>
+  
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="profile-item wow fadeInUp" data-wow-delay=".5s">
-                            <img src="static/img/home-1/profile/3.jpg" alt="Profile">
-                            <div class="profile-inner">
-                                <h3>Tom Potter</h3>
-                                <span>UX/UI Consultant</span>
-                                <a href="candidate-details.html">View Profile
-                                    <i class="icofont-swoosh-right"></i>
-                                </a>
-                                <div class="profile-heart">
-                                    <a href="candidate-details.html">
-                                        <i class="icofont-heart-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="profile-item wow fadeInUp" data-wow-delay=".6s">
-                            <img src="static/img/home-1/profile/4.jpg" alt="Profile">
-                            <div class="profile-inner">
-                                <h3>Shane Mac</h3>
-                                <span>SEO Consultant </span>
-                                <a href="candidate-details.html">View Profile
-                                    <i class="icofont-swoosh-right"></i>
-                                </a>
-                                <div class="profile-heart">
-                                    <a href="candidate-details.html">
-                                        <i class="icofont-heart-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="profile-item wow fadeInUp" data-wow-delay=".3s">
-                            <img src="static/img/home-1/profile/5.jpg" alt="Profile">
-                            <div class="profile-inner">
-                                <h3>Liam Noah</h3>
-                                <span>Marketing Consultant</span>
-                                <a href="candidate-details.html">View Profile
-                                    <i class="icofont-swoosh-right"></i>
-                                </a>
-                                <div class="profile-heart">
-                                    <a href="candidate-details.html">
-                                        <i class="icofont-heart-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="profile-item wow fadeInUp" data-wow-delay=".4s">
-                            <img src="static/img/home-1/profile/6.jpg" alt="Profile">
-                            <div class="profile-inner">
-                                <h3>William James</h3>
-                                <span>Management Consultant</span>
-                                <a href="candidate-details.html">View Profile
-                                    <i class="icofont-swoosh-right"></i>
-                                </a>
-                                <div class="profile-heart">
-                                    <a href="candidate-details.html">
-                                        <i class="icofont-heart-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="profile-item wow fadeInUp" data-wow-delay=".5s">
-                            <img src="static/img/home-1/profile/7.jpg" alt="Profile">
-                            <div class="profile-inner">
-                                <h3>Lucas Mason</h3>
-                                <span>Networking Consultant</span>
-                                <a href="candidate-details.html">View Profile
-                                    <i class="icofont-swoosh-right"></i>
-                                </a>
-                                <div class="profile-heart">
-                                    <a href="candidate-details.html">
-                                        <i class="icofont-heart-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="profile-item wow fadeInUp" data-wow-delay=".6s">
-                            <img src="static/img/home-1/profile/8.jpg" alt="Profile">
-                            <div class="profile-inner">
-                                <h3>Daniel Henry</h3>
-                                <span>Data Consultant </span>
-                                <a href="candidate-details.html">View Profile
-                                    <i class="icofont-swoosh-right"></i>
-                                </a>
-                                <div class="profile-heart">
-                                    <a href="candidate-details.html">
-                                        <i class="icofont-heart-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    {% endfor %}
+
                 </div>
             </div>
         </section>
@@ -318,7 +218,91 @@
                 </div>
                 <!-- End Subscribe Form -->
 
-               
+        <div id="myModal" class="modaledu">
+            <div class="modaledu-content">
+                <div class="modaledu-header">
+                    <span class="close" id="spanJ">&times;</span>
+                    <h2 style="color: white">Offer A Job </h2>
+                </div>
+                <div class="modaledu-body">
+
+                    
+
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="col-lg-6"><p style="color: black">Select the job you want to offer:</p></div>
+                                        <div class="col-lg-3">
+                                            <select class="form-control" name = "jobs" id = "jobs">
+                                        {% for k in jdata %}
+                                            <option value = "{{k[0]}}">{{k[1]}}</option>
+                                        {% endfor %}                                  
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <span id = "msg1" style="color:green;"></span>
+                                            <input type="hidden" name="vuid" id = "vuid">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <br>
+                            <button class="btn create-ac-btn vertical-center" id = "offerbtn">
+                                Offer
+                            </button>
+
+                        </div>
+
+                    
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            var modaloaj = document.getElementById("myModal");
+            var spanJ = document.getElementById("spanJ");
+            //var table = document.getElementById('joblistbox');
+
+
+            $(function() {
+
+
+                $(".offerbutton").click(function () {
+                var uid = $(this).closest("div.profile-inner").find("input[name='iuid']").val();
+                console.log("Uid" + uid);
+                $("#vuid").val(uid);
+                $("#myModal").css("display", "block");
+                });
+
+                $('#offerbtn').click(function () {
+                console.log("Mdule Clicked");
+                var uid = $('#vuid').val();
+                var jid = $('#jobs').val();
+                console.log(uid, jid);
+                $.ajax({
+                type: "POST",
+                url: '/offerajob',
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify({'uid': uid, 'jid': jid}),
+                dataType: "json",
+                success: function(data) {
+                    
+                        $('#msg1').html(data['message']);
+                    }
+
+                });
+            });
+            });
+
+            spanJ.onclick = function() {
+              modaloaj.style.display = "none";
+          }
+        </script>
+
 
         <!-- Essential JS -->
         <script src="static/js/jquery.min.js"></script>
