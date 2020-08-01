@@ -240,9 +240,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Candidate Applied</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-logout-tab" data-toggle="pill" href="#pills-logout" role="tab" aria-controls="pills-logout" aria-selected="false">Logout</a>
-                                </li>
+                                
                             </ul>
                             {% with messages = get_flashed_messages(with_categories=true) %}
                               {% if messages %}
@@ -257,186 +255,170 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div id="detailtag" class="create-information">
-                            <!-- <form action="" method="POST"> -->
-                                <h3>Basic Information</h3>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Company ID</label>
-                                            <input type="text" class="form-control" name='compid' value="{{ detail[0][0]}}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Company Name</label>
-                                            <input type="text" class="form-control" name='compname' value="{{ detail[0][1]}}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Date of Establishment</label>
-                                            <input type="date" class="form-control" name='estdate' value="{{ detail[0][2]}}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Headquarters Address</label>
-                                            <input type="text" class="form-control" name='compaddress' value="{{ detail[0][3]}}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label>Your Email</label>
-                                            <input type="email" class="form-control" name='compemail' value="{{ detail[0][4]}}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label>Company URL</label>
-                                            <input type="url" class="form-control" name='compurl' value="{{ detail[0][5]}}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label>Contact no</label>
-                                            <input type="phone" class="form-control" name = "compphone" value="{{ detail[0][6]}}" readonly>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea  class="form-control" rows="8" name='compdescription' readonly>{{ detail[0][7]}}</textarea>
-                                        </div>
-                                    </div>   
-                                </div>
-
-                                    <div class="col-lg-12" style="text-align: center;">
-                            <!-- </form> -->
-                                        <button onclick="showDialogD()" style="height:60px; width:170px;border:0px;background:linear-gradient(90deg, #ffd9b3 0%, #ffb366 63%);font-family: 'Poppins';font-size: 20px; font-weight:500; color: #ffffff;" >Edit</button>
+                            <h3>Basic Information</h3>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Company ID</label>
+                                        <input type="text" class="form-control" name='compid' value="{{ detail[0][0]}}" readonly>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-
-                    <div id="mymodalD" class="modaldetails">
-                           <div class="modaldetails-content" id="popupS">
-                                <div class="modaldetails-header">
-                                    <span class="close" id="spanD">&times;</span>
-                                    <h2 style="color: white"> Update Details</h2>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Company Name</label>
+                                        <input type="text" class="form-control" name='compname' value="{{ detail[0][1]}}" readonly>
+                                    </div>
                                 </div>
-                                <div class="modaldetails-body">
-                                <form action="{{ url_for('updatecompdetails')}}" method="POST"> 
-                                    
-                                <div class="row" style="color: black;">
-                                    <!-- <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Company ID</label>
-                                            <input type="text" class="form-control" name='compid' value="{{ detail[0][0]}}" >
-                                        </div>
-                                    </div> -->
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Company Name</label>
-                                            <input type="text" class="form-control" name='compname' value="{{ detail[0][1]}}" >
-                                        </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Date of Establishment</label>
+                                        <input type="date" class="form-control" name='estdate' value="{{ detail[0][2]}}" readonly>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Date of Establishment</label>
-                                            <input type="date" class="form-control" name='estdate' value="{{ detail[0][2]}}" >
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Headquarters Address</label>
-                                            <input type="text" class="form-control" name='compaddress' value="{{ detail[0][3]}}" >
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Your Email</label>
-                                            <input type="email" class="form-control" name='compemail' value="{{ detail[0][4]}}" >
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Company URL</label>
-                                            <input type="url" class="form-control" name='compurl' value="{{ detail[0][5]}}" >
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Contact no</label>
-                                            <input type="phone" class="form-control" name = "compphone" value="{{ detail[0][6]}}" >
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea  class="form-control" rows="8" name='compdescription' >{{ detail[0][7]}}</textarea>
-                                        </div>
-                                    </div> 
-
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <button type="submit" class="btn create-ac-btn">save</button>
-                                        </div>
-                                    </div>  
                                 </div>
-
-                               </form>
-
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Headquarters Address</label>
+                                        <input type="text" class="form-control" name='compaddress' value="{{ detail[0][3]}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Your Email</label>
+                                        <input type="email" class="form-control" name='compemail' value="{{ detail[0][4]}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Company URL</label>
+                                        <input type="url" class="form-control" name='compurl' value="{{ detail[0][5]}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Contact no</label>
+                                        <input type="phone" class="form-control" name = "compphone" value="{{ detail[0][6]}}" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea  class="form-control" rows="8" name='compdescription' readonly>{{ detail[0][7]}}</textarea>
+                                    </div>
+                                </div>   
                             </div>
 
+                            <div class="col-lg-12" style="text-align: center;">
+                                <button onclick="showDialogD()" style="height:60px; width:170px;border:0px;background:linear-gradient(90deg, #ffd9b3 0%, #ffb366 63%);font-family: 'Poppins';font-size: 20px; font-weight:500; color: #ffffff;" >Edit</button>
+                            </div>
                         </div>
+                    
+                
+                    <div id="mymodalD" class="modaldetails">
+                       <div class="modaldetails-content" id="popupS">
+                            <div class="modaldetails-header">
+                                <span class="close" id="spanD">&times;</span>
+                                <h2 style="color: white"> Update Details</h2>
+                            </div>
+                            <div class="modaldetails-body">
+                                <form action="{{ url_for('updatecompdetails')}}" method="POST"> 
+	                                <div class="row" style="color: black;">
+	                                    <!-- <div class="col-lg-6">
+	                                        <div class="form-group">
+	                                            <label>Company ID</label>
+	                                            <input type="text" class="form-control" name='compid' value="{{ detail[0][0]}}" >
+	                                        </div>
+	                                    </div> -->
+	                                    <div class="col-lg-6">
+	                                        <div class="form-group">
+	                                            <label>Company Name</label>
+	                                            <input type="text" class="form-control" name='compname' value="{{ detail[0][1]}}" >
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-lg-6">
+	                                        <div class="form-group">
+	                                            <label>Date of Establishment</label>
+	                                            <input type="date" class="form-control" name='estdate' value="{{ detail[0][2]}}" >
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-lg-6">
+	                                        <div class="form-group">
+	                                            <label>Headquarters Address</label>
+	                                            <input type="text" class="form-control" name='compaddress' value="{{ detail[0][3]}}" >
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-lg-6">
+	                                        <div class="form-group">
+	                                            <label>Your Email</label>
+	                                            <input type="email" class="form-control" name='compemail' value="{{ detail[0][4]}}" >
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-lg-6">
+	                                        <div class="form-group">
+	                                            <label>Company URL</label>
+	                                            <input type="url" class="form-control" name='compurl' value="{{ detail[0][5]}}" >
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-lg-6">
+	                                        <div class="form-group">
+	                                            <label>Contact no</label>
+	                                            <input type="phone" class="form-control" name = "compphone" value="{{ detail[0][6]}}" >
+	                                        </div>
+	                                    </div>
+	                                    
+	                                    <div class="col-lg-12">
+	                                        <div class="form-group">
+	                                            <label>Description</label>
+	                                            <textarea  class="form-control" rows="8" name='compdescription' >{{ detail[0][7]}}</textarea>
+	                                        </div>
+	                                    </div> 
+
+	                                    <div class="col-lg-12">
+	                                        <div class="form-group">
+	                                            <button type="submit" class="btn create-ac-btn">save</button>
+	                                        </div>
+	                                    </div>  
+	                                </div>
+                               </form>
+                        	</div>
+                    	</div>
                     </div>
                             
 
 
 
-                        <a id="hello"></a>
-                        <div id="aowtag" class="create-education create-education-two">
-                            <div class="create-education-wrap">
-                                <div class="create-education-left">
-                                
-                                        <h3>Area of Work</h3>
-                                    </div>
-                                <div class="create-education-right">
-                                    <!-- <a href="/">Edit</a> -->
-                                    <button type="submit" onclick="showDialog()" class="btn create-ac-btn">Add Education</button>
+                    <a id="hello"></a>
+                    <div id="aowtag" class="create-education create-education-two">
+                        <div class="create-education-wrap">
+                            <div class="create-education-left">
+                            
+                                    <h3>Area of Work</h3>
                                 </div>
+                            <div class="create-education-right">
+                                <!-- <a href="/">Edit</a> -->
+                                <button type="submit" onclick="showDialog()" class="btn create-ac-btn">Add Area of work</button>
                             </div>
-                        <div>
-                            <div>
-                                {% for i in tcfow %}
-                                
-                                <a href="/deleteaow/{{ i.0 }}"" type="button" class="btn btn-outline-success btn-rounded waves-effect" onclick="return confirm('Are You Sure For Delete?')">{{i.2}}</a>
-                                {% endfor %}
-                                
                         </div>
-                        <div style="text-align: center; padding: 10px;">
-                        <p style="color: black; ">Click on button to remove</p>
-                        </div>
-                    </div>
+	                    <div>
+	                        <div>
+	                            {% for i in tcfow %}
+	                            
+	                            <a href="/deleteaow/{{ i.0 }}"" type="button" class="btn btn-outline-success btn-rounded waves-effect" onclick="return confirm('Are You Sure For Delete?')">{{i.2}}</a>
+	                            {% endfor %}
+	                            
+		                    </div>
+		                    <div style="text-align: center; padding: 10px;">
+		                    <p style="color: black; ">Click on button to remove</p>
+		                    </div>
+                    	</div>
 
                         <div id="myModal" class="modaledu">
-                            
-        
-                
-                                <div class="create-education-right">
-                                    <!-- <a href="/">Edit</a> -->
-                                    
-                                </div>
-                            
                             <div class="modaledu-content">
                                 <div class="modaledu-header">
                                     <span class="close" id="spanE">&times;</span>
                                     <h2 style="color: white"> Select Area of work</h2>
                                 </div>
                                 <div class="modaledu-body">
-                                     
                                     <form action="{{ url_for('insertaow') }}" method="POST">
                                          <!-- <input type="hidden" id="srno" name="srno"> -->
                                     
@@ -451,23 +433,23 @@
                                             </div>
                                             {% endfor %}
                                             <div class="col-lg-12">
-                                            <button type="submit" class="btn create-ac-btn vertical-center">Add Education</button>
-                                        </div>
+                                            	<button type="submit" class="btn create-ac-btn vertical-center">Add Education</button>
+                                        	</div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-
-                            </div>
                         </div>
-                        <div id="awardtag" class="create-skills">
+                    </div>
+                    <div id="awardtag" class="create-skills">
+                        <form action="{{ url_for('insertaward') }}" method="POST">
                             <div class="create-skills-wrap">
                                 <div class="create-skills-left">
                                     <h3>Awards</h3>
                                 </div>
                                 <div class="create-skills-right">
                                     
-                                    <form action="{{ url_for('insertaward') }}" method="POST">
+                                    
                                     <button type="submit" class="btn create-ac-btn">Add Awards</button>
                                 </div>
                             </div>
@@ -494,36 +476,35 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    
                                 </div>
                             </div>
-                            <div >
-                                <div class="single-profile-skills">
-                                    <table id="skillbox" class="table table-striped">
-                                        <tbody width="100%">
-                                        <tr>
-                                        <th>Title</th>
-                                        <th>From</th>
-                                        <th>Year</th>
-                                        <th>Action</th>
-                                        </tr>
-                                        {% for rowskill in tskills %}
-                                        <tr>
-                                            <td style="display:none;">{{rowskill.0}}</td>
-                                            <td>{{ rowskill.2 }}</td>
-                                            <td>{{ rowskill.3}}</td>
-                                            <td></td>
-                                        <td width="25%" style="text-align:right;">
-                                               <button onclick="showDialogS()"   class="btn btn-outline-info waves-effect">Edit</button>
-                                                <a href="/deleteaward/{{ rowskill.0 }}" class="btn btn-outline-danger waves-effect" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
-                                            </td>
+                        </form>
 
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        <div class="single-profile-skills">
+                            <table id="skillbox" class="table table-striped">
+                                <tbody width="100%">
+                                <tr>
+                                <th>Title</th>
+                                <th>From</th>
+                                <th>Year</th>
+                                <th>Action</th>
+                                </tr>
+                                {% for rowskill in tskills %}
+                                <tr>
+                                    <td style="display:none;">{{rowskill.0}}</td>
+                                    <td>{{ rowskill.2 }}</td>
+                                    <td>{{ rowskill.3}}</td>
+                                    <td></td>
+                                <td width="25%" style="text-align:right;">
+                                       <button onclick="showDialogS()"   class="btn btn-outline-info waves-effect">Edit</button>
+                                        <a href="/deleteaward/{{ rowskill.0 }}" class="btn btn-outline-danger waves-effect" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                                    </td>
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            </table>
                         </div>
                         <div id="mymodalS" class="modaledu">
                            <div class="modaledu-content" id="popupS">
@@ -558,23 +539,23 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                        
 
                         <div id="keytag" class="create-education create-education-two">
-                            <div class="create-education-wrap">
-                                <div class="create-education-left">
-                                <form action="{{ url_for('insertkey') }}" method="POST">
-                                        <h3>Key Peoples</h3>
-                                    </div>
-                                <div class="create-education-right">
-                                    <!-- <a href="/">Edit</a> -->
-                                    <button type="submit" class="btn create-ac-btn">Add key people</button>
-                                </div>
-                            </div>
-                            <div class="popupE" id="popupE">
-                                <div class="popupE-inner">
-                                    
-                                
-                                    
+                            <form action="{{ url_for('insertkey') }}" method="POST">
+	                            <div class="create-education-wrap">
+	                                <div class="create-education-left">
+	                                
+	                                        <h3>Key Peoples</h3>
+	                                    </div>
+	                                <div class="create-education-right">
+	                                    <!-- <a href="/">Edit</a> -->
+	                                    <button type="submit" class="btn create-ac-btn">Add key people</button>
+	                                </div>
+	                            </div>
+	                            <div class="popupE" id="popupE">
+	                                <div class="popupE-inner">
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
@@ -589,9 +570,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
+	                                </div>
+	                            </div>
+	                        </form>
+            
 
                             <div>
                                 <table id="workbox" class="table table-striped">
@@ -622,7 +604,8 @@
                                         {% endfor  %}
 
                                  </table>
-                        </div>
+                        	</div>
+                    	</div>
 
                         <div id="myModalW" class="modalwork">
                             
@@ -658,82 +641,75 @@
                                             </div>
                                         </div>
                                         <button type="submit" class="btn create-ac-btn vertical-center">Save</button>
-                                        </div>
                                     </form>
                                 </div>
                             </div>
-
-                            </div>
                         </div>
+                    
                         
 
                         
                         <div id="geotag" class="create-skills">
-                            <div class="create-skills-wrap">
-                                <div class="create-skills-left">
-                                    <h3>Geographic Presence</h3>
-                                </div>
-                                <div class="create-skills-right">
-                                    
-                                    <form action="{{ url_for('insertgeo') }}" method="POST">
-                                    <button type="submit" class="btn create-ac-btn">Add Link</button>
-                                </div>
-                            </div>
-                            <div class="popupL" id="popupL">
-                                <div class="popupL-inner">
-                                    
-                                        <div class="row">            
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label>City</label>
-                                                        <input name='compcity' type="text" class="form-control" placeholder="New York">
-                                                    </div>
-                                                </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label>Country</label>
-                                                    <input  name="compcount" type="text" class="form-control" placeholder="United States">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            <form action="{{ url_for('insertgeo') }}" method="POST">
+	                            <div class="create-skills-wrap">
+	                                <div class="create-skills-left">
+	                                    <h3>Geographic Presence</h3>
+	                                </div>
+	                                <div class="create-skills-right">
+	                                    
+	                                    
+	                                    <button type="submit" class="btn create-ac-btn">Add Link</button>
+	                                </div>
+	                            </div>
+	                            <div class="popupL" id="popupL">
+	                                <div class="popupL-inner">
+	                                    
+	                                        <div class="row">            
+	                                            <div class="col-lg-6">
+	                                                <div class="form-group">
+	                                                    <label>City</label>
+	                                                        <input name='compcity' type="text" class="form-control" placeholder="New York">
+	                                                    </div>
+	                                                </div>
+	                                            <div class="col-lg-6">
+	                                                <div class="form-group">
+	                                                    <label>Country</label>
+	                                                    <input  name="compcount" type="text" class="form-control" placeholder="United States">
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                    
+	                                </div>
+	                            </div>
+	                        </form>
+	               
+			                <div >
+			                    <div class="single-profile-skills">
+			                        <table id="linkbox" class="table table-striped">
+			                            <tbody width="100%">
+			                            <tr>
+			                            <th>City</th>
+			                            <th>Country</th>
+			                            <th>Action</th>
+			                            </tr>
+			                            {% for rowlink in tlinks %}
+			                            <tr>
+			                                {% print(Ldata) %}
+			                                <td style="display:none;">{{rowlink.0}}</td>
+			                                <td>{{ rowlink.2 }}</td>
+			                                <td>{{ rowlink.3}}</td>
+			                            <td width="25%" style="text-align:right;">
+			                                   <button onclick="showDialogL()"  class="btn btn-outline-info waves-effect">Edit</button>
+			                                    <a href="/deletegeo/{{ rowlink.0 }}" class="btn btn-outline-danger waves-effect" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+			                                </td>
 
-        {% if scroll %}
-    <script>
-    document.getElementById('{{ scroll }}').scrollIntoView();
-    // or
-    console.log('{{ scroll }}')
-    // document.location.hash = '#' + '{{ scroll }}';
-    </script>
-        {% endif %}
-                            <div >
-                                <div class="single-profile-skills">
-                                    <table id="linkbox" class="table table-striped">
-                                        <tbody width="100%">
-                                        <tr>
-                                        <th>City</th>
-                                        <th>Country</th>
-                                        <th>Action</th>
-                                        </tr>
-                                        {% for rowlink in tlinks %}
-                                        <tr>
-                                            {% print(Ldata) %}
-                                            <td style="display:none;">{{rowlink.0}}</td>
-                                            <td>{{ rowlink.2 }}</td>
-                                            <td>{{ rowlink.3}}</td>
-                                        <td width="25%" style="text-align:right;">
-                                               <button onclick="showDialogL()"  class="btn btn-outline-info waves-effect">Edit</button>
-                                                <a href="/deletegeo/{{ rowlink.0 }}" class="btn btn-outline-danger waves-effect" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
-                                            </td>
-
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                    </table>
-                                </div>
-                            </div>
+			                            </tr>
+			                            {% endfor %}
+			                        </tbody>
+			                        </table>
+			                    </div>
+			                </div>
+			            </div>
                     
 
                         <div id="mymodalL" class="modallink">
@@ -765,193 +741,13 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-                        </div>
+                    
                         <div class="text-left">
                             <a href="/companydetails" class="btn create-ac-btn">View Profile</a>
                         </div>
                     </div>
-
-<script type="text/javascript">
-
-
-var modaledu = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var spanE = document.getElementById("spanE");
-
-// When the user clicks the button, open the modal 
-function showDialog () { 
-  modaledu.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-spanE.onclick = function() {
-  modaledu.style.display = "none";
-}
-
-
-var modalwork = document.getElementById("myModalW");
-
-
-// Get the <span> element that closes the modal
-var spanW = document.getElementById("spanW");
-
-// When the user clicks the button, open the modal 
-function showDialogW () { 
-  modalwork.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-spanW.onclick = function() {
-  modalwork.style.display = "none";
-}
-
-var modalskl = document.getElementById("mymodalS");
-
-
-var spanS = document.getElementById("spanS");
-// Get the <span> element that closes the modal
-
-// When the user clicks the button, open the modal 
-function showDialogS () { 
-  modalskl.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-spanS.onclick = function() {
-  modalskl.style.display = "none";
-}
-
-
-var modallnk = document.getElementById("mymodalL");
-
-
-var spanL = document.getElementById("spanL");
-// Get the <span> element that closes the modal
-
-// When the user clicks the button, open the modal 
-function showDialogL () { 
-  modallnk.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-spanL.onclick = function() {
-  modallnk.style.display = "none";
-}
-
-var modaldet = document.getElementById("mymodalD");
-
-
-var spanD= document.getElementById("spanD");
-// Get the <span> element that closes the modal
-
-// When the user clicks the button, open the modal 
-function showDialogD () { 
-    console.log(modaldet)
-  modaldet.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-spanD.onclick = function() {
-  modaldet.style.display = "none";
-}
-
-
-</script>
-
-    
-        <script>
-    
-                var table = document.getElementById('edubox');
                 
-                for(var i = 1; i < table.rows.length; i++)
-                {
-                    table.rows[i].onclick = function()
-                    {
-                         //rIndex = this.rowIndex;
-                         console.log(this.cells[0]);
-                         console.log(this.cells[0].innerHTML);
-                         document.getElementById("Titleedu").value = this.cells[0].innerHTML;
-                         document.getElementById("Degreeedu").value = this.cells[1].innerHTML;
-                         document.getElementById("Instedu").value = this.cells[2].innerHTML;
-                         document.getElementById("Yearedu").value = this.cells[3].innerHTML;
-                         document.getElementById("srno").value = this.cells[4].innerHTML;
-                         
-                         
 
-
-                    };
-                }
-
-
-                var tableW = document.getElementById('workbox');
-                
-                for(var i = 1; i < tableW.rows.length; i++)
-                {
-                    tableW.rows[i].onclick = function()
-                    {
-                         //rIndex = this.rowIndex;
-                         console.log(this.cells[0]);
-                         console.log(this.cells[0].innerHTML);
-                         document.getElementById("jobtitle").value = this.cells[0].innerHTML;
-                         document.getElementById("org").value = this.cells[1].innerHTML;
-                         document.getElementById("dur").value = this.cells[2].innerHTML;
-                         document.getElementById("yearwork").value = this.cells[3].innerHTML;
-                         document.getElementById("wsrno").value = this.cells[4].innerHTML;
-
-                         console.log(document.getElementById("wsrno").value);
-                         
-                         
-
-
-                    };
-                }
-
-                var tableU = document.getElementById('skillbox');
-                
-                for(var i = 1; i < tableU.rows.length; i++)
-                {
-                    tableU.rows[i].onclick = function()
-                    {
-                         //rIndex = this.rowIndex;
-                         document.getElementById("uskname").value = this.cells[1].innerHTML;
-                         document.getElementById("uprcnt").value = this.cells[2].innerHTML;
-                         
-                         document.getElementById("Usrno").value = this.cells[0].innerHTML;
-                         console.log(this.cells[0].innerHTML,this.cells[1].innerHTML,this.cells[2].innerHTML)
-                         
-
-
-                    };
-                }
-
-                var tableL = document.getElementById('linkbox');
-                
-                for(var i = 1; i < tableL.rows.length; i++)
-                {
-                    tableL.rows[i].onclick = function()
-                    {
-                         //rIndex = this.rowIndex;
-                         console.log(this.cells[0]);
-                         console.log(this.cells[0].innerHTML);
-                         document.getElementById("link").value = this.cells[1].innerHTML;
-                         document.getElementById("value").value = this.cells[2].innerHTML;
-                         document.getElementById("lsrno").value = this.cells[0].innerHTML;
-                         
-                         
-
-
-                    };
-                }
-
-
-         </script>
 
 
 
@@ -1181,6 +977,193 @@ spanD.onclick = function() {
             </div>
         </div>
         <!-- End Dashboard -->
+        {% if scroll %}
+<script>
+document.getElementById('{{ scroll }}').scrollIntoView();
+// or
+console.log('{{ scroll }}')
+// document.location.hash = '#' + '{{ scroll }}';
+</script>
+{% endif %}
+
+<script type="text/javascript">
+
+
+var modaledu = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var spanE = document.getElementById("spanE");
+
+// When the user clicks the button, open the modal 
+function showDialog () { 
+  modaledu.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+spanE.onclick = function() {
+  modaledu.style.display = "none";
+}
+
+
+var modalwork = document.getElementById("myModalW");
+
+
+// Get the <span> element that closes the modal
+var spanW = document.getElementById("spanW");
+
+// When the user clicks the button, open the modal 
+function showDialogW () { 
+  modalwork.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+spanW.onclick = function() {
+  modalwork.style.display = "none";
+}
+
+var modalskl = document.getElementById("mymodalS");
+
+
+var spanS = document.getElementById("spanS");
+// Get the <span> element that closes the modal
+
+// When the user clicks the button, open the modal 
+function showDialogS () { 
+  modalskl.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+spanS.onclick = function() {
+  modalskl.style.display = "none";
+}
+
+
+var modallnk = document.getElementById("mymodalL");
+
+
+var spanL = document.getElementById("spanL");
+// Get the <span> element that closes the modal
+
+// When the user clicks the button, open the modal 
+function showDialogL () { 
+  modallnk.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+spanL.onclick = function() {
+  modallnk.style.display = "none";
+}
+
+var modaldet = document.getElementById("mymodalD");
+
+
+var spanD= document.getElementById("spanD");
+// Get the <span> element that closes the modal
+
+// When the user clicks the button, open the modal 
+function showDialogD () { 
+    console.log(modaldet)
+  modaldet.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+spanD.onclick = function() {
+  modaldet.style.display = "none";
+}
+
+
+</script>
+
+    
+        <script>
+    
+                var table = document.getElementById('edubox');
+                
+                for(var i = 1; i < table.rows.length; i++)
+                {
+                    table.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         console.log(this.cells[0]);
+                         console.log(this.cells[0].innerHTML);
+                         document.getElementById("Titleedu").value = this.cells[0].innerHTML;
+                         document.getElementById("Degreeedu").value = this.cells[1].innerHTML;
+                         document.getElementById("Instedu").value = this.cells[2].innerHTML;
+                         document.getElementById("Yearedu").value = this.cells[3].innerHTML;
+                         document.getElementById("srno").value = this.cells[4].innerHTML;
+                         
+                         
+
+
+                    };
+                }
+
+
+                var tableW = document.getElementById('workbox');
+                
+                for(var i = 1; i < tableW.rows.length; i++)
+                {
+                    tableW.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         console.log(this.cells[0]);
+                         console.log(this.cells[0].innerHTML);
+                         document.getElementById("jobtitle").value = this.cells[0].innerHTML;
+                         document.getElementById("org").value = this.cells[1].innerHTML;
+                         document.getElementById("dur").value = this.cells[2].innerHTML;
+                         document.getElementById("yearwork").value = this.cells[3].innerHTML;
+                         document.getElementById("wsrno").value = this.cells[4].innerHTML;
+
+                         console.log(document.getElementById("wsrno").value);
+                         
+                         
+
+
+                    };
+                }
+
+                var tableU = document.getElementById('skillbox');
+                
+                for(var i = 1; i < tableU.rows.length; i++)
+                {
+                    tableU.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         document.getElementById("uskname").value = this.cells[1].innerHTML;
+                         document.getElementById("uprcnt").value = this.cells[2].innerHTML;
+                         
+                         document.getElementById("Usrno").value = this.cells[0].innerHTML;
+                         console.log(this.cells[0].innerHTML,this.cells[1].innerHTML,this.cells[2].innerHTML)
+                         
+
+
+                    };
+                }
+
+                var tableL = document.getElementById('linkbox');
+                
+                for(var i = 1; i < tableL.rows.length; i++)
+                {
+                    tableL.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         console.log(this.cells[0]);
+                         console.log(this.cells[0].innerHTML);
+                         document.getElementById("link").value = this.cells[1].innerHTML;
+                         document.getElementById("value").value = this.cells[2].innerHTML;
+                         document.getElementById("lsrno").value = this.cells[0].innerHTML;
+                         
+                         
+
+
+                    };
+                }
+
+
+         </script>
 
         <!-- Footer -->
         <style>

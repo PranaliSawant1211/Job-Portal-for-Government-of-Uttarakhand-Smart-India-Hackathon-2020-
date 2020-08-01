@@ -1987,7 +1987,6 @@ def companywisejobsapps():
 	sql  = "SELECT * FROM app_status WHERE compid = %s"
 	aresults = cur.execute(sql,[compid])
 	adata = cur.fetchall()
-
 	data= []
 
 	for i in adata:
