@@ -146,6 +146,13 @@
         <!-- Profile -->
         <section class="profile-area profile-area-two pt-100">
             <div class="container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                                              {% if messages %}
+                                                {% for category, message in messages %}
+                                                  <p class="alert-{{ category }}">{{ message }}</p>
+                                                {% endfor %}
+                                              {% endif %}
+                                            {% endwith %}
                 <div class="row">
                     <div class="col-sm-6 col-lg-3">
                         <div class="profile-item wow fadeInUp" data-wow-delay=".3s">
