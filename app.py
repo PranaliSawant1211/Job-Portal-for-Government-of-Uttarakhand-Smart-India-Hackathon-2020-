@@ -1701,25 +1701,113 @@ def upldjob():
 		return resp
 
 
-@app.route('/joblist')
+@app.route('/testva',methods=['POST','GET'])
+def testva():
+    #data = request.args.get('jsdata')
+    if request.method == 'POST':
+        jcursor = mysql.connection.cursor()
+        _json = request.json
+        _checkbox1  = _json['checkbox1']
+        _minprice  = int(_json['minprice'])
+        _sect  = int(_json['sect'])
+        _comp  = str(_json['comp'])
+        print('--------------------------------javascriptvalues---------------------------------')
+        print("checkbox1: {}, minprice: {}, sect: {}, comp: {}".format(_checkbox1, _minprice, _sect,_comp))
+
+        if(_checkbox1=='checked'):
+            if(_minprice>0):
+                if(_comp!='0'):
+                    print('all 3 query')
+                    jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
+                    jdata = list(jcursor.fetchall())
+                    jcursor.close()
+                    return jsonify({'output' : jdata})
+                print('checkbox and minprice query')
+                jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s ",(_minprice,))
+                jdata = list(jcursor.fetchall())
+                jcursor.close()
+                return jsonify({'output' : jdata})
+                
+            if(_comp!='0'):
+                print('checkbox comp query')
+                jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `compid` = %s",(_comp,))
+                jdata = list(jcursor.fetchall())
+                jcursor.close()
+                return jsonify({'output' : jdata})
+            print('checkbox only query')
+            jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME'")
+        else:
+            if(_minprice>0):
+                if(_comp!='0'):
+                    # if(_checkbox1=='checked'):
+                    #     print('all 3 query')
+                    #     jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
+                    #     jdata = list(jcursor.fetchall())
+                    #     jcursor.close()
+                    #     return jsonify({'output' : jdata})
+                        print('minprice and comp query')
+                        jresult = jcursor.execute("SELECT * FROM `jobs` where `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
+                        jdata = list(jcursor.fetchall())
+                        jcursor.close()
+                        return jsonify({'output' : jdata})
+                    
+                jresult = jcursor.execute("SELECT * FROM `jobs` where `jsalary` >= %s",(_minprice,))
+            else:
+                if(_comp!='0'):
+                    if(_checkbox1=='checked'):
+                        # if(_minprice>0):
+                        #     print('all 3')
+                        print('checkbox and minprice')
+                        jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s ",(_minprice,))
+                        jdata = list(jcursor.fetchall())
+                        jcursor.close()
+                        return jsonify({'output' : jdata})
+                    print('comp only')
+                    jresult = jcursor.execute("SELECT * FROM `jobs` where `compid` = %s",(_comp,))
+
+        if(_checkbox1=='unchecked' and _minprice==0 and _comp=='0'):
+            print('no query all jobs')
+            jresult = jcursor.execute("SELECT * FROM `jobs`")
+            
+
+        jdata = list(jcursor.fetchall())
+        jcursor.close()
+        print('--------------------------testva----------------------------------------')
+        # print(data)
+        # for j in jdata:
+        #     print("Job Title: {}".format(j[1]))
+        #     print("Job Description: {}".format(j[2]))
+        #     print("Job Age Limit: {}".format(j[3]))
+        #     print("Job Company ID: {}".format(j[4]))
+        #     print("Job Salary: {}".format(j[5]))
+        #     print("Job Vacancies: {}".format(j[6]))
+        #     print("Job Location: {}".format(j[7]))
+        #     print("Date of Post: {}".format(j[8]))
+        #     print("Last Date to Apply: {}".format(j[9]))
+        #     print("Job Type: {}".format(j[10]))
+        #     print("Expereince Required: {}".format(j[11]))
+        return jsonify({'output' : jdata})
+
+
+@app.route('/joblist/')
 def joblist():
-	jcursor = mysql.connection.cursor()
-	jresult = jcursor.execute("SELECT * FROM `jobs`")
-	jdata = list(jcursor.fetchall())
-	jcursor.close()
-	for j in jdata:
-		print("Job Title: {}".format(j[1]))
-		print("Job Description: {}".format(j[2]))
-		print("Job Age Limit: {}".format(j[3]))
-		print("Job Company ID: {}".format(j[4]))
-		print("Job Salary: {}".format(j[5]))
-		print("Job Vacancies: {}".format(j[6]))
-		print("Job Location: {}".format(j[7]))
-		print("Date of Post: {}".format(j[8]))
-		print("Last Date to Apply: {}".format(j[9]))
-		print("Job Type: {}".format(j[10]))
-		print("Expereince Required: {}".format(j[11]))
-	return render_template('joblist.html', data = jdata)
+    jcursor = mysql.connection.cursor()
+    jresult = jcursor.execute("SELECT * FROM `jobs`")
+    jdata = list(jcursor.fetchall())
+    jcursor.close()
+    # for j in jdata:
+    #     print("Job Title: {}".format(j[1]))
+    #     print("Job Description: {}".format(j[2]))
+    #     print("Job Age Limit: {}".format(j[3]))
+    #     print("Job Company ID: {}".format(j[4]))
+    #     print("Job Salary: {}".format(j[5]))
+    #     print("Job Vacancies: {}".format(j[6]))
+    #     print("Job Location: {}".format(j[7]))
+    #     print("Date of Post: {}".format(j[8]))
+    #     print("Last Date to Apply: {}".format(j[9]))
+    #     print("Job Type: {}".format(j[10]))
+    #     print("Expereince Required: {}".format(j[11]))
+    return render_template('joblist.html', data = jdata)
 
 @app.route('/jobdetails/<job_id>', methods = ['GET'])
 def getjobdetails(job_id):
