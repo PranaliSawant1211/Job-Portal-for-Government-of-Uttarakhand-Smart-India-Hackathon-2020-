@@ -35,6 +35,43 @@
 
         <link rel="icon" type="image/png" href="static/title1.png">
         <style>
+            @media (min-width: 1200px)
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 100%;
+}
+           
+            .uppercircle{
+                position: relative;
+
+                }
+                
+              
+              .uppercircle span {
+                color: #fff;
+                position: absolute;
+                width: 20px;
+                height: 22px;
+                top: -8px;
+                right: -3px;
+                background-color: red;
+                border-radius: 50%;
+                text-align: center;
+                font-size: em(10);
+                font-weight: 600;
+                }
+                .uppercircle i :: hover{
+                    color: green;
+                }
+            .disable-scrollbars::-webkit-scrollbar {
+                width: 0px;
+                background: transparent; /* Chrome/Safari/Webkit */
+            }
+
+            .disable-scrollbars {
+              scrollbar-width: none; /* Firefox */
+              -ms-overflow-style: none;  /* IE 10+ */
+            }
+
             .main-nav nav .navbar-nav .nav-item {
             position: relative;
             padding: 15px 8px;
@@ -119,14 +156,14 @@
 
             <!-- Menu For Desktop Device -->
             <div class="main-nav">
-                <a class="navbar-brand" href="index.html">
-                    <img src="static/logo1.png" alt="Logo">
+                <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
+                    <img src="static/logo1.png" alt="Logo" style="height:53px; width: 90px">
                 </a>
-                <div class="container">
-                    <nav class="navbar navbar-expand-md navbar-light" style="margin-top:-40px">
+                <div class="container"  style="max-width:100%">
+                    <nav class="navbar navbar-expand-md navbar-light">
                         
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                            <ul class="navbar-nav" style="padding: 0% 0% 0% 30%">
+                            <ul class="navbar-nav" style="padding: 0% 0% 0% 25%;">
                                 <li class="nav-item">
                                     <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Dashboard </a>
                                 </li>
@@ -168,6 +205,24 @@
                                     <a href="{{url_for('about')}}" class="nav-link">About</a>
                                 </li>
                             </ul>
+
+                            <div class="d-inline dropdown uppercircle mr-3">
+
+                                  <a style="color: #6fea6f;" onMouseOver="this.style.color='green'" onMouseOut="this.style.color=' #6fea6f'" class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="/notificationviewed">{% if noticount > 0%}<span>{{noticount}}</span>{% endif%}<i class="icofont-notification" style="font-size: 44px;"></i></a>
+                                  <div class="dropdown-menu dropdown-menu-right rounded-0 pt-0" aria-labelledby="notifications">
+                                    <div class="list-group" style="background-color: white;">
+                                      <div class="lgnoti disable-scrollbars" style="width:300px; height: 400px;overflow: auto;">
+                                        {%for i in tnoti%}
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start">
+                                          <h5 class="mb-1">{{ i.1}}</h5>
+                                          <p class="mb-0">{{ i.2}}</p>
+                                        </a>
+                                        {% endfor %}
+                                      </div> <!-- /.lg -->
+                                    </div> <!-- /.list group -->
+                                  </div> <!-- /.dropdown-menu -->
+                                </div>
+
                             <div class="common-btn" style="float: right">
                                 {% if session.logged_in %}
                                 <a class="login-btn" href="/logout">Logout</a>
