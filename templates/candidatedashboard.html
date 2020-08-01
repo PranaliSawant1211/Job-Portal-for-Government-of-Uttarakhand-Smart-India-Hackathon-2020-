@@ -291,16 +291,8 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Saved Jobs</a>
-                                </li>
-                                
+                                </li>    
                             </ul>
-                            {% with messages = get_flashed_messages(with_categories=true) %}
-                              {% if messages %}
-                                {% for category, message in messages %}
-                                  <p class="alert-{{ category }}">{{ message }}</p>
-                                {% endfor %}
-                              {% endif %}
-                            {% endwith %}
                         </div>
                     </div>
                 </div>
