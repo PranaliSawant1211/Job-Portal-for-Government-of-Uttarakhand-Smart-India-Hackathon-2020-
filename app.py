@@ -1022,8 +1022,92 @@ def publiccandidatedetails(duname):
 #********************************Details page ends*************************************************
 
 @app.route('/candidatelist')
+@login_required_company
 def candidatelist():
-	return render_template('candidatelist.html')
+	uname=session['comp_username']
+
+	candcursor = mysql.connection.cursor()
+	candresult = candcursor.execute("SELECT * FROM register WHERE afw = 1")
+	canddata = candcursor.fetchall()
+	candcursor.close()
+
+	jcursor = mysql.connection.cursor()
+	jresult = jcursor.execute("SELECT * FROM jobs WHERE compid = %s", [uname])
+	jdata = jcursor.fetchall()
+	jcursor.close()
+
+	return render_template('candidatelist.html', data = canddata, jdata = jdata)
+
+@app.route('/offerajob', methods=("POST", "GET"))
+@login_required_company
+def offerajob():
+	print("reached")
+	if request.method == 'POST':
+		_json = request.json
+		uname = _json['uid']	
+		jid = _json['jid']
+		compid = session['comp_username']
+
+		print("Uname: {} jid: {} compid: {}".format(uname, jid, compid))
+
+		ocursor = mysql.connection.cursor()
+		oresults = ocursor.execute("SELECT * FROM offer WHERE uname = %s AND compid = %s AND jid = %s", (uname, compid, jid))
+		print(oresults)
+		if oresults>0:
+			ocursor.close()
+			resp = jsonify({'message' : 'You Have Already offered the Job!'})
+			resp.status_code = 201
+			return resp
+		else:
+			oresults = ocursor.execute("INSERT INTO offer (uname, compid, jid) VALUES (%s, %s, %s)", (uname, compid, jid))
+			mysql.connection.commit()
+			ocursor.close()
+			resp = jsonify({'message' : 'Job Offered Successfully!'})
+			resp.status_code = 201
+			return resp
+			
+@app.route('/viewoffers')
+@login_required
+def viewoffers():
+	uname = session['username']
+	ocursor = mysql.connection.cursor()
+	oresults = ocursor.execute("SELECT * FROM offer WHERE uname = %s", [uname])
+	odata = ocursor.fetchall()
+	ocursor.close()
+	data = []
+
+	for i in odata:
+		oid = i[0]
+
+		jcursor = mysql.connection.cursor()
+		jresults = jcursor.execute("SELECT jtitle FROM jobs WHERE jid = %s", [i[3]])
+		jdata = jcursor.fetchall()
+
+		jtitle = jdata[0][0]
+
+		ccursor = mysql.connection.cursor()
+		cresults = ccursor.execute("SELECT compname FROM company_register WHERE compid = %s", [i[2]])
+		cdata = ccursor.fetchall()
+
+		compname = cdata[0][0]
+
+		odate = i[4].strftime("%Y-%m-%d")
+
+		data.append([oid, jtitle, compname, odate, i[3], i[2]])
+
+
+	return render_template('viewoffers.html', data= data)
+
+@app.route('/deleteoffer/<oid>')
+@login_required
+def deleteoffer(oid):
+
+	flash("Record Has Been Deleted Successfully")
+	cur = mysql.connection.cursor()
+	cur.execute("DELETE FROM `offer` WHERE `oid`=%s", (oid,))
+	mysql.connection.commit()
+
+	return redirect(url_for('viewoffers'))
 
 @app.route('/companylist')
 def companylist():
