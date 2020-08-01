@@ -530,7 +530,21 @@ def compdashboard():
 	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
-	return render_template('companydashboard.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+	cursorlnk = mysql.connection.cursor()
+	result_nojobs = cursorlnk.execute("SELECT * FROM jobs WHERE compid = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Accepted"
+	result_pplhired = cursorlnk.execute("SELECT * FROM appstatus WHERE compid = %s AND status= %s", [uname,status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_applnrcvd = cursorlnk.execute("SELECT * FROM appstatus WHERE compid = %s", [uname])
+	cursorskl.close()
+
+	return render_template('companydashboard.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
 
 @app.route('/compdashboardgeoloc')
 @login_required_company
@@ -716,7 +730,25 @@ def cdashboard():
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
 
-	return render_template('candidatedashboard.html', students=edudata,detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, tnoti=Ndata, noticount= result4)
+	cursorlnk = mysql.connection.cursor()
+	result_appln = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Interview Complete"
+	result_intrw = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname, status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_offers = cursorlnk.execute("SELECT * FROM offer WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status1 = "Accepted"
+	result_applnacpt = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname,status1])
+	cursorskl.close()
+
+	return render_template('candidatedashboard.html', students=edudata,detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, tnoti=Ndata, noticount= result4, , result_appln=result_appln, result_intrw=result_intrw, result_offers=result_offers, result_applnacpt=result_applnacpt)
 
 
 @app.route('/cdashboardwork')
@@ -926,7 +958,9 @@ def companydetails():
 	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
-	return render_template('companydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+
+	return render_template('companydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
 
 @app.route('/publiccompanydetails/<compid>')
 def publiccompanydetails(compid):
@@ -992,6 +1026,7 @@ def candidatedetails():
 	result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
 	Mdata = cursorlnk.fetchall()
 	cursorskl.close()
+
 	return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
 
 @app.route('/publiccandidatedetails/<duname>')

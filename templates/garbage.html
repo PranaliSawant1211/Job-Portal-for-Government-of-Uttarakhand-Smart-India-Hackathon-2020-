@@ -655,7 +655,8 @@ def upload_file():
 
 
 
-
+ALTER TABLE `company_register`
+ADD PRIMARY KEY(`compid`);
 
 
 @app.route('/login', methods = ['GET', 'POST'])
