@@ -537,11 +537,11 @@ def compdashboard():
 
 	cursorlnk = mysql.connection.cursor()
 	status = "Accepted"
-	result_pplhired = cursorlnk.execute("SELECT * FROM appstatus WHERE compid = %s AND status= %s", [uname,status])
+	result_pplhired = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s AND status= %s", [uname,status])
 	cursorskl.close()
 
 	cursorlnk = mysql.connection.cursor()
-	result_applnrcvd = cursorlnk.execute("SELECT * FROM appstatus WHERE compid = %s", [uname])
+	result_applnrcvd = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s", [uname])
 	cursorskl.close()
 
 	return render_template('companydashboard.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
@@ -748,7 +748,7 @@ def cdashboard():
 	result_applnacpt = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname,status1])
 	cursorskl.close()
 
-	return render_template('candidatedashboard.html', students=edudata,detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, tnoti=Ndata, noticount= result4, , result_appln=result_appln, result_intrw=result_intrw, result_offers=result_offers, result_applnacpt=result_applnacpt)
+	return render_template('candidatedashboard.html', students=edudata,detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, tnoti=Ndata, noticount= result4, result_appln=result_appln, result_intrw=result_intrw, result_offers=result_offers, result_applnacpt=result_applnacpt)
 
 
 @app.route('/cdashboardwork')
