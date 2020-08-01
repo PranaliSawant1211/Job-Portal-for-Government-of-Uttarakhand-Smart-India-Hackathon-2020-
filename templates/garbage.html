@@ -661,54 +661,54 @@ def upload_file():
 @app.route('/login', methods = ['GET', 'POST'])
 # @login_required
 def login():
-
     if request.method == 'POST':
         session.pop('username', None)
         session.pop('comp_username', None)
         cursor = mysql.connection.cursor()
         cursor1 = mysql.connection.cursor()
+        cursor2 = mysql.connection.cursor()
         uname = request.form.get('uname')
         result = cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
         result1 = cursor1.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
         if(result > 0):
             password = request.form.get('password')
-            result = cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
-            if result > 0:
-                data = cursor.fetchone()
-                password_db = data[11]
-                if (pwd_context.verify(password, password_db)):
-                    session['logged_in'] = True
-                    session['username'] = uname
-                    flash('You are now logged in', 'success')
-                    return redirect(url_for('cdashboard'))
-                else:
-                    flash('Invalid Login', 'error')
-                    return render_template('login.html')
-                cursor.close()
+            result2 = cursor2.execute("SELECT * FROM register WHERE uname = %s", [uname])
+            data = cursor2.fetchone()
+            password_db = data[11]
+            if (pwd_context.verify(password, password_db)):
+                session['logged_in'] = True
+                session['username'] = uname
+                flash('You are now logged in', 'success')
+                return redirect(url_for('cdashboard'))
             else:
-                flash('User not found', 'error')
+                flash('Invalid Login', 'error')
                 return render_template('login.html')
+            cursor.close()
+            cursor1.close()
+            cursor2.close()
 
-        elif(choice == "company"):
-            uname = request.form.get('uname')
+        elif(result1 > 0):
             password = request.form.get('password')
-            result = cursor.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
-            if result > 0:
-                data = cursor.fetchone()
-                password_db = data[8]
-                if (pwd_context.verify(password, password_db)):
-                    session['logged_in_company'] = True
-                    session['comp_username'] = uname
-                    flash('You are now logged in', 'success')
-                    return redirect(url_for('compdashboard'))
-                else:
-                    flash('Invalid Login', 'error')
-                    return render_template('login.html')
-                cursor.close()
+            result2 = cursor2.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+            data = cursor2.fetchone()
+            password_db = data[8]
+            if (pwd_context.verify(password, password_db)):
+                session['logged_in_company'] = True
+                session['comp_username'] = uname
+                flash('You are now logged in', 'success')
+                return redirect(url_for('compdashboard'))
             else:
-                flash('User not found', 'error')
+                flash('Invalid Login', 'error')
                 return render_template('login.html')
-
+            cursor.close()
+            cursor1.close()
+            cursor2.close()
+        else:
+            flash('User not found', 'error')
+            cursor.close()
+            cursor1.close()
+            cursor2.close()
+            return render_template('login.html')
     return render_template('login.html')
 
 

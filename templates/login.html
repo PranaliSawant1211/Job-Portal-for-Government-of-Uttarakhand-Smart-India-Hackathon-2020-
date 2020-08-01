@@ -51,15 +51,15 @@
 
   <script>
     function universal_validation(form){
-        var choice = document.forms["login"]["role"];
+        // var choice = document.forms["login"]["role"];
         var uname = document.forms["login"]["uname"];
         var password = document.forms["login"]["password"];
-        if(choice.value =="")
-        {
-            window.alert("Please enter your role");
-            choice.focus();
-            return false;
-        }
+        // if(choice.value =="")
+        // {
+        //     window.alert("Please enter your role");
+        //     choice.focus();
+        //     return false;
+        // }
         else if(uname.value =="")
         {
             window.alert("Please enter your username");
@@ -180,15 +180,7 @@
 
 
 
-                    <form name="login" action="{{ url_for('login') }}" method="POST" onsubmit="return universal_validation()">
-                        <div class="form-group">
-                            <label>Role</label>
-                            <select name="role" id="role" class="form-control">
-                                <option value="" disabled selected>Select your role</option>
-                                <option value="candidate">Candidate</option>
-                                <option value="company">Company</option>
-                            </select>
-                        </div>                            
+                    <form name="login" action="{{ url_for('login') }}" method="POST" onsubmit="return universal_validation()">                         
                         <div class="form-group">
                             <label>Enter Username</label>
                             <input type="text" class="form-control" name= "uname" placeholder="Your username">
