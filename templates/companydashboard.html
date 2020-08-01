@@ -132,11 +132,11 @@
                 <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
                     <img src="static/logo1.png" alt="Logo" style="height:53px; width: 90px">
                 </a>
-                <div class="container">
+                <div class="container" style="max-width: 100%">
                     <nav class="navbar navbar-expand-md navbar-light" >
                         
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                            <ul class="navbar-nav" style="padding: 0px 210px;">
+                            <ul class="navbar-nav" style="padding: 0% 0% 0% 25%">
                                 <li class="nav-item">
                                     <a href="{{url_for('compdashboard')}}" class="nav-link dropdown-toggle">Dashboard</a>
                                 </li>
@@ -195,7 +195,7 @@
         <!-- End Navbar Area -->
 
         <!-- Page Title -->
-        <div class="page-title-area">
+        <div class="page-title-area"style="height:250px; width:100%;">
             <div class="d-table">
                 <div class="d-table-cell">
                     <div class="container">
@@ -514,8 +514,8 @@
                                             <td>{{ rowskill.3}}</td>
                                             <td></td>
                                         <td width="25%" style="text-align:right;">
-                                               <button onclick="showDialogS()" class="btn btn-warning btn-xs">Edit</button>
-                                                <a href="/deleteaward/{{ rowskill.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                                               <button onclick="showDialogS()"   class="btn btn-outline-info waves-effect">Edit</button>
+                                                <a href="/deleteaward/{{ rowskill.0 }}" class="btn btn-outline-danger waves-effect" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
                                             </td>
 
                                         </tr>
@@ -612,7 +612,7 @@
                                             
                                             <td style="display:none;">{{row.0}}</td>
                                             <td style="text-align:right;">
-                                               <button onclick="showDialogW()"  class="btn btn-warning btn-xs">Edit</button>
+                                               <button onclick="showDialogW()"    class="btn btn-outline-info waves-effect">Edit</button>
                                                <input id='sr' type="hidden" value="{{row.0}}">
                                                 <a href="/deletekey/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
                                             </td>
@@ -724,8 +724,8 @@
                                             <td>{{ rowlink.2 }}</td>
                                             <td>{{ rowlink.3}}</td>
                                         <td width="25%" style="text-align:right;">
-                                               <button onclick="showDialogL()" class="btn btn-warning btn-xs">Edit</button>
-                                                <a href="/deletegeo/{{ rowlink.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                                               <button onclick="showDialogL()"  class="btn btn-outline-info waves-effect">Edit</button>
+                                                <a href="/deletegeo/{{ rowlink.0 }}" class="btn btn-outline-danger waves-effect" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
                                             </td>
 
                                         </tr>
