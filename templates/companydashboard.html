@@ -695,7 +695,7 @@ body {
                                     <form action="{{ url_for('updatekey') }}" method="POST">
                                          <input type="hidden" id="wsrno" name="srno">
                                     
-                                        <div class="row">
+                                        <div class="row" style="color:black;">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Designation</label>
@@ -1005,6 +1005,91 @@ body {
 
 
 </script>
+<script>
+    
+                // var table = document.getElementById('edubox');
+                
+                // for(var i = 1; i < table.rows.length; i++)
+                // {
+                //     table.rows[i].onclick = function()
+                //     {
+                //          //rIndex = this.rowIndex;
+                //          console.log(this.cells[0]);
+                //          console.log(this.cells[0].innerHTML);
+                //          document.getElementById("Titleedu").value = this.cells[0].innerHTML;
+                //          document.getElementById("Degreeedu").value = this.cells[1].innerHTML;
+                //          document.getElementById("Instedu").value = this.cells[2].innerHTML;
+                //          document.getElementById("Yearedu").value = this.cells[3].innerHTML;
+                //          document.getElementById("srno").value = this.cells[4].innerHTML;
+                         
+                         
+
+
+                //     };
+                // }
+
+
+                var tableW = document.getElementById('workbox');
+                
+                for(var i = 1; i < tableW.rows.length; i++)
+                {
+                    tableW.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         console.log(this.cells[0]);
+                         console.log(this.cells[0].innerHTML);
+                         document.getElementById("keydesig").value = this.cells[0].innerHTML;
+                         document.getElementById("keyname").value = this.cells[1].innerHTML;
+                        
+                         document.getElementById("wsrno").value = this.cells[2].innerHTML;
+
+                         console.log(document.getElementById("wsrno").value);
+                         
+                         
+
+
+                    };
+                }
+
+                var tableU = document.getElementById('skillbox');
+                
+                for(var i = 1; i < tableU.rows.length; i++)
+                {
+                    tableU.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         document.getElementById("awardtitle").value = this.cells[1].innerHTML;
+                         document.getElementById("from_org").value = this.cells[2].innerHTML;
+                         document.getElementById("awardyear").value = this.cells[3].innerHTML;
+                         document.getElementById("Usrno").value = this.cells[0].innerHTML;
+                         console.log(this.cells[0].innerHTML,this.cells[1].innerHTML,this.cells[2].innerHTML)
+                         
+
+
+                    };
+                }
+
+                var tableL = document.getElementById('linkbox');
+                
+                for(var i = 1; i < tableL.rows.length; i++)
+                {
+                    tableL.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         console.log(this.cells[0]);
+                         console.log(this.cells[0].innerHTML);
+                         document.getElementById("link").value = this.cells[1].innerHTML;
+                         document.getElementById("value").value = this.cells[2].innerHTML;
+                         document.getElementById("lsrno").value = this.cells[0].innerHTML;
+                         
+                         
+
+
+                    };
+                }
+
+
+         </script>
 
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <div class="change-password-area">
