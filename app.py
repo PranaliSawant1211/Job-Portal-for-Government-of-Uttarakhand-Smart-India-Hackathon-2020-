@@ -2152,6 +2152,7 @@ def getjobdetails(job_id):
 
 	print("Job Type: {}".format(jobdetlist[10]))
 	print("Expereince Required: {}".format(jobdetlist[11]))
+	
 
 
 	uname=jobdetlist[4]
