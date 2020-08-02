@@ -2026,6 +2026,129 @@ def upldjob():
 		return resp
 
 
+
+@app.route('/sugg',methods=['POST','GET'])
+def sugg():
+    #data = request.args.get('jsdata')
+    if request.method == 'POST':
+        jcursor = mysql.connection.cursor()
+        _json = request.get_json()
+        _ser  = str(_json['ser'])
+        query='SELECT * FROM `jobs` where `jtitle` REGEXP  %s'
+
+    jresult = jcursor.execute(query,tuple(_ser))
+    jdata = list(jcursor.fetchall())
+    jcursor.close()
+    return jsonify({'output' : jdata})
+
+
+@app.route('/sugg123',methods=['POST','GET'])
+def sugg123():
+    #data = request.args.get('jsdata')
+    if request.method == 'POST':
+        jcursor = mysql.connection.cursor()
+        _json = request.get_json()
+        _ser  = str(_json['ser'])
+        query='SELECT * FROM `jobs` where `jtitle` REGEXP  %s'
+
+    jresult = jcursor.execute(query,(_ser,))
+    jdata = list(jcursor.fetchall())
+    jcursor.close()
+    return jsonify({'output' : jdata})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/filter',methods=['POST','GET'])
+def filter():
+    #data = request.args.get('jsdata')
+    if request.method == 'POST':
+        jcursor = mysql.connection.cursor()
+        _json = request.json
+        _checkbox1  = _json['checkbox1']
+        _minprice  = int(_json['minprice'])
+        # _sect  = str(_json['sect'])
+        _comp  = str(_json['comp'])
+        _loc = str(_json['loc'])
+
+        query=''
+        # use tuple to store 
+        t1=[]
+        # t2=()
+        none=0
+        if(_checkbox1=='checked'):
+            query="SELECT * FROM `jobs` where `jtype` = 'PART TIME'"
+            none=1
+        if(_minprice>0 and query!=''):
+            query+=" and `jsalary` >= %s"
+            t1.append(_minprice)
+        else:
+            if(_minprice>0):
+                query='SELECT * FROM `jobs` where `jsalary` >= %s'
+                t1.append(_minprice)
+                none=1
+        if(_comp!='0' and query!=''):
+            query+=" and `compid` = %s"
+            t1.append(_comp)
+        else:
+            if(_comp!='0'):
+                query='SELECT * FROM `jobs` where `compid` = %s'
+                t1.append(_comp)
+                none=1
+        if(_loc!='0' and query!=''):
+            query+=" and `jlocation` = %s"
+            t1.append(_loc)
+        else:
+            if(_loc!='0'):
+                query='SELECT * FROM `jobs` where `jlocation` = %s'
+                t1.append(_loc)
+                none=1
+
+
+
+
+        # ---------------------------------------------------------------
+
+
+        if(none==0):
+            jresult = jcursor.execute("SELECT * FROM `jobs`")
+        else:
+            if(len(t1)>0):
+                print(len(t1),'value:',t1)
+                print('query: ',query)
+                jresult = jcursor.execute(query,tuple(t1))
+            else:
+                jresult = jcursor.execute(query)
+        jdata = list(jcursor.fetchall())
+        jcursor.close()
+
+        return jsonify({'output' : jdata})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/testva',methods=['POST','GET'])
 def testva():
     #data = request.args.get('jsdata')
@@ -2034,7 +2157,7 @@ def testva():
         _json = request.json
         _checkbox1  = _json['checkbox1']
         _minprice  = int(_json['minprice'])
-        _sect  = int(_json['sect'])
+        # _sect  = int(_json['sect'])
         _comp  = str(_json['comp'])
         print('--------------------------------javascriptvalues---------------------------------')
         print("checkbox1: {}, minprice: {}, sect: {}, comp: {}".format(_checkbox1, _minprice, _sect,_comp))
@@ -2120,6 +2243,18 @@ def joblist():
     jresult = jcursor.execute("SELECT * FROM `jobs`")
     jdata = list(jcursor.fetchall())
     jcursor.close()
+
+    jcursor = mysql.connection.cursor()
+    jresult = jcursor.execute("SELECT `jtitle` FROM `jobs`")
+    jdata2 = list(jcursor.fetchall())
+    print('-------------------------------jdata----------------------------------')
+    print(jdata2)
+    l=[]
+    for i in range(len(jdata2)):
+        print(jdata2[i][0])
+        l.append(jdata2[i][0])
+    print(l)
+    jcursor.close()
     # for j in jdata:
     #     print("Job Title: {}".format(j[1]))
     #     print("Job Description: {}".format(j[2]))
@@ -2132,7 +2267,7 @@ def joblist():
     #     print("Last Date to Apply: {}".format(j[9]))
     #     print("Job Type: {}".format(j[10]))
     #     print("Expereince Required: {}".format(j[11]))
-    return render_template('joblist.html', data = jdata)
+    return render_template('joblist.html', data = jdata,array=l)
 
 @app.route('/jobdetails/<job_id>', methods = ['GET'])
 def getjobdetails(job_id):
@@ -2159,6 +2294,7 @@ def getjobdetails(job_id):
 
 	print("Job Type: {}".format(jobdetlist[10]))
 	print("Expereince Required: {}".format(jobdetlist[11]))
+	
 
 
 	uname=jobdetlist[4]
