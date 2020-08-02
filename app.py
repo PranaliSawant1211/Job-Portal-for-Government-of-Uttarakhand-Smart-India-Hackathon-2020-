@@ -684,6 +684,15 @@ def compdashboardkey():
 @login_required
 def cdashboard():
 	uname = session['username'] 
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+
+	pppath = ppdata[0][0]
+
+
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -714,7 +723,7 @@ def cdashboard():
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
 
-	return render_template('candidatedashboard.html', students=edudata,detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, tnoti=Ndata, noticount= result4)
+	return render_template('candidatedashboard.html', students=edudata,detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, tnoti=Ndata, noticount= result4, pp = pppath)
 
 
 @app.route('/cdashboardwork')
@@ -1669,6 +1678,39 @@ def upldfile():
 		print(df)
 		t = df.to_html(classes='table table-hover', table_id="tblData", header="true")
 		return jsonify(name=filename, size=file_size, user_image=full_filename, table = t)
+
+@app.route('/uploadajaxcp', methods=("POST", "GET"))
+@login_required
+def upldfilecp():
+	basedir = os.path.abspath(os.path.dirname(__file__))
+	print("Upload Ajax")
+	if request.method == 'POST':
+		files = request.files['file']
+		#if files and allowed_file(files.filename):
+		filename = secure_filename(files.filename)
+		app.logger.info('FileName: ' + filename)
+		updir = os.path.join(basedir, 'static/img/dashboard/')
+		files.save(os.path.join(updir, filename))
+		file_size = os.path.getsize(os.path.join(updir, filename))
+		print(filename)
+		# myFunc(filename)s
+		flname = 'static/img/dashboard/'+filename
+		uname = session['username']
+
+		cur = mysql.connection.cursor()
+		sql = """ UPDATE register SET profile_pic=%s WHERE uname = %s """
+		cur.execute(sql,(flname, uname))
+		mysql.connection.commit()
+		cur.close()
+
+		sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+		ppcur = mysql.connection.cursor()
+		ppresults = ppcur.execute(sql1, [uname])
+		ppdata = ppcur.fetchall()
+
+		pppath = ppdata[0][0]
+
+		return jsonify(name=filename, size=file_size, dbpath = pppath, message = "Profile Pic Update!")
 
 
 @app.route('/uploadfajax', methods=("POST", "GET"))

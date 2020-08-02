@@ -32,7 +32,7 @@
 
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
         <title>Recruit Uttarakhand</title>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="icon" type="image/png" href="static/title1.png">
         <style>
             @media (min-width: 1200px)
@@ -275,7 +275,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4">
                         <div class="dashboard-img">
-                            <img src="static/img/dashboard/1.jpg" alt="Dashboard">
+                            <img src="{{pp}}" alt="Dashboard">
                             <h3>{{session.username}}</h3>
                             <p>UX/UI Designer</p>
                         </div>
@@ -310,7 +310,7 @@
                             <!-- <form action="" method="POST"> -->
                                 <h3>Basic Information</h3>
                                 <div class="create-information-btn">
-                                    <a href="#">Upload Cover Photo</a>
+                                    <a href="#" id = "uploadcp">Upload Cover Photo</a>
                                     <a href="#">Upload Your CV</a>
                                 </div>
                                 <div class="row">
@@ -1405,6 +1405,113 @@ spanD.onclick = function() {
             </div>
         </div>
         <!-- End Dashboard -->
+
+        <div id="myModalcp" class="modaledu">
+            <div class="modaledu-content">
+                <div class="modaledu-header">
+                    <span class="close" id="spanJ">&times;</span>
+                    <h2 style="color: white">Offer A Job </h2>
+                </div>
+                <div class="modaledu-body">
+
+                    <form id="uploadformcp" method = "POST" enctype = "multipart/form-data">
+
+                        <div class="row">
+
+
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="col-lg-3"><p style="color: black">Upload Your Image:</p></div>
+                                        <div class="col-lg-6">
+                                            <input class="btn btn-outline-info waves-effect" type = "file" name = "file" />
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <span id = "msg1" style="color:green;"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <br>
+                            <button class="btn create-ac-btn vertical-center" id = "uploadcpbtn">
+                                Upload
+                            </button>
+
+
+                        </div>
+
+                    </form>    
+                    
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(function() {
+
+
+                $("#uploadcp").click(function () {
+                    $("#myModalcp").css("display", "block");
+                });
+
+                $("#spanJ").click(function () {
+                    $("#myModalcp").css("display", "none");
+                });
+
+                $("#uploadcpbtn").click(function(){
+                    console.log('Reached Jquery');
+                    event.preventDefault();
+                    var form_data = new FormData($('#uploadformcp')[0]);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/uploadajaxcp',
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+                        dataType: 'json'
+                    }).done(function(data, textStatus, jqXHR){
+                        console.log(data);
+                        console.log(textStatus);
+                        console.log(jqXHR);
+                        console.log('Success!');
+                        $("#msg1").html(data['message']);
+                    }).fail(function(data){
+                        alert('error!');
+                    });
+                });
+
+                
+
+                    $('#gettable').click(function() {
+                    console.log('Reached Jquery');
+                    event.preventDefault();
+                    var form_data = new FormData($('#uploadform')[0]);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/uploadajax',
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+                        dataType: 'json'
+                    }).done(function(data, textStatus, jqXHR){
+                        console.log(data);
+                        console.log(textStatus);
+                        console.log(jqXHR);
+                        console.log('Success!');
+                        $("#noid").html(data['table']);
+                        $("#resultFullName").text(data['user_image']);
+                    }).fail(function(data){
+                        alert('error!');
+                    });
+                });
+
+                
+            });
+
+
+        </script>
 
        <style>
         .footer {
