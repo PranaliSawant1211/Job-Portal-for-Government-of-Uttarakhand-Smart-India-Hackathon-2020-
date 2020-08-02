@@ -940,32 +940,47 @@ def cdashboardskill():
 #********************************Candidate Pages end********************************************************
 
 #**************Details start *******************************
-# @app.route('/cdashboarddetail')
-# @login_required
-# def cdashboarddetail():
-# 	uname = session['username'] 
-# 	cursoredu = mysql.connection.cursor()
-# 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
-# 	edudata = cursoredu.fetchall()
-# 	cursoredu.close()
-# 	cursorskl = mysql.connection.cursor()
-# 	result2 = cursorskl.execute("SELECT * FROM skills WHERE uname = %s", [uname])
-# 	skdata = cursorskl.fetchall()
-# 	cursorskl.close()
-# 	cursorlnk = mysql.connection.cursor()
-# 	result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
-# 	lnkdata = cursorlnk.fetchall()
-# 	cursorskl.close()
-# 	cursorlnk = mysql.connection.cursor()
-# 	result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
-# 	workdata = cursorlnk.fetchall()
-# 	cursorskl.close()
-# 	cursorlnk = mysql.connection.cursor()
-# 	result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
-# 	Mdata = cursorlnk.fetchall()
-# 	cursorskl.close()
+@app.route('/cdashboarddetail')
+@login_required
+def cdashboarddetail():
+
+	uname = session['username'] 
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+
+	cursoredu = mysql.connection.cursor()
+	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
+	edudata = cursoredu.fetchall()
+	cursoredu.close()
+	cursorskl = mysql.connection.cursor()
+	result2 = cursorskl.execute("SELECT * FROM skills WHERE uname = %s", [uname])
+	skdata = cursorskl.fetchall()
+	cursorskl.close()
+	cursorlnk = mysql.connection.cursor()
+	result3 = cursorlnk.execute("SELECT * FROM link WHERE uname = %s", [uname])
+	lnkdata = cursorlnk.fetchall()
+	cursorskl.close()
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM work WHERE uname = %s", [uname])
+	workdata = cursorlnk.fetchall()
+	cursorskl.close()
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
+	Mdata = cursorlnk.fetchall()
+	cursorskl.close()
 	
-# 	return render_template('candidatedashboard.html', scroll='detailtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
+	viewed="0"
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
+	Ndata = cursorlnk.fetchall()
+	cursorskl.close()
+
+	return render_template('candidatedashboard.html', scroll='detailtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath )
 
 
 
