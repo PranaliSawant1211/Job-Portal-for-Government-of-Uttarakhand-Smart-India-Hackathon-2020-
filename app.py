@@ -2077,10 +2077,11 @@ def apply(compid,jid):
 	result = cur.execute(sql1,(compid))
 	company_name = cur.fetchall()
 
+	'''
 	notidesc="Your Application for "+str(job_title_noti)+" post have been successfully submitted"
 	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 	cur.execute(sql, (notidesc, str("0"), uname, appid))
-	mysql.connection.commit()
+	mysql.connection.commit()'''
 
 	return redirect(url_for('myapplications'))
 
@@ -2296,10 +2297,11 @@ def completetest():
 		result = cur.execute(sql1,(jid))
 		job_title_noti = cur.fetchall()
 
+		'''
 		notidesc="Test for "+str(job_title_noti)+" have sucessfully completed, sent for review to concerned department"
 		sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 		cur.execute(sql, (notidesc, str("0"), uname, appid))
-		mysql.connection.commit()
+		mysql.connection.commit()'''
 
 	return redirect(url_for('myapplications'))
 
@@ -2404,10 +2406,11 @@ def setinterview():
 		result = cur.execute(sql1,(jid))
 		job_title_noti = cur.fetchall()
 
+		'''
 		notidesc="Congratualations you have cleared the test for "+str(job_title_noti)+" post, an interview have been scheduled"
 		sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 		cur.execute(sql, (notidesc, str("0"), uname, appid))
-		mysql.connection.commit()
+		mysql.connection.commit()'''
 
 		print("Time:"+str(date)+str(time)+":00")
 		print(date, time, aid)
@@ -2434,7 +2437,7 @@ def allowtest(aid):
 
 	cur.execute(sql, (status, iet, test_link, aid))
 	mysql.connection.commit()
-	cur.close()
+	
 
 	sql1 = """SELECT jid FROM app_status WHERE appid=%s"""
 	result = cur.execute(sql1,(aid))
@@ -2445,10 +2448,14 @@ def allowtest(aid):
 	result = cur.execute(sql1,(jid))
 	job_title_noti = cur.fetchall()
 	
-	notidesc= compname_noti+" has responded to your Application for "+str(job_title_noti)
-	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
+	#notidesc= compname_noti+" has responded to your Application for "+str(job_title_noti)
+	
+	'''sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 	cur.execute(sql, (notidesc, str("0"), uname, appid))
-	mysql.connection.commit()
+	mysql.connection.commit()'''
+
+
+	cur.close()
 
 	return redirect(url_for('companywisejobsapps'))
 
@@ -2471,10 +2478,11 @@ def acceptapp(aid):
 	result = cur.execute(sql1,(jid))
 	job_title_noti = cur.fetchall()
 
+	'''
 	notidesc= "Congratualations you have been selected for "+str(job_title_noti)+" post."
 	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 	cur.execute(sql, (notidesc, str("0"), uname, appid))
-	mysql.connection.commit()
+	mysql.connection.commit()'''
 
 	return redirect(url_for('companywisejobsapps'))
 
@@ -2496,10 +2504,11 @@ def rejectapp(aid):
 	result = cur.execute(sql1,(jid))
 	job_title_noti = cur.fetchall()
 
+	'''
 	notidesc= compname_noti+" have rejected to your Application for "+str(job_title_noti)
 	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 	cur.execute(sql, (notidesc, str("0"), uname, appid))
-	mysql.connection.commit()
+	mysql.connection.commit()'''
 
 	return redirect(url_for('companywisejobsapps'))
 
