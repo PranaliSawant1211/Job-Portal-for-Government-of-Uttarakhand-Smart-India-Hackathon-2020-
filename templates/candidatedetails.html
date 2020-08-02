@@ -152,7 +152,7 @@
                                     <a href="{{url_for('about')}}" class="nav-link">About</a>
                                 </li>
                             </ul>
-                           
+
                             <div class="common-btn" style="float: right">
                                 {% if session.logged_in %}
                                 <a class="login-btn" href="/logout">Logout</a>
@@ -345,8 +345,8 @@
                       {% endif %}
                     {% endwith %}
                     <div class="col-lg-5">
-                        <div class="single-profile-item">
-                            <img src="static/img/single-profile/2.jpg" alt="Profile">
+                        <div class="dashboard-img">
+                           <img src="{{pp}}" alt="Profile" style="height: 150px; width: 150px"> 
                             <div class="single-profile-left">
                                 <div class="single-profile-contact">
                                     <h3>Contact Info</h3>

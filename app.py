@@ -702,13 +702,13 @@ def compdashboardkey():
 @login_required
 def cdashboard():
 	uname = session['username'] 
-
 	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
 	ppcur = mysql.connection.cursor()
 	ppresults = ppcur.execute(sql1, [uname])
 	ppdata = ppcur.fetchall()
 	ppcur.close()
 	pppath = ppdata[0][0]
+	
 
 
 	cursoredu = mysql.connection.cursor()
@@ -772,12 +772,7 @@ def cdashboardwork():
 	uname = session['username'] 
 
 
-	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
-	ppcur = mysql.connection.cursor()
-	ppresults = ppcur.execute(sql1, [uname])
-	ppdata = ppcur.fetchall()
-	ppcur.close()
-	pppath = ppdata[0][0]
+	
 
 
 	cursoredu = mysql.connection.cursor()
@@ -1027,6 +1022,19 @@ def companydetails():
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
 
+	cursorlnk = mysql.connection.cursor()
+	result_nojobs = cursorlnk.execute("SELECT * FROM jobs WHERE compid = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Accepted"
+	result_pplhired = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s AND status= %s", [uname,status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_applnrcvd = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s", [uname])
+	cursorskl.close()
+
 
 	return render_template('companydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
 
@@ -1074,6 +1082,12 @@ def publiccompanydetails(compid):
 def candidatedetails():
 	
 	uname = session['username'] 
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -1095,12 +1109,20 @@ def candidatedetails():
 	Mdata = cursorlnk.fetchall()
 	cursorskl.close()
 
-	return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
+	return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, pp=pppath)
 
 @app.route('/publiccandidatedetails/<duname>')
 def publiccandidatedetails(duname):
 	
 	uname = duname
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+	
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -1121,7 +1143,7 @@ def publiccandidatedetails(duname):
 	result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
 	Mdata = cursorlnk.fetchall()
 	cursorskl.close()
-	return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
+	return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, pp=pppath)
 
 
 #********************************Details page ends*************************************************
