@@ -364,7 +364,7 @@ def login():
             if (pwd_context.verify(password, password_db)):
                 session['logged_in_company'] = True
                 session['comp_username'] = uname
-                flash('You are now logged in', 'success')
+                flash('You are now logged in'+session['comp_username'], 'success')
                 return redirect(url_for('compdashboard'))
             else:
                 flash('Invalid Login', 'error')
@@ -945,7 +945,17 @@ def cdashboardskill():
 @app.route('/cdashboarddetail')
 @login_required
 def cdashboarddetail():
+
 	uname = session['username'] 
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+
+
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -967,7 +977,15 @@ def cdashboarddetail():
 	Mdata = cursorlnk.fetchall()
 	cursorskl.close()
 	
-	return render_template('candidatedashboard.html', scroll='detailtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
+
+	viewed="0"
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
+	Ndata = cursorlnk.fetchall()
+	cursorskl.close()
+
+	return render_template('candidatedashboard.html', scroll='detailtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath )
+
 
 
 
@@ -1519,15 +1537,13 @@ def updatecompdetails():
 		compaddress = request.form.get('compaddress')
 		compemail = request.form.get('compemail')
 		compurl = request.form.get('compurl')
-		compphone = request.form.get('compphone')
+		compphone1 = request.form.get('compphone1')
+		print(type(compphone1))
 		compdescription = request.form.get('compdescription')
 		uname = session['comp_username'] 
 		cur = mysql.connection.cursor()
-		cur.execute(""" 
-					UPDATE company_register
-					SET compname=%s, doe=%s, compaddress=%s, compemail=%s, compurl=%s, compphone=%s, compdescription=%s
-					where compid = %s
-				""",(compname, estdate, compaddress, compemail, compurl, compphone, compdescription,uname ))
+		sql=""" UPDATE company_register SET compname=%s, doe=%s, compaddress=%s, compemail=%s, compurl=%s, compphone=%s, compdescription=%s WHERE compid = %s"""
+		cur.execute(sql,(compname, estdate, compaddress, compemail, compurl, compphone1, compdescription,uname ))
 		mysql.connection.commit()
 		cur.close()
 		return redirect(url_for('compdashboard'))
@@ -1713,6 +1729,7 @@ def updatekey():
 			   SET name=%s, designation=%s
 			   WHERE srno=%s
 			""", (name, designation,srno))
+		print(srno)
 		flash("Data Updated Successfully")
 		mysql.connection.commit()
 		return redirect(url_for('compdashboardkey'))
