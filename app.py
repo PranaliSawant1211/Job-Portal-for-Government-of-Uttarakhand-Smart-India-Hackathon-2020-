@@ -364,7 +364,7 @@ def login():
             if (pwd_context.verify(password, password_db)):
                 session['logged_in_company'] = True
                 session['comp_username'] = uname
-                flash('You are now logged in', 'success')
+                flash('You are now logged in'+session['comp_username'], 'success')
                 return redirect(url_for('compdashboard'))
             else:
                 flash('Invalid Login', 'error')
@@ -1469,15 +1469,13 @@ def updatecompdetails():
 		compaddress = request.form.get('compaddress')
 		compemail = request.form.get('compemail')
 		compurl = request.form.get('compurl')
-		compphone = request.form.get('compphone')
+		compphone1 = request.form.get('compphone1')
+		print(type(compphone1))
 		compdescription = request.form.get('compdescription')
 		uname = session['comp_username'] 
 		cur = mysql.connection.cursor()
-		cur.execute(""" 
-					UPDATE company_register
-					SET compname=%s, doe=%s, compaddress=%s, compemail=%s, compurl=%s, compphone=%s, compdescription=%s
-					where compid = %s
-				""",(compname, estdate, compaddress, compemail, compurl, compphone, compdescription,uname ))
+		sql=""" UPDATE company_register SET compname=%s, doe=%s, compaddress=%s, compemail=%s, compurl=%s, compphone=%s, compdescription=%s WHERE compid = %s"""
+		cur.execute(sql,(compname, estdate, compaddress, compemail, compurl, compphone1, compdescription,uname ))
 		mysql.connection.commit()
 		cur.close()
 		return redirect(url_for('compdashboard'))
@@ -1663,6 +1661,7 @@ def updatekey():
 			   SET name=%s, designation=%s
 			   WHERE srno=%s
 			""", (name, designation,srno))
+		print(srno)
 		flash("Data Updated Successfully")
 		mysql.connection.commit()
 		return redirect(url_for('compdashboardkey'))
