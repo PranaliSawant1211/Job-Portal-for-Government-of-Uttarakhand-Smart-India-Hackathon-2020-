@@ -8,6 +8,8 @@ from passlib.apps import custom_app_context as pwd_context
 from functools import wraps
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
+# from googleapiclient import discovery
+# from discovery import build
 from apiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 import csv
@@ -2438,7 +2440,7 @@ def setinterview():
 		cur = mysql.connection.cursor()
 		cur.execute(sql, (status, link, datetime1, aid))
 		mysql.connection.commit()
-		cur.close()
+		
 
 		sql1 = """SELECT jid FROM app_status WHERE appid=%s"""
 		result = cur.execute(sql1,(aid))
@@ -2462,7 +2464,7 @@ def setinterview():
 		mail.send(msg)
 
 
-
+		cur.close()
 		return redirect(url_for('companywisejobsapps'))
 
 
