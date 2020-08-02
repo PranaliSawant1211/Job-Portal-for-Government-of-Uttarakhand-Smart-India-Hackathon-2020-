@@ -160,6 +160,7 @@ body {
         </script>
 
         <link rel="icon" type="image/png" href="static/title1.png">
+
     </head>
     <body>
         <!-- Preloader -->
@@ -476,13 +477,14 @@ body {
                     	</div>
 
                         <div id="myModal" class="modaledu">
+                            <form action="{{ url_for('insertaow') }}" method="POST">
                             <div class="modaledu-content">
                                 <div class="modaledu-header">
                                     <span class="close" id="spanE">&times;</span>
                                     <h2 style="color: white"> Select Area of work</h2>
                                 </div>
                                 <div class="modaledu-body">
-                                    <form action="{{ url_for('insertaow') }}" method="POST">
+                                    <!-- <form action="{{ url_for('insertaow') }}" method="POST"> -->
                                          <!-- <input type="hidden" id="srno" name="srno"> -->
                                     
                                         <div class="row" style="color: black;">
@@ -490,18 +492,19 @@ body {
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     
-                                                <input name="cfow" type="checkbox" id="test{{rowfow.0}}" value="{{ rowfow.1}}" required />
+                                                <input name="cfow" type="checkbox" id="test{{rowfow.0}}" value="{{ rowfow.1}}" />
                                                 <label style="" for="test{{rowfow.0}}">{{ rowfow.1}}</label>
                                                 </div>
                                             </div>
                                             {% endfor %}
                                             <div class="col-lg-12">
-                                            	<button type="submit" class="btn create-ac-btn vertical-center">Add Work</button>
+                                            	<input type="submit" class="btn create-ac-btn vertical-center" value="Add work"/>
                                         	</div>
                                         </div>
-                                    </form>
+                                    <!-- </form> -->
                                 </div>
                             </div>
+                        </form>
                         </div>
                     </div>
                     <div id="awardtag" class="create-skills">
@@ -816,7 +819,192 @@ body {
 
 
 
+{% if scroll %}
+    <script>
+        document.getElementById('{{ scroll }}').scrollIntoView();
+        // or
+        console.log('{{ scroll }}')
+        // document.location.hash = '#' + '{{ scroll }}';
+    </script>
+{% endif %}
 
+<script>
+    
+                var table = document.getElementById('edubox');
+                
+                for(var i = 1; i < table.rows.length; i++)
+                {
+                    table.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         console.log(this.cells[0]);
+                         console.log(this.cells[0].innerHTML);
+                         document.getElementById("Titleedu").value = this.cells[0].innerHTML;
+                         document.getElementById("Degreeedu").value = this.cells[1].innerHTML;
+                         document.getElementById("Instedu").value = this.cells[2].innerHTML;
+                         document.getElementById("Yearedu").value = this.cells[3].innerHTML;
+                         document.getElementById("srno").value = this.cells[4].innerHTML;
+                         
+                         
+
+
+                    };
+                }
+
+
+                var tableW = document.getElementById('workbox');
+                
+                for(var i = 1; i < tableW.rows.length; i++)
+                {
+                    tableW.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         console.log(this.cells[0]);
+                         console.log(this.cells[0].innerHTML);
+                         document.getElementById("jobtitle").value = this.cells[0].innerHTML;
+                         document.getElementById("org").value = this.cells[1].innerHTML;
+                         document.getElementById("dur").value = this.cells[2].innerHTML;
+                         document.getElementById("yearwork").value = this.cells[3].innerHTML;
+                         document.getElementById("wsrno").value = this.cells[4].innerHTML;
+
+                         console.log(document.getElementById("wsrno").value);
+                         
+                         
+
+
+                    };
+                }
+
+                var tableU = document.getElementById('skillbox');
+                
+                for(var i = 1; i < tableU.rows.length; i++)
+                {
+                    tableU.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         document.getElementById("uskname").value = this.cells[1].innerHTML;
+                         document.getElementById("uprcnt").value = this.cells[2].innerHTML;
+                         
+                         document.getElementById("Usrno").value = this.cells[0].innerHTML;
+                         console.log(this.cells[0].innerHTML,this.cells[1].innerHTML,this.cells[2].innerHTML)
+                         
+
+
+                    };
+                }
+
+                var tableL = document.getElementById('linkbox');
+                
+                for(var i = 1; i < tableL.rows.length; i++)
+                {
+                    tableL.rows[i].onclick = function()
+                    {
+                         //rIndex = this.rowIndex;
+                         console.log(this.cells[0]);
+                         console.log(this.cells[0].innerHTML);
+                         document.getElementById("link").value = this.cells[1].innerHTML;
+                         document.getElementById("value").value = this.cells[2].innerHTML;
+                         document.getElementById("lsrno").value = this.cells[0].innerHTML;
+                         
+                         
+
+
+                    };
+                }
+
+
+         </script>
+
+<script type="text/javascript">
+
+
+    var modaledu = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var spanE = document.getElementById("spanE");
+
+    // When the user clicks the button, open the modal 
+    function showDialog () { 
+      modaledu.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    spanE.onclick = function() {
+      modaledu.style.display = "none";
+    }
+
+
+    var modalwork = document.getElementById("myModalW");
+
+
+    // Get the <span> element that closes the modal
+    var spanW = document.getElementById("spanW");
+
+    // When the user clicks the button, open the modal 
+    function showDialogW () { 
+      modalwork.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    spanW.onclick = function() {
+      modalwork.style.display = "none";
+    }
+
+    var modalskl = document.getElementById("mymodalS");
+
+
+    var spanS = document.getElementById("spanS");
+    // Get the <span> element that closes the modal
+
+    // When the user clicks the button, open the modal 
+    function showDialogS () { 
+      modalskl.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    spanS.onclick = function() {
+      modalskl.style.display = "none";
+    }
+
+
+    var modallnk = document.getElementById("mymodalL");
+
+
+    var spanL = document.getElementById("spanL");
+    // Get the <span> element that closes the modal
+
+    // When the user clicks the button, open the modal 
+    function showDialogL () { 
+      modallnk.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    spanL.onclick = function() {
+      modallnk.style.display = "none";
+    }
+
+    var modaldet = document.getElementById("mymodalD");
+
+
+    var spanD= document.getElementById("spanD");
+    // Get the <span> element that closes the modal
+
+    // When the user clicks the button, open the modal 
+    function showDialogD () { 
+        console.log(modaldet)
+      modaldet.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    spanD.onclick = function() {
+      modaldet.style.display = "none";
+    }
+
+
+</script>
 
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <div class="change-password-area">
@@ -948,193 +1136,10 @@ body {
             </div>
         </div>
         <!-- End Dashboard -->
-        {% if scroll %}
-<script>
-document.getElementById('{{ scroll }}').scrollIntoView();
-// or
-console.log('{{ scroll }}')
-// document.location.hash = '#' + '{{ scroll }}';
-</script>
-{% endif %}
-
-<script type="text/javascript">
-
-
-var modaledu = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var spanE = document.getElementById("spanE");
-
-// When the user clicks the button, open the modal 
-function showDialog () { 
-  modaledu.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-spanE.onclick = function() {
-  modaledu.style.display = "none";
-}
-
-
-var modalwork = document.getElementById("myModalW");
-
-
-// Get the <span> element that closes the modal
-var spanW = document.getElementById("spanW");
-
-// When the user clicks the button, open the modal 
-function showDialogW () { 
-  modalwork.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-spanW.onclick = function() {
-  modalwork.style.display = "none";
-}
-
-var modalskl = document.getElementById("mymodalS");
-
-
-var spanS = document.getElementById("spanS");
-// Get the <span> element that closes the modal
-
-// When the user clicks the button, open the modal 
-function showDialogS () { 
-  modalskl.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-spanS.onclick = function() {
-  modalskl.style.display = "none";
-}
-
-
-var modallnk = document.getElementById("mymodalL");
-
-
-var spanL = document.getElementById("spanL");
-// Get the <span> element that closes the modal
-
-// When the user clicks the button, open the modal 
-function showDialogL () { 
-  modallnk.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-spanL.onclick = function() {
-  modallnk.style.display = "none";
-}
-
-var modaldet = document.getElementById("mymodalD");
-
-
-var spanD= document.getElementById("spanD");
-// Get the <span> element that closes the modal
-
-// When the user clicks the button, open the modal 
-function showDialogD () { 
-    console.log(modaldet)
-  modaldet.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-spanD.onclick = function() {
-  modaldet.style.display = "none";
-}
-
-
-</script>
+ 
 
     
-        <script>
-    
-                var table = document.getElementById('edubox');
-                
-                for(var i = 1; i < table.rows.length; i++)
-                {
-                    table.rows[i].onclick = function()
-                    {
-                         //rIndex = this.rowIndex;
-                         console.log(this.cells[0]);
-                         console.log(this.cells[0].innerHTML);
-                         document.getElementById("Titleedu").value = this.cells[0].innerHTML;
-                         document.getElementById("Degreeedu").value = this.cells[1].innerHTML;
-                         document.getElementById("Instedu").value = this.cells[2].innerHTML;
-                         document.getElementById("Yearedu").value = this.cells[3].innerHTML;
-                         document.getElementById("srno").value = this.cells[4].innerHTML;
-                         
-                         
-
-
-                    };
-                }
-
-
-                var tableW = document.getElementById('workbox');
-                
-                for(var i = 1; i < tableW.rows.length; i++)
-                {
-                    tableW.rows[i].onclick = function()
-                    {
-                         //rIndex = this.rowIndex;
-                         console.log(this.cells[0]);
-                         console.log(this.cells[0].innerHTML);
-                         document.getElementById("jobtitle").value = this.cells[0].innerHTML;
-                         document.getElementById("org").value = this.cells[1].innerHTML;
-                         document.getElementById("dur").value = this.cells[2].innerHTML;
-                         document.getElementById("yearwork").value = this.cells[3].innerHTML;
-                         document.getElementById("wsrno").value = this.cells[4].innerHTML;
-
-                         console.log(document.getElementById("wsrno").value);
-                         
-                         
-
-
-                    };
-                }
-
-                var tableU = document.getElementById('skillbox');
-                
-                for(var i = 1; i < tableU.rows.length; i++)
-                {
-                    tableU.rows[i].onclick = function()
-                    {
-                         //rIndex = this.rowIndex;
-                         document.getElementById("uskname").value = this.cells[1].innerHTML;
-                         document.getElementById("uprcnt").value = this.cells[2].innerHTML;
-                         
-                         document.getElementById("Usrno").value = this.cells[0].innerHTML;
-                         console.log(this.cells[0].innerHTML,this.cells[1].innerHTML,this.cells[2].innerHTML)
-                         
-
-
-                    };
-                }
-
-                var tableL = document.getElementById('linkbox');
-                
-                for(var i = 1; i < tableL.rows.length; i++)
-                {
-                    tableL.rows[i].onclick = function()
-                    {
-                         //rIndex = this.rowIndex;
-                         console.log(this.cells[0]);
-                         console.log(this.cells[0].innerHTML);
-                         document.getElementById("link").value = this.cells[1].innerHTML;
-                         document.getElementById("value").value = this.cells[2].innerHTML;
-                         document.getElementById("lsrno").value = this.cells[0].innerHTML;
-                         
-                         
-
-
-                    };
-                }
-
-
-         </script>
+        
 
         <!-- Footer -->
         <style>

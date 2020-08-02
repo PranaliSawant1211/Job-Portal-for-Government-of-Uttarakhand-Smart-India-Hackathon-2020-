@@ -56,6 +56,31 @@
         color: Green;
         }
     </style>
+    <script>
+    function universal_validation(form){
+        // var choice = document.forms["login"]["role"];
+        var uname = document.forms["login"]["uname"];
+        var password = document.forms["login"]["password"];
+        // if(choice.value =="")
+        // {
+        //     window.alert("Please enter your role");
+        //     choice.focus();
+        //     return false;
+        // }
+        if(uname.value =="")
+        {
+            window.alert("Please enter your username");
+            uname.focus();
+            return false;
+        }
+        else if(password.value =="")
+        {
+            window.alert("Please enter your password");
+            password.focus();
+            return false;
+        }
+    }
+</script>
         <title>Gable - Job Portal HTML Template</title>
 
         <link rel="icon" type="image/png" href="static/title1.png">
@@ -202,7 +227,7 @@
                 </div>
                 <div class="post-job-item">
 
-                    <form>
+                    <form >
 
                         <div class="post-job-heading">
                             <h2>Post a Job</h2>

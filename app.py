@@ -1078,7 +1078,7 @@ def publiccompanydetails(compid):
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
 
-	return render_template('companydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+	return render_template('publiccompanydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
 
 
 @app.route('/candidatedetails')
@@ -1147,7 +1147,7 @@ def publiccandidatedetails(duname):
 	result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
 	Mdata = cursorlnk.fetchall()
 	cursorskl.close()
-	return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, pp=pppath)
+	return render_template('publiccandidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, pp=pppath)
 
 
 #********************************Details page ends*************************************************
@@ -1701,7 +1701,7 @@ def updateaward():
 		awardyear = request.form['awardyear']
 		srno = request.form['srno']
 		cur = mysql.connection.cursor()
-		print((link, value, uname,srno))
+		print(awardtitle, from_org, awardyear, srno)
 		cur.execute("""
 			   UPDATE award
 			   SET title=%s, from_org=%s, year=%s
@@ -2032,7 +2032,7 @@ def companywisejobs():
 @app.route('/companywisejobseditable', methods = ['GET'])
 @login_required_company
 def getcwisejobdetailseditable():
-	compid = 200000
+	compid = session["comp_username"]
 	jcursor = mysql.connection.cursor()
 	jresult = jcursor.execute("SELECT * FROM `jobs` WHERE `compid` = %s", [compid])
 	jdata = list(jcursor.fetchall())
@@ -2113,20 +2113,20 @@ def apply(compid,jid):
 	sql1 = """SELECT appid FROM app_status WHERE jid = %s AND uname = %s AND compid = %s"""
 	result = cur.execute(sql1,(jid, uname, compid))
 	appid_noti = cur.fetchall()
-
+	print(jid)
 	sql1 = """SELECT jtitle FROM jobs WHERE jid = %s """
-	result = cur.execute(sql1,(jid))
+	result = cur.execute(sql1,[jid])
 	job_title_noti = cur.fetchall()
 
 	sql1 = """SELECT compname FROM company_register WHERE compid = %s """
-	result = cur.execute(sql1,(compid))
+	result = cur.execute(sql1,[compid])
 	company_name = cur.fetchall()
 
 	'''
 	notidesc="Your Application for "+str(job_title_noti)+" post have been successfully submitted"
 	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
-	cur.execute(sql, (notidesc, str("0"), uname, appid))
-	mysql.connection.commit()'''
+	cur.execute(sql, (notidesc, str("0"), uname, appid))'''
+	mysql.connection.commit()
 
 	return redirect(url_for('myapplications'))
 
@@ -2363,7 +2363,7 @@ def setinterview():
 
 		cur = mysql.connection.cursor()
 		sql1 = """ SELECT * from register r, app_status a WHERE r.uname = a.uname AND a.appid = %s """
-		result = cur.execute(sql1, (aid))
+		result = cur.execute(sql1, (aid,))
 		if result>0:
 			lst = cur.fetchone()
 			print(lst)
@@ -2443,12 +2443,12 @@ def setinterview():
 		
 
 		sql1 = """SELECT jid FROM app_status WHERE appid=%s"""
-		result = cur.execute(sql1,(aid))
+		result = cur.execute(sql1,(aid,))
 		jid = cur.fetchall()
 
 
 		sql1 = """SELECT jtitle FROM jobs WHERE jid = %s """
-		result = cur.execute(sql1,(jid))
+		result = cur.execute(sql1,(jid,))
 		job_title_noti = cur.fetchall()
 
 		'''
@@ -2485,12 +2485,12 @@ def allowtest(aid):
 	
 
 	sql1 = """SELECT jid FROM app_status WHERE appid=%s"""
-	result = cur.execute(sql1,(aid))
+	result = cur.execute(sql1,(aid,))
 	jid = cur.fetchall()
 
 
 	sql1 = """SELECT jtitle FROM jobs WHERE jid = %s """
-	result = cur.execute(sql1,(jid))
+	result = cur.execute(sql1,(jid,))
 	job_title_noti = cur.fetchall()
 	
 	#notidesc= compname_noti+" has responded to your Application for "+str(job_title_noti)
@@ -2512,15 +2512,15 @@ def acceptapp(aid):
 	cur = mysql.connection.cursor()
 	cur.execute(sql, [aid])
 	mysql.connection.commit()
-	cur.close()
+	
 
 	sql1 = """SELECT jid FROM app_status WHERE appid=%s"""
-	result = cur.execute(sql1,(aid))
+	result = cur.execute(sql1,(aid,))
 	jid = cur.fetchall()
 
 
 	sql1 = """SELECT jtitle FROM jobs WHERE jid = %s """
-	result = cur.execute(sql1,(jid))
+	result = cur.execute(sql1,(jid,))
 	job_title_noti = cur.fetchall()
 
 	'''
@@ -2528,7 +2528,7 @@ def acceptapp(aid):
 	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 	cur.execute(sql, (notidesc, str("0"), uname, appid))
 	mysql.connection.commit()'''
-
+	cur.close()
 	return redirect(url_for('companywisejobsapps'))
 
 @app.route('/rejectapp/<aid>')
@@ -2538,15 +2538,15 @@ def rejectapp(aid):
 	cur = mysql.connection.cursor()
 	cur.execute(sql, [aid])
 	mysql.connection.commit()
-	cur.close()
+	
 
 	sql1 = """SELECT jid FROM app_status WHERE appid=%s"""
-	result = cur.execute(sql1,(aid))
+	result = cur.execute(sql1,(aid,))
 	jid = cur.fetchall()
 
 
 	sql1 = """SELECT jtitle FROM jobs WHERE jid = %s """
-	result = cur.execute(sql1,(jid))
+	result = cur.execute(sql1,(jid,))
 	job_title_noti = cur.fetchall()
 
 	'''
@@ -2554,6 +2554,7 @@ def rejectapp(aid):
 	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 	cur.execute(sql, (notidesc, str("0"), uname, appid))
 	mysql.connection.commit()'''
+	cur.close()
 
 	return redirect(url_for('companywisejobsapps'))
 
