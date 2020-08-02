@@ -1122,6 +1122,8 @@ def cdashboarddetail():
 def companydetails():
 	uname=session['comp_username']
 
+	
+
 
 	cursorskl = mysql.connection.cursor()
 	result2 = cursorskl.execute("SELECT * FROM award WHERE compid = %s", [uname])

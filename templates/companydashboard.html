@@ -66,6 +66,7 @@ body {
   padding: 0 5px;
   font-size: 33px;
   font-weight: 100px;
+  font-family: optima;
 }
 
 .row11 {margin: 0 -160px;}
@@ -292,8 +293,9 @@ body {
                                     <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Change Password</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Candidate Applied</a>
+                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Dashboard</a>
                                 </li>
+
                                 
                             </ul>
                             {% with messages = get_flashed_messages(with_categories=true) %}
@@ -306,43 +308,8 @@ body {
                         </div>
                     </div>
                 </div>
-<div class="row11">
-  <div class="column11">
-    <div class="card" style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
-      <p><i class="fa fa-user"></i></p>
-      <h3>11+</h3>
-      <p style="font-size:30px">Since</p>
-    </div>
-  </div>
 
-  <div class="column11">
-    <div class="card"style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
-      <p><i class="fa fa-check"></i></p>
-      <h3>{{ result_nojobs }}</h3>
-      <p style="font-size:30px">Number of Jobs Posted</p>
-    </div>
-  </div>
 
-  <div class="column11">
-    <div class="card"style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
-      <p><i class="fa fa-smile-o"></i></p>
-      <h3>{{ result_pplhired }}</h3>
-      <p style="font-size:30px">Candidates Hired</p>
-    </div>
-  </div>
-
-  <div class="column11">
-    <div class="card" style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
-      <p><i class="fa fa-coffee"></i></p>
-      <h3>{{ result_applnrcvd }}</h3>
-      <p style="font-size:30px">No of Applications Recieved</p>
-    </div>
-  </div>
-</div>
-
-<br><br>
-
-    
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div id="detailtag" class="create-information">
@@ -874,133 +841,38 @@ body {
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        <div class="dashboard-saved-job">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="job-item wow fadeInUp" data-wow-delay=".3s">
-                                        <img src="static/img/home-1/jobs/1.png" alt="Job">
-                                        <div class="job-inner align-items-center">
-                                            <div class="job-inner-left">
-                                                <h3>UI/UX Designer</h3>
-                                                <a href="company-details.html">Winbrans.com</a>
-                                                <ul>
-                                                    <li>
-                                                        <i class="icofont-money-bag"></i>
-                                                        $20k - $25k
-                                                    </li>
-                                                    <li>
-                                                        <i class="icofont-location-pin"></i>
-                                                        Location 210-27 Quadra, Market Street, Victoria Canada
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="job-inner-right">
-                                                <ul>
-                                                    <li>
-                                                        <a href="create-account.html">Apply</a>
-                                                    </li>
-                                                    <li>
-                                                        <span>Full Time</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="job-item wow fadeInUp" data-wow-delay=".4s">
-                                        <img src="static/img/home-1/jobs/2.png" alt="Job">
-                                        <div class="job-inner align-items-center">
-                                            <div class="job-inner-left">
-                                                <h3>Android Developer</h3>
-                                                <a href="company-details.html">Infiniza.com</a>
-                                                <ul>
-                                                    <li>
-                                                        <i class="icofont-money-bag"></i>
-                                                        $20k - $25k
-                                                    </li>
-                                                    <li>
-                                                        <i class="icofont-location-pin"></i>
-                                                        Location 210-27 Quadra, Market Street, Victoria Canada
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="job-inner-right">
-                                                <ul>
-                                                    <li>
-                                                        <a href="create-account.html">Apply</a>
-                                                    </li>
-                                                    <li>
-                                                        <span>Part Time</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6"> 
-                                    <div class="job-item wow fadeInUp" data-wow-delay=".3s">
-                                        <img src="static/img/home-1/jobs/3.png" alt="Job">
-                                        <div class="job-inner align-items-center">
-                                            <div class="job-inner-left">
-                                                <h3>Senior Manager</h3>
-                                                <a href="company-details.html">Glovibo.com</a>
-                                                <ul>
-                                                    <li>
-                                                        <i class="icofont-money-bag"></i>
-                                                        $20k - $25k
-                                                    </li>
-                                                    <li>
-                                                        <i class="icofont-location-pin"></i>
-                                                        Location 210-27 Quadra, Market Street, Victoria Canada
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="job-inner-right">
-                                                <ul>
-                                                    <li>
-                                                        <a href="create-account.html">Apply</a>
-                                                    </li>
-                                                    <li>
-                                                        <span>Intern</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="job-item wow fadeInUp" data-wow-delay=".4s">
-                                        <img src="static/img/home-1/jobs/4.png" alt="Job">
-                                        <div class="job-inner align-items-center">
-                                            <div class="job-inner-left">
-                                                <h3>Product Designer</h3>
-                                                <a href="company-details.html">Bizotic.com</a>
-                                                <ul>
-                                                    <li>
-                                                        <i class="icofont-money-bag"></i>
-                                                        $20k - $25k
-                                                    </li>
-                                                    <li>
-                                                        <i class="icofont-location-pin"></i>
-                                                        Location 210-27 Quadra, Market Street, Victoria Canada
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="job-inner-right">
-                                                <ul>
-                                                    <li>
-                                                        <a href="create-account.html">Apply</a>
-                                                    </li>
-                                                    <li>
-                                                        <span>Part Time</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="row11">
+                          <div class="column11">
+                            <div class="card" style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
+                              <p><i class="fa fa-user"></i></p>
+                              <h3>11+</h3>
+                              <p style="font-size:30px">Since</p>
                             </div>
+                          </div>
+
+                          <div class="column11">
+                            <div class="card"style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
+                              <p><i class="fa fa-check"></i></p>
+                              <h3>{{ result_nojobs }}</h3>
+                              <p style="font-size:30px">Number of Jobs Posted</p>
+                            </div>
+                          </div>
+
+                          <div class="column11">
+                            <div class="card"style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
+                              <p><i class="fa fa-smile-o"></i></p>
+                              <h3>{{ result_pplhired }}</h3>
+                              <p style="font-size:30px">Candidates Hired</p>
+                            </div>
+                          </div>
+
+                          <div class="column11">
+                            <div class="card" style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
+                              <p><i class="fa fa-coffee"></i></p>
+                              <h3>{{ result_applnrcvd }}</h3>
+                              <p style="font-size:30px">No of Applications Recieved</p>
+                            </div>
+                          </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-logout" role="tabpanel" aria-labelledby="pills-logout-tab">
