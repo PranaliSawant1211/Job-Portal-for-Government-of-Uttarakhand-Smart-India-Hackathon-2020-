@@ -330,53 +330,55 @@ def convertToBinaryData(filename):
 @app.route('/login', methods = ['GET', 'POST'])
 # @login_required
 def login():
+    if request.method == 'POST':
+        session.pop('username', None)
+        session.pop('comp_username', None)
+        cursor = mysql.connection.cursor()
+        cursor1 = mysql.connection.cursor()
+        cursor2 = mysql.connection.cursor()
+        uname = request.form.get('uname')
+        result = cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
+        result1 = cursor1.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+        if(result > 0):
+            password = request.form.get('password')
+            result2 = cursor2.execute("SELECT * FROM register WHERE uname = %s", [uname])
+            data = cursor2.fetchone()
+            password_db = data[11]
+            if (pwd_context.verify(password, password_db)):
+                session['logged_in'] = True
+                session['username'] = uname
+                flash('You are now logged in', 'success')
+                return redirect(url_for('cdashboard'))
+            else:
+                flash('Invalid Login', 'error')
+                return render_template('login.html')
+            cursor.close()
+            cursor1.close()
+            cursor2.close()
 
-	if request.method == 'POST':
-		session.pop('username', None)
-		session.pop('comp_username', None)
-		cursor = mysql.connection.cursor()
-		choice = request.form.get('role')
-		if(choice == "candidate"):
-			uname = request.form.get('uname')
-			password = request.form.get('password')
-			result = cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
-			if result > 0:
-				data = cursor.fetchone()
-				password_db = data[11]
-				if (pwd_context.verify(password, password_db)):
-					session['logged_in'] = True
-					session['username'] = uname
-					flash('You are now logged in', 'success')
-					return redirect(url_for('cdashboard'))
-				else:
-					flash('Invalid Login', 'error')
-					return render_template('login.html')
-				cursor.close()
-			else:
-				flash('User not found', 'error')
-				return render_template('login.html')
-
-		elif(choice == "company"):
-			uname = request.form.get('uname')
-			password = request.form.get('password')
-			result = cursor.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
-			if result > 0:
-				data = cursor.fetchone()
-				password_db = data[8]
-				if (pwd_context.verify(password, password_db)):
-					session['logged_in_company'] = True
-					session['comp_username'] = uname
-					flash('You are now logged in', 'success')
-					return redirect(url_for('compdashboard'))
-				else:
-					flash('Invalid Login', 'error')
-					return render_template('login.html')
-				cursor.close()
-			else:
-				flash('User not found', 'error')
-				return render_template('login.html')
-
-	return render_template('login.html')
+        elif(result1 > 0):
+            password = request.form.get('password')
+            result2 = cursor2.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+            data = cursor2.fetchone()
+            password_db = data[8]
+            if (pwd_context.verify(password, password_db)):
+                session['logged_in_company'] = True
+                session['comp_username'] = uname
+                flash('You are now logged in', 'success')
+                return redirect(url_for('compdashboard'))
+            else:
+                flash('Invalid Login', 'error')
+                return render_template('login.html')
+            cursor.close()
+            cursor1.close()
+            cursor2.close()
+        else:
+            flash('User not found', 'error')
+            cursor.close()
+            cursor1.close()
+            cursor2.close()
+            return render_template('login.html')
+    return render_template('login.html')
 
 
 
@@ -528,7 +530,21 @@ def compdashboard():
 	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
-	return render_template('companydashboard.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+	cursorlnk = mysql.connection.cursor()
+	result_nojobs = cursorlnk.execute("SELECT * FROM jobs WHERE compid = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Accepted"
+	result_pplhired = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s AND status= %s", [uname,status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_applnrcvd = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s", [uname])
+	cursorskl.close()
+
+	return render_template('companydashboard.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
 
 @app.route('/compdashboardgeoloc')
 @login_required_company
@@ -689,7 +705,7 @@ def cdashboard():
 	ppcur = mysql.connection.cursor()
 	ppresults = ppcur.execute(sql1, [uname])
 	ppdata = ppcur.fetchall()
-
+	ppcur.close()
 	pppath = ppdata[0][0]
 
 
@@ -723,7 +739,27 @@ def cdashboard():
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
 
-	return render_template('candidatedashboard.html', students=edudata,detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, tnoti=Ndata, noticount= result4, pp = pppath)
+
+	cursorlnk = mysql.connection.cursor()
+	result_appln = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Interview Complete"
+	result_intrw = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname, status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_offers = cursorlnk.execute("SELECT * FROM offer WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status1 = "Accepted"
+	result_applnacpt = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname,status1])
+	cursorskl.close()
+
+	return render_template('candidatedashboard.html', students=edudata,detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, tnoti=Ndata, noticount= result4, result_appln=result_appln, result_intrw=result_intrw, result_offers=result_offers, result_applnacpt=result_applnacpt, pp = pppath)
+
 
 
 @app.route('/cdashboardwork')
@@ -933,7 +969,9 @@ def companydetails():
 	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
-	return render_template('companydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+
+	return render_template('companydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
 
 @app.route('/publiccompanydetails/<compid>')
 def publiccompanydetails(compid):
@@ -999,6 +1037,7 @@ def candidatedetails():
 	result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
 	Mdata = cursorlnk.fetchall()
 	cursorskl.close()
+
 	return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
 
 @app.route('/publiccandidatedetails/<duname>')
@@ -1424,7 +1463,7 @@ def addblog():
 
 @app.route('/blog')
 def blog():
-		return render_template('blog.html')
+	return render_template('blog.html')
 
 
 
@@ -1745,25 +1784,113 @@ def upldjob():
 		return resp
 
 
-@app.route('/joblist')
+@app.route('/testva',methods=['POST','GET'])
+def testva():
+    #data = request.args.get('jsdata')
+    if request.method == 'POST':
+        jcursor = mysql.connection.cursor()
+        _json = request.json
+        _checkbox1  = _json['checkbox1']
+        _minprice  = int(_json['minprice'])
+        _sect  = int(_json['sect'])
+        _comp  = str(_json['comp'])
+        print('--------------------------------javascriptvalues---------------------------------')
+        print("checkbox1: {}, minprice: {}, sect: {}, comp: {}".format(_checkbox1, _minprice, _sect,_comp))
+
+        if(_checkbox1=='checked'):
+            if(_minprice>0):
+                if(_comp!='0'):
+                    print('all 3 query')
+                    jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
+                    jdata = list(jcursor.fetchall())
+                    jcursor.close()
+                    return jsonify({'output' : jdata})
+                print('checkbox and minprice query')
+                jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s ",(_minprice,))
+                jdata = list(jcursor.fetchall())
+                jcursor.close()
+                return jsonify({'output' : jdata})
+                
+            if(_comp!='0'):
+                print('checkbox comp query')
+                jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `compid` = %s",(_comp,))
+                jdata = list(jcursor.fetchall())
+                jcursor.close()
+                return jsonify({'output' : jdata})
+            print('checkbox only query')
+            jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME'")
+        else:
+            if(_minprice>0):
+                if(_comp!='0'):
+                    # if(_checkbox1=='checked'):
+                    #     print('all 3 query')
+                    #     jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
+                    #     jdata = list(jcursor.fetchall())
+                    #     jcursor.close()
+                    #     return jsonify({'output' : jdata})
+                        print('minprice and comp query')
+                        jresult = jcursor.execute("SELECT * FROM `jobs` where `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
+                        jdata = list(jcursor.fetchall())
+                        jcursor.close()
+                        return jsonify({'output' : jdata})
+                    
+                jresult = jcursor.execute("SELECT * FROM `jobs` where `jsalary` >= %s",(_minprice,))
+            else:
+                if(_comp!='0'):
+                    if(_checkbox1=='checked'):
+                        # if(_minprice>0):
+                        #     print('all 3')
+                        print('checkbox and minprice')
+                        jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s ",(_minprice,))
+                        jdata = list(jcursor.fetchall())
+                        jcursor.close()
+                        return jsonify({'output' : jdata})
+                    print('comp only')
+                    jresult = jcursor.execute("SELECT * FROM `jobs` where `compid` = %s",(_comp,))
+
+        if(_checkbox1=='unchecked' and _minprice==0 and _comp=='0'):
+            print('no query all jobs')
+            jresult = jcursor.execute("SELECT * FROM `jobs`")
+            
+
+        jdata = list(jcursor.fetchall())
+        jcursor.close()
+        print('--------------------------testva----------------------------------------')
+        # print(data)
+        # for j in jdata:
+        #     print("Job Title: {}".format(j[1]))
+        #     print("Job Description: {}".format(j[2]))
+        #     print("Job Age Limit: {}".format(j[3]))
+        #     print("Job Company ID: {}".format(j[4]))
+        #     print("Job Salary: {}".format(j[5]))
+        #     print("Job Vacancies: {}".format(j[6]))
+        #     print("Job Location: {}".format(j[7]))
+        #     print("Date of Post: {}".format(j[8]))
+        #     print("Last Date to Apply: {}".format(j[9]))
+        #     print("Job Type: {}".format(j[10]))
+        #     print("Expereince Required: {}".format(j[11]))
+        return jsonify({'output' : jdata})
+
+
+@app.route('/joblist/')
 def joblist():
-	jcursor = mysql.connection.cursor()
-	jresult = jcursor.execute("SELECT * FROM `jobs`")
-	jdata = list(jcursor.fetchall())
-	jcursor.close()
-	for j in jdata:
-		print("Job Title: {}".format(j[1]))
-		print("Job Description: {}".format(j[2]))
-		print("Job Age Limit: {}".format(j[3]))
-		print("Job Company ID: {}".format(j[4]))
-		print("Job Salary: {}".format(j[5]))
-		print("Job Vacancies: {}".format(j[6]))
-		print("Job Location: {}".format(j[7]))
-		print("Date of Post: {}".format(j[8]))
-		print("Last Date to Apply: {}".format(j[9]))
-		print("Job Type: {}".format(j[10]))
-		print("Expereince Required: {}".format(j[11]))
-	return render_template('joblist.html', data = jdata)
+    jcursor = mysql.connection.cursor()
+    jresult = jcursor.execute("SELECT * FROM `jobs`")
+    jdata = list(jcursor.fetchall())
+    jcursor.close()
+    # for j in jdata:
+    #     print("Job Title: {}".format(j[1]))
+    #     print("Job Description: {}".format(j[2]))
+    #     print("Job Age Limit: {}".format(j[3]))
+    #     print("Job Company ID: {}".format(j[4]))
+    #     print("Job Salary: {}".format(j[5]))
+    #     print("Job Vacancies: {}".format(j[6]))
+    #     print("Job Location: {}".format(j[7]))
+    #     print("Date of Post: {}".format(j[8]))
+    #     print("Last Date to Apply: {}".format(j[9]))
+    #     print("Job Type: {}".format(j[10]))
+    #     print("Expereince Required: {}".format(j[11]))
+    return render_template('joblist.html', data = jdata)
 
 @app.route('/jobdetails/<job_id>', methods = ['GET'])
 def getjobdetails(job_id):
@@ -1929,6 +2056,7 @@ def notificationviewed():
 	result2 = cur.execute("""UPDATE `notification-candidate` SET viewed = %s WHERE uname = %s""", [view,uname])
 	mysql.connection.commit()
 	cur.close()
+	return ""
 
 @app.route('/myapplications')
 @login_required
@@ -1962,7 +2090,12 @@ def myapplications():
 		compname = compdata[0][0]
 
 		data.append([appid, jtitle, compname, applied_on, status])
-	return render_template('myapplications.html', data=data)
+	viewed="0"
+	
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
+	Ndata = cursorlnk.fetchall()
+	return render_template('myapplications.html', data=data,tnoti=Ndata, noticount=result4)
 
 
 @app.route('/deleteapplications/<aid>')

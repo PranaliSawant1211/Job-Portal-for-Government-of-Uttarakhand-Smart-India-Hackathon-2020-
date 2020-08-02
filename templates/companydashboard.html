@@ -50,6 +50,53 @@
 
 
 }
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+/* Float four columns side by side */
+.column11 {
+  float: left;
+  width: 25%;
+  padding: 0 5px;
+  font-size: 33px;
+  font-weight: 100px;
+}
+
+.row11 {margin: 0 -160px;}
+
+/* Clear floats after the columns */
+.row11:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column11 {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 49px;
+  height: 240px;
+  text-align: center;
+  background-color: #444;
+  color: white;
+}
+
+.fa {font-size:80px;}
 
         </style>
 
@@ -220,14 +267,14 @@
         <!-- Dashboard -->
         <div class="dashboard-area pt-100">
             <div class="container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <p class="alert-{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
                 <div class="row align-items-center">
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                      {% if messages %}
-                        {% for category, message in messages %}
-                          <p class="alert-{{ category }}">{{ message }}</p>
-                        {% endfor %}
-                      {% endif %}
-                    {% endwith %}
                     <div class="col-lg-4">
                         <div class="dashboard-img">
                             <img src="static/img/dashboard/1.jpg" alt="Dashboard">
@@ -259,6 +306,43 @@
                         </div>
                     </div>
                 </div>
+<div class="row11">
+  <div class="column11">
+    <div class="card" style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
+      <p><i class="fa fa-user"></i></p>
+      <h3>11+</h3>
+      <p style="font-size:30px">Since</p>
+    </div>
+  </div>
+
+  <div class="column11">
+    <div class="card"style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
+      <p><i class="fa fa-check"></i></p>
+      <h3>{{ result_nojobs }}</h3>
+      <p style="font-size:30px">Number of Jobs Posted</p>
+    </div>
+  </div>
+
+  <div class="column11">
+    <div class="card"style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
+      <p><i class="fa fa-smile-o"></i></p>
+      <h3>{{ result_pplhired }}</h3>
+      <p style="font-size:30px">Candidates Hired</p>
+    </div>
+  </div>
+
+  <div class="column11">
+    <div class="card" style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
+      <p><i class="fa fa-coffee"></i></p>
+      <h3>{{ result_applnrcvd }}</h3>
+      <p style="font-size:30px">No of Applications Recieved</p>
+    </div>
+  </div>
+</div>
+
+<br><br>
+
+    
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div id="detailtag" class="create-information">
