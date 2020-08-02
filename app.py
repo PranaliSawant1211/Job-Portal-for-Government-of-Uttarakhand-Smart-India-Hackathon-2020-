@@ -530,7 +530,21 @@ def compdashboard():
 	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
-	return render_template('companydashboard.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+	cursorlnk = mysql.connection.cursor()
+	result_nojobs = cursorlnk.execute("SELECT * FROM jobs WHERE compid = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Accepted"
+	result_pplhired = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s AND status= %s", [uname,status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_applnrcvd = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s", [uname])
+	cursorskl.close()
+
+	return render_template('companydashboard.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
 
 @app.route('/compdashboardgeoloc')
 @login_required_company
@@ -688,6 +702,15 @@ def compdashboardkey():
 @login_required
 def cdashboard():
 	uname = session['username'] 
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+
+
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -718,13 +741,45 @@ def cdashboard():
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
 
-	return render_template('candidatedashboard.html', students=edudata,detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, tnoti=Ndata, noticount= result4)
+
+	cursorlnk = mysql.connection.cursor()
+	result_appln = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Interview Complete"
+	result_intrw = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname, status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_offers = cursorlnk.execute("SELECT * FROM offer WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status1 = "Accepted"
+	result_applnacpt = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname,status1])
+	cursorskl.close()
+
+	return render_template('candidatedashboard.html', students=edudata,detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, tnoti=Ndata, noticount= result4, result_appln=result_appln, result_intrw=result_intrw, result_offers=result_offers, result_applnacpt=result_applnacpt, pp = pppath)
+
 
 
 @app.route('/cdashboardwork')
 @login_required
 def cdashboardwork():
+
+
 	uname = session['username'] 
+
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+
+
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -753,7 +808,7 @@ def cdashboardwork():
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
 	print(Mdata)
-	return render_template('candidatedashboard.html', scroll='worktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4)
+	return render_template('candidatedashboard.html', scroll='worktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath)
 
 
 
@@ -761,6 +816,15 @@ def cdashboardwork():
 @login_required
 def cdashboardedu():
 	uname = session['username'] 
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+
+
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -788,12 +852,20 @@ def cdashboardedu():
 	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
-	return render_template('candidatedashboard.html', scroll='educationtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4)
+	return render_template('candidatedashboard.html', scroll='educationtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath)
 
 @app.route('/cdashboardlink')
 @login_required
 def cdashboardlink():
 	uname = session['username'] 
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -822,12 +894,20 @@ def cdashboardlink():
 	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
-	return render_template('candidatedashboard.html', scroll='linktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4)
+	return render_template('candidatedashboard.html', scroll='linktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp =pppath)
 
 @app.route('/cdashboardskill')
 @login_required
 def cdashboardskill():
 	uname = session['username'] 
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -856,7 +936,7 @@ def cdashboardskill():
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
 
-	return render_template('candidatedashboard.html', scroll='skilltag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4 )
+	return render_template('candidatedashboard.html', scroll='skilltag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath )
 
 
 #********************************Candidate Pages end********************************************************
@@ -928,7 +1008,9 @@ def companydetails():
 	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
-	return render_template('companydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+
+	return render_template('companydetails.html',tcfow=tcfowd,tfow=tfowd,  detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
 
 @app.route('/publiccompanydetails/<compid>')
 def publiccompanydetails(compid):
@@ -994,6 +1076,7 @@ def candidatedetails():
 	result4 = cursorlnk.execute("SELECT * FROM register WHERE uname = %s", [uname])
 	Mdata = cursorlnk.fetchall()
 	cursorskl.close()
+
 	return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata)
 
 @app.route('/publiccandidatedetails/<duname>')
@@ -1674,6 +1757,39 @@ def upldfile():
 		t = df.to_html(classes='table table-hover', table_id="tblData", header="true")
 		return jsonify(name=filename, size=file_size, user_image=full_filename, table = t)
 
+@app.route('/uploadajaxcp', methods=("POST", "GET"))
+@login_required
+def upldfilecp():
+	basedir = os.path.abspath(os.path.dirname(__file__))
+	print("Upload Ajax")
+	if request.method == 'POST':
+		files = request.files['file']
+		#if files and allowed_file(files.filename):
+		filename = secure_filename(files.filename)
+		app.logger.info('FileName: ' + filename)
+		updir = os.path.join(basedir, 'static/img/dashboard/')
+		files.save(os.path.join(updir, filename))
+		file_size = os.path.getsize(os.path.join(updir, filename))
+		print(filename)
+		# myFunc(filename)s
+		flname = 'static/img/dashboard/'+filename
+		uname = session['username']
+
+		cur = mysql.connection.cursor()
+		sql = """ UPDATE register SET profile_pic=%s WHERE uname = %s """
+		cur.execute(sql,(flname, uname))
+		mysql.connection.commit()
+		cur.close()
+
+		sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+		ppcur = mysql.connection.cursor()
+		ppresults = ppcur.execute(sql1, [uname])
+		ppdata = ppcur.fetchall()
+
+		pppath = ppdata[0][0]
+
+		return jsonify(name=filename, size=file_size, dbpath = pppath, message = "Profile Pic Update!")
+
 
 @app.route('/uploadfajax', methods=("POST", "GET"))
 @login_required_company
@@ -1963,10 +2079,11 @@ def apply(compid,jid):
 	result = cur.execute(sql1,(compid))
 	company_name = cur.fetchall()
 
+	'''
 	notidesc="Your Application for "+str(job_title_noti)+" post have been successfully submitted"
 	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 	cur.execute(sql, (notidesc, str("0"), uname, appid))
-	mysql.connection.commit()
+	mysql.connection.commit()'''
 
 	return redirect(url_for('myapplications'))
 
@@ -2182,10 +2299,11 @@ def completetest():
 		result = cur.execute(sql1,(jid))
 		job_title_noti = cur.fetchall()
 
+		'''
 		notidesc="Test for "+str(job_title_noti)+" have sucessfully completed, sent for review to concerned department"
 		sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 		cur.execute(sql, (notidesc, str("0"), uname, appid))
-		mysql.connection.commit()
+		mysql.connection.commit()'''
 
 	return redirect(url_for('myapplications'))
 
@@ -2290,10 +2408,11 @@ def setinterview():
 		result = cur.execute(sql1,(jid))
 		job_title_noti = cur.fetchall()
 
+		'''
 		notidesc="Congratualations you have cleared the test for "+str(job_title_noti)+" post, an interview have been scheduled"
 		sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 		cur.execute(sql, (notidesc, str("0"), uname, appid))
-		mysql.connection.commit()
+		mysql.connection.commit()'''
 
 		print("Time:"+str(date)+str(time)+":00")
 		print(date, time, aid)
@@ -2320,7 +2439,7 @@ def allowtest(aid):
 
 	cur.execute(sql, (status, iet, test_link, aid))
 	mysql.connection.commit()
-	cur.close()
+	
 
 	sql1 = """SELECT jid FROM app_status WHERE appid=%s"""
 	result = cur.execute(sql1,(aid))
@@ -2331,10 +2450,14 @@ def allowtest(aid):
 	result = cur.execute(sql1,(jid))
 	job_title_noti = cur.fetchall()
 	
-	notidesc= compname_noti+" has responded to your Application for "+str(job_title_noti)
-	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
+	#notidesc= compname_noti+" has responded to your Application for "+str(job_title_noti)
+	
+	'''sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 	cur.execute(sql, (notidesc, str("0"), uname, appid))
-	mysql.connection.commit()
+	mysql.connection.commit()'''
+
+
+	cur.close()
 
 	return redirect(url_for('companywisejobsapps'))
 
@@ -2357,10 +2480,11 @@ def acceptapp(aid):
 	result = cur.execute(sql1,(jid))
 	job_title_noti = cur.fetchall()
 
+	'''
 	notidesc= "Congratualations you have been selected for "+str(job_title_noti)+" post."
 	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 	cur.execute(sql, (notidesc, str("0"), uname, appid))
-	mysql.connection.commit()
+	mysql.connection.commit()'''
 
 	return redirect(url_for('companywisejobsapps'))
 
@@ -2382,10 +2506,11 @@ def rejectapp(aid):
 	result = cur.execute(sql1,(jid))
 	job_title_noti = cur.fetchall()
 
+	'''
 	notidesc= compname_noti+" have rejected to your Application for "+str(job_title_noti)
 	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
 	cur.execute(sql, (notidesc, str("0"), uname, appid))
-	mysql.connection.commit()
+	mysql.connection.commit()'''
 
 	return redirect(url_for('companywisejobsapps'))
 
