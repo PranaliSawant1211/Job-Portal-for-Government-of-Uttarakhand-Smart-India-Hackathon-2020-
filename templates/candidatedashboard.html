@@ -75,7 +75,48 @@
             .main-nav nav .navbar-nav .nav-item {
             position: relative;
             padding: 15px 8px;
+
+
 }
+
+.column11 {
+  float: left;
+  width: 25%;
+  padding: 0 5px;
+  font-size: 33px;
+  font-weight: 100px;
+  font-family: optima;
+}
+
+.row11 {margin: 0 -160px;}
+
+/* Clear floats after the columns */
+.row11:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column11 {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 49px;
+  height: 240px;
+  text-align: center;
+  background-color: #444;
+  color: white;
+}
+
+.fa {font-size:80px;}
         </style>
 
         
@@ -165,10 +206,10 @@
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav" style="padding: 0% 0% 0% 25%;">
                                 <li class="nav-item">
-                                    <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Dashboard </a>
+                                    <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Profile</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url_for('candidatedetails')}}" class="nav-link">Profile</a>
+                                    <a href="{{url_for('candidatedetails')}}" class="nav-link">Candidate Details</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{url_for('joblist')}}" class="nav-link dropdown-toggle">Jobs </a>
@@ -290,7 +331,7 @@
                                     <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Change Password</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Saved Jobs</a>
+                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Dashboard</a>
                                 </li>    
                             </ul>
                         </div>
@@ -1199,7 +1240,7 @@ spanD.onclick = function() {
                           <div class="column11">
                             <div class="card" style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
                               <p><i class="fa fa-user"></i></p>
-                              <h3>11+</h3>
+                              <h3>{{  result_appln}}</h3>
                               <p style="font-size:30px">No. of Jobs Applied</p>
                             </div>
                           </div>
@@ -1207,7 +1248,7 @@ spanD.onclick = function() {
                           <div class="column11">
                             <div class="card"style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
                               <p><i class="fa fa-check"></i></p>
-                              <h3>{{ result_nojobs }}</h3>
+                              <h3>{{ result_intrw }}</h3>
                               <p style="font-size:30px">No. of interviews attended</p>
                             </div>
                           </div>
@@ -1215,7 +1256,7 @@ spanD.onclick = function() {
                           <div class="column11">
                             <div class="card"style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
                               <p><i class="fa fa-smile-o"></i></p>
-                              <h3>{{ result_pplhired }}</h3>
+                              <h3>{{ result_offers }}</h3>
                               <p style="font-size:30px">No. of Jobs Offered</p>
                             </div>
                           </div>
@@ -1223,7 +1264,7 @@ spanD.onclick = function() {
                           <div class="column11">
                             <div class="card" style=" background: -webkit-gradient(linear, left top, right top, from(#ffd9b3), color-stop(63%, #ffb366))">
                               <p><i class="fa fa-coffee"></i></p>
-                              <h3>{{ result_applnrcvd }}</h3>
+                              <h3>{{ result_applnacpt }}</h3>
                               <p style="font-size:30px">No of Applications Accepted</p>
                             </div>
                           </div>
