@@ -1780,10 +1780,11 @@ def updategeo():
 		compcity = request.form['compcity']
 		compcount = request.form['compcount']
 		srno = request.form['srno']
+		print(compcity, compcount, srno)
 		cur = mysql.connection.cursor()
 		cur.execute("""
 			   UPDATE geoloc
-			   SET compcity=%s, compcount=%s
+			   SET city=%s, country=%s
 			   WHERE srno=%s
 			""", (compcity, compcount, srno))
 		flash("Data Updated Successfully")
@@ -1831,7 +1832,6 @@ def updateaward():
 		awardyear = request.form['awardyear']
 		srno = request.form['srno']
 		cur = mysql.connection.cursor()
-		print((link, value, uname,srno))
 		cur.execute("""
 			   UPDATE award
 			   SET title=%s, from_org=%s, year=%s

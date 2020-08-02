@@ -482,7 +482,7 @@ body {
                                     <h2 style="color: white"> Select Area of work</h2>
                                 </div>
                                 <div class="modaledu-body">
-                                    <form action="{{ url_for('insertaow') }}" method="POST">
+                                    <form action="{{url_for('insertaow')}}" method="POST">
                                          <!-- <input type="hidden" id="srno" name="srno"> -->
                                     
                                         <div class="row" style="color: black;">
@@ -490,7 +490,7 @@ body {
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     
-                                                <input name="cfow" type="checkbox" id="test{{rowfow.0}}" value="{{ rowfow.1}}" required />
+                                                <input name="cfow" type="checkbox" id="test{{rowfow.0}}" value="{{ rowfow.1}}" />
                                                 <label style="" for="test{{rowfow.0}}">{{ rowfow.1}}</label>
                                                 </div>
                                             </div>
@@ -582,19 +582,19 @@ body {
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Title</label>
-                                                        <input name='awardtitle' type="text" class="form-control" placeholder="Best Media" required>
+                                                        <input name='awardtitle' id='awardtitle' type="text" class="form-control" placeholder="Best Media" required>
                                                     </div>
                                                 </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>From</label>
-                                                    <input  name="from_org" type="text" class="form-control" placeholder="ZEE Business" required>
+                                                    <input  name="from_org" id="from_org" type="text" class="form-control" placeholder="ZEE Business" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Year</label>
-                                                    <input  name="awardyear" type="Number" class="form-control" placeholder="2020" required>
+                                                    <input  name="awardyear" id="awardyear" type="Number" class="form-control" placeholder="2020" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
@@ -696,13 +696,13 @@ body {
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Designation</label>
-                                                    <input name="keydesig" type="text" class="form-control" placeholder="CEO" required>
+                                                    <input name="keydesig" id="keydesig" type="text" class="form-control" placeholder="CEO" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Name of Person</label>
-                                                    <input  name="keyname" type="text" class="form-control" placeholder="Sundar pichai" required>
+                                                    <input  name="keyname" id="keyname" type="text" class="form-control" placeholder="Sundar pichai" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -1051,26 +1051,26 @@ spanD.onclick = function() {
     
         <script>
     
-                var table = document.getElementById('edubox');
+                // var table = document.getElementById('edubox');
                 
-                for(var i = 1; i < table.rows.length; i++)
-                {
-                    table.rows[i].onclick = function()
-                    {
-                         //rIndex = this.rowIndex;
-                         console.log(this.cells[0]);
-                         console.log(this.cells[0].innerHTML);
-                         document.getElementById("Titleedu").value = this.cells[0].innerHTML;
-                         document.getElementById("Degreeedu").value = this.cells[1].innerHTML;
-                         document.getElementById("Instedu").value = this.cells[2].innerHTML;
-                         document.getElementById("Yearedu").value = this.cells[3].innerHTML;
-                         document.getElementById("srno").value = this.cells[4].innerHTML;
+                // for(var i = 1; i < table.rows.length; i++)
+                // {
+                //     table.rows[i].onclick = function()
+                //     {
+                //          //rIndex = this.rowIndex;
+                //          console.log(this.cells[0]);
+                //          console.log(this.cells[0].innerHTML);
+                //          document.getElementById("Titleedu").value = this.cells[0].innerHTML;
+                //          document.getElementById("Degreeedu").value = this.cells[1].innerHTML;
+                //          document.getElementById("Instedu").value = this.cells[2].innerHTML;
+                //          document.getElementById("Yearedu").value = this.cells[3].innerHTML;
+                //          document.getElementById("srno").value = this.cells[4].innerHTML;
                          
                          
 
 
-                    };
-                }
+                //     };
+                // }
 
 
                 var tableW = document.getElementById('workbox');
@@ -1082,11 +1082,10 @@ spanD.onclick = function() {
                          //rIndex = this.rowIndex;
                          console.log(this.cells[0]);
                          console.log(this.cells[0].innerHTML);
-                         document.getElementById("jobtitle").value = this.cells[0].innerHTML;
-                         document.getElementById("org").value = this.cells[1].innerHTML;
-                         document.getElementById("dur").value = this.cells[2].innerHTML;
-                         document.getElementById("yearwork").value = this.cells[3].innerHTML;
-                         document.getElementById("wsrno").value = this.cells[4].innerHTML;
+                         document.getElementById("keydesig").value = this.cells[0].innerHTML;
+                         document.getElementById("keyname").value = this.cells[1].innerHTML;
+                        
+                         document.getElementById("wsrno").value = this.cells[2].innerHTML;
 
                          console.log(document.getElementById("wsrno").value);
                          
@@ -1103,9 +1102,9 @@ spanD.onclick = function() {
                     tableU.rows[i].onclick = function()
                     {
                          //rIndex = this.rowIndex;
-                         document.getElementById("uskname").value = this.cells[1].innerHTML;
-                         document.getElementById("uprcnt").value = this.cells[2].innerHTML;
-                         
+                         document.getElementById("awardtitle").value = this.cells[1].innerHTML;
+                         document.getElementById("from_org").value = this.cells[2].innerHTML;
+                         document.getElementById("awardyear").value = this.cells[3].innerHTML;
                          document.getElementById("Usrno").value = this.cells[0].innerHTML;
                          console.log(this.cells[0].innerHTML,this.cells[1].innerHTML,this.cells[2].innerHTML)
                          
