@@ -765,7 +765,19 @@ def cdashboard():
 @app.route('/cdashboardwork')
 @login_required
 def cdashboardwork():
+
+
 	uname = session['username'] 
+
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+
+
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -794,7 +806,7 @@ def cdashboardwork():
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
 	print(Mdata)
-	return render_template('candidatedashboard.html', scroll='worktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4)
+	return render_template('candidatedashboard.html', scroll='worktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath)
 
 
 
@@ -802,6 +814,15 @@ def cdashboardwork():
 @login_required
 def cdashboardedu():
 	uname = session['username'] 
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+
+
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -829,12 +850,20 @@ def cdashboardedu():
 	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
-	return render_template('candidatedashboard.html', scroll='educationtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4)
+	return render_template('candidatedashboard.html', scroll='educationtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath)
 
 @app.route('/cdashboardlink')
 @login_required
 def cdashboardlink():
 	uname = session['username'] 
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -863,12 +892,20 @@ def cdashboardlink():
 	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
-	return render_template('candidatedashboard.html', scroll='linktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4)
+	return render_template('candidatedashboard.html', scroll='linktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp =pppath)
 
 @app.route('/cdashboardskill')
 @login_required
 def cdashboardskill():
 	uname = session['username'] 
+
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
+
 	cursoredu = mysql.connection.cursor()
 	result1 = cursoredu.execute("SELECT * FROM edu WHERE uname = %s", [uname])
 	edudata = cursoredu.fetchall()
@@ -897,7 +934,7 @@ def cdashboardskill():
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
 
-	return render_template('candidatedashboard.html', scroll='skilltag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4 )
+	return render_template('candidatedashboard.html', scroll='skilltag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath )
 
 
 #********************************Candidate Pages end********************************************************
