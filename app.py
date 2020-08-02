@@ -597,6 +597,8 @@ def compdashboardaward():
 	tfowd = cursorlnk.fetchall()
 	cursorskl.close()
 
+	
+
 	cursorlnk = mysql.connection.cursor()
 	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname])
 	tcfowd = cursorlnk.fetchall()
