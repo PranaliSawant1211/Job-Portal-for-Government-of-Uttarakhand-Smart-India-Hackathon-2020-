@@ -22,6 +22,7 @@ import pandas as pd
 import camelot
 from datetime import datetime, timedelta
 import pickle
+import sys, fitz
 
 
 
@@ -581,7 +582,20 @@ def compdashboardgeoloc():
 	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname])
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
-	return render_template('companydashboard.html', scroll="geotag" ,tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+	cursorlnk = mysql.connection.cursor()
+	result_nojobs = cursorlnk.execute("SELECT * FROM jobs WHERE compid = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Accepted"
+	result_pplhired = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s AND status= %s", [uname,status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_applnrcvd = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s", [uname])
+	cursorskl.close()
+	return render_template('companydashboard.html', scroll="geotag" ,tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
 
 @app.route('/compdashboardaward')
 @login_required_company
@@ -619,7 +633,20 @@ def compdashboardaward():
 	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname])
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
-	return render_template('companydashboard.html', scroll="awardtag" ,tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+	cursorlnk = mysql.connection.cursor()
+	result_nojobs = cursorlnk.execute("SELECT * FROM jobs WHERE compid = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Accepted"
+	result_pplhired = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s AND status= %s", [uname,status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_applnrcvd = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s", [uname])
+	cursorskl.close()
+	return render_template('companydashboard.html', scroll="awardtag" ,tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
 
 
 @app.route('/compdashboardfow')
@@ -656,7 +683,20 @@ def compdashboardfow():
 	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
-	return render_template('companydashboard.html', scroll="aowtag" ,tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+	cursorlnk = mysql.connection.cursor()
+	result_nojobs = cursorlnk.execute("SELECT * FROM jobs WHERE compid = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Accepted"
+	result_pplhired = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s AND status= %s", [uname,status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_applnrcvd = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s", [uname])
+	cursorskl.close()
+	return render_template('companydashboard.html', scroll="aowtag" ,tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata, result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
 
 
 @app.route('/compdashboardkey')
@@ -693,7 +733,20 @@ def compdashboardkey():
 	result4 = cursorlnk.execute("SELECT * FROM compfow WHERE compid = %s", [uname] )
 	tcfowd = cursorlnk.fetchall()
 	cursorlnk.close()
-	return render_template('companydashboard.html', scroll="keytag" , tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata)
+
+	cursorlnk = mysql.connection.cursor()
+	result_nojobs = cursorlnk.execute("SELECT * FROM jobs WHERE compid = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Accepted"
+	result_pplhired = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s AND status= %s", [uname,status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_applnrcvd = cursorlnk.execute("SELECT * FROM app_status WHERE compid = %s", [uname])
+	cursorskl.close()
+	return render_template('companydashboard.html', scroll="keytag" , tcfow=tcfowd,tfow=tfowd, detail=Mdata, tlinks=lnkdata, tskills=skdata, twork=workdata , result_nojobs=result_nojobs, result_pplhired=result_pplhired, result_applnrcvd=result_applnrcvd)
 
 
 #*****************************company pages end********************************************
@@ -772,7 +825,12 @@ def cdashboardwork():
 
 
 	uname = session['username'] 
-
+	sql1 = """ SELECT `profile_pic` FROM `register` WHERE `uname` = %s """
+	ppcur = mysql.connection.cursor()
+	ppresults = ppcur.execute(sql1, [uname])
+	ppdata = ppcur.fetchall()
+	ppcur.close()
+	pppath = ppdata[0][0]
 
 	
 
@@ -805,7 +863,25 @@ def cdashboardwork():
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
 	print(Mdata)
-	return render_template('candidatedashboard.html', scroll='worktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath)
+
+	cursorlnk = mysql.connection.cursor()
+	result_appln = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Interview Complete"
+	result_intrw = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname, status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_offers = cursorlnk.execute("SELECT * FROM offer WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status1 = "Accepted"
+	result_applnacpt = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname,status1])
+	cursorskl.close()
+	return render_template('candidatedashboard.html', scroll='worktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath, result_appln=result_appln, result_intrw=result_intrw, result_offers=result_offers, result_applnacpt=result_applnacpt)
 
 
 
@@ -849,7 +925,25 @@ def cdashboardedu():
 	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
-	return render_template('candidatedashboard.html', scroll='educationtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath)
+
+	cursorlnk = mysql.connection.cursor()
+	result_appln = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Interview Complete"
+	result_intrw = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname, status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_offers = cursorlnk.execute("SELECT * FROM offer WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status1 = "Accepted"
+	result_applnacpt = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname,status1])
+	cursorskl.close()
+	return render_template('candidatedashboard.html', scroll='educationtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath, result_appln=result_appln, result_intrw=result_intrw, result_offers=result_offers, result_applnacpt=result_applnacpt)
 
 @app.route('/cdashboardlink')
 @login_required
@@ -891,7 +985,25 @@ def cdashboardlink():
 	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
-	return render_template('candidatedashboard.html', scroll='linktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp =pppath)
+
+	cursorlnk = mysql.connection.cursor()
+	result_appln = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Interview Complete"
+	result_intrw = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname, status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_offers = cursorlnk.execute("SELECT * FROM offer WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status1 = "Accepted"
+	result_applnacpt = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname,status1])
+	cursorskl.close()
+	return render_template('candidatedashboard.html', scroll='linktag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp =pppath, result_appln=result_appln, result_intrw=result_intrw, result_offers=result_offers, result_applnacpt=result_applnacpt)
 
 @app.route('/cdashboardskill')
 @login_required
@@ -933,7 +1045,25 @@ def cdashboardskill():
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
 
-	return render_template('candidatedashboard.html', scroll='skilltag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath )
+
+	cursorlnk = mysql.connection.cursor()
+	result_appln = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status = "Interview Complete"
+	result_intrw = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname, status])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	result_offers = cursorlnk.execute("SELECT * FROM offer WHERE uname = %s", [uname])
+	cursorskl.close()
+
+	cursorlnk = mysql.connection.cursor()
+	status1 = "Accepted"
+	result_applnacpt = cursorlnk.execute("SELECT * FROM app_status WHERE uname = %s AND status = %s", [uname,status1])
+	cursorskl.close()
+	return render_template('candidatedashboard.html', scroll='skilltag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath, result_appln=result_appln, result_intrw=result_intrw, result_offers=result_offers, result_applnacpt=result_applnacpt )
 
 
 #********************************Candidate Pages end********************************************************
@@ -981,7 +1111,7 @@ def cdashboarddetail():
 	Ndata = cursorlnk.fetchall()
 	cursorskl.close()
 
-	return render_template('candidatedashboard.html', scroll='detailtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath )
+	return render_template('candidatedashboard.html', scroll='detailtag',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, tnoti=Ndata, noticount= result4, pp = pppath, result_appln=result_appln, result_intrw=result_intrw, result_offers=result_offers, result_applnacpt=result_applnacpt )
 
 
 
@@ -1650,10 +1780,11 @@ def updategeo():
 		compcity = request.form['compcity']
 		compcount = request.form['compcount']
 		srno = request.form['srno']
+		print(compcity, compcount, srno)
 		cur = mysql.connection.cursor()
 		cur.execute("""
 			   UPDATE geoloc
-			   SET compcity=%s, compcount=%s
+			   SET city=%s, country=%s
 			   WHERE srno=%s
 			""", (compcity, compcount, srno))
 		flash("Data Updated Successfully")
@@ -1701,7 +1832,7 @@ def updateaward():
 		awardyear = request.form['awardyear']
 		srno = request.form['srno']
 		cur = mysql.connection.cursor()
-		print(awardtitle, from_org, awardyear, srno)
+
 		cur.execute("""
 			   UPDATE award
 			   SET title=%s, from_org=%s, year=%s
@@ -1770,6 +1901,28 @@ def updatekey():
 def postajob():
 	df = pd.DataFrame()
 	return render_template('postajob.html',  tables=[df.to_html(classes='table table-hover', table_id="tblData" ,header="true")])
+
+def find_between_r( s, first, last ):
+    try:
+        start = s.rindex( first ) + len( first )
+        end = s.rindex( last, start )
+        return s[start:end]
+    except ValueError:
+        return ""
+
+@app.route('/trypostajob')
+@login_required_company
+def trypostajob():
+	fname = 'DETAILED_NOTIFICATION_TGC-132_COURSE__JAN_2021_.pdf'
+	doc = fitz.open(fname)
+	text = ""
+	for page in doc:
+	  text= text + str(page.getText())
+
+	find_between_r(text , "Age Limit" , "year")
+
+
+	return render_template('trialjob.html')
 
 
 
