@@ -174,7 +174,7 @@ def test(user, aid, inc, score):
 				option3=row_you_want1[5]
 				option4=row_you_want1[6]
 				correct_answer1 = row_you_want1[8]
-				curr_level=int(float(row_you_want1[12]))
+
 				ID=qid
 				inc+=1
 				return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,res_time=res_time,ID=ID,user=user, correct_answer = correct_answer1, inc= inc, a = aid)
@@ -189,11 +189,35 @@ def final_score():
 
 	s = request.args['score']
 	a = request.args['aid']
-	
-	cur = mysql.connection.cursor()
 
-	sql = "UPDATE app_status SET test_score = %s WHERE appid = %s"
-	cur.execute (sql, (s,a))
+	uname=session['username']
+	
+	# cur = mysql.connection.cursor()
+
+	# sql = "UPDATE app_status SET test_score = %s WHERE appid = %s"
+	# cur.execute (sql, (s,a))
+	# mysql.connection.commit()
+	# cur.close()
+
+	status = "Test Completed"
+
+	cur = mysql.connection.cursor()
+	sql = "UPDATE app_status SET status = %s, test_score = %s WHERE appid = %s"
+	cur.execute(sql, (status, s, a))
+	mysql.connection.commit()
+	
+
+	sql1 = """SELECT jid FROM app_status WHERE appid=%s"""
+	result = cur.execute(sql1,(a,))
+	jid = cur.fetchall()
+
+	sql1 = """SELECT jtitle FROM jobs WHERE jid = %s """
+	result = cur.execute(sql1,(jid[0][0],))
+	job_title_noti = cur.fetchall()
+
+	notidesc="Test for "+str(job_title_noti[0][0])+" have sucessfully completed, sent for review to concerned department"
+	sql = """INSERT INTO `notification-candidate` (`description`, `viewed`, `uname`, `appid`) VALUES (%s, %s, %s, %s)"""
+	cur.execute(sql, (notidesc, str("0"), uname, a))
 	mysql.connection.commit()
 	cur.close()
 	
@@ -2291,16 +2315,19 @@ def joblist():
 	print('-------------------------------jdata----------------------------------')
 	print(jdata)
 	#print(jskills)
+
 	l=[]
 	for i in range(len(jdata2)):
 		print(jdata2[i][0])
 		l.append(jdata2[i][0])
+
 	#print(l)
 
 
 
 
 	jcursor.close()
+
 
 	# for j in jdata:
 	#     print("Job Title: {}".format(j[1]))
@@ -2316,6 +2343,7 @@ def joblist():
 	#     print("Expereince Required: {}".format(j[11]))
 
 
+
 	for j in jdata:
 		compid = j[4]
 		ccursor = mysql.connection.cursor()
@@ -2325,6 +2353,7 @@ def joblist():
 		if cresult> 0:
 			compname = cdata[0][0]
 			j.append(compname)
+
 
 	return render_template('joblist.html', data = jdata,array=l)
 

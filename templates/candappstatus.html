@@ -32,7 +32,7 @@
 
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
 
-        <title>Gable - Job Portal HTML Template</title>
+       
             <style>
             .main-nav nav .navbar-nav .nav-item {
             position: relative;
@@ -75,8 +75,9 @@
             }
 
         </style>
+         <title>Recruit Uttrakhand.in</title>
 
-        <link rel="icon" type="image/png" href="static/title1.png">
+        <link rel="icon" type="image/png" href="../static/title1.png">
     </head>
     <body>
 
@@ -88,14 +89,14 @@
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
                 <a href="index.html" class="logo" >
-                    <img src="static/logo1.png" alt="Logo">
+                    <img src="../static/logo1.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Menu For Desktop Device -->
             <div class="main-nav">
                 <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
-                    <img src="static/logo1.png" alt="Logo" style="height:53px; width: 90px">
+                    <img src="../static/logo1.png" alt="Logo" style="height:53px; width: 90px">
                 </a>
                 <div class="container" style="max-width: 100%">
                     <nav class="navbar navbar-expand-md navbar-light">
@@ -143,6 +144,8 @@
                                     <a href="{{url_for('about')}}" class="nav-link">About</a>
                                 </li>
                             </ul>
+
+
                             
                             <div class="common-btn" style="float: right">
                                 {% if session.logged_in %}
@@ -262,7 +265,7 @@
                                         <div class="single-profile-paragraph">
                                             <ul>
                                                 
-                                                <li style="color: black;">Test Link: <a href = {{data[8]}}> {{data[8]}} </a></li>
+                                                <li style="color: black;">Test Link: <a href = {{data[8]}} target="_blank"> {{data[8]}} </a></li>
 
                                                 <li style="color: black;">Marks: {{data[6]}}</li>
                                                 
