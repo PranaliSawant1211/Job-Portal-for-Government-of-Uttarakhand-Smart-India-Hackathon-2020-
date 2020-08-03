@@ -1569,23 +1569,31 @@ $.ajax({
                                     <input type="hidden" name="jid", id = "jid", value = {{j[0]}}>
                                     <input type="hidden" name="compid", id = "compid", value = {{j[4]}}>
                                     <h3>{{j[1]}}</h3>
-                                    <a href="company-details.html">Winbrans.com</a>
+                                    <a href="company-details.html">{{j[-1]}}</a>
                                     <ul>
                                         <li>
                                             <i class="icofont-money-bag"></i>
-                                            ${{j[5]}}s
+                                            ₹{{j[5]}}
                                         </li>
                                         <li>
                                             <i class="icofont-location-pin"></i>
                                             Location: {{j[7]}}
                                         </li>
+                                        {% if session.logged_in %}
+                                        <li style="color: red;">
+                                            Skills Matched: {{j[-2]}}
+                                        </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                                 <div class="job-inner-right">
                                     <ul>
+                                        {% if session.logged_in %}
                                         <li>
                                             <a href="/apply/{{j[4]}}/{{j[0]}}">Apply</a>
                                         </li>
+                                        {% endif %}
+
                                         <li>
                                             <a href="/jobdetails/{{j[0]}}">View Details</a>
                                         </li>

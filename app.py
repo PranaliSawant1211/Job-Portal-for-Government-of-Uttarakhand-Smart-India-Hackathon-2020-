@@ -70,19 +70,19 @@ def login_required_company(f):
 @app.route('/takethetest/<aid>')
 @login_required
 def read_celltemp(aid):
-    score = 0
-    inc = 0
+	score = 0
+	inc = 0
 
-    sql = "SELECT * FROM app_status WHERE appid = %s"
-    cur = mysql.connection.cursor()
+	sql = "SELECT * FROM app_status WHERE appid = %s"
+	cur = mysql.connection.cursor()
 
-    aresult = cur.execute(sql, [aid])
-    adata = cur.fetchall()
-    isattempted = 0
-    if adata[0][6] != 'Not Attempted':
-        isattempted = 1
+	aresult = cur.execute(sql, [aid])
+	adata = cur.fetchall()
+	isattempted = 0
+	if adata[0][6] != 'Not Attempted':
+		isattempted = 1
 
-    return render_template("button.html", isattempted = isattempted, aid = aid, inc = int(inc), score=int(score))
+	return render_template("button.html", isattempted = isattempted, aid = aid, inc = int(inc), score=int(score))
 
 
 
@@ -90,114 +90,114 @@ def read_celltemp(aid):
 @app.route("/read_cell/<aid>", methods=['POST','GET'])
 @login_required
 def read_cell(aid):
-    
+	
 
-    inc = request.form['inc']
-    score = request.form['score']
-    # Reading the CSV file of questions
-    with open('./static/ques_data.csv') as csvfile:
-        readCSV = list(csv.reader(csvfile, delimiter=','))
+	inc = request.form['inc']
+	score = request.form['score']
+	# Reading the CSV file of questions
+	with open('./static/ques_data.csv') as csvfile:
+		readCSV = list(csv.reader(csvfile, delimiter=','))
 
-        # Displaying First question to the user of Medium Level 0 Difficulty
+		# Displaying First question to the user of Medium Level 0 Difficulty
 
 
-        
-        qid = random.choice(range(0,651,1)) # Randomly selecting one question index
-        row_you_want = readCSV[qid]
-        question=row_you_want[2]
-        option1=row_you_want[3]
-        option2=row_you_want[4]
-        option3=row_you_want[5]
-        option4=row_you_want[6]
-        correct_answer1=row_you_want[8] 
-        ID = qid
+		
+		qid = random.choice(range(0,651,1)) # Randomly selecting one question index
+		row_you_want = readCSV[qid]
+		question=row_you_want[2]
+		option1=row_you_want[3]
+		option2=row_you_want[4]
+		option3=row_you_want[5]
+		option4=row_you_want[6]
+		correct_answer1=row_you_want[8] 
+		ID = qid
 
-        return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score, ID = ID, correct_answer = correct_answer1, inc = int(inc), a = aid)
+		return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score, ID = ID, correct_answer = correct_answer1, inc = int(inc), a = aid)
 
 
 @app.route('/check_answer/<aid>', methods=['POST','GET'])
 @login_required
 def check_answer(aid):
-    # Retriving timer value from 12.html(this value is hidden in 12.html).This value is retrived only when user clicks the Next button.
-    if request.method == 'POST':
-      user = int(request.form['nm'])
-    else:
-      user = int(60) # If the user runs out of time and doesn't click the next button then the respopnse time 60 seconds is stored here
-    
+	# Retriving timer value from 12.html(this value is hidden in 12.html).This value is retrived only when user clicks the Next button.
+	if request.method == 'POST':
+	  user = int(request.form['nm'])
+	else:
+	  user = int(60) # If the user runs out of time and doesn't click the next button then the respopnse time 60 seconds is stored here
+	
 
-    inc = int(request.form['inc'])
-    score = int(request.form['score'])
-    correct_answer1 = request.form['correct_answer1']
+	inc = int(request.form['inc'])
+	score = int(request.form['score'])
+	correct_answer1 = request.form['correct_answer1']
 
-    with open('./static/ques_data.csv') as csvfile:
-        readCSV = list(csv.reader(csvfile, delimiter=','))
+	with open('./static/ques_data.csv') as csvfile:
+		readCSV = list(csv.reader(csvfile, delimiter=','))
 
-        
-        given_answer = request.form.get('option')
-        correct_answer = correct_answer1
+		
+		given_answer = request.form.get('option')
+		correct_answer = correct_answer1
 
-        if  given_answer == correct_answer1:
-            correct_answer1 = 1
-            score+=1
-            return test(user = user, aid = aid, inc = inc, score = score)
+		if  given_answer == correct_answer1:
+			correct_answer1 = 1
+			score+=1
+			return test(user = user, aid = aid, inc = inc, score = score)
 
-        else:
-            correctness=0
-            return test(user = user, aid = aid, inc = inc, score = score)
+		else:
+			correctness=0
+			return test(user = user, aid = aid, inc = inc, score = score)
 
 
 
-       
+	   
 
 @app.route('/test', methods=['POST','GET'])
 
 @login_required
 def test(user, aid, inc, score):
-    
+	
 
-    res_time=user
+	res_time=user
 
-    
-    correctness=0
-    with open('./static/Test.csv') as csvfile:
-        pred_read = list(csv.reader(csvfile, delimiter=','))
-        with open('./static/ques_data.csv') as csvfile:
-            readCSV = list(csv.reader(csvfile, delimiter=','))
-            # Displaying 30 questions to the user
-            if(inc<9):
+	
+	correctness=0
+	with open('./static/Test.csv') as csvfile:
+		pred_read = list(csv.reader(csvfile, delimiter=','))
+		with open('./static/ques_data.csv') as csvfile:
+			readCSV = list(csv.reader(csvfile, delimiter=','))
+			# Displaying 30 questions to the user
+			if(inc<9):
 
-                qid = random.choice(range(0,651,1))
-                row_you_want1 = readCSV[qid]
-                question=row_you_want1[2]
-                option1=row_you_want1[3]
-                option2=row_you_want1[4]
-                option3=row_you_want1[5]
-                option4=row_you_want1[6]
-                correct_answer1 = row_you_want1[8]
-                curr_level=int(float(row_you_want1[12]))
-                ID=qid
-                inc+=1
-                return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,res_time=res_time,ID=ID,user=user, correct_answer = correct_answer1, inc= inc, a = aid)
-                
-            if(inc==9):
-                # Calculating and displaying final score after the user has attempted all the 30 questions
-                score = score
-                return redirect(url_for('final_score', score=score, aid = aid))
+				qid = random.choice(range(0,651,1))
+				row_you_want1 = readCSV[qid]
+				question=row_you_want1[2]
+				option1=row_you_want1[3]
+				option2=row_you_want1[4]
+				option3=row_you_want1[5]
+				option4=row_you_want1[6]
+				correct_answer1 = row_you_want1[8]
+				curr_level=int(float(row_you_want1[12]))
+				ID=qid
+				inc+=1
+				return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,res_time=res_time,ID=ID,user=user, correct_answer = correct_answer1, inc= inc, a = aid)
+				
+			if(inc==9):
+				# Calculating and displaying final score after the user has attempted all the 30 questions
+				score = score
+				return redirect(url_for('final_score', score=score, aid = aid))
 
 @app.route('/final_score')
 def final_score():
 
-    s = request.args['score']
-    a = request.args['aid']
-    
-    cur = mysql.connection.cursor()
+	s = request.args['score']
+	a = request.args['aid']
+	
+	cur = mysql.connection.cursor()
 
-    sql = "UPDATE app_status SET test_score = %s WHERE appid = %s"
-    cur.execute (sql, (s,a))
-    mysql.connection.commit()
-    cur.close()
-    
-    return render_template('final.html', score=s, aid = a)
+	sql = "UPDATE app_status SET test_score = %s WHERE appid = %s"
+	cur.execute (sql, (s,a))
+	mysql.connection.commit()
+	cur.close()
+	
+	return render_template('final.html', score=s, aid = a)
 
 
 
@@ -208,7 +208,10 @@ def final_score():
 	  
 @app.route('/')
 def home():
-	session.clear()
+	#session.clear()
+	#session.pop('logged_in', None)
+	session['logged_in'] = False
+
 	return render_template('index.html')
 
 @app.route('/create_account', methods = ['GET', 'POST'])
@@ -333,55 +336,55 @@ def convertToBinaryData(filename):
 @app.route('/login', methods = ['GET', 'POST'])
 # @login_required
 def login():
-    if request.method == 'POST':
-        session.pop('username', None)
-        session.pop('comp_username', None)
-        cursor = mysql.connection.cursor()
-        cursor1 = mysql.connection.cursor()
-        cursor2 = mysql.connection.cursor()
-        uname = request.form.get('uname')
-        result = cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
-        result1 = cursor1.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
-        if(result > 0):
-            password = request.form.get('password')
-            result2 = cursor2.execute("SELECT * FROM register WHERE uname = %s", [uname])
-            data = cursor2.fetchone()
-            password_db = data[11]
-            if (pwd_context.verify(password, password_db)):
-                session['logged_in'] = True
-                session['username'] = uname
-                flash('You are now logged in', 'success')
-                return redirect(url_for('cdashboard'))
-            else:
-                flash('Invalid Login', 'error')
-                return render_template('login.html')
-            cursor.close()
-            cursor1.close()
-            cursor2.close()
+	if request.method == 'POST':
+		session.pop('username', None)
+		session.pop('comp_username', None)
+		cursor = mysql.connection.cursor()
+		cursor1 = mysql.connection.cursor()
+		cursor2 = mysql.connection.cursor()
+		uname = request.form.get('uname')
+		result = cursor.execute("SELECT * FROM register WHERE uname = %s", [uname])
+		result1 = cursor1.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+		if(result > 0):
+			password = request.form.get('password')
+			result2 = cursor2.execute("SELECT * FROM register WHERE uname = %s", [uname])
+			data = cursor2.fetchone()
+			password_db = data[11]
+			if (pwd_context.verify(password, password_db)):
+				session['logged_in'] = True
+				session['username'] = uname
+				flash('You are now logged in', 'success')
+				return redirect(url_for('cdashboard'))
+			else:
+				flash('Invalid Login', 'error')
+				return render_template('login.html')
+			cursor.close()
+			cursor1.close()
+			cursor2.close()
 
-        elif(result1 > 0):
-            password = request.form.get('password')
-            result2 = cursor2.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
-            data = cursor2.fetchone()
-            password_db = data[8]
-            if (pwd_context.verify(password, password_db)):
-                session['logged_in_company'] = True
-                session['comp_username'] = uname
-                flash('You are now logged in'+session['comp_username'], 'success')
-                return redirect(url_for('compdashboard'))
-            else:
-                flash('Invalid Login', 'error')
-                return render_template('login.html')
-            cursor.close()
-            cursor1.close()
-            cursor2.close()
-        else:
-            flash('User not found', 'error')
-            cursor.close()
-            cursor1.close()
-            cursor2.close()
-            return render_template('login.html')
-    return render_template('login.html')
+		elif(result1 > 0):
+			password = request.form.get('password')
+			result2 = cursor2.execute("SELECT * FROM company_register WHERE compid = %s", [uname])
+			data = cursor2.fetchone()
+			password_db = data[8]
+			if (pwd_context.verify(password, password_db)):
+				session['logged_in_company'] = True
+				session['comp_username'] = uname
+				flash('You are now logged in'+session['comp_username'], 'success')
+				return redirect(url_for('compdashboard'))
+			else:
+				flash('Invalid Login', 'error')
+				return render_template('login.html')
+			cursor.close()
+			cursor1.close()
+			cursor2.close()
+		else:
+			flash('User not found', 'error')
+			cursor.close()
+			cursor1.close()
+			cursor2.close()
+			return render_template('login.html')
+	return render_template('login.html')
 
 
 
@@ -394,7 +397,8 @@ def logout():
 	result2 = cur.execute("""UPDATE `notification-candidate` SET viewed = %s WHERE uname = %s""", [view,uname])
 	mysql.connection.commit()
 	cur.close()
-	session.clear()
+	#session.clear()
+	session['logged_in'] = False
 	flash('You are now logged out', 'success')
 
 	return redirect(url_for('login'))
@@ -1910,12 +1914,12 @@ def postajob():
 	return render_template('postajob.html',  tables=[df.to_html(classes='table table-hover', table_id="tblData" ,header="true")])
 
 def find_between_r( s, first, last ):
-    try:
-        start = s.rindex( first ) + len( first )
-        end = s.rindex( last, start )
-        return s[start:end]
-    except ValueError:
-        return ""
+	try:
+		start = s.rindex( first ) + len( first )
+		end = s.rindex( last, start )
+		return s[start:end]
+	except ValueError:
+		return ""
 
 @app.route('/trypostajob')
 @login_required_company
@@ -2034,32 +2038,32 @@ def upldjob():
 
 @app.route('/sugg',methods=['POST','GET'])
 def sugg():
-    #data = request.args.get('jsdata')
-    if request.method == 'POST':
-        jcursor = mysql.connection.cursor()
-        _json = request.get_json()
-        _ser  = str(_json['ser'])
-        query='SELECT * FROM `jobs` where `jtitle` REGEXP  %s'
+	#data = request.args.get('jsdata')
+	if request.method == 'POST':
+		jcursor = mysql.connection.cursor()
+		_json = request.get_json()
+		_ser  = str(_json['ser'])
+		query='SELECT * FROM `jobs` where `jtitle` REGEXP  %s'
 
-    jresult = jcursor.execute(query,tuple(_ser))
-    jdata = list(jcursor.fetchall())
-    jcursor.close()
-    return jsonify({'output' : jdata})
+	jresult = jcursor.execute(query,tuple(_ser))
+	jdata = list(jcursor.fetchall())
+	jcursor.close()
+	return jsonify({'output' : jdata})
 
 
 @app.route('/sugg123',methods=['POST','GET'])
 def sugg123():
-    #data = request.args.get('jsdata')
-    if request.method == 'POST':
-        jcursor = mysql.connection.cursor()
-        _json = request.get_json()
-        _ser  = str(_json['ser'])
-        query='SELECT * FROM `jobs` where `jtitle` REGEXP  %s'
+	#data = request.args.get('jsdata')
+	if request.method == 'POST':
+		jcursor = mysql.connection.cursor()
+		_json = request.get_json()
+		_ser  = str(_json['ser'])
+		query='SELECT * FROM `jobs` where `jtitle` REGEXP  %s'
 
-    jresult = jcursor.execute(query,(_ser,))
-    jdata = list(jcursor.fetchall())
-    jcursor.close()
-    return jsonify({'output' : jdata})
+	jresult = jcursor.execute(query,(_ser,))
+	jdata = list(jcursor.fetchall())
+	jcursor.close()
+	return jsonify({'output' : jdata})
 
 
 
@@ -2078,68 +2082,68 @@ def sugg123():
 
 @app.route('/filter',methods=['POST','GET'])
 def filter():
-    #data = request.args.get('jsdata')
-    if request.method == 'POST':
-        jcursor = mysql.connection.cursor()
-        _json = request.json
-        _checkbox1  = _json['checkbox1']
-        _minprice  = int(_json['minprice'])
-        # _sect  = str(_json['sect'])
-        _comp  = str(_json['comp'])
-        _loc = str(_json['loc'])
+	#data = request.args.get('jsdata')
+	if request.method == 'POST':
+		jcursor = mysql.connection.cursor()
+		_json = request.json
+		_checkbox1  = _json['checkbox1']
+		_minprice  = int(_json['minprice'])
+		# _sect  = str(_json['sect'])
+		_comp  = str(_json['comp'])
+		_loc = str(_json['loc'])
 
-        query=''
-        # use tuple to store 
-        t1=[]
-        # t2=()
-        none=0
-        if(_checkbox1=='checked'):
-            query="SELECT * FROM `jobs` where `jtype` = 'PART TIME'"
-            none=1
-        if(_minprice>0 and query!=''):
-            query+=" and `jsalary` >= %s"
-            t1.append(_minprice)
-        else:
-            if(_minprice>0):
-                query='SELECT * FROM `jobs` where `jsalary` >= %s'
-                t1.append(_minprice)
-                none=1
-        if(_comp!='0' and query!=''):
-            query+=" and `compid` = %s"
-            t1.append(_comp)
-        else:
-            if(_comp!='0'):
-                query='SELECT * FROM `jobs` where `compid` = %s'
-                t1.append(_comp)
-                none=1
-        if(_loc!='0' and query!=''):
-            query+=" and `jlocation` = %s"
-            t1.append(_loc)
-        else:
-            if(_loc!='0'):
-                query='SELECT * FROM `jobs` where `jlocation` = %s'
-                t1.append(_loc)
-                none=1
-
-
+		query=''
+		# use tuple to store 
+		t1=[]
+		# t2=()
+		none=0
+		if(_checkbox1=='checked'):
+			query="SELECT * FROM `jobs` where `jtype` = 'PART TIME'"
+			none=1
+		if(_minprice>0 and query!=''):
+			query+=" and `jsalary` >= %s"
+			t1.append(_minprice)
+		else:
+			if(_minprice>0):
+				query='SELECT * FROM `jobs` where `jsalary` >= %s'
+				t1.append(_minprice)
+				none=1
+		if(_comp!='0' and query!=''):
+			query+=" and `compid` = %s"
+			t1.append(_comp)
+		else:
+			if(_comp!='0'):
+				query='SELECT * FROM `jobs` where `compid` = %s'
+				t1.append(_comp)
+				none=1
+		if(_loc!='0' and query!=''):
+			query+=" and `jlocation` = %s"
+			t1.append(_loc)
+		else:
+			if(_loc!='0'):
+				query='SELECT * FROM `jobs` where `jlocation` = %s'
+				t1.append(_loc)
+				none=1
 
 
-        # ---------------------------------------------------------------
 
 
-        if(none==0):
-            jresult = jcursor.execute("SELECT * FROM `jobs`")
-        else:
-            if(len(t1)>0):
-                print(len(t1),'value:',t1)
-                print('query: ',query)
-                jresult = jcursor.execute(query,tuple(t1))
-            else:
-                jresult = jcursor.execute(query)
-        jdata = list(jcursor.fetchall())
-        jcursor.close()
+		# ---------------------------------------------------------------
 
-        return jsonify({'output' : jdata})
+
+		if(none==0):
+			jresult = jcursor.execute("SELECT * FROM `jobs`")
+		else:
+			if(len(t1)>0):
+				print(len(t1),'value:',t1)
+				print('query: ',query)
+				jresult = jcursor.execute(query,tuple(t1))
+			else:
+				jresult = jcursor.execute(query)
+		jdata = list(jcursor.fetchall())
+		jcursor.close()
+
+		return jsonify({'output' : jdata})
 
 
 
@@ -2156,123 +2160,173 @@ def filter():
 
 @app.route('/testva',methods=['POST','GET'])
 def testva():
-    #data = request.args.get('jsdata')
-    if request.method == 'POST':
-        jcursor = mysql.connection.cursor()
-        _json = request.json
-        _checkbox1  = _json['checkbox1']
-        _minprice  = int(_json['minprice'])
-        # _sect  = int(_json['sect'])
-        _comp  = str(_json['comp'])
-        print('--------------------------------javascriptvalues---------------------------------')
-        print("checkbox1: {}, minprice: {}, sect: {}, comp: {}".format(_checkbox1, _minprice, _sect,_comp))
+	#data = request.args.get('jsdata')
+	if request.method == 'POST':
+		jcursor = mysql.connection.cursor()
+		_json = request.json
+		_checkbox1  = _json['checkbox1']
+		_minprice  = int(_json['minprice'])
+		# _sect  = int(_json['sect'])
+		_comp  = str(_json['comp'])
+		print('--------------------------------javascriptvalues---------------------------------')
+		print("checkbox1: {}, minprice: {}, sect: {}, comp: {}".format(_checkbox1, _minprice, _sect,_comp))
 
-        if(_checkbox1=='checked'):
-            if(_minprice>0):
-                if(_comp!='0'):
-                    print('all 3 query')
-                    jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
-                    jdata = list(jcursor.fetchall())
-                    jcursor.close()
-                    return jsonify({'output' : jdata})
-                print('checkbox and minprice query')
-                jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s ",(_minprice,))
-                jdata = list(jcursor.fetchall())
-                jcursor.close()
-                return jsonify({'output' : jdata})
-                
-            if(_comp!='0'):
-                print('checkbox comp query')
-                jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `compid` = %s",(_comp,))
-                jdata = list(jcursor.fetchall())
-                jcursor.close()
-                return jsonify({'output' : jdata})
-            print('checkbox only query')
-            jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME'")
-        else:
-            if(_minprice>0):
-                if(_comp!='0'):
-                    # if(_checkbox1=='checked'):
-                    #     print('all 3 query')
-                    #     jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
-                    #     jdata = list(jcursor.fetchall())
-                    #     jcursor.close()
-                    #     return jsonify({'output' : jdata})
-                        print('minprice and comp query')
-                        jresult = jcursor.execute("SELECT * FROM `jobs` where `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
-                        jdata = list(jcursor.fetchall())
-                        jcursor.close()
-                        return jsonify({'output' : jdata})
-                    
-                jresult = jcursor.execute("SELECT * FROM `jobs` where `jsalary` >= %s",(_minprice,))
-            else:
-                if(_comp!='0'):
-                    if(_checkbox1=='checked'):
-                        # if(_minprice>0):
-                        #     print('all 3')
-                        print('checkbox and minprice')
-                        jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s ",(_minprice,))
-                        jdata = list(jcursor.fetchall())
-                        jcursor.close()
-                        return jsonify({'output' : jdata})
-                    print('comp only')
-                    jresult = jcursor.execute("SELECT * FROM `jobs` where `compid` = %s",(_comp,))
+		if(_checkbox1=='checked'):
+			if(_minprice>0):
+				if(_comp!='0'):
+					print('all 3 query')
+					jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
+					jdata = list(jcursor.fetchall())
+					jcursor.close()
+					return jsonify({'output' : jdata})
+				print('checkbox and minprice query')
+				jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s ",(_minprice,))
+				jdata = list(jcursor.fetchall())
+				jcursor.close()
+				return jsonify({'output' : jdata})
+				
+			if(_comp!='0'):
+				print('checkbox comp query')
+				jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `compid` = %s",(_comp,))
+				jdata = list(jcursor.fetchall())
+				jcursor.close()
+				return jsonify({'output' : jdata})
+			print('checkbox only query')
+			jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME'")
+		else:
+			if(_minprice>0):
+				if(_comp!='0'):
+					# if(_checkbox1=='checked'):
+					#     print('all 3 query')
+					#     jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
+					#     jdata = list(jcursor.fetchall())
+					#     jcursor.close()
+					#     return jsonify({'output' : jdata})
+						print('minprice and comp query')
+						jresult = jcursor.execute("SELECT * FROM `jobs` where `jsalary` >= %s and `compid` = %s",(_minprice,_comp))
+						jdata = list(jcursor.fetchall())
+						jcursor.close()
+						return jsonify({'output' : jdata})
+					
+				jresult = jcursor.execute("SELECT * FROM `jobs` where `jsalary` >= %s",(_minprice,))
+			else:
+				if(_comp!='0'):
+					if(_checkbox1=='checked'):
+						# if(_minprice>0):
+						#     print('all 3')
+						print('checkbox and minprice')
+						jresult = jcursor.execute("SELECT * FROM `jobs` where `jtype` = 'PART TIME' and `jsalary` >= %s ",(_minprice,))
+						jdata = list(jcursor.fetchall())
+						jcursor.close()
+						return jsonify({'output' : jdata})
+					print('comp only')
+					jresult = jcursor.execute("SELECT * FROM `jobs` where `compid` = %s",(_comp,))
 
-        if(_checkbox1=='unchecked' and _minprice==0 and _comp=='0'):
-            print('no query all jobs')
-            jresult = jcursor.execute("SELECT * FROM `jobs`")
-            
+		if(_checkbox1=='unchecked' and _minprice==0 and _comp=='0'):
+			print('no query all jobs')
+			jresult = jcursor.execute("SELECT * FROM `jobs`")
+			
 
-        jdata = list(jcursor.fetchall())
-        jcursor.close()
-        print('--------------------------testva----------------------------------------')
-        # print(data)
-        # for j in jdata:
-        #     print("Job Title: {}".format(j[1]))
-        #     print("Job Description: {}".format(j[2]))
-        #     print("Job Age Limit: {}".format(j[3]))
-        #     print("Job Company ID: {}".format(j[4]))
-        #     print("Job Salary: {}".format(j[5]))
-        #     print("Job Vacancies: {}".format(j[6]))
-        #     print("Job Location: {}".format(j[7]))
-        #     print("Date of Post: {}".format(j[8]))
-        #     print("Last Date to Apply: {}".format(j[9]))
-        #     print("Job Type: {}".format(j[10]))
-        #     print("Expereince Required: {}".format(j[11]))
-        return jsonify({'output' : jdata})
+		jdata = list(jcursor.fetchall())
+		jcursor.close()
+		print('--------------------------testva----------------------------------------')
+		# print(data)
+		# for j in jdata:
+		#     print("Job Title: {}".format(j[1]))
+		#     print("Job Description: {}".format(j[2]))
+		#     print("Job Age Limit: {}".format(j[3]))
+		#     print("Job Company ID: {}".format(j[4]))
+		#     print("Job Salary: {}".format(j[5]))
+		#     print("Job Vacancies: {}".format(j[6]))
+		#     print("Job Location: {}".format(j[7]))
+		#     print("Date of Post: {}".format(j[8]))
+		#     print("Last Date to Apply: {}".format(j[9]))
+		#     print("Job Type: {}".format(j[10]))
+		#     print("Expereince Required: {}".format(j[11]))
+		return jsonify({'output' : jdata})
 
 
 @app.route('/joblist/')
 def joblist():
-    jcursor = mysql.connection.cursor()
-    jresult = jcursor.execute("SELECT * FROM `jobs`")
-    jdata = list(jcursor.fetchall())
-    jcursor.close()
+	jcursor = mysql.connection.cursor()
+	jresult = jcursor.execute("SELECT * FROM `jobs`")
+	jdata = list(jcursor.fetchall())
+	jcursor.close()
 
-    jcursor = mysql.connection.cursor()
-    jresult = jcursor.execute("SELECT `jtitle` FROM `jobs`")
-    jdata2 = list(jcursor.fetchall())
-    print('-------------------------------jdata----------------------------------')
-    print(jdata2)
-    l=[]
-    for i in range(len(jdata2)):
-        print(jdata2[i][0])
-        l.append(jdata2[i][0])
-    print(l)
-    jcursor.close()
-    # for j in jdata:
-    #     print("Job Title: {}".format(j[1]))
-    #     print("Job Description: {}".format(j[2]))
-    #     print("Job Age Limit: {}".format(j[3]))
-    #     print("Job Company ID: {}".format(j[4]))
-    #     print("Job Salary: {}".format(j[5]))
-    #     print("Job Vacancies: {}".format(j[6]))
-    #     print("Job Location: {}".format(j[7]))
-    #     print("Date of Post: {}".format(j[8]))
-    #     print("Last Date to Apply: {}".format(j[9]))
-    #     print("Job Type: {}".format(j[10]))
-    #     print("Expereince Required: {}".format(j[11]))
-    return render_template('joblist.html', data = jdata,array=l)
+
+	jdata = [list(i) for i in jdata]
+
+	flag = 0
+
+	if session['logged_in'] == True:
+
+		flaf = 1
+
+		scursor = mysql.connection.cursor()
+		uname = session['username']
+		sresult = scursor.execute("SELECT skname FROM skills WHERE uname = %s",[uname])
+		sdata = list(scursor.fetchall())
+		scursor.close()
+		sdata= [s[0] for s in sdata]
+		print("sdata: {}".format(sdata))
+
+		c = set(sdata)
+
+		for j in jdata:
+			v = len(list(c & set(j[12:])))
+			j.append(v)
+		
+		jdata = sorted(jdata, key = lambda x: x[-1], reverse=True)
+
+
+	#jskills = [[i[0], i[12], i[13], i[14], i[15], i[16]] for i in jdata]
+
+	jcursor = mysql.connection.cursor()
+	jresult = jcursor.execute("SELECT `jtitle` FROM `jobs`")
+	jdata2 = list(jcursor.fetchall())
+	#jdata2 = [list(i) for i in jdata2]
+
+
+
+	print('-------------------------------jdata----------------------------------')
+	print(jdata)
+	#print(jskills)
+	l=[]
+	for i in range(len(jdata2)):
+		print(jdata2[i][0])
+		l.append(jdata2[i][0])
+	#print(l)
+
+
+
+
+	jcursor.close()
+
+	# for j in jdata:
+	#     print("Job Title: {}".format(j[1]))
+	#     print("Job Description: {}".format(j[2]))
+	#     print("Job Age Limit: {}".format(j[3]))
+	#     print("Job Company ID: {}".format(j[4]))
+	#     print("Job Salary: {}".format(j[5]))
+	#     print("Job Vacancies: {}".format(j[6]))
+	#     print("Job Location: {}".format(j[7]))
+	#     print("Date of Post: {}".format(j[8]))
+	#     print("Last Date to Apply: {}".format(j[9]))
+	#     print("Job Type: {}".format(j[10]))
+	#     print("Expereince Required: {}".format(j[11]))
+
+
+	for j in jdata:
+		compid = j[4]
+		ccursor = mysql.connection.cursor()
+		sql = "SELECT compname FROM company_register WHERE compid = %s"
+		cresult = ccursor.execute(sql, [compid])
+		cdata = ccursor.fetchall()
+		if cresult> 0:
+			compname = cdata[0][0]
+			j.append(compname)
+
+	return render_template('joblist.html', data = jdata,array=l)
 
 @app.route('/jobdetails/<job_id>', methods = ['GET'])
 def getjobdetails(job_id):
@@ -2295,7 +2349,7 @@ def getjobdetails(job_id):
 
 	diff = jobdetlist[9] - datetime.now()
 	jobdetlist.append(diff.days)
-	print("Days Left: {}".format(jobdetlist[12]))
+	print("Days Left: {}".format(jobdetlist[-1]))
 
 	print("Job Type: {}".format(jobdetlist[10]))
 	print("Expereince Required: {}".format(jobdetlist[11]))
@@ -2695,40 +2749,40 @@ def setinterview():
 		  'location': 'Google Meet',
 		  'description': 'company details',
 		  'start': {
-		    'dateTime': start_time.strftime("%Y-%m-%dT%H:%M:%S"),
-		    'timeZone': timezone,
+			'dateTime': start_time.strftime("%Y-%m-%dT%H:%M:%S"),
+			'timeZone': timezone,
 		  },
 		  'end': {
-		    'dateTime': end_time.strftime("%Y-%m-%dT%H:%M:%S"),
-		    'timeZone': timezone,
+			'dateTime': end_time.strftime("%Y-%m-%dT%H:%M:%S"),
+			'timeZone': timezone,
 		  },
-		    
+			
 		  'reminders': {
-		    'useDefault': False,
-		    'overrides': [
-		      {'method': 'email', 'minutes': 24 * 60},
-		      {'method': 'popup', 'minutes': 10},
-		    ],
+			'useDefault': False,
+			'overrides': [
+			  {'method': 'email', 'minutes': 24 * 60},
+			  {'method': 'popup', 'minutes': 10},
+			],
 		  },
-		    'attendees':[
-		    {'email': email },
+			'attendees':[
+			{'email': email },
 		  ]
-		    ,
+			,
 		  'conferenceData': {
-		      'createRequest': {
-		          'requestId':'its done baby',
-		          'conferenceSolutionKey': {
-		                  'type': 'hangoutsMeet'
-		              }
-		          
-		      }
+			  'createRequest': {
+				  'requestId':'its done baby',
+				  'conferenceSolutionKey': {
+						  'type': 'hangoutsMeet'
+					  }
+				  
+			  }
 		  },
-		    'reminders': {
-		        'useDefault': False,
-		        'overrides': [
-		          {'method': 'email', 'minutes': 5},
-		        ],
-		      },
+			'reminders': {
+				'useDefault': False,
+				'overrides': [
+				  {'method': 'email', 'minutes': 5},
+				],
+			  },
 		}
 
 		a = service.events().insert(calendarId='maheshmahajan.20998@gmail.com', body=event, conferenceDataVersion=1).execute()
