@@ -6,7 +6,8 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="static/icofont/icofont.min.css">
+        <!--link rel="stylesheet" href="static/icofont/icofont.min.css"-->
+        <link rel="stylesheet" href="{{url_for('static', filename= 'icofont/icofont.min.css')}}">
         <!-- Meanmenu CSS -->
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/meanmenu.css')}}">
         <!-- Icofont -->
@@ -29,9 +30,9 @@
 
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
 
-        <title>Job Details</title>
+        <title>Recruit Uttarakhand.in</title>
 
-        <link rel="icon" type="image/png" href="static/title1.png">
+        <link rel="icon" type="image/png" href="../static/title1.png">
     </head>
     <body>
 
@@ -50,14 +51,14 @@
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
                 <a href="index.html" class="logo" >
-                    <img src="static/logo1.png" alt="Logo">
+                    <img src="../static/logo1.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Menu For Desktop Device -->
             <div class="main-nav">
                 <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
-                    <img src="static/logo1.png" alt="Logo" style="height:53px; width: 90px">
+                    <img src="../static/logo1.png" alt="Logo" style="height:53px; width: 90px">
                 </a>
                 <div class="container" style="max-width: 100%">
                     <nav class="navbar navbar-expand-md navbar-light" >
@@ -125,14 +126,14 @@
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
                 <a href="index.html" class="logo">
-                    <img src="static/logo1.png" alt="Logo">
+                    <img src="../static/logo1.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Menu For Desktop Device -->
             <div class="main-nav">
                 <a class="navbar-brand" href="index.html" style="float: left;  padding-top: 0px; margin: 0px; padding: 0px; margin-left: 40px;">
-                    <img src="static/logo1.png" alt="Logo" style="height:53px; width: 90px"> </a>
+                    <img src="../static/logo1.png" alt="Logo" style="height:53px; width: 90px"> </a>
 
                 </a>
                 <div class="container" style="max-width: 100%">
@@ -140,16 +141,16 @@
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav" style="padding: 0% 0% 0% 25%;">
                                 <li class="nav-item">
-                                    <a href="{{ url_for('home')}}" class="nav-link dropdown-toggle">Home <i class="icofont-simple-down"></i></a>
+                                    <a href="{{ url_for('home')}}" class="nav-link dropdown-toggle">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ url_for('about')}}" class="nav-link">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ url_for('joblist')}}" class="nav-link dropdown-toggle">Jobs <i class="icofont-simple-down"></i></a>
+                                    <a href="{{ url_for('joblist')}}" class="nav-link dropdown-toggle">Jobs</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link dropdown-toggle">Blogs <i class="icofont-simple-down"></i></a>
+                                    <a href="#" class="nav-link dropdown-toggle">Blogs</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a href="{{ url_for('blog')}}" class="nav-link">Read Blog</a>
@@ -238,12 +239,16 @@
                                 <h2>Last Date to Apply</h2>
                                 <p>{{data[9].strftime('%d-%m-%Y')}}</p>
                                 <h2>Days Left</h2>
-                                <p style="color: green;">{{data[12]}}</p>
+                                <p style="color: green;">{{data[-1]}}</p>
                             </div>
                             
+
+                            {% if session.logged_in %}
                             <div class="text-center">
                                 <a class="btn create-ac-btn" href="/apply/{{data[4]}}/{{data[0]}}">Apply Now</a>
                             </div>
+                            {% endif %}
+
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -254,7 +259,7 @@
                                     <li>
                                         <i class="icofont-dollar"></i>
                                         <p>Offered Salary</p>
-                                        <span>${{data[5]}}</span>
+                                        <span>₹{{data[5]}}</span>
                                     </li>
                                     <li>
                                         <i class="icofont-badge"></i>
@@ -264,7 +269,7 @@
                                     <li>
                                         <i class="icofont-graduate"></i>
                                         <p>Days Left for Application</p>
-                                        <span style="color: red;">{{data[12]}}</span>
+                                        <span style="color: red;">{{data[-1]}}</span>
                                     </li>
                                 </ul>
                             </div>

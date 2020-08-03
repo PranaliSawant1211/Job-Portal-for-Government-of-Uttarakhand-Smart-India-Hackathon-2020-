@@ -174,7 +174,7 @@ def test(user, aid, inc, score):
 				option3=row_you_want1[5]
 				option4=row_you_want1[6]
 				correct_answer1 = row_you_want1[8]
-				# curr_level=int(float(row_you_want1[12]))
+
 				ID=qid
 				inc+=1
 				return render_template('12.html', question=question, option1=option1, option2=option2, option3=option3, option4=option4,score=score,res_time=res_time,ID=ID,user=user, correct_answer = correct_answer1, inc= inc, a = aid)
@@ -189,6 +189,7 @@ def final_score():
 
 	s = request.args['score']
 	a = request.args['aid']
+
 	uname=session['username']
 	
 	# cur = mysql.connection.cursor()
@@ -231,7 +232,10 @@ def final_score():
 	  
 @app.route('/')
 def home():
-	session.clear()
+	#session.clear()
+	#session.pop('logged_in', None)
+	session['logged_in'] = False
+
 	return render_template('index.html')
 
 @app.route('/create_account', methods = ['GET', 'POST'])
@@ -417,7 +421,8 @@ def logout():
 	result2 = cur.execute("""UPDATE `notification-candidate` SET viewed = %s WHERE uname = %s""", [view,uname])
 	mysql.connection.commit()
 	cur.close()
-	session.clear()
+	#session.clear()
+	session['logged_in'] = False
 	flash('You are now logged out', 'success')
 
 	return redirect(url_for('login'))
@@ -2032,15 +2037,20 @@ def upldjob():
 		_exp  = _json['exp'] 
 		_jtype  = _json['jtype'] 
 		_jd  = _json['jd']
+		_s1 = _json['s1']
+		_s2 = _json['s2']
+		_s3 = _json['s3']
+		_s4 = _json['s4']
+		_s5 = _json['s5']
 		_compid = session['comp_username']
 		if _ld != "":
 			_ldo = datetime.strptime(_ld, "%Y-%m-%d")
 			_ld = _ldo.strftime("%Y-%m-%d")
 		'''INSERT INTO `jobs`(`jtitle`, `jdescription`, `jagelimit`, `compid`, `jsalary`, `jvacancies`, `jlocation`, `jlastd`, `jtype`, `jexperience`)
 		 VALUES ('Java Developer', 'developing java apps', 55, 200000, 500.0, 10, 'Banglore', STR_TO_DATE('10-09-2020', '%d-%m-%Y'), 'Full Time', 5) '''
-		sql = """ INSERT INTO `jobs`(`jtitle`, `jdescription`, `jagelimit`, `compid`, `jsalary`, `jvacancies`, `jlocation`, `jlastd`, `jtype`, `jexperience`)
-		 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-		cur.execute(sql,(_jtl, _jd, _al, _compid, _sal, _vac, _loc, _ld, _jtype, _exp))
+		sql = """ INSERT INTO `jobs`(`jtitle`, `jdescription`, `jagelimit`, `compid`, `jsalary`, `jvacancies`, `jlocation`, `jlastd`, `jtype`, `jexperience`, `s1`, `s2`, `s3`, `s4`, `s5`)
+		 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+		cur.execute(sql,(_jtl, _jd, _al, _compid, _sal, _vac, _loc, _ld, _jtype, _exp, _s1, _s2, _s3, _s4, _s5))
 		mysql.connection.commit()
 		cur.close()
 
@@ -2267,17 +2277,58 @@ def joblist():
 	jdata = list(jcursor.fetchall())
 	jcursor.close()
 
+
+	jdata = [list(i) for i in jdata]
+
+	flag = 0
+
+	if session['logged_in'] == True:
+
+		flaf = 1
+
+		scursor = mysql.connection.cursor()
+		uname = session['username']
+		sresult = scursor.execute("SELECT skname FROM skills WHERE uname = %s",[uname])
+		sdata = list(scursor.fetchall())
+		scursor.close()
+		sdata= [s[0] for s in sdata]
+		print("sdata: {}".format(sdata))
+
+		c = set(sdata)
+
+		for j in jdata:
+			v = len(list(c & set(j[12:])))
+			j.append(v)
+		
+		jdata = sorted(jdata, key = lambda x: x[-1], reverse=True)
+
+
+	#jskills = [[i[0], i[12], i[13], i[14], i[15], i[16]] for i in jdata]
+
 	jcursor = mysql.connection.cursor()
 	jresult = jcursor.execute("SELECT `jtitle` FROM `jobs`")
 	jdata2 = list(jcursor.fetchall())
+	#jdata2 = [list(i) for i in jdata2]
+
+
+
 	print('-------------------------------jdata----------------------------------')
-	print(jdata2)
+	print(jdata)
+	#print(jskills)
+
 	l=[]
 	for i in range(len(jdata2)):
 		print(jdata2[i][0])
 		l.append(jdata2[i][0])
-	print(l)
+
+	#print(l)
+
+
+
+
 	jcursor.close()
+
+
 	# for j in jdata:
 	#     print("Job Title: {}".format(j[1]))
 	#     print("Job Description: {}".format(j[2]))
@@ -2290,6 +2341,20 @@ def joblist():
 	#     print("Last Date to Apply: {}".format(j[9]))
 	#     print("Job Type: {}".format(j[10]))
 	#     print("Expereince Required: {}".format(j[11]))
+
+
+
+	for j in jdata:
+		compid = j[4]
+		ccursor = mysql.connection.cursor()
+		sql = "SELECT compname FROM company_register WHERE compid = %s"
+		cresult = ccursor.execute(sql, [compid])
+		cdata = ccursor.fetchall()
+		if cresult> 0:
+			compname = cdata[0][0]
+			j.append(compname)
+
+
 	return render_template('joblist.html', data = jdata,array=l)
 
 @app.route('/jobdetails/<job_id>', methods = ['GET'])
@@ -2313,7 +2378,7 @@ def getjobdetails(job_id):
 
 	diff = jobdetlist[9] - datetime.now()
 	jobdetlist.append(diff.days)
-	print("Days Left: {}".format(jobdetlist[12]))
+	print("Days Left: {}".format(jobdetlist[-1]))
 
 	print("Job Type: {}".format(jobdetlist[10]))
 	print("Expereince Required: {}".format(jobdetlist[11]))
