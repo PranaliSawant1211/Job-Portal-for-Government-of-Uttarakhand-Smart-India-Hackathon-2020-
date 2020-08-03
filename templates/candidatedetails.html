@@ -153,6 +153,23 @@
                                 </li>
                             </ul>
 
+                            <div class="d-inline dropdown uppercircle mr-3">
+
+                                  <a style="color: #6fea6f;" onMouseOver="this.style.color='green'" onMouseOut="this.style.color=' #6fea6f'" class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">{% if noticount > 0%}<span>{{noticount}}</span>{% endif%}<i class="icofont-notification" style="font-size: 44px;"></i></a>
+                                  <div class="dropdown-menu dropdown-menu-right rounded-0 pt-0" aria-labelledby="notifications">
+                                    <div class="list-group" style="background-color: white;">
+                                      <div class="lgnoti disable-scrollbars" style="width:300px; height: 400px;overflow: auto;">
+                                        {%for i in tnoti%}
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start">
+                                          <h5 class="mb-1">{{ i.1}}</h5>
+                                          <p class="mb-0">{{ i.2}}</p>
+                                        </a>
+                                        {% endfor %}
+                                      </div> <!-- /.lg -->
+                                    </div> <!-- /.list group -->
+                                  </div> <!-- /.dropdown-menu -->
+                                </div>
+
                             <div class="common-btn" style="float: right">
                                 {% if session.logged_in %}
                                 <a class="login-btn" href="/logout">Logout</a>
