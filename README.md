@@ -9,7 +9,7 @@
   3. import sql file provided in the repository from import tab.
   4. click go.
   
-# Important Libraries needed to install:
+# Important Libraries need to install:
   1. Flask: pip install Flask
   2. Camelot : pip install camelot-py[cv]
   3. Fitz: python -m pip install PyMuPDF
