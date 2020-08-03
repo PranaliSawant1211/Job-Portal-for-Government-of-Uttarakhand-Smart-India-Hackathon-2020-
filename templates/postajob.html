@@ -23,7 +23,86 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="static/css/select2.min.css" />
+        
+        <style>
+            .select2-dropdown {top: 22px !important; left: 8px !important;}
+        </style>
+        <style type="text/css">
+                                    .grey_color {
+                                        color: black;
+                                      font-size: 14px;
+                                  }
+        </style>
+
+
+        <style>
+            * {
+              box-sizing: border-box;
+          }
+
+          body {
+              font: 16px Arial;  
+          }
+
+          /*the container must be positioned relative:*/
+          .autocomplete {
+              position: relative;
+              display: inline-block;
+          }
+
+          input {
+              border: 1px solid transparent;
+              background-color: #f1f1f1;
+              padding: 10px;
+              font-size: 16px;
+          }
+
+          input[type=text] {
+              background-color: #f1f1f1;
+              width: 100%;
+          }
+
+          input[type=submit] {
+              background-color: DodgerBlue;
+              color: #fff;
+              cursor: pointer;
+          }
+
+          .autocomplete-items {
+              position: absolute;
+              border: 1px solid #d4d4d4;
+              border-bottom: none;
+              border-top: none;
+              z-index: 99;
+              /*position the autocomplete items to be the same width as the container:*/
+              top: 100%;
+              left: 0;
+              right: 0;
+          }
+
+          .autocomplete-items div {
+              padding: 10px;
+              cursor: pointer;
+              background-color: #fff; 
+              border-bottom: 1px solid #d4d4d4; 
+          }
+
+          /*when hovering an item:*/
+          .autocomplete-items div:hover {
+              background-color: #e9e9e9; 
+          }
+
+          /*when navigating through the items using the arrow keys:*/
+          .autocomplete-active {
+              background-color: DodgerBlue !important; 
+              color: #ffffff; 
+          }
+      </style>
+
+
         <style>
         .main-nav nav .navbar-nav .nav-item {
         position: relative;
@@ -289,6 +368,51 @@
                                     
                                 </div>
                             </div>
+
+                            <!--div class="col-lg-6">
+                                
+                                
+                                    
+                                        <select  id="skills">
+                                          <option value="Full Time" class = "grey_color">Full Time</option>
+                                          <option value="Part Time" class = "grey_color">Part Time</option>
+                                          <option value="Intern" class = "grey_color">Intern</option>
+                                        </select>
+                                    
+                                
+                            </div-->
+
+                            <div class="col-lg-6"> <label style="color: black;">Enter your top 5 skills</label> </div>
+
+                            <div class="col-lg-12">
+
+                               
+                                  <div class="autocomplete" style="width:150px; color: black;">
+                                    <input id="myInput1" type="text" name="myCountry" placeholder="Skill1">
+                                  </div>
+                                  <div class="autocomplete" style="width:150px; color: black;">
+                                    <input id="myInput2" type="text" name="myCountry" placeholder="Skill2">
+                                  </div>
+                                  <div class="autocomplete" style="width:150px; color: black;">
+                                    <input id="myInput3" type="text" name="myCountry" placeholder="Skill3">
+                                  </div>
+                                  <div class="autocomplete" style="width:150px; color: black;">
+                                    <input id="myInput4" type="text" name="myCountry" placeholder="Skill4">
+                                  </div>
+                                  <div class="autocomplete" style="width:150px; color: black;">
+                                    <input id="myInput5" type="text" name="myCountry" placeholder="Skill5">
+                                  </div>
+                                
+
+                            </div>                         
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+
+
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Job Description</label>
@@ -328,7 +452,7 @@
         <!-- End Footer -->
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
         <script>        
 
             $('#noid').on('DOMSubtreeModified', function() {
@@ -347,8 +471,6 @@
                     $('#loc').val(tableData[6]);
                     //$('#ld').val(tableData[7]);
                 });
-
-                
                 
             });    
         </script>
@@ -368,12 +490,17 @@
                     var exp = $('#exp').val();
                     var jtype = $('#jtype').val();
                     var jd = $('#jd').val();
-                    console.log(jtl, al, sal, vac, loc, ld, exp, jtype, jd);
+                    var s1 = $('#myInput1').val()
+                    var s2 = $('#myInput2').val()
+                    var s3 = $('#myInput3').val()
+                    var s4 = $('#myInput4').val()
+                    var s5 = $('#myInput5').val()
+                    console.log(jtl, al, sal, vac, loc, ld, exp, jtype, jd, s1, s2, s3, s4, s5);
                     $.ajax({
                     method: "POST",
                     url: '/uploadfajax',
                     contentType: 'application/json;charset=UTF-8',
-                    data: JSON.stringify({'jtl': jtl, 'al': al, 'sal': sal, 'vac': vac, 'loc': loc, 'ld': ld, 'exp': exp, 'jtype': jtype, 'jd': jd}),
+                    data: JSON.stringify({'jtl': jtl, 'al': al, 'sal': sal, 'vac': vac, 'loc': loc, 'ld': ld, 'exp': exp, 'jtype': jtype, 'jd': jd, 's1': s1, 's2': s2, 's3': s3, 's4': s4, 's5': s5}),
                     dataType: "json",
                     success: function(data) {
                         alert("Data Uploaded Successfully!");
@@ -385,6 +512,11 @@
                         $('#loc').val("");
                         $('#ld').val("");
                         $('#exp').val("");
+                        $('#myInput1').val("");
+                        $('#myInput2').val("");
+                        $('#myInput3').val("");
+                        $('#myInput4').val("");
+                        $('#myInput5').val("");
                         //$('#msg1').html('<span style="color: green;">Data Uploaded Successfully</span>');
                     }
 
@@ -418,6 +550,126 @@
             }); 
         </script>
         
+
+
+
+        <script>
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+/*An array containing all the country names in the world:*/
+var countries = ["Problem-Solving", "Communication", "Teamwork", "Time management", "Leadership", "Creativity", "Marketing", "Data Analysis", "Project Management", "Critical Thinking", "SEO/SEM", "Web scraping", "Testing/Debugging", "Machine learning", "Cloud computing", "Mobile app development", "UX design", "Artificial intelligence", "Scrum", "Git", "Oracle", ".Net", "Python", "Java", 
+    "AngularJS"];
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput1"), countries);
+autocomplete(document.getElementById("myInput2"), countries);
+autocomplete(document.getElementById("myInput3"), countries);
+autocomplete(document.getElementById("myInput4"), countries);
+autocomplete(document.getElementById("myInput5"), countries);
+</script>
+
+
+
+
+
+
+
+
         <!-- Essential JS -->
         <script src="./Gable - Job Portal HTML Template_files/jquery.min.js.download"></script>
         <script src="./Gable - Job Portal HTML Template_files/popper.min.js.download"></script>
