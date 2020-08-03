@@ -1278,7 +1278,13 @@ def candidatedetails():
 	Mdata = cursorlnk.fetchall()
 	cursorskl.close()
 
-	return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, pp=pppath)
+	viewed="0"
+	cursorlnk = mysql.connection.cursor()
+	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
+	Ndata = cursorlnk.fetchall()
+	cursorskl.close()
+
+	return render_template('candidatedetails.html',detail=Mdata, students=edudata, twork=workdata, tlinks=lnkdata, tskills=skdata, pp=pppath, tnoti=Ndata,noticount=result4)
 
 @app.route('/publiccandidatedetails/<duname>')
 def publiccandidatedetails(duname):
@@ -2563,6 +2569,7 @@ def myapplications():
 	cursorlnk = mysql.connection.cursor()
 	result4 = cursorlnk.execute("SELECT * FROM `notification-candidate` WHERE uname = %s and viewed=%s", [uname,viewed])
 	Ndata = cursorlnk.fetchall()
+
 	return render_template('myapplications.html', data=data,tnoti=Ndata, noticount=result4)
 
 
