@@ -2488,7 +2488,7 @@ def apply(compid,jid):
 	sql1 = """SELECT * FROM app_status WHERE jid = %s AND uname = %s AND compid = %s"""
 	result = cur.execute(sql1,(jid, uname, compid))
 	if(result > 0):
-		flash("Already Applied chup kar ab","error")
+		flash("Already Applied.","error")
 		return redirect(url_for('joblist'))
 	sql = """ INSERT INTO `app_status`(`jid`, `uname`, `compid`, `status`) VALUES (%s, %s, %s, %s)"""
 	cur.execute(sql, (jid, uname, compid, status))
