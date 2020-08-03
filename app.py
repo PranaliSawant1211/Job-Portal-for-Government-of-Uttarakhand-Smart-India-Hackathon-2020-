@@ -2002,15 +2002,20 @@ def upldjob():
 		_exp  = _json['exp'] 
 		_jtype  = _json['jtype'] 
 		_jd  = _json['jd']
+		_s1 = _json['s1']
+		_s2 = _json['s2']
+		_s3 = _json['s3']
+		_s4 = _json['s4']
+		_s5 = _json['s5']
 		_compid = session['comp_username']
 		if _ld != "":
 			_ldo = datetime.strptime(_ld, "%Y-%m-%d")
 			_ld = _ldo.strftime("%Y-%m-%d")
 		'''INSERT INTO `jobs`(`jtitle`, `jdescription`, `jagelimit`, `compid`, `jsalary`, `jvacancies`, `jlocation`, `jlastd`, `jtype`, `jexperience`)
 		 VALUES ('Java Developer', 'developing java apps', 55, 200000, 500.0, 10, 'Banglore', STR_TO_DATE('10-09-2020', '%d-%m-%Y'), 'Full Time', 5) '''
-		sql = """ INSERT INTO `jobs`(`jtitle`, `jdescription`, `jagelimit`, `compid`, `jsalary`, `jvacancies`, `jlocation`, `jlastd`, `jtype`, `jexperience`)
-		 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-		cur.execute(sql,(_jtl, _jd, _al, _compid, _sal, _vac, _loc, _ld, _jtype, _exp))
+		sql = """ INSERT INTO `jobs`(`jtitle`, `jdescription`, `jagelimit`, `compid`, `jsalary`, `jvacancies`, `jlocation`, `jlastd`, `jtype`, `jexperience`, `s1`, `s2`, `s3`, `s4`, `s5`)
+		 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+		cur.execute(sql,(_jtl, _jd, _al, _compid, _sal, _vac, _loc, _ld, _jtype, _exp, _s1, _s2, _s3, _s4, _s5))
 		mysql.connection.commit()
 		cur.close()
 
