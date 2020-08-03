@@ -28,9 +28,87 @@
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
 
         <link rel="stylesheet" href="{{url_for('static', filename= 'css/try.css')}}">
-        <title>Gable - Job Portal HTML Template</title>
+        <title>Recruit Uttarakhand</title>
 
-        <link rel="icon" type="image/png" href="static/img/favicon.png">
+        <link rel="icon" type="image/png" href="../static/title1.png">
+
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font: 16px Arial;  
+}
+
+/*the container must be positioned relative:*/
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+        
 
     </head>
     <body>
@@ -102,20 +180,20 @@
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
                 <a href="index.html" class="logo" >
-                    <img src="static/img/logo.png" alt="Logo">
+                    <img src="../static/logo1.png"alt="Logo" style="height:53px; width: 90px">
                 </a>
             </div>
 
             <!-- Menu For Desktop Device -->
             <div class="main-nav">
                 <a class="navbar-brand" href="index.html">
-                    <img src="" alt="Logo">
+                    <img src="../static/logo1.png" alt="Logo" style="height:53px; width: 90px">
                 </a>
-                <div class="container">
+                <div class="container" style="max-width: 100%">
                     <nav class="navbar navbar-expand-md navbar-light" style="margin-top:-40px">
                         
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                            <ul class="navbar-nav" style="padding: 0px 210px;">
+                            <ul class="navbar-nav" style="padding: 0% 0% 0% 25%">
                                 <li class="nav-item">
                                     <a href="{{url_for('cdashboard')}}" class="nav-link dropdown-toggle">Dashboard <i class="icofont-simple-down"></i></a>
                                 </li>
@@ -174,19 +252,19 @@
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
                 <a href="index.html" class="logo">
-                    <img src="assets/img/logo.png" alt="Logo">
+                    <img src="../static/logo1.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Menu For Desktop Device -->
             <div class="main-nav">
                 <a class="navbar-brand" href="index.html" style="float: left">
-                    <img src="assets/img/logo.png" alt="Logo">
+                    <img src="../static/logo1.png" alt="Logo" style="height:53px; width: 90px">
                 </a>
-                <div class="container" style="float: right">
+                <div class="container" style="max-width: 100%">
                     <nav class="navbar navbar-expand-md navbar-light" style="margin-bottom:0px;">
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                            <ul class="navbar-nav" style="padding: 0px 187px;">
+                            <ul class="navbar-nav" style="padding: 0% 0% 0% 25%;">
                                 <li class="nav-item">
                                     <a href="{{ url_for('home')}}" class="nav-link dropdown-toggle">Home <i class="icofont-simple-down"></i></a>
                                 </li>
@@ -255,6 +333,34 @@
        
 
 <table align="left" style="margin-top: 6.6%;border: 1px solid lightgray;margin-left: 50px;border-width: 1px;max-width: 100%">
+<!-- 
+    <tr>
+        <td><br>
+            <h5>Search Job Title:</h5>
+            <input type="text" id="ser_inp" onkeyup="SearchFunc(this.value)">
+            <button id='search_button'>Search</button>
+            <h6 id='search_res'></h6>
+
+            <br><br>
+        </td>
+    </tr>
+
+ -->
+     <tr>
+        <td><br>
+            <h5>Search Job Title:</h5>
+            <div class="autocomplete" style="width:300px; color:black;">
+                <p  hidden name="searchArray" id = "searchArray">{{array}}</p>
+                <!-- <input type="hidden" name="searchArray", id = "searchArray", value = {{array}}> -->
+    <input id="myInput" type="text" name="jobtitle" placeholder="Enter Job Post">
+  </div>
+  <input type="submit" id="search_button">
+            <br><br>
+        </td>
+    </tr>
+
+
+
 
     <tr align="left" >
         <td><h6>Salary range</h6>
@@ -295,7 +401,7 @@
 
 
 
-
+<!-- 
 <tr>
     <td><br><h6>Sector</h6>
         <div class="container">
@@ -318,9 +424,37 @@
      </td>
 
 
+    </tr> -->
+
+    <!-- <tr> -->
+
+
+
+
+
+<tr>
+    <td><br><h6>Location</h6>
+        <div class="container">
+<div class="styled-select" style="color: black">
+    <select id="Location_" name="Location">
+        <option value="0" selected="selected">Choose Location</option>
+        <option value="Mumbai"> Mumbai</option>
+        <option value="Pune">Pune</option>
+        <option value="Banglore">Banglore</option>
+
+            
+    </select>
+</div>
+</div>
+
+     </td>
+
+
     </tr>
 
     <tr>
+
+
 
         
 <td><br><h6>Company Name</h6>
@@ -337,6 +471,7 @@
         <option value="Reliance JIO">Reliance JIO</option>
             
     </select>
+    <br><br>
 </div>
 </div>
 
@@ -356,9 +491,422 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+/*An array containing all the country names in the world:*/
+// var jtitle =[];
+// var tmp = ['Python Dev', 'full stack developer', 'data scientist', 'ml engineer', 'Java Developer', 'C Developer', 'DB Admin', 'Java Developer', 'Python Dev', 'ml engineer'];
+var jtitle = document.getElementById("searchArray").innerHTML;
+console.log('jtile here');
+
+
+var arr=[];
+
+var tmp_arr=jtitle.split(',');
+for(var i=0;i<tmp_arr.length;i++)
+{
+    if(i==0)
+    {
+        arr[i]=tmp_arr[i].substring(1, tmp_arr[i].length-1);
+    }
+    if(i==tmp_arr[i].length-1)
+    {
+        arr[i]=tmp_arr[i].substring(2, tmp_arr[i].length-2);
+    }
+    else
+    {
+        arr[i]=tmp_arr[i].substring(2, tmp_arr[i].length-1);
+    }
+    // arr[i]=arr[i].split("[");
+    // arr[i]=arr[i].split("]");
+}
+
+
+console.log(arr);
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput"), arr);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  <!-- ajax------------ -->
  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
 <script>
+
+
+
+function SearchFunc(ser){
+    // var ser = $('#search').value;
+    console.log('search: ',ser)
+    $.ajax({
+      method: "POST",
+      url: "/sugg",
+      // cache:true,
+      contentType: 'application/json;charset=UTF-8',
+      // dataType: "json",
+      //data: { jsdata: checkbox },
+      data: JSON.stringify({'ser': ser}),
+      dataType: "json",
+      success: function(response) {
+        alert(response.output);
+        console.log(response.output);
+        var i;
+        var str ='';
+        // var temp=response.output[0][1];
+        // document.getElementById('search_res').innerHTML = '';
+        for (i = 0; i < response.output.length; i++) {
+            
+            str+=response.output[i][1];
+            console.log(response.output[i][1]);
+            str+='<br>'
+
+        }
+        document.getElementById('search_res').innerHTML = str;
+
+
+      }
+  });
+}
+
+// ------------------------func ends--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------search button--------------------------
+
+$("#search_button").click(function(){
+
+    var ser=$("#myInput").val();
+    alert(ser);
+
+    $.ajax({
+      method: "POST",
+      url: "/sugg123",
+      // cache:true,
+      contentType: 'application/json;charset=UTF-8',
+      // dataType: "json",
+      //data: { jsdata: checkbox },
+      data: JSON.stringify({'ser': ser}),
+      dataType: "json",
+      success: function(response) {
+        alert(response.output);
+        
+
+
+        var i;
+        document.getElementById('job_data_here').innerHTML = '';
+        for (i = 0; i < response.output.length; i++) {
+
+            // --------------------def--------------------------------
+
+        var div1 = document.createElement('div');
+        var div2 = document.createElement('div');
+        var div3 = document.createElement('div');
+        var div4 = document.createElement('div');
+        var div5 = document.createElement('div');
+        var img1 = document.createElement('img');
+        // iDiv.id = 'block';
+        div1.className = 'col-lg-6';
+        div2.className = 'job-item wow fadeInUp';
+        div2.setAttribute("data-wow-delay",".3s");
+        div3.className = 'job-inner align-items-center';
+        div4.className = 'job-inner-left';
+        div5.className = 'job-inner-right';
+
+        img1.src='/static/img/home-1/jobs/1.png'
+
+        var inp1 = document.createElement('input');
+        var inp2 = document.createElement('input');
+
+        var h3=document.createElement("h3");
+        var a =document.createElement("a");
+        var a2 =document.createElement("a");
+        var a3 =document.createElement("a");
+        var ul1 =document.createElement("ul");
+        var ul2 =document.createElement("ul");
+        var li1 =document.createElement("li");
+        var li2 =document.createElement("li");
+        var li3 =document.createElement("li");
+        var li4 =document.createElement("li");
+        var i1 =document.createElement("i");
+        var i2 =document.createElement("i");
+
+
+
+
+            // --------------------------------------------------------
+
+
+
+            div1.appendChild(div2);
+            div2.appendChild(img1);
+            div2.appendChild(div3);
+            div3.appendChild(div4);
+
+
+            inp1.setAttribute("type",'hidden');
+            inp1.setAttribute('value',response.output[i][0]);
+            inp2.setAttribute("type",'hidden');
+            inp2.setAttribute('value',response.output[i][4]);
+            h3.innerHTML=response.output[i][1];
+            a.setAttribute('href', "company-details.html");
+            a.innerHTML = 'Winbrans.com';
+            
+            
+            i1.setAttribute('class','icofont-money-bag');
+            var txt1='$'+response.output[i][5]+'s';
+            li1.innerHTML=txt1;
+            li1.appendChild(i1);
+            ul1.appendChild(li1);
+
+
+            i2.setAttribute('class','icofont-location-pin');
+            li2.innerHTML='Location: '+response.output[i][7];
+            li2.appendChild(i2);
+            ul1.appendChild(li2);
+
+            div4.appendChild(inp1);
+            div4.appendChild(inp2);
+            div4.appendChild(h3);
+            div4.appendChild(a);
+            div4.appendChild(ul1);
+
+            var txt2='/apply/'+response.output[i][4]+'/'+response.output[i][0];
+            a2.setAttribute('href',txt2);
+            a2.innerHTML = 'Apply';
+            li3.appendChild(a2);
+            var txt3 = '/jobdetails/'+response.output[i][0];
+            a3.setAttribute('href',txt3);
+            a3.innerHTML = 'View Details';
+            li4.appendChild(a3);
+            ul2.appendChild(li3);
+            ul2.appendChild(li4);
+
+            div5.appendChild(ul2);
+            div3.appendChild(div5);
+
+            
+
+            document.getElementById('job_data_here').appendChild(div1);
+
+
+
+
+
+      }}
+  });
+
+});
+
+// ----------------------search ends------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // ---------------------------------checkbox starts---------------------------------------------
 $("#chkTest").click(function(){
     // clicked = $(this).attr("name");
@@ -379,16 +927,17 @@ if ($("input[type=checkbox]").is(
 var minprice = $('#minprice').val();
 var sect = $('#sectors').val();
 var comp = $('#company_').val();
-    var data1 = [checkbox1,minprice,sect];
+var loc = $('#Location_').val();
+    var data1 = [checkbox1,minprice,sect,loc];
     console.log(data1);
 
 $.ajax({
       method: "POST",
-      url: "/testva",
+      url: "/filter",
       contentType: 'application/json;charset=UTF-8',
       // dataType: "json",
       //data: { jsdata: checkbox },
-      data: JSON.stringify({'checkbox1': checkbox1, 'minprice': minprice, 'sect': sect, 'comp': comp}),
+      data: JSON.stringify({'checkbox1': checkbox1, 'minprice': minprice,  'comp': comp, 'loc': loc}),
       dataType: "json",
       success: function(response) {
         // var div_addAll = document.createElement('div');
@@ -523,6 +1072,8 @@ $.ajax({
 console.log('clicked minprice');
 // console.log(s);
 var checkbox1='unchecked';
+var loc = $('#Location_').val();
+
 
 if ($("input[type=checkbox]").is( 
                       ":checked")) { 
@@ -542,11 +1093,11 @@ var comp = $('#company_').val();
 
 $.ajax({
       method: "POST",
-      url: "/testva",
+      url: "/filter",
       contentType: 'application/json;charset=UTF-8',
       // dataType: "json",
       //data: { jsdata: checkbox },
-      data: JSON.stringify({'checkbox1': checkbox1, 'minprice': minprice, 'sect': sect, 'comp': comp}),
+      data: JSON.stringify({'checkbox1': checkbox1, 'minprice': minprice, 'comp': comp, 'loc': loc}),
       dataType: "json",
       success: function(response) {
         // var div_addAll = document.createElement('div');
@@ -691,17 +1242,17 @@ if ($("input[type=checkbox]").is(
 var minprice = $('#minprice').val();
 var sect = $('#sectors').val();
 var comp = $('#company_').val();
-
+var loc = $('#Location_').val();
     var data1 = [checkbox1,minprice,sect];
     console.log(data1);
 
 $.ajax({
       method: "POST",
-      url: "/testva",
+      url: "/filter",
       contentType: 'application/json;charset=UTF-8',
       // dataType: "json",
       //data: { jsdata: checkbox },
-      data: JSON.stringify({'checkbox1': checkbox1, 'minprice': minprice, 'sect': sect, 'comp': comp}),
+      data: JSON.stringify({'checkbox1': checkbox1, 'minprice': minprice,  'comp': comp, 'loc': loc}),
       dataType: "json",
       success: function(response) {
         // var div_addAll = document.createElement('div');
@@ -813,6 +1364,181 @@ $.ajax({
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -----------------------Location-----------------------
+
+// ---------------------------------company name--------------------------------------
+$('#Location_').on('change', function() {
+console.log('clicked Location_');
+// console.log(s);
+var checkbox1='unchecked';
+
+if ($("input[type=checkbox]").is( 
+                      ":checked")) { 
+                        alert("Check box in Checked"); 
+                     checkbox1="checked";
+                    } else { 
+                        alert("Check box is Unchecked"); 
+                        checkbox1='unchecked';
+                    } 
+
+var minprice = $('#minprice').val();
+var sect = $('#sectors').val();
+var comp = $('#company_').val();
+var loc = $('#Location_').val();
+    var data1 = [checkbox1,minprice,sect];
+    console.log(data1);
+
+$.ajax({
+      method: "POST",
+      url: "/filter",
+      contentType: 'application/json;charset=UTF-8',
+      // dataType: "json",
+      //data: { jsdata: checkbox },
+      data: JSON.stringify({'checkbox1': checkbox1, 'minprice': minprice, 'comp': comp, 'loc': loc}),
+      dataType: "json",
+      success: function(response) {
+        // var div_addAll = document.createElement('div');
+        var i;
+        document.getElementById('job_data_here').innerHTML = '';
+        for (i = 0; i < response.output.length; i++) {
+
+            // --------------------def--------------------------------
+
+        var div1 = document.createElement('div');
+        var div2 = document.createElement('div');
+        var div3 = document.createElement('div');
+        var div4 = document.createElement('div');
+        var div5 = document.createElement('div');
+        var img1 = document.createElement('img');
+        // iDiv.id = 'block';
+        div1.className = 'col-lg-6';
+        div2.className = 'job-item wow fadeInUp';
+        div2.setAttribute("data-wow-delay",".3s");
+        div3.className = 'job-inner align-items-center';
+        div4.className = 'job-inner-left';
+        div5.className = 'job-inner-right';
+
+        img1.src='/static/img/home-1/jobs/1.png'
+
+        var inp1 = document.createElement('input');
+        var inp2 = document.createElement('input');
+
+        var h3=document.createElement("h3");
+        var a =document.createElement("a");
+        var a2 =document.createElement("a");
+        var a3 =document.createElement("a");
+        var ul1 =document.createElement("ul");
+        var ul2 =document.createElement("ul");
+        var li1 =document.createElement("li");
+        var li2 =document.createElement("li");
+        var li3 =document.createElement("li");
+        var li4 =document.createElement("li");
+        var i1 =document.createElement("i");
+        var i2 =document.createElement("i");
+
+
+
+
+            // --------------------------------------------------------
+
+
+
+            div1.appendChild(div2);
+            div2.appendChild(img1);
+            div2.appendChild(div3);
+            div3.appendChild(div4);
+
+
+            inp1.setAttribute("type",'hidden');
+            inp1.setAttribute('value',response.output[i][0]);
+            inp2.setAttribute("type",'hidden');
+            inp2.setAttribute('value',response.output[i][4]);
+            h3.innerHTML=response.output[i][1];
+            a.setAttribute('href', "company-details.html");
+            a.innerHTML = 'Winbrans.com';
+            
+            
+            i1.setAttribute('class','icofont-money-bag');
+            var txt1='$'+response.output[i][5]+'s';
+            li1.innerHTML=txt1;
+            li1.appendChild(i1);
+            ul1.appendChild(li1);
+
+
+            i2.setAttribute('class','icofont-location-pin');
+            li2.innerHTML='Location: '+response.output[i][7];
+            li2.appendChild(i2);
+            ul1.appendChild(li2);
+
+            div4.appendChild(inp1);
+            div4.appendChild(inp2);
+            div4.appendChild(h3);
+            div4.appendChild(a);
+            div4.appendChild(ul1);
+
+            var txt2='/apply/'+response.output[i][4]+'/'+response.output[i][0];
+            a2.setAttribute('href',txt2);
+            a2.innerHTML = 'Apply';
+            li3.appendChild(a2);
+            var txt3 = '/jobdetails/'+response.output[i][0];
+            a3.setAttribute('href',txt3);
+            a3.innerHTML = 'View Details';
+            li4.appendChild(a3);
+            ul2.appendChild(li3);
+            ul2.appendChild(li4);
+
+            div5.appendChild(ul2);
+            div3.appendChild(div5);
+
+            
+
+            document.getElementById('job_data_here').appendChild(div1);
+
+                  
+            }
+
+    }
+});
+});
+
+// ----------------------------location ends-----------------------------
+
+
 </script>
 <!-- ----------------------------- -->
 
@@ -837,7 +1563,7 @@ $.ajax({
                     {% for j in data %}
                     <div class="col-lg-6">
                         <div class="job-item wow fadeInUp" data-wow-delay=".3s">
-                            <img src="/static/img/home-1/jobs/1.png" alt="Job">
+                            <img src="../static/img/home-1/jobs/1.png" alt="Job">
                             <div class="job-inner align-items-center">
                                 <div class="job-inner-left">
                                     <input type="hidden" name="jid", id = "jid", value = {{j[0]}}>
